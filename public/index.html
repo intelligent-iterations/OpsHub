@@ -10,7 +10,7 @@
     <header>
       <h1>OpsHub</h1>
       <p>Local OpenClaw monitoring dashboard</p>
-      <p id="meta"></p>
+      <p id="meta" aria-live="polite"></p>
     </header>
 
     <main>
@@ -18,14 +18,19 @@
         <h2>Kanban Board</h2>
         <p class="muted">Columns: Backlog, To Do, In Progress, Done</p>
         <div class="kanban-actions">
-          <input id="taskName" placeholder="Task name" />
+          <label class="sr-only" for="taskName">Task name</label>
+          <input id="taskName" placeholder="Task name" maxlength="200" />
+
+          <label class="sr-only" for="taskPriority">Task priority</label>
           <select id="taskPriority">
             <option value="high">high</option>
             <option value="medium" selected>medium</option>
             <option value="low">low</option>
           </select>
-          <input id="taskDesc" placeholder="Description" />
-          <button id="addTaskBtn">Add Task</button>
+
+          <label class="sr-only" for="taskDesc">Task description</label>
+          <input id="taskDesc" placeholder="Description" maxlength="2000" />
+          <button id="addTaskBtn" type="button">Add Task</button>
         </div>
         <div class="kanban-grid" id="kanbanGrid"></div>
       </section>

@@ -6,19 +6,27 @@ const util = require('util');
 const crypto = require('crypto');
 
 const execAsync = util.promisify(exec);
-const app = express();
-const PORT = process.env.PORT || 4180;
+const PORT = Number(process.env.PORT) || 4180;
 const WORKSPACE = path.resolve(__dirname, '..');
 const MEMORY_DIR = path.join(WORKSPACE, 'memory');
 const OPSHUB_DIR = __dirname;
-const DATA_DIR = path.join(OPSHUB_DIR, 'data');
+const DATA_DIR = process.env.OPSHUB_DATA_DIR
+  ? path.resolve(process.env.OPSHUB_DATA_DIR)
+  : path.join(OPSHUB_DIR, 'data');
 const KANBAN_PATH = path.join(DATA_DIR, 'kanban.json');
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
+const VALID_COLUMNS = ['backlog', 'todo', 'inProgress', 'done'];
+const VALID_PRIORITIES = ['high', 'medium', 'low'];
 
 function nowIso() {
   return new Date().toISOString();
+}
+
+function cleanText(value, maxLen = 3000) {
+  const str = String(value ?? '')
+    .replace(/[\u0000-\u001f\u007f]/g, ' ')
+    .trim();
+  return str.length > maxLen ? str.slice(0, maxLen) : str;
 }
 
 async function ensureDataDir() {
@@ -40,13 +48,25 @@ function defaultKanban() {
 function newTask({ name, description = '', priority = 'medium', source = 'manual' }) {
   return {
     id: crypto.randomUUID(),
-    name,
-    description,
-    priority: ['high', 'medium', 'low'].includes(priority) ? priority : 'medium',
+    name: cleanText(name, 200),
+    description: cleanText(description, 2000),
+    priority: VALID_PRIORITIES.includes(priority) ? priority : 'medium',
     status: 'backlog',
     createdAt: nowIso(),
     completedAt: null,
-    source
+    source: cleanText(source, 100) || 'manual'
+  };
+}
+
+function normalizeBoard(parsed) {
+  return {
+    columns: {
+      backlog: Array.isArray(parsed?.columns?.backlog) ? parsed.columns.backlog : [],
+      todo: Array.isArray(parsed?.columns?.todo) ? parsed.columns.todo : [],
+      inProgress: Array.isArray(parsed?.columns?.inProgress) ? parsed.columns.inProgress : [],
+      done: Array.isArray(parsed?.columns?.done) ? parsed.columns.done : []
+    },
+    activityLog: Array.isArray(parsed?.activityLog) ? parsed.activityLog : []
   };
 }
 
@@ -54,16 +74,7 @@ async function loadKanban() {
   await ensureDataDir();
   try {
     const content = await fs.readFile(KANBAN_PATH, 'utf8');
-    const parsed = JSON.parse(content);
-    return {
-      columns: {
-        backlog: parsed.columns?.backlog || [],
-        todo: parsed.columns?.todo || [],
-        inProgress: parsed.columns?.inProgress || [],
-        done: parsed.columns?.done || []
-      },
-      activityLog: Array.isArray(parsed.activityLog) ? parsed.activityLog : []
-    };
+    return normalizeBoard(JSON.parse(content));
   } catch {
     const initial = defaultKanban();
     await saveKanban(initial);
@@ -73,7 +84,9 @@ async function loadKanban() {
 
 async function saveKanban(board) {
   await ensureDataDir();
-  await fs.writeFile(KANBAN_PATH, JSON.stringify(board, null, 2), 'utf8');
+  const tmpPath = `${KANBAN_PATH}.tmp`;
+  await fs.writeFile(tmpPath, JSON.stringify(board, null, 2), 'utf8');
+  await fs.rename(tmpPath, KANBAN_PATH);
 }
 
 function pushActivity(board, entry) {
@@ -82,8 +95,7 @@ function pushActivity(board, entry) {
 }
 
 function findTask(board, taskId) {
-  const columns = Object.keys(board.columns);
-  for (const col of columns) {
+  for (const col of VALID_COLUMNS) {
     const idx = board.columns[col].findIndex((t) => t.id === taskId);
     if (idx > -1) return { col, idx, task: board.columns[col][idx] };
   }
@@ -100,7 +112,7 @@ async function readIfExists(filePath) {
 
 async function safeExec(command, cwd = WORKSPACE) {
   try {
-    const { stdout, stderr } = await execAsync(command, { cwd });
+    const { stdout, stderr } = await execAsync(command, { cwd, timeout: 4000, maxBuffer: 1024 * 1024 });
     return { ok: true, stdout, stderr: stderr || null };
   } catch (err) {
     return {
@@ -112,41 +124,14 @@ async function safeExec(command, cwd = WORKSPACE) {
   }
 }
 
-function parseTaskStatus(tasksText) {
-  if (!tasksText) return [];
-  const lines = tasksText.split('\n');
-  const sections = [];
-  let current = null;
-
-  for (const line of lines) {
-    const h = line.match(/^##\s+\d+\)\s+(.*)$/);
-    if (h) {
-      if (current) sections.push(current);
-      current = { title: h[1].trim(), status: 'Unknown', detail: '' };
-      continue;
-    }
-    if (!current) continue;
-
-    const status = line.match(/Current status:\s*\*\*(.*?)\*\*/i);
-    if (status) current.status = status[1].trim();
-    if (line.startsWith('- Task name:')) current.detail = line.replace('- Task name:', '').trim();
-  }
-
-  if (current) sections.push(current);
-  return sections;
-}
-
 async function getSubagentsData() {
-  const tasksText = await readIfExists(path.join(WORKSPACE, 'tasks.md'));
-  const taskSections = parseTaskStatus(tasksText);
-  const activeFromTasks = taskSections
-    .filter((t) => /in progress|active|ongoing/i.test(t.status))
-    .map((t) => ({
-      id: t.detail || t.title,
-      task: t.title,
-      status: t.status,
-      source: 'tasks.md'
-    }));
+  const board = await loadKanban();
+  const activeFromKanban = (board.columns.inProgress || []).map((t) => ({
+    id: t.id,
+    task: t.name,
+    status: 'In Progress',
+    source: 'OpsHub kanban'
+  }));
 
   const ps = await safeExec("ps -ax -o pid=,command= | grep -i 'subagent' | grep -v grep | head -n 20");
   const activeFromPs = ps.ok
@@ -165,7 +150,7 @@ async function getSubagentsData() {
         })
     : [];
 
-  const merged = [...activeFromPs, ...activeFromTasks];
+  const merged = [...activeFromPs, ...activeFromKanban];
   const reason = merged.length
     ? null
     : 'No direct OpenClaw subagent runtime API is available in this environment; showing inferred status only.';
@@ -206,18 +191,14 @@ async function getSessionsData() {
       });
     }
   } else {
-    entries.push({
-      timestamp: nowIso(),
-      source: 'git',
-      summary: 'Git log unavailable'
-    });
+    entries.push({ timestamp: nowIso(), source: 'git', summary: 'Git log unavailable' });
   }
 
   return entries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 20);
 }
 
 async function getErrorData() {
-  const sources = [path.join(WORKSPACE, 'tasks.md'), path.join(WORKSPACE, 'HEARTBEAT.md')];
+  const sources = [path.join(WORKSPACE, 'HEARTBEAT.md'), KANBAN_PATH];
 
   try {
     const memFiles = await fs.readdir(MEMORY_DIR);
@@ -254,7 +235,7 @@ async function getErrorData() {
 }
 
 async function getTokenUsageData() {
-  const filesToScan = [path.join(WORKSPACE, 'tasks.md')];
+  const filesToScan = [KANBAN_PATH];
   const totals = { promptTokens: 0, completionTokens: 0, estimatedCostUsd: 0 };
 
   for (const file of filesToScan) {
@@ -307,87 +288,133 @@ async function getActivityFeed() {
   return items.slice(0, 20);
 }
 
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'OpsHub', timestamp: nowIso() });
-});
+function asyncHandler(fn) {
+  return (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+}
 
-app.get('/api/dashboard', async (_req, res) => {
-  const [subagents, sessions, errors, tokenUsage, activity] = await Promise.all([
-    getSubagentsData(),
-    getSessionsData(),
-    getErrorData(),
-    getTokenUsageData(),
-    getActivityFeed()
-  ]);
+function createApp() {
+  const app = express();
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.json({ limit: '64kb' }));
 
-  res.json({
-    generatedAt: nowIso(),
-    refreshSeconds: 60,
-    subagents,
-    sessions,
-    errors,
-    tokenUsage,
-    activity
-  });
-});
-
-app.get('/api/kanban', async (_req, res) => {
-  const board = await loadKanban();
-  res.json({ generatedAt: nowIso(), board });
-});
-
-app.post('/api/kanban/task', async (req, res) => {
-  const { name, description, priority, status = 'backlog', source = 'manual' } = req.body || {};
-  if (!name || !String(name).trim()) return res.status(400).json({ error: 'name is required' });
-
-  const board = await loadKanban();
-  const task = newTask({ name: String(name).trim(), description: description || '', priority, source });
-  const target = ['backlog', 'todo', 'inProgress', 'done'].includes(status) ? status : 'backlog';
-  task.status = target;
-  if (target === 'done') task.completedAt = nowIso();
-
-  board.columns[target].unshift(task);
-  pushActivity(board, {
-    type: 'task_added',
-    taskId: task.id,
-    taskName: task.name,
-    to: target,
-    detail: `Added task from ${source}`
+  app.get('/api/health', (_req, res) => {
+    res.json({ status: 'ok', service: 'OpsHub', timestamp: nowIso(), uptimeSeconds: Math.floor(process.uptime()) });
   });
 
-  await saveKanban(board);
-  res.json({ ok: true, task, board });
-});
+  app.get(
+    '/api/dashboard',
+    asyncHandler(async (_req, res) => {
+      const [subagents, sessions, errors, tokenUsage, activity] = await Promise.all([
+        getSubagentsData(),
+        getSessionsData(),
+        getErrorData(),
+        getTokenUsageData(),
+        getActivityFeed()
+      ]);
 
-app.post('/api/kanban/move', async (req, res) => {
-  const { taskId, to, summary = '' } = req.body || {};
-  if (!taskId || !to) return res.status(400).json({ error: 'taskId and to are required' });
-  if (!['backlog', 'todo', 'inProgress', 'done'].includes(to)) return res.status(400).json({ error: 'invalid target column' });
+      res.json({
+        generatedAt: nowIso(),
+        refreshSeconds: 60,
+        subagents,
+        sessions,
+        errors,
+        tokenUsage,
+        activity
+      });
+    })
+  );
 
-  const board = await loadKanban();
-  const found = findTask(board, taskId);
-  if (!found) return res.status(404).json({ error: 'task not found' });
+  app.get(
+    '/api/kanban',
+    asyncHandler(async (_req, res) => {
+      const board = await loadKanban();
+      res.json({ generatedAt: nowIso(), board });
+    })
+  );
 
-  const [task] = board.columns[found.col].splice(found.idx, 1);
-  const from = found.col;
-  task.status = to;
-  if (to === 'done' && !task.completedAt) task.completedAt = nowIso();
-  if (to !== 'done') task.completedAt = null;
+  app.post(
+    '/api/kanban/task',
+    asyncHandler(async (req, res) => {
+      const { name, description, priority, status = 'backlog', source = 'manual' } = req.body || {};
+      const cleanedName = cleanText(name, 200);
+      if (!cleanedName) return res.status(400).json({ error: 'name is required' });
 
-  board.columns[to].unshift(task);
-  pushActivity(board, {
-    type: 'task_moved',
-    taskId: task.id,
-    taskName: task.name,
-    from,
-    to,
-    detail: summary || ''
+      const board = await loadKanban();
+      const task = newTask({ name: cleanedName, description, priority, source });
+      const target = VALID_COLUMNS.includes(status) ? status : 'backlog';
+      task.status = target;
+      if (target === 'done') task.completedAt = nowIso();
+
+      board.columns[target].unshift(task);
+      pushActivity(board, {
+        type: 'task_added',
+        taskId: task.id,
+        taskName: task.name,
+        to: target,
+        detail: `Added task from ${task.source}`
+      });
+
+      await saveKanban(board);
+      res.json({ ok: true, task, board });
+    })
+  );
+
+  app.post(
+    '/api/kanban/move',
+    asyncHandler(async (req, res) => {
+      const { taskId, to, summary = '' } = req.body || {};
+      if (!taskId || !to) return res.status(400).json({ error: 'taskId and to are required' });
+      if (!VALID_COLUMNS.includes(to)) return res.status(400).json({ error: 'invalid target column' });
+
+      const board = await loadKanban();
+      const found = findTask(board, taskId);
+      if (!found) return res.status(404).json({ error: 'task not found' });
+
+      const [task] = board.columns[found.col].splice(found.idx, 1);
+      const from = found.col;
+      task.status = to;
+      if (to === 'done' && !task.completedAt) task.completedAt = nowIso();
+      if (to !== 'done') task.completedAt = null;
+
+      board.columns[to].unshift(task);
+      pushActivity(board, {
+        type: 'task_moved',
+        taskId: task.id,
+        taskName: task.name,
+        from,
+        to,
+        detail: cleanText(summary, 500)
+      });
+
+      await saveKanban(board);
+      res.json({ ok: true, task, board });
+    })
+  );
+
+  app.use((err, _req, res, _next) => {
+    console.error('[OpsHub] request failed:', err);
+    res.status(500).json({ error: 'internal server error' });
   });
 
-  await saveKanban(board);
-  res.json({ ok: true, task, board });
-});
+  return app;
+}
 
-app.listen(PORT, () => {
-  console.log(`OpsHub running at http://localhost:${PORT}`);
-});
+function startServer(port = PORT) {
+  const app = createApp();
+  const server = app.listen(port, () => {
+    const actualPort = server.address()?.port ?? port;
+    console.log(`OpsHub running at http://localhost:${actualPort}`);
+  });
+  return server;
+}
+
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = {
+  createApp,
+  startServer,
+  loadKanban,
+  saveKanban
+};
