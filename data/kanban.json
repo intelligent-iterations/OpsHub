@@ -3,20 +3,3341 @@
     "backlog": [],
     "todo": [
       {
+        "id": "862370c2-46ca-44ed-8c91-5c90026210b5",
+        "name": "[Rework QA] [P1] Write security rules baseline for Firestore/Storage",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.384Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "083c57dc-eda2-4cb6-ad03-1329ac90d964",
+        "name": "[Rework QA] [P1] Define app architecture (presentation/state/domain/data layers)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.378Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "2979a92c-f358-46fa-b6cb-440da1b11d00",
+        "name": "[Rework QA] Smoke task",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.377Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "f2fe68dd-8cc8-45ff-879b-dac859cb5713",
+        "name": "[Rework QA] [P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.376Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "11ca03b3-2810-4a78-b317-8b1771c23477",
+        "name": "[Rework QA] [P2] Build pantry CRUD UI (add/edit/remove/consume)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.374Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "9cbbd55a-7754-4d54-82b5-a9c83cb7c2bc",
+        "name": "[Rework QA] [P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.373Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "5a8ebea6-b01b-4abb-94fa-25269a51933b",
+        "name": "[Rework QA] [P1] Wire Firebase config bootstrap + emulator/dev toggles",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.372Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "5518e591-5362-411e-b5f0-5f8ed0d097ca",
+        "name": "[Rework QA] [P2] Add expiry-date tracking and freshness status logic",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.371Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "4fb291a2-d96b-4cad-a7cd-3b9a2a989011",
+        "name": "[Rework QA] [P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.370Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "c4acfa26-1eb4-4589-a45a-2b985441a8f6",
+        "name": "[Rework QA] [P2] Implement photo-to-food item capture flow",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.369Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "9b6a1867-3e6d-43b6-aada-bc08737c04a1",
+        "name": "[Rework QA] [P3] Define pet attributes (mood/energy/health/hunger/evolution)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.367Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "335459e5-6eac-4394-9f4c-07f0d8064f82",
+        "name": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.366Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "662e5878-f53d-4ac1-ae6a-10ee8c348cae",
+        "name": "[Rework QA] [P3] Design pet state machine and trigger rules",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.365Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "dbc0400d-b5b1-4bd5-b66f-45aed9430b60",
+        "name": "[Rework QA] [P2] Add confidence scoring + fallback for unknown items",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.364Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "d4efe638-9179-40ed-a793-fce15a82921f",
+        "name": "[Rework QA] [P2] Build food classification engine (category + nutrition quality score)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.363Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "4bdf2baa-ada3-4e3d-9da9-cc6bc9949233",
+        "name": "[Rework QA] [P2] Normalize food names and units (dedupe + parsing)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.361Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "df8ffcd0-dbad-4d1e-a6a9-0ad1bbd7525e",
+        "name": "[Rework QA] [P3] Implement pet animation state controller",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.360Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
+        "name": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.359Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "48c98705-ed2a-4a15-b4c0-669286fec15e",
+        "name": "[Rework QA] [P3] Build pet timeline/history view for user feedback loop",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.358Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "ff1b7a09-df85-4e33-a6c6-cbc549a191d4",
+        "name": "[Rework QA] [P3] Implement hunger/sad behavior for expiring pantry items",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.357Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "b126e511-fe6c-4e27-ab78-c0e50f901522",
+        "name": "[Rework QA] [P3] Define evolution/degradation thresholds and cadence",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.355Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "a0c3ac65-2bfa-45e0-9dd0-42eb16385efd",
+        "name": "[Rework QA] [P5] Accessibility + localization readiness",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.354Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "4d423e6c-b6f1-456f-8729-71c61a4a07d5",
+        "name": "[Rework QA] [P5] Launch checklist + app store assets + rollout plan",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.353Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "53f3e69f-4452-403b-960c-10a8d9a6bc7c",
+        "name": "[Rework QA] [P5] QA plan + test matrix (unit/widget/integration)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.352Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "a065b412-6975-4b99-a2e9-18ef2a27dc71",
+        "name": "[Rework QA] [P5] Performance pass (startup, list rendering, sync)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.350Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "a791fed4-2779-4198-8cc5-24b938c0f077",
+        "name": "[Rework QA] [P5] Add onboarding flow + permission education",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.349Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "72fd9ddb-6503-44ed-932c-534f69a3ca12",
+        "name": "[Rework QA] [P5] Add analytics instrumentation (funnel + retention events)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.348Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "d433a717-dae7-44ba-b4eb-1a6b29362716",
+        "name": "[Rework QA] [P4] Add re-engagement messaging strategy (push + in-app)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.347Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "239f82df-0c60-420e-832f-cfc00ada7326",
+        "name": "[Rework QA] [P4] Build challenge/quest system (use expiring foods this week)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.346Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "1cec7707-6648-4c2a-bfc6-62b0835c3010",
+        "name": "[Rework QA] [P4] Add streak engine (healthy pantry days / waste reduction)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.344Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "2677a413-9820-4ff1-9d8f-0532e91f6235",
+        "name": "[Rework QA] [P4] Implement pet hunger notifications tied to pantry risk",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.343Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "8e29e46f-4c4d-4c2b-8314-66213fe23a62",
+        "name": "[Rework QA] [P4] Implement expiry reminders and urgency tiers",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.342Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "108f18b4-c421-434b-8a9a-4bac1f20c14d",
+        "name": "[Rework QA] [P6] Build smart shopping list generator from low-stock + expiry risk",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.341Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "a83f576b-a5b5-4eba-8610-0192fdc606ba",
+        "name": "[Rework QA] [P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.339Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "d3812c11-07ae-4154-9261-0b177e4c4dcb",
+        "name": "[Rework QA] [P6] Add household profiles + shared pantry collaboration permissions",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.338Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "706c918c-50e0-459f-ad91-2f6a5258f894",
+        "name": "[Rework QA] [Ops] Verify Claude delegate workflow end-to-end",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.337Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
+        "name": "[Rework QA] [P7] Build meal planner suggestions from expiring pantry items",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.336Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "064f20cc-6634-4dc6-9529-f35dec6118cf",
+        "name": "[Rework QA] [P7] Add adaptive notification quiet-hours + urgency escalation",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.334Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "b72cbfdc-b0d2-4141-b1d7-49824939a9c4",
+        "name": "[Rework QA] [P7] Implement household activity feed with undo for pantry actions",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.333Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "95880994-b1f1-4093-a708-b8c97485fff7",
+        "name": "[Rework QA] [P8] Build personalized pantry health scorecard with weekly trend explanations",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.332Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "96b68b0b-7650-441f-a271-ea7b9b714edc",
+        "name": "[Rework QA] [P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.330Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "376fe6d7-1792-4eec-8018-9cbe619da89e",
+        "name": "[Rework QA] [P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:39:17.329Z",
+        "completedAt": null,
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "6b6701af-0f27-4bf0-8159-3c62a8609032",
+        "name": "[P9] Create household accountability dashboard for waste reduction goals",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-26T22:38:01.983Z",
+        "source": "intelligent-iteration"
+      }
+    ],
+    "inProgress": [
+      {
+        "id": "3dfeeb20-a5d6-41b2-ae3f-3cbf6738dc22",
+        "name": "[P9] Design PantryPal weekly meal-prep optimizer using pantry inventory + calendar constraints",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-26T22:38:01.983Z",
+        "source": "intelligent-iteration"
+      },
+      {
+        "id": "b86c1e59-5027-46c4-9871-3d38f615c478",
+        "name": "[Rework][UI] Redesign Tamagotchi wellness companion with custom art, animation, and personality",
+        "description": "Build a tamagotchi-style wellness companion for thepom.app that makes healthy scanning rewarding. Visual design: custom illustrated character (not emoji) with at least 5 states (hungry, satisfied, energized, sluggish, thriving). Reactions must reflect cumulative recent scan quality. Add real-time scan reactions, celebratory animation for clean products, gentle nudge animation for concerning products, customizable creature name, and brand-consistent color palette. FEEL target: Tamagotchi x Duolingo delight. QA gate: screenshot-based review must PASS for polish/professional quality before Done.",
+        "priority": "high",
+        "status": "inProgress",
+        "createdAt": "2026-02-26T22:37:54.431Z",
+        "completedAt": null,
+        "source": "luciana-directive"
+      },
+      {
+        "id": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
+        "name": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-26T19:54:56.951Z",
+        "completedAt": null,
+        "source": "migration"
+      }
+    ],
+    "done": [
+      {
+        "id": "906e7b93-4977-48a2-bbd6-9ed8ef4dfc3e",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T23:50:38.782Z",
+        "completedAt": "2026-02-26T23:50:38.785Z",
+        "source": "manual"
+      },
+      {
+        "id": "f9ac62f3-cc9e-4824-ac59-00d0ce494d38",
+        "name": "[Rework QA] [P1] Define API/contracts for scanning + classification services",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.385Z",
+        "completedAt": "2026-02-26T23:50:33Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "714ea6b8-49e6-4221-b9e1-f8334383f1a1",
+        "name": "[Rework QA] [P1] Design event model for pet reactions and pantry changes",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.382Z",
+        "completedAt": "2026-02-26T23:50:32Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "caeeccb1-0f86-4ff9-a4f2-4b4da8102191",
+        "name": "[Rework QA] OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
+        "description": "Delight rework QA complete. Evidence: artifacts/opshub-rework-qa-evidence.md + artifacts/opshub-rework-qa-dashboard.png. UI polish + tests passed.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.389Z",
+        "completedAt": "2026-02-26T23:50:26.780Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "e17eca61-de4e-40bd-bd47-f24874636d50",
+        "name": "[Rework QA] [P1] Scaffold Flutter app modules and folder conventions",
+        "description": "Delight rework QA PASS. Evidence: artifacts/rework-qa-p1-flutter-scaffold-evidence.md (scaffold convention tests passed).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.386Z",
+        "completedAt": "2026-02-26T23:50:07Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "6ec0d2af-b68a-4214-875c-6120ba2efc50",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T23:49:51.729Z",
+        "completedAt": "2026-02-26T23:49:51.737Z",
+        "source": "manual"
+      },
+      {
+        "id": "3a230476-6b10-46f7-85e8-01cbb206add0",
+        "name": "[Rework QA] [P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.395Z",
+        "completedAt": "2026-02-26T23:49:37Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "77a0607b-381f-446d-a2ab-6a1117eb7615",
+        "name": "[Rework QA] [P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.392Z",
+        "completedAt": "2026-02-26T23:49:33Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "4de69407-f14e-451a-ba1c-86d13b58a0fc",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T23:48:41.428Z",
+        "completedAt": "2026-02-26T23:48:41.432Z",
+        "source": "manual"
+      },
+      {
+        "id": "580c094b-22bc-4c8e-8e39-10e5f75bba54",
+        "name": "[Rework QA] [P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.391Z",
+        "completedAt": "2026-02-26T23:47:15.917Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "84998ff0-62ff-4355-afa6-f92472c6888a",
+        "name": "[Rework QA] [P1] Create environment/config strategy (dev/staging/prod)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.388Z",
+        "completedAt": "2026-02-26T23:46:55Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "28e7fd49-2446-4966-bb8f-c412ee28cf39",
+        "name": "[Rework QA] [P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.394Z",
+        "completedAt": "2026-02-26T22:41:02Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "519058ce-e72a-4936-8d65-e94c45116b61",
+        "name": "[P9] Add cost-aware substitution suggestions when ingredients are missing",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:38:01.983Z",
+        "source": "intelligent-iteration",
+        "completedAt": "2026-02-26T22:40:41.712Z"
+      },
+      {
+        "id": "ab7df9f4-5da7-4fce-b890-73193eec72c6",
+        "name": "[P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:23:18.552Z",
+        "source": "intelligent-iteration",
+        "completedAt": "2026-02-26T22:24:32.382Z"
+      },
+      {
+        "id": "29015876-9333-4ce2-bdc8-503f902b559c",
+        "name": "[P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:23:18.552Z",
+        "source": "intelligent-iteration",
+        "completedAt": "2026-02-26T22:24:32.382Z"
+      },
+      {
+        "id": "1bed2a9c-2fd7-44a2-ba99-1a45633b57fa",
+        "name": "[P8] Build personalized pantry health scorecard with weekly trend explanations",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:23:18.552Z",
+        "source": "intelligent-iteration",
+        "completedAt": "2026-02-26T22:23:42.581Z"
+      },
+      {
+        "id": "52845d1d-7a90-4c23-865d-b7daac20c53e",
+        "name": "[P7] Implement household activity feed with undo for pantry actions",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:08:10.136Z",
+        "completedAt": "2026-02-26T22:16:37Z",
+        "source": "intelligent-iteration"
+      },
+      {
+        "id": "fd440368-339f-4aec-a2a6-37222bf909d3",
+        "name": "[P7] Add adaptive notification quiet-hours + urgency escalation",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:08:10.136Z",
+        "completedAt": "2026-02-26T22:15:55Z",
+        "source": "intelligent-iteration"
+      },
+      {
+        "id": "ec84a913-80e3-4bec-8451-f39115e52c8d",
+        "name": "[P7] Build meal planner suggestions from expiring pantry items",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:08:10.136Z",
+        "completedAt": "2026-02-26T22:08:26.526Z",
+        "source": "intelligent-iteration"
+      },
+      {
+        "id": "62f7cbf3-3da1-4095-a321-72a475c686be",
+        "name": "[Ops] Verify Claude delegate workflow end-to-end",
+        "description": "Create artifact proving new workflow",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T21:59:38.701Z",
+        "completedAt": "2026-02-26T22:00:06.649Z",
+        "source": "manual-checklist"
+      },
+      {
+        "id": "dc21fdc5-81a3-48c3-9362-0015eb34dee8",
+        "name": "[P6] Add household profiles + shared pantry collaboration permissions",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T21:43:10.553Z",
+        "completedAt": "2026-02-26T21:53:08.356Z",
+        "source": "intelligent-iteration"
+      },
+      {
+        "id": "3115e6b8-5998-4767-9944-359ac669c740",
+        "name": "[P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T21:43:10.553Z",
+        "completedAt": "2026-02-26T21:46:07.978Z",
+        "source": "intelligent-iteration"
+      },
+      {
+        "id": "b26ebe2c-1e0a-4464-97d0-cccfb2e59341",
+        "name": "[P6] Build smart shopping list generator from low-stock + expiry risk",
+        "description": "Intelligent Iterations seed task created by social-progress heartbeat",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T21:43:10.553Z",
+        "completedAt": "2026-02-26T21:45:55.887Z",
+        "source": "intelligent-iteration"
+      },
+      {
+        "id": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
+        "name": "[P4] Implement expiry reminders and urgency tiers",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.973Z",
+        "completedAt": "2026-02-26T21:41:08.865Z",
+        "source": "migration"
+      },
+      {
+        "id": "d28923a4-6957-4794-8a34-f3c5f513fce6",
+        "name": "[P4] Implement pet hunger notifications tied to pantry risk",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.979Z",
+        "completedAt": "2026-02-26T21:40:48.311Z",
+        "source": "migration"
+      },
+      {
+        "id": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
+        "name": "[P4] Add streak engine (healthy pantry days / waste reduction)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.985Z",
+        "completedAt": "2026-02-26T21:40:12.159Z",
+        "source": "migration"
+      },
+      {
+        "id": "5f65417e-c225-4069-a1c2-000638727a61",
+        "name": "[P4] Build challenge/quest system (use expiring foods this week)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.990Z",
+        "completedAt": "2026-02-26T21:36:15.355Z",
+        "source": "migration"
+      },
+      {
+        "id": "5702ea57-c198-40d6-a165-7f1e274cf96b",
+        "name": "[P4] Add re-engagement messaging strategy (push + in-app)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.996Z",
+        "completedAt": "2026-02-26T21:34:54.723Z",
+        "source": "migration"
+      },
+      {
+        "id": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
+        "name": "[P5] Add analytics instrumentation (funnel + retention events)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.007Z",
+        "completedAt": "2026-02-26T21:28:44.022039Z",
+        "source": "migration"
+      },
+      {
+        "id": "20bb91f3-6263-4fca-9768-7f77ab351d41",
+        "name": "[P5] Add onboarding flow + permission education",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.002Z",
+        "completedAt": "2026-02-26T21:28:31.642110Z",
+        "source": "migration"
+      },
+      {
+        "id": "93d240f5-d619-4509-836f-497fb5b0c643",
+        "name": "[P5] Performance pass (startup, list rendering, sync)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.013Z",
+        "completedAt": "2026-02-26T21:26:37.120245Z",
+        "source": "migration"
+      },
+      {
+        "id": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
+        "name": "[P5] QA plan + test matrix (unit/widget/integration)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.019Z",
+        "completedAt": "2026-02-26T20:49:19Z",
+        "source": "migration"
+      },
+      {
+        "id": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
+        "name": "[P5] Launch checklist + app store assets + rollout plan",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.030Z",
+        "completedAt": "2026-02-26T20:49:19.363Z",
+        "source": "migration"
+      },
+      {
+        "id": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
+        "name": "[P5] Accessibility + localization readiness",
+        "description": "Migrated from legacy queue.md",
+        "priority": "low",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.024Z",
+        "completedAt": "2026-02-26T20:48:59Z",
+        "source": "migration"
+      },
+      {
+        "id": "33ab6340-2712-4dd5-bd6f-a1c322227b8d",
+        "name": "[P3] Define evolution/degradation thresholds and cadence",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.957Z",
+        "completedAt": "2026-02-26T20:42:25Z",
+        "source": "migration"
+      },
+      {
+        "id": "956c668f-0d16-48b7-ac25-3e1830eb703d",
+        "name": "[P3] Implement hunger/sad behavior for expiring pantry items",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.962Z",
+        "completedAt": "2026-02-26T20:42:25Z",
+        "source": "migration"
+      },
+      {
+        "id": "9bbb6d66-4c96-4b9f-97da-656d2448fdce",
+        "name": "[P3] Build pet timeline/history view for user feedback loop",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.968Z",
+        "completedAt": "2026-02-26T20:42:25Z",
+        "source": "migration"
+      },
+      {
+        "id": "26841502-9e0e-4034-9d5e-d7a812188223",
+        "name": "[P3] Map nutrition score deltas to pet stat updates",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.940Z",
+        "completedAt": "2026-02-26T20:35:23.006Z",
+        "source": "migration"
+      },
+      {
+        "id": "71fb9a7f-4b33-4b0f-8442-4151ff6437c0",
+        "name": "[P3] Implement pet animation state controller",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.945Z",
+        "completedAt": "2026-02-26T20:35:15.361Z",
+        "source": "migration"
+      },
+      {
+        "id": "5c90333a-91fc-41fe-8b16-b9d1d9a15aa9",
+        "name": "[P2] Normalize food names and units (dedupe + parsing)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.906Z",
+        "completedAt": "2026-02-26T20:35:00.479Z",
+        "source": "migration"
+      },
+      {
+        "id": "9ebcec19-b972-4fe3-ae6f-6b9067161131",
+        "name": "[P2] Build food classification engine (category + nutrition quality score)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.911Z",
+        "completedAt": "2026-02-26T20:34:51.011Z",
+        "source": "migration"
+      },
+      {
+        "id": "26b38058-9cb8-4e12-8a72-adc0314f966a",
+        "name": "[P2] Add confidence scoring + fallback for unknown items",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.917Z",
+        "completedAt": "2026-02-26T20:34:43.120Z",
+        "source": "migration"
+      },
+      {
+        "id": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
+        "name": "[P3] Design pet state machine and trigger rules",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.934Z",
+        "completedAt": "2026-02-26T20:32:03.948Z",
+        "source": "migration"
+      },
+      {
+        "id": "78ecd0ea-6c59-4342-8cd1-93f02c27ce49",
+        "name": "[P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.923Z",
+        "completedAt": "2026-02-26T20:29:15Z",
+        "source": "migration"
+      },
+      {
+        "id": "44df43d6-ff02-464f-909e-a5cb68719a6a",
+        "name": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.928Z",
+        "completedAt": "2026-02-26T20:29:15Z",
+        "source": "migration"
+      },
+      {
+        "id": "77b79633-56a9-48b2-8211-82239082dc53",
+        "name": "[P2] Implement photo-to-food item capture flow",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.900Z",
+        "completedAt": "2026-02-26T20:23:06Z",
+        "source": "migration"
+      },
+      {
+        "id": "86dc02f7-c52b-4e97-949c-fc075a40a288",
+        "name": "[P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.894Z",
+        "completedAt": "2026-02-26T20:21:01Z",
+        "source": "migration"
+      },
+      {
+        "id": "9ae1cd93-21a5-434e-8d30-f54628822e02",
+        "name": "[P2] Add expiry-date tracking and freshness status logic",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.888Z",
+        "completedAt": "2026-02-26T20:20:48Z",
+        "source": "migration"
+      },
+      {
+        "id": "facc9d0c-9584-40af-8298-7a548e603843",
+        "name": "[P1] Wire Firebase config bootstrap + emulator/dev toggles",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.803Z",
+        "completedAt": "2026-02-26T20:15:43.528Z",
+        "source": "migration"
+      },
+      {
+        "id": "646cfb37-bbf5-45dc-860a-e8ad9d6a4f5d",
+        "name": "[P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.814Z",
+        "completedAt": "2026-02-26T20:15:43.528Z",
+        "source": "migration"
+      },
+      {
+        "id": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
+        "name": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.883Z",
+        "completedAt": "2026-02-26T20:15:43.528Z",
+        "source": "migration"
+      },
+      {
+        "id": "59242717-db00-413f-a540-346bc0b9debb",
+        "name": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.843Z",
+        "completedAt": "2026-02-26T20:15:43.528Z",
+        "source": "migration"
+      },
+      {
         "id": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
         "name": "Smoke task",
         "description": "verify kanban",
         "priority": "high",
-        "status": "todo",
+        "status": "done",
         "createdAt": "2026-02-26T19:37:02.048Z",
-        "completedAt": null,
+        "completedAt": "2026-02-26T20:15:43.528Z",
         "source": "api-test"
+      },
+      {
+        "id": "856b4509-4b98-4c81-b26f-e3f213a8eda1",
+        "name": "[P1] Define app architecture (presentation/state/domain/data layers)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.830Z",
+        "completedAt": "2026-02-26T20:09:36.547Z",
+        "source": "migration"
+      },
+      {
+        "id": "24f5de28-6e68-4c52-89de-7d263ba8a379",
+        "name": "[P1] Select state management approach (Riverpod/Bloc decision doc)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.836Z",
+        "completedAt": "2026-02-26T20:09:15.134Z",
+        "source": "migration"
+      },
+      {
+        "id": "4840b3d9-557b-4693-a495-8b69ded1e114",
+        "name": "[P1] Create PantryPal project brief and success metrics (MVP + north-star)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.823Z",
+        "completedAt": "2026-02-26T20:09:04.479Z",
+        "source": "migration"
+      },
+      {
+        "id": "2218c972-0530-402c-a011-1d255942e293",
+        "name": "[P1] Design event model for pet reactions and pantry changes",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.855Z",
+        "completedAt": "2026-02-26T20:05:47.351Z",
+        "source": "migration"
+      },
+      {
+        "id": "b0f90eca-f62e-4c17-83df-deb23899b7a4",
+        "name": "[P1] Define Firestore collections and indexing plan",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.849Z",
+        "completedAt": "2026-02-26T20:05:03.094Z",
+        "source": "migration"
+      },
+      {
+        "id": "1f76e1d0-0314-417a-a88c-689df51989a5",
+        "name": "[P1] Write security rules baseline for Firestore/Storage",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.860Z",
+        "completedAt": "2026-02-26T20:04:50.975Z",
+        "source": "migration"
+      },
+      {
+        "id": "d5acb575-0834-4c96-af8b-3b57133c13c9",
+        "name": "[P1] Define API/contracts for scanning + classification services",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.866Z",
+        "completedAt": "2026-02-26T19:58:43.151Z",
+        "source": "migration"
+      },
+      {
+        "id": "30011eb5-4854-46b4-907a-8fedd0f7e4f5",
+        "name": "[P1] Scaffold Flutter app modules and folder conventions",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.877Z",
+        "completedAt": "2026-02-26T19:58:15.000003Z",
+        "source": "migration"
+      },
+      {
+        "id": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
+        "name": "[P1] Create environment/config strategy (dev/staging/prod)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:56.871Z",
+        "completedAt": "2026-02-26T19:57:59.776Z",
+        "source": "migration"
+      },
+      {
+        "id": "7424d962-fd80-4553-a84c-129b01e46c7d",
+        "name": "OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
+        "description": "Migrated from legacy queue.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.063Z",
+        "completedAt": "2026-02-26T19:54:57.063Z",
+        "source": "migration"
+      },
+      {
+        "id": "8bfc26f1-fa97-46cd-a7de-42d530e79f90",
+        "name": "[P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.057Z",
+        "completedAt": "2026-02-26T19:54:57.057Z",
+        "source": "migration"
+      },
+      {
+        "id": "1aa6af66-731e-4da7-8ae0-b3c3c938c876",
+        "name": "[P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.052Z",
+        "completedAt": "2026-02-26T19:54:57.052Z",
+        "source": "migration"
+      },
+      {
+        "id": "a2f7bc8d-6a52-48e2-8489-9535c57f5d59",
+        "name": "[P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.046Z",
+        "completedAt": "2026-02-26T19:54:57.046Z",
+        "source": "migration"
+      },
+      {
+        "id": "09429660-b121-47d2-845f-bf3baa3be6d5",
+        "name": "[P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.041Z",
+        "completedAt": "2026-02-26T19:54:57.041Z",
+        "source": "migration"
+      },
+      {
+        "id": "c39330d0-bc74-413f-956e-12adb8ebc865",
+        "name": "[P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
+        "description": "Migrated from legacy queue.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T19:54:57.035Z",
+        "completedAt": "2026-02-26T19:54:57.035Z",
+        "source": "migration"
+      },
+      {
+        "id": "f092ac2e-e01c-4614-82df-0e1c5f1f0b9e",
+        "name": "[Rework QA] [P1] Define Firestore collections and indexing plan",
+        "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.383Z",
+        "completedAt": "2026-02-26T23:46:34Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "c1c2fe48-7d82-4dd4-b21b-62dae6f6fcbd",
+        "name": "[Rework QA] [P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
+        "description": "Delight rework QA complete. Evidence: artifacts/rework-qa-p1-domain-models-evidence.md (model tests passed).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.390Z",
+        "completedAt": "2026-02-26T23:46:44.576Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "28c984be-6d48-47f9-92fd-1ed9bf8de66e",
+        "name": "[Rework QA] [P1] Create PantryPal project brief and success metrics (MVP + north-star)",
+        "description": "Delight rework pass complete. Evidence: pantrypal/docs/project_brief_success_metrics.md (MVP scope, north-star metric, success criteria).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.380Z",
+        "completedAt": "2026-02-26T23:49:33Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "269f9749-ff5b-4ff9-9f9c-946e9e51523e",
+        "name": "[Rework QA] [P1] Select state management approach (Riverpod/Bloc decision doc)",
+        "description": "Delight rework QA complete. Evidence: pantrypal/docs/state_management_decision_riverpod_vs_bloc.md (Riverpod selected with rationale, trade-offs, and implementation guidance).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.379Z",
+        "completedAt": "2026-02-26T23:49:34Z",
+        "source": "delight-rework-sweep"
       }
-    ],
-    "inProgress": [],
-    "done": []
+    ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-26T23:50:38.785Z",
+      "type": "task_moved",
+      "taskId": "906e7b93-4977-48a2-bbd6-9ed8ef4dfc3e",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-26T23:50:38.782Z",
+      "type": "task_added",
+      "taskId": "906e7b93-4977-48a2-bbd6-9ed8ef4dfc3e",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "timestamp": "2026-02-26T23:50:33Z",
+      "type": "task_done",
+      "taskName": "[Rework QA] [P1] Define API/contracts for scanning + classification services",
+      "detail": "Rework QA passed: contracts docs/tests/analyze verified; evidence at artifacts/rework-qa-p1-api-contracts-evidence.md"
+    },
+    {
+      "at": "2026-02-26T23:50:32Z",
+      "type": "task_moved",
+      "taskId": "714ea6b8-49e6-4221-b9e1-f8334383f1a1",
+      "taskName": "[Rework QA] [P1] Design event model for pet reactions and pantry changes",
+      "from": "todo",
+      "to": "done",
+      "detail": "Completed: event model contract/spec refreshed (docs + schema), canonical references aligned, and payload invariants documented for pantry/pet timeline events."
+    },
+    {
+      "at": "2026-02-26T23:50:26.780Z",
+      "type": "task_moved",
+      "taskId": "caeeccb1-0f86-4ff9-a4f2-4b4da8102191",
+      "taskName": "[Rework QA] OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Rework QA passed with screenshot evidence and frontend polish updates"
+    },
+    {
+      "at": "2026-02-26T23:50:07Z",
+      "type": "task_moved",
+      "taskId": "e17eca61-de4e-40bd-bd47-f24874636d50",
+      "taskName": "[Rework QA] [P1] Scaffold Flutter app modules and folder conventions",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Rework QA PASS with scaffold convention tests + evidence artifact"
+    },
+    {
+      "at": "2026-02-26T23:49:51.737Z",
+      "type": "task_moved",
+      "taskId": "6ec0d2af-b68a-4214-875c-6120ba2efc50",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-26T23:49:51.729Z",
+      "type": "task_added",
+      "taskId": "6ec0d2af-b68a-4214-875c-6120ba2efc50",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-26T23:49:34Z",
+      "type": "task_moved",
+      "taskId": "269f9749-ff5b-4ff9-9f9c-946e9e51523e",
+      "taskName": "[Rework QA] [P1] Select state management approach (Riverpod/Bloc decision doc)",
+      "from": "todo",
+      "to": "done",
+      "detail": "Completed state management decision doc with evidence artifact at pantrypal/docs/state_management_decision_riverpod_vs_bloc.md"
+    },
+    {
+      "at": "2026-02-26T23:49:33Z",
+      "type": "task_moved",
+      "taskId": "28c984be-6d48-47f9-92fd-1ed9bf8de66e",
+      "taskName": "[Rework QA] [P1] Create PantryPal project brief and success metrics (MVP + north-star)",
+      "from": "todo",
+      "to": "done",
+      "detail": "Completed project brief + success metrics doc with MVP scope, north-star, and launch success criteria. Evidence: pantrypal/docs/project_brief_success_metrics.md"
+    },
+    {
+      "at": "2026-02-26T23:48:41.432Z",
+      "type": "task_moved",
+      "taskId": "4de69407-f14e-451a-ba1c-86d13b58a0fc",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-26T23:48:41.428Z",
+      "type": "task_added",
+      "taskId": "4de69407-f14e-451a-ba1c-86d13b58a0fc",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_reassigned",
+      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
+      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_reassigned",
+      "taskId": "b86c1e59-5027-46c4-9871-3d38f615c478",
+      "taskName": "[Rework][UI] Redesign Tamagotchi wellness companion with custom art, animation, and personality",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_reassigned",
+      "taskId": "3dfeeb20-a5d6-41b2-ae3f-3cbf6738dc22",
+      "taskName": "[P9] Design PantryPal weekly meal-prep optimizer using pantry inventory + calendar constraints",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_reassigned",
+      "taskId": "3a230476-6b10-46f7-85e8-01cbb206add0",
+      "taskName": "[Rework QA] [P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_reassigned",
+      "taskId": "77a0607b-381f-446d-a2ab-6a1117eb7615",
+      "taskName": "[Rework QA] [P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_moved",
+      "taskId": "f9ac62f3-cc9e-4824-ac59-00d0ce494d38",
+      "taskName": "[Rework QA] [P1] Define API/contracts for scanning + classification services",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_moved",
+      "taskId": "e17eca61-de4e-40bd-bd47-f24874636d50",
+      "taskName": "[Rework QA] [P1] Scaffold Flutter app modules and folder conventions",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T23:48:13Z",
+      "type": "task_moved",
+      "taskId": "caeeccb1-0f86-4ff9-a4f2-4b4da8102191",
+      "taskName": "[Rework QA] OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T23:47:15.917Z",
+      "type": "task_moved",
+      "taskId": "580c094b-22bc-4c8e-8e39-10e5f75bba54",
+      "taskName": "[Rework QA] [P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
+      "from": "inProgress",
+      "to": "done"
+    },
+    {
+      "at": "2026-02-26T23:47:04.797Z",
+      "type": "task_moved",
+      "taskId": "580c094b-22bc-4c8e-8e39-10e5f75bba54",
+      "taskName": "[Rework QA] [P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
+      "from": "todo",
+      "to": "inProgress"
+    },
+    {
+      "at": "2026-02-26T23:46:44Z",
+      "type": "task_moved",
+      "taskId": "c1c2fe48-7d82-4dd4-b21b-62dae6f6fcbd",
+      "taskName": "[Rework QA] [P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA complete with evidence artifact and passing model tests"
+    },
+    {
+      "at": "2026-02-26T22:41:02Z",
+      "type": "task_moved",
+      "taskId": "28e7fd49-2446-4966-bb8f-c412ee28cf39",
+      "taskName": "[Rework QA] [P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Delight rework pass complete"
+    },
+    {
+      "at": "2026-02-26T22:40:41.712Z",
+      "type": "task_moved",
+      "taskId": "519058ce-e72a-4936-8d65-e94c45116b61",
+      "taskName": "[P9] Add cost-aware substitution suggestions when ingredients are missing",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p9-cost-aware-subs; commit 8b469e5; tests pass (4/4)"
+    },
+    {
+      "at": "2026-02-26T22:39:39.270Z",
+      "type": "task_moved",
+      "taskId": "77a0607b-381f-446d-a2ab-6a1117eb7615",
+      "taskName": "[Rework QA] [P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Rework sweep started in parallel"
+    },
+    {
+      "at": "2026-02-26T22:39:39.260Z",
+      "type": "task_moved",
+      "taskId": "28e7fd49-2446-4966-bb8f-c412ee28cf39",
+      "taskName": "[Rework QA] [P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Rework sweep started in parallel"
+    },
+    {
+      "at": "2026-02-26T22:39:39.246Z",
+      "type": "task_moved",
+      "taskId": "3a230476-6b10-46f7-85e8-01cbb206add0",
+      "taskName": "[Rework QA] [P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Rework sweep started in parallel"
+    },
+    {
+      "at": "2026-02-26T22:39:17.395Z",
+      "type": "task_added",
+      "taskId": "3a230476-6b10-46f7-85e8-01cbb206add0",
+      "taskName": "[Rework QA] [P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.394Z",
+      "type": "task_added",
+      "taskId": "28e7fd49-2446-4966-bb8f-c412ee28cf39",
+      "taskName": "[Rework QA] [P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.392Z",
+      "type": "task_added",
+      "taskId": "77a0607b-381f-446d-a2ab-6a1117eb7615",
+      "taskName": "[Rework QA] [P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.391Z",
+      "type": "task_added",
+      "taskId": "580c094b-22bc-4c8e-8e39-10e5f75bba54",
+      "taskName": "[Rework QA] [P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.390Z",
+      "type": "task_added",
+      "taskId": "c1c2fe48-7d82-4dd4-b21b-62dae6f6fcbd",
+      "taskName": "[Rework QA] [P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.389Z",
+      "type": "task_added",
+      "taskId": "caeeccb1-0f86-4ff9-a4f2-4b4da8102191",
+      "taskName": "[Rework QA] OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.388Z",
+      "type": "task_added",
+      "taskId": "84998ff0-62ff-4355-afa6-f92472c6888a",
+      "taskName": "[Rework QA] [P1] Create environment/config strategy (dev/staging/prod)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.386Z",
+      "type": "task_added",
+      "taskId": "e17eca61-de4e-40bd-bd47-f24874636d50",
+      "taskName": "[Rework QA] [P1] Scaffold Flutter app modules and folder conventions",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.385Z",
+      "type": "task_added",
+      "taskId": "f9ac62f3-cc9e-4824-ac59-00d0ce494d38",
+      "taskName": "[Rework QA] [P1] Define API/contracts for scanning + classification services",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.384Z",
+      "type": "task_added",
+      "taskId": "862370c2-46ca-44ed-8c91-5c90026210b5",
+      "taskName": "[Rework QA] [P1] Write security rules baseline for Firestore/Storage",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.383Z",
+      "type": "task_added",
+      "taskId": "f092ac2e-e01c-4614-82df-0e1c5f1f0b9e",
+      "taskName": "[Rework QA] [P1] Define Firestore collections and indexing plan",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.382Z",
+      "type": "task_added",
+      "taskId": "714ea6b8-49e6-4221-b9e1-f8334383f1a1",
+      "taskName": "[Rework QA] [P1] Design event model for pet reactions and pantry changes",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.380Z",
+      "type": "task_added",
+      "taskId": "28c984be-6d48-47f9-92fd-1ed9bf8de66e",
+      "taskName": "[Rework QA] [P1] Create PantryPal project brief and success metrics (MVP + north-star)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.379Z",
+      "type": "task_added",
+      "taskId": "269f9749-ff5b-4ff9-9f9c-946e9e51523e",
+      "taskName": "[Rework QA] [P1] Select state management approach (Riverpod/Bloc decision doc)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.378Z",
+      "type": "task_added",
+      "taskId": "083c57dc-eda2-4cb6-ad03-1329ac90d964",
+      "taskName": "[Rework QA] [P1] Define app architecture (presentation/state/domain/data layers)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.377Z",
+      "type": "task_added",
+      "taskId": "2979a92c-f358-46fa-b6cb-440da1b11d00",
+      "taskName": "[Rework QA] Smoke task",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.376Z",
+      "type": "task_added",
+      "taskId": "f2fe68dd-8cc8-45ff-879b-dac859cb5713",
+      "taskName": "[Rework QA] [P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.374Z",
+      "type": "task_added",
+      "taskId": "11ca03b3-2810-4a78-b317-8b1771c23477",
+      "taskName": "[Rework QA] [P2] Build pantry CRUD UI (add/edit/remove/consume)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.373Z",
+      "type": "task_added",
+      "taskId": "9cbbd55a-7754-4d54-82b5-a9c83cb7c2bc",
+      "taskName": "[Rework QA] [P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.372Z",
+      "type": "task_added",
+      "taskId": "5a8ebea6-b01b-4abb-94fa-25269a51933b",
+      "taskName": "[Rework QA] [P1] Wire Firebase config bootstrap + emulator/dev toggles",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.371Z",
+      "type": "task_added",
+      "taskId": "5518e591-5362-411e-b5f0-5f8ed0d097ca",
+      "taskName": "[Rework QA] [P2] Add expiry-date tracking and freshness status logic",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.370Z",
+      "type": "task_added",
+      "taskId": "4fb291a2-d96b-4cad-a7cd-3b9a2a989011",
+      "taskName": "[Rework QA] [P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.369Z",
+      "type": "task_added",
+      "taskId": "c4acfa26-1eb4-4589-a45a-2b985441a8f6",
+      "taskName": "[Rework QA] [P2] Implement photo-to-food item capture flow",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.367Z",
+      "type": "task_added",
+      "taskId": "9b6a1867-3e6d-43b6-aada-bc08737c04a1",
+      "taskName": "[Rework QA] [P3] Define pet attributes (mood/energy/health/hunger/evolution)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.366Z",
+      "type": "task_added",
+      "taskId": "335459e5-6eac-4394-9f4c-07f0d8064f82",
+      "taskName": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.365Z",
+      "type": "task_added",
+      "taskId": "662e5878-f53d-4ac1-ae6a-10ee8c348cae",
+      "taskName": "[Rework QA] [P3] Design pet state machine and trigger rules",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.364Z",
+      "type": "task_added",
+      "taskId": "dbc0400d-b5b1-4bd5-b66f-45aed9430b60",
+      "taskName": "[Rework QA] [P2] Add confidence scoring + fallback for unknown items",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.363Z",
+      "type": "task_added",
+      "taskId": "d4efe638-9179-40ed-a793-fce15a82921f",
+      "taskName": "[Rework QA] [P2] Build food classification engine (category + nutrition quality score)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.361Z",
+      "type": "task_added",
+      "taskId": "4bdf2baa-ada3-4e3d-9da9-cc6bc9949233",
+      "taskName": "[Rework QA] [P2] Normalize food names and units (dedupe + parsing)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.360Z",
+      "type": "task_added",
+      "taskId": "df8ffcd0-dbad-4d1e-a6a9-0ad1bbd7525e",
+      "taskName": "[Rework QA] [P3] Implement pet animation state controller",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.359Z",
+      "type": "task_added",
+      "taskId": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
+      "taskName": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.358Z",
+      "type": "task_added",
+      "taskId": "48c98705-ed2a-4a15-b4c0-669286fec15e",
+      "taskName": "[Rework QA] [P3] Build pet timeline/history view for user feedback loop",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.357Z",
+      "type": "task_added",
+      "taskId": "ff1b7a09-df85-4e33-a6c6-cbc549a191d4",
+      "taskName": "[Rework QA] [P3] Implement hunger/sad behavior for expiring pantry items",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.355Z",
+      "type": "task_added",
+      "taskId": "b126e511-fe6c-4e27-ab78-c0e50f901522",
+      "taskName": "[Rework QA] [P3] Define evolution/degradation thresholds and cadence",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.354Z",
+      "type": "task_added",
+      "taskId": "a0c3ac65-2bfa-45e0-9dd0-42eb16385efd",
+      "taskName": "[Rework QA] [P5] Accessibility + localization readiness",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.353Z",
+      "type": "task_added",
+      "taskId": "4d423e6c-b6f1-456f-8729-71c61a4a07d5",
+      "taskName": "[Rework QA] [P5] Launch checklist + app store assets + rollout plan",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.352Z",
+      "type": "task_added",
+      "taskId": "53f3e69f-4452-403b-960c-10a8d9a6bc7c",
+      "taskName": "[Rework QA] [P5] QA plan + test matrix (unit/widget/integration)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.350Z",
+      "type": "task_added",
+      "taskId": "a065b412-6975-4b99-a2e9-18ef2a27dc71",
+      "taskName": "[Rework QA] [P5] Performance pass (startup, list rendering, sync)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.349Z",
+      "type": "task_added",
+      "taskId": "a791fed4-2779-4198-8cc5-24b938c0f077",
+      "taskName": "[Rework QA] [P5] Add onboarding flow + permission education",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.348Z",
+      "type": "task_added",
+      "taskId": "72fd9ddb-6503-44ed-932c-534f69a3ca12",
+      "taskName": "[Rework QA] [P5] Add analytics instrumentation (funnel + retention events)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.347Z",
+      "type": "task_added",
+      "taskId": "d433a717-dae7-44ba-b4eb-1a6b29362716",
+      "taskName": "[Rework QA] [P4] Add re-engagement messaging strategy (push + in-app)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.346Z",
+      "type": "task_added",
+      "taskId": "239f82df-0c60-420e-832f-cfc00ada7326",
+      "taskName": "[Rework QA] [P4] Build challenge/quest system (use expiring foods this week)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.344Z",
+      "type": "task_added",
+      "taskId": "1cec7707-6648-4c2a-bfc6-62b0835c3010",
+      "taskName": "[Rework QA] [P4] Add streak engine (healthy pantry days / waste reduction)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.343Z",
+      "type": "task_added",
+      "taskId": "2677a413-9820-4ff1-9d8f-0532e91f6235",
+      "taskName": "[Rework QA] [P4] Implement pet hunger notifications tied to pantry risk",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.342Z",
+      "type": "task_added",
+      "taskId": "8e29e46f-4c4d-4c2b-8314-66213fe23a62",
+      "taskName": "[Rework QA] [P4] Implement expiry reminders and urgency tiers",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.341Z",
+      "type": "task_added",
+      "taskId": "108f18b4-c421-434b-8a9a-4bac1f20c14d",
+      "taskName": "[Rework QA] [P6] Build smart shopping list generator from low-stock + expiry risk",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.339Z",
+      "type": "task_added",
+      "taskId": "a83f576b-a5b5-4eba-8610-0192fdc606ba",
+      "taskName": "[Rework QA] [P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.338Z",
+      "type": "task_added",
+      "taskId": "d3812c11-07ae-4154-9261-0b177e4c4dcb",
+      "taskName": "[Rework QA] [P6] Add household profiles + shared pantry collaboration permissions",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.337Z",
+      "type": "task_added",
+      "taskId": "706c918c-50e0-459f-ad91-2f6a5258f894",
+      "taskName": "[Rework QA] [Ops] Verify Claude delegate workflow end-to-end",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.336Z",
+      "type": "task_added",
+      "taskId": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
+      "taskName": "[Rework QA] [P7] Build meal planner suggestions from expiring pantry items",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.334Z",
+      "type": "task_added",
+      "taskId": "064f20cc-6634-4dc6-9529-f35dec6118cf",
+      "taskName": "[Rework QA] [P7] Add adaptive notification quiet-hours + urgency escalation",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.333Z",
+      "type": "task_added",
+      "taskId": "b72cbfdc-b0d2-4141-b1d7-49824939a9c4",
+      "taskName": "[Rework QA] [P7] Implement household activity feed with undo for pantry actions",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.332Z",
+      "type": "task_added",
+      "taskId": "95880994-b1f1-4093-a708-b8c97485fff7",
+      "taskName": "[Rework QA] [P8] Build personalized pantry health scorecard with weekly trend explanations",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.330Z",
+      "type": "task_added",
+      "taskId": "96b68b0b-7650-441f-a271-ea7b9b714edc",
+      "taskName": "[Rework QA] [P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:39:17.329Z",
+      "type": "task_added",
+      "taskId": "376fe6d7-1792-4eec-8018-9cbe619da89e",
+      "taskName": "[Rework QA] [P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+      "to": "todo",
+      "detail": "Added task from delight-rework-sweep"
+    },
+    {
+      "at": "2026-02-26T22:38:13.567Z",
+      "type": "task_moved",
+      "taskId": "519058ce-e72a-4936-8d65-e94c45116b61",
+      "taskName": "[P9] Add cost-aware substitution suggestions when ingredients are missing",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T22:38:13.567Z",
+      "type": "task_moved",
+      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
+      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T22:38:13.567Z",
+      "type": "task_moved",
+      "taskId": "b86c1e59-5027-46c4-9871-3d38f615c478",
+      "taskName": "[Rework][UI] Redesign Tamagotchi wellness companion with custom art, animation, and personality",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T22:38:01.983Z",
+      "type": "task_moved",
+      "taskId": "3dfeeb20-a5d6-41b2-ae3f-3cbf6738dc22",
+      "taskName": "[P9] Design PantryPal weekly meal-prep optimizer using pantry inventory + calendar constraints",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Started directly in main agent (cron)"
+    },
+    {
+      "at": "2026-02-26T22:38:01.983Z",
+      "type": "task_added",
+      "taskId": "6b6701af-0f27-4bf0-8159-3c62a8609032",
+      "taskName": "[P9] Create household accountability dashboard for waste reduction goals",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:38:01.983Z",
+      "type": "task_added",
+      "taskId": "519058ce-e72a-4936-8d65-e94c45116b61",
+      "taskName": "[P9] Add cost-aware substitution suggestions when ingredients are missing",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:38:01.983Z",
+      "type": "task_added",
+      "taskId": "3dfeeb20-a5d6-41b2-ae3f-3cbf6738dc22",
+      "taskName": "[P9] Design PantryPal weekly meal-prep optimizer using pantry inventory + calendar constraints",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:37:54.431Z",
+      "type": "task_added",
+      "taskId": "b86c1e59-5027-46c4-9871-3d38f615c478",
+      "taskName": "[Rework][UI] Redesign Tamagotchi wellness companion with custom art, animation, and personality",
+      "to": "todo",
+      "detail": "Added task from luciana-directive"
+    },
+    {
+      "at": "2026-02-26T22:37:48.814Z",
+      "type": "task_moved",
+      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
+      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
+      "from": "done",
+      "to": "todo",
+      "detail": "Needs rework: current pet visual implementation is placeholder quality; requires custom illustrated states + animation polish."
+    },
+    {
+      "at": "2026-02-26T22:24:32.382Z",
+      "type": "task_moved",
+      "taskId": "ab7df9f4-5da7-4fce-b890-73193eec72c6",
+      "taskName": "[P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p8-household-task-assignment; artifact pantrypal/docs/p8_household_pantry_task_assignment.md"
+    },
+    {
+      "at": "2026-02-26T22:24:32.382Z",
+      "type": "task_moved",
+      "taskId": "29015876-9333-4ce2-bdc8-503f902b559c",
+      "taskName": "[P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p8-cook-tonight-recs; artifact pantrypal/docs/p8_cook_tonight_recommendations.md"
+    },
+    {
+      "at": "2026-02-26T22:23:55.675Z",
+      "type": "task_moved",
+      "taskId": "ab7df9f4-5da7-4fce-b890-73193eec72c6",
+      "taskName": "[P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T22:23:55.675Z",
+      "type": "task_moved",
+      "taskId": "29015876-9333-4ce2-bdc8-503f902b559c",
+      "taskName": "[P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T22:23:42.581Z",
+      "type": "task_moved",
+      "taskId": "1bed2a9c-2fd7-44a2-ba99-1a45633b57fa",
+      "taskName": "[P8] Build personalized pantry health scorecard with weekly trend explanations",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed directly in main agent; artifact pantrypal/docs/p8_pantry_health_scorecard.md"
+    },
+    {
+      "at": "2026-02-26T22:23:18.552Z",
+      "type": "task_moved",
+      "taskId": "1bed2a9c-2fd7-44a2-ba99-1a45633b57fa",
+      "taskName": "[P8] Build personalized pantry health scorecard with weekly trend explanations",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Started directly in main agent (cron)"
+    },
+    {
+      "at": "2026-02-26T22:23:18.552Z",
+      "type": "task_added",
+      "taskId": "ab7df9f4-5da7-4fce-b890-73193eec72c6",
+      "taskName": "[P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:23:18.552Z",
+      "type": "task_added",
+      "taskId": "29015876-9333-4ce2-bdc8-503f902b559c",
+      "taskName": "[P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:23:18.552Z",
+      "type": "task_added",
+      "taskId": "1bed2a9c-2fd7-44a2-ba99-1a45633b57fa",
+      "taskName": "[P8] Build personalized pantry health scorecard with weekly trend explanations",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:16:37Z",
+      "type": "task_moved",
+      "taskId": "52845d1d-7a90-4c23-865d-b7daac20c53e",
+      "taskName": "[P7] Implement household activity feed with undo for pantry actions",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p7-activity-feed-undo"
+    },
+    {
+      "at": "2026-02-26T22:15:55Z",
+      "type": "task_moved",
+      "taskId": "fd440368-339f-4aec-a2a6-37222bf909d3",
+      "taskName": "[P7] Add adaptive notification quiet-hours + urgency escalation",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p7-quiet-hours-escalation"
+    },
+    {
+      "at": "2026-02-26T22:13:03Z",
+      "type": "task_moved",
+      "taskId": "52845d1d-7a90-4c23-865d-b7daac20c53e",
+      "taskName": "[P7] Implement household activity feed with undo for pantry actions",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T22:13:03Z",
+      "type": "task_moved",
+      "taskId": "fd440368-339f-4aec-a2a6-37222bf909d3",
+      "taskName": "[P7] Add adaptive notification quiet-hours + urgency escalation",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T22:08:26.526Z",
+      "type": "task_moved",
+      "taskId": "ec84a913-80e3-4bec-8451-f39115e52c8d",
+      "taskName": "[P7] Build meal planner suggestions from expiring pantry items",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed directly in main agent; artifact pantrypal/docs/p7-meal-planner-expiry.md"
+    },
+    {
+      "at": "2026-02-26T22:08:10.136Z",
+      "type": "task_moved",
+      "taskId": "ec84a913-80e3-4bec-8451-f39115e52c8d",
+      "taskName": "[P7] Build meal planner suggestions from expiring pantry items",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Started directly in main agent (cron)"
+    },
+    {
+      "at": "2026-02-26T22:08:10.136Z",
+      "type": "task_added",
+      "taskId": "52845d1d-7a90-4c23-865d-b7daac20c53e",
+      "taskName": "[P7] Implement household activity feed with undo for pantry actions",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:08:10.136Z",
+      "type": "task_added",
+      "taskId": "fd440368-339f-4aec-a2a6-37222bf909d3",
+      "taskName": "[P7] Add adaptive notification quiet-hours + urgency escalation",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:08:10.136Z",
+      "type": "task_added",
+      "taskId": "ec84a913-80e3-4bec-8451-f39115e52c8d",
+      "taskName": "[P7] Build meal planner suggestions from expiring pantry items",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T22:00:06.649Z",
+      "type": "task_moved",
+      "taskId": "62f7cbf3-3da1-4095-a321-72a475c686be",
+      "taskName": "[Ops] Verify Claude delegate workflow end-to-end",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed via claude-code-delegate (commit 928ab58)"
+    },
+    {
+      "at": "2026-02-26T21:59:44.372Z",
+      "type": "task_moved",
+      "taskId": "62f7cbf3-3da1-4095-a321-72a475c686be",
+      "taskName": "[Ops] Verify Claude delegate workflow end-to-end",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating to Claude Code via claude-code-delegate"
+    },
+    {
+      "at": "2026-02-26T21:59:38.701Z",
+      "type": "task_added",
+      "taskId": "62f7cbf3-3da1-4095-a321-72a475c686be",
+      "taskName": "[Ops] Verify Claude delegate workflow end-to-end",
+      "to": "todo",
+      "detail": "Added task from manual-checklist"
+    },
+    {
+      "at": "2026-02-26T21:53:08.356Z",
+      "type": "task_moved",
+      "taskId": "dc21fdc5-81a3-48c3-9362-0015eb34dee8",
+      "taskName": "[P6] Add household profiles + shared pantry collaboration permissions",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p6-household-collab (commit 77fbbc1)"
+    },
+    {
+      "at": "2026-02-26T21:46:07.979Z",
+      "type": "task_moved",
+      "taskId": "3115e6b8-5998-4767-9944-359ac669c740",
+      "taskName": "[P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p6-weekly-insights-digest (commit 37744ba)"
+    },
+    {
+      "at": "2026-02-26T21:45:55.888Z",
+      "type": "task_moved",
+      "taskId": "b26ebe2c-1e0a-4464-97d0-cccfb2e59341",
+      "taskName": "[P6] Build smart shopping list generator from low-stock + expiry risk",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p6-smart-shopping-list (commit 0d79f19)"
+    },
+    {
+      "at": "2026-02-26T21:43:10.553Z",
+      "type": "task_moved",
+      "taskId": "3115e6b8-5998-4767-9944-359ac669c740",
+      "taskName": "[P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:43:10.553Z",
+      "type": "task_moved",
+      "taskId": "b26ebe2c-1e0a-4464-97d0-cccfb2e59341",
+      "taskName": "[P6] Build smart shopping list generator from low-stock + expiry risk",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:43:10.553Z",
+      "type": "task_moved",
+      "taskId": "dc21fdc5-81a3-48c3-9362-0015eb34dee8",
+      "taskName": "[P6] Add household profiles + shared pantry collaboration permissions",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:43:10.553Z",
+      "type": "task_added",
+      "taskId": "3115e6b8-5998-4767-9944-359ac669c740",
+      "taskName": "[P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T21:43:10.553Z",
+      "type": "task_added",
+      "taskId": "b26ebe2c-1e0a-4464-97d0-cccfb2e59341",
+      "taskName": "[P6] Build smart shopping list generator from low-stock + expiry risk",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T21:43:10.553Z",
+      "type": "task_added",
+      "taskId": "dc21fdc5-81a3-48c3-9362-0015eb34dee8",
+      "taskName": "[P6] Add household profiles + shared pantry collaboration permissions",
+      "to": "todo",
+      "detail": "Added intelligent iteration seed task (cron)"
+    },
+    {
+      "at": "2026-02-26T21:41:08.866Z",
+      "type": "task_moved",
+      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
+      "taskName": "[P4] Implement expiry reminders and urgency tiers",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p4-expiry-reminders (commit 5f7393f)"
+    },
+    {
+      "at": "2026-02-26T21:40:48.312Z",
+      "type": "task_moved",
+      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
+      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p4-hunger-notifications (commit 64a175c)"
+    },
+    {
+      "at": "2026-02-26T21:40:12.159Z",
+      "type": "task_moved",
+      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
+      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p4-streak-engine-unstick (commit 1637965)"
+    },
+    {
+      "at": "2026-02-26T21:38:13.649Z",
+      "type": "task_reassigned",
+      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
+      "taskName": "[P4] Implement expiry reminders and urgency tiers",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T21:38:13.649Z",
+      "type": "task_reassigned",
+      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
+      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T21:38:13.649Z",
+      "type": "task_reassigned",
+      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
+      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T21:38:13.649Z",
+      "type": "task_moved",
+      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
+      "taskName": "[P4] Implement expiry reminders and urgency tiers",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:38:13.649Z",
+      "type": "task_moved",
+      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
+      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:36:15.355Z",
+      "type": "task_moved",
+      "taskId": "5f65417e-c225-4069-a1c2-000638727a61",
+      "taskName": "[P4] Build challenge/quest system (use expiring foods this week)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p4-challenge-quest-system (commit 57736fa)"
+    },
+    {
+      "at": "2026-02-26T21:34:54.724Z",
+      "type": "task_moved",
+      "taskId": "5702ea57-c198-40d6-a165-7f1e274cf96b",
+      "taskName": "[P4] Add re-engagement messaging strategy (push + in-app)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p4-reengagement-messaging (commit 7bb1d40)"
+    },
+    {
+      "at": "2026-02-26T21:33:23.183Z",
+      "type": "task_moved",
+      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
+      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:33:23.183Z",
+      "type": "task_moved",
+      "taskId": "5f65417e-c225-4069-a1c2-000638727a61",
+      "taskName": "[P4] Build challenge/quest system (use expiring foods this week)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:33:23.183Z",
+      "type": "task_moved",
+      "taskId": "5702ea57-c198-40d6-a165-7f1e274cf96b",
+      "taskName": "[P4] Add re-engagement messaging strategy (push + in-app)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:28:44.022039Z",
+      "type": "task_moved",
+      "taskId": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
+      "taskName": "[P5] Add analytics instrumentation (funnel + retention events)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p5-analytics-instrumentation (commit 48a8d04)"
+    },
+    {
+      "at": "2026-02-26T21:28:31.642110Z",
+      "type": "task_moved",
+      "taskId": "20bb91f3-6263-4fca-9768-7f77ab351d41",
+      "taskName": "[P5] Add onboarding flow + permission education",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p5-onboarding-permissions (commit f5ea91e)"
+    },
+    {
+      "at": "2026-02-26T21:26:37.120245Z",
+      "type": "task_moved",
+      "taskId": "93d240f5-d619-4509-836f-497fb5b0c643",
+      "taskName": "[P5] Performance pass (startup, list rendering, sync)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p5-performance-pass (commit 08332d3)"
+    },
+    {
+      "at": "2026-02-26T21:23:24Z",
+      "type": "task_moved",
+      "taskId": "20bb91f3-6263-4fca-9768-7f77ab351d41",
+      "taskName": "[P5] Add onboarding flow + permission education",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:23:24Z",
+      "type": "task_moved",
+      "taskId": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
+      "taskName": "[P5] Add analytics instrumentation (funnel + retention events)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T21:23:24Z",
+      "type": "task_moved",
+      "taskId": "93d240f5-d619-4509-836f-497fb5b0c643",
+      "taskName": "[P5] Performance pass (startup, list rendering, sync)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:49:19Z",
+      "type": "task_moved",
+      "taskId": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
+      "taskName": "[P5] QA plan + test matrix (unit/widget/integration)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p5-qa-plan-test-matrix (commit 96cdd52)"
+    },
+    {
+      "at": "2026-02-26T20:49:19.363Z",
+      "type": "task_moved",
+      "taskId": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
+      "taskName": "[P5] Launch checklist + app store assets + rollout plan",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p5-launch-checklist-rollout (commit f742c65)"
+    },
+    {
+      "at": "2026-02-26T20:48:59Z",
+      "type": "task_moved",
+      "taskId": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
+      "taskName": "[P5] Accessibility + localization readiness",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p5-accessibility-localization-readiness (commit 8755bc6)"
+    },
+    {
+      "at": "2026-02-26T20:47:55.966Z",
+      "type": "task_moved",
+      "taskId": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
+      "taskName": "[P5] QA plan + test matrix (unit/widget/integration)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:47:55.966Z",
+      "type": "task_moved",
+      "taskId": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
+      "taskName": "[P5] Accessibility + localization readiness",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:47:55.966Z",
+      "type": "task_moved",
+      "taskId": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
+      "taskName": "[P5] Launch checklist + app store assets + rollout plan",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:42:25Z",
+      "type": "task_moved",
+      "taskId": "33ab6340-2712-4dd5-bd6f-a1c322227b8d",
+      "taskName": "[P3] Define evolution/degradation thresholds and cadence",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-evolution-thresholds-cadence (commit 0c037b7)"
+    },
+    {
+      "at": "2026-02-26T20:42:25Z",
+      "type": "task_moved",
+      "taskId": "956c668f-0d16-48b7-ac25-3e1830eb703d",
+      "taskName": "[P3] Implement hunger/sad behavior for expiring pantry items",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-hunger-sad-behavior (commit f1b4b22)"
+    },
+    {
+      "at": "2026-02-26T20:42:25Z",
+      "type": "task_moved",
+      "taskId": "9bbb6d66-4c96-4b9f-97da-656d2448fdce",
+      "taskName": "[P3] Build pet timeline/history view for user feedback loop",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-pet-timeline-history-view (commit 9f3bf4d)"
+    },
+    {
+      "at": "2026-02-26T20:37:59Z",
+      "type": "task_moved",
+      "taskId": "33ab6340-2712-4dd5-bd6f-a1c322227b8d",
+      "taskName": "[P3] Define evolution/degradation thresholds and cadence",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:37:59Z",
+      "type": "task_moved",
+      "taskId": "956c668f-0d16-48b7-ac25-3e1830eb703d",
+      "taskName": "[P3] Implement hunger/sad behavior for expiring pantry items",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:37:59Z",
+      "type": "task_moved",
+      "taskId": "9bbb6d66-4c96-4b9f-97da-656d2448fdce",
+      "taskName": "[P3] Build pet timeline/history view for user feedback loop",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:35:23.006Z",
+      "type": "task_moved",
+      "taskId": "26841502-9e0e-4034-9d5e-d7a812188223",
+      "taskName": "[P3] Map nutrition score deltas to pet stat updates",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-nutrition-deltas-to-pet-stats (commit 0a4cf62)"
+    },
+    {
+      "at": "2026-02-26T20:35:15.362Z",
+      "type": "task_moved",
+      "taskId": "71fb9a7f-4b33-4b0f-8442-4151ff6437c0",
+      "taskName": "[P3] Implement pet animation state controller",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-pet-animation-state-controller (commit d96834e)"
+    },
+    {
+      "at": "2026-02-26T20:35:00.479Z",
+      "type": "task_moved",
+      "taskId": "5c90333a-91fc-41fe-8b16-b9d1d9a15aa9",
+      "taskName": "[P2] Normalize food names and units (dedupe + parsing)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p2-normalize-food-names-units"
+    },
+    {
+      "at": "2026-02-26T20:34:51.011Z",
+      "type": "task_moved",
+      "taskId": "9ebcec19-b972-4fe3-ae6f-6b9067161131",
+      "taskName": "[P2] Build food classification engine (category + nutrition quality score)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p2-food-classification-engine"
+    },
+    {
+      "at": "2026-02-26T20:34:43.120Z",
+      "type": "task_moved",
+      "taskId": "26b38058-9cb8-4e12-8a72-adc0314f966a",
+      "taskName": "[P2] Add confidence scoring + fallback for unknown items",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p2-confidence-fallback"
+    },
+    {
+      "at": "2026-02-26T20:34:26.799Z",
+      "type": "task_moved",
+      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
+      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-pet-visual-base-states (commit b48edf2)"
+    },
+    {
+      "at": "2026-02-26T20:33:38.666Z",
+      "type": "task_moved",
+      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
+      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:33:38.666Z",
+      "type": "task_moved",
+      "taskId": "71fb9a7f-4b33-4b0f-8442-4151ff6437c0",
+      "taskName": "[P3] Implement pet animation state controller",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:33:38.666Z",
+      "type": "task_moved",
+      "taskId": "26841502-9e0e-4034-9d5e-d7a812188223",
+      "taskName": "[P3] Map nutrition score deltas to pet stat updates",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:32:03.948Z",
+      "type": "task_moved",
+      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
+      "taskName": "[P3] Design pet state machine and trigger rules",
+      "from": "done",
+      "to": "done",
+      "detail": "completed by sub-agent p3-pet-state-machine-rules"
+    },
+    {
+      "at": "2026-02-26T20:29:15Z",
+      "type": "task_moved",
+      "taskId": "78ecd0ea-6c59-4342-8cd1-93f02c27ce49",
+      "taskName": "[P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p2-pantry-summary-dashboard"
+    },
+    {
+      "at": "2026-02-26T20:29:15Z",
+      "type": "task_moved",
+      "taskId": "44df43d6-ff02-464f-909e-a5cb68719a6a",
+      "taskName": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-pet-attributes-definition"
+    },
+    {
+      "at": "2026-02-26T20:29:15Z",
+      "type": "task_moved",
+      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
+      "taskName": "[P3] Design pet state machine and trigger rules",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p3-pet-state-machine-rules"
+    },
+    {
+      "at": "2026-02-26T20:28:41Z",
+      "type": "task_moved",
+      "taskId": "78ecd0ea-6c59-4342-8cd1-93f02c27ce49",
+      "taskName": "[P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:28:41Z",
+      "type": "task_moved",
+      "taskId": "44df43d6-ff02-464f-909e-a5cb68719a6a",
+      "taskName": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:28:41Z",
+      "type": "task_moved",
+      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
+      "taskName": "[P3] Design pet state machine and trigger rules",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:23:06Z",
+      "type": "task_moved",
+      "taskId": "26b38058-9cb8-4e12-8a72-adc0314f966a",
+      "taskName": "[P2] Add confidence scoring + fallback for unknown items",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:23:06Z",
+      "type": "task_moved",
+      "taskId": "9ebcec19-b972-4fe3-ae6f-6b9067161131",
+      "taskName": "[P2] Build food classification engine (category + nutrition quality score)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:23:06Z",
+      "type": "task_moved",
+      "taskId": "5c90333a-91fc-41fe-8b16-b9d1d9a15aa9",
+      "taskName": "[P2] Normalize food names and units (dedupe + parsing)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:23:06Z",
+      "type": "task_moved",
+      "taskId": "77b79633-56a9-48b2-8211-82239082dc53",
+      "taskName": "[P2] Implement photo-to-food item capture flow",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p2-photo-capture-flow"
+    },
+    {
+      "at": "2026-02-26T20:21:01Z",
+      "type": "task_moved",
+      "taskId": "86dc02f7-c52b-4e97-949c-fc075a40a288",
+      "taskName": "[P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p2-receipt-scan-ingestion"
+    },
+    {
+      "at": "2026-02-26T20:20:48Z",
+      "type": "task_moved",
+      "taskId": "9ae1cd93-21a5-434e-8d30-f54628822e02",
+      "taskName": "[P2] Add expiry-date tracking and freshness status logic",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p2-expiry-tracking-freshness"
+    },
+    {
+      "at": "2026-02-26T20:18:03Z",
+      "type": "task_moved",
+      "taskId": "77b79633-56a9-48b2-8211-82239082dc53",
+      "taskName": "[P2] Implement photo-to-food item capture flow",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:18:03Z",
+      "type": "task_moved",
+      "taskId": "86dc02f7-c52b-4e97-949c-fc075a40a288",
+      "taskName": "[P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:18:03Z",
+      "type": "task_moved",
+      "taskId": "9ae1cd93-21a5-434e-8d30-f54628822e02",
+      "taskName": "[P2] Add expiry-date tracking and freshness status logic",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:15:43.528Z",
+      "type": "task_moved",
+      "taskId": "facc9d0c-9584-40af-8298-7a548e603843",
+      "taskName": "[P1] Wire Firebase config bootstrap + emulator/dev toggles",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:15:43.528Z",
+      "type": "task_moved",
+      "taskId": "646cfb37-bbf5-45dc-860a-e8ad9d6a4f5d",
+      "taskName": "[P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:15:43.528Z",
+      "type": "task_moved",
+      "taskId": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
+      "taskName": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:15:43.528Z",
+      "type": "task_moved",
+      "taskId": "59242717-db00-413f-a540-346bc0b9debb",
+      "taskName": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:15:43.528Z",
+      "type": "task_moved",
+      "taskId": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
+      "taskName": "Smoke task",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_reassigned",
+      "taskId": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
+      "taskName": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_reassigned",
+      "taskId": "59242717-db00-413f-a540-346bc0b9debb",
+      "taskName": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_reassigned",
+      "taskId": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
+      "taskName": "Smoke task",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_reassigned",
+      "taskId": "facc9d0c-9584-40af-8298-7a548e603843",
+      "taskName": "[P1] Wire Firebase config bootstrap + emulator/dev toggles",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_reassigned",
+      "taskId": "646cfb37-bbf5-45dc-860a-e8ad9d6a4f5d",
+      "taskName": "[P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
+      "to": "inProgress",
+      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_moved",
+      "taskId": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
+      "taskName": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_moved",
+      "taskId": "59242717-db00-413f-a540-346bc0b9debb",
+      "taskName": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:13:15.342Z",
+      "type": "task_moved",
+      "taskId": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
+      "taskName": "Smoke task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:09:36.547Z",
+      "type": "task_moved",
+      "taskId": "856b4509-4b98-4c81-b26f-e3f213a8eda1",
+      "taskName": "[P1] Define app architecture (presentation/state/domain/data layers)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p1-app-architecture-layers"
+    },
+    {
+      "at": "2026-02-26T20:09:15.134Z",
+      "type": "task_moved",
+      "taskId": "24f5de28-6e68-4c52-89de-7d263ba8a379",
+      "taskName": "[P1] Select state management approach (Riverpod/Bloc decision doc)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p1-state-mgmt-decision"
+    },
+    {
+      "at": "2026-02-26T20:09:04.479Z",
+      "type": "task_moved",
+      "taskId": "4840b3d9-557b-4693-a495-8b69ded1e114",
+      "taskName": "[P1] Create PantryPal project brief and success metrics (MVP + north-star)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p1-brief-success-metrics"
+    },
+    {
+      "at": "2026-02-26T20:08:04.991Z",
+      "type": "task_moved",
+      "taskId": "24f5de28-6e68-4c52-89de-7d263ba8a379",
+      "taskName": "[P1] Select state management approach (Riverpod/Bloc decision doc)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:08:04.991Z",
+      "type": "task_moved",
+      "taskId": "856b4509-4b98-4c81-b26f-e3f213a8eda1",
+      "taskName": "[P1] Define app architecture (presentation/state/domain/data layers)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:08:04.991Z",
+      "type": "task_moved",
+      "taskId": "4840b3d9-557b-4693-a495-8b69ded1e114",
+      "taskName": "[P1] Create PantryPal project brief and success metrics (MVP + north-star)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (cron)"
+    },
+    {
+      "at": "2026-02-26T20:05:47.351Z",
+      "type": "task_moved",
+      "taskId": "2218c972-0530-402c-a011-1d255942e293",
+      "taskName": "[P1] Design event model for pet reactions and pantry changes",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p1-event-model"
+    },
+    {
+      "at": "2026-02-26T20:05:03.094Z",
+      "type": "task_moved",
+      "taskId": "b0f90eca-f62e-4c17-83df-deb23899b7a4",
+      "taskName": "[P1] Define Firestore collections and indexing plan",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p1-firestore-collections-plan"
+    },
+    {
+      "at": "2026-02-26T20:04:50.976Z",
+      "type": "task_moved",
+      "taskId": "1f76e1d0-0314-417a-a88c-689df51989a5",
+      "taskName": "[P1] Write security rules baseline for Firestore/Storage",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent p1-security-rules-baseline"
+    },
+    {
+      "at": "2026-02-26T20:02:59.003Z",
+      "type": "task_moved",
+      "taskId": "b0f90eca-f62e-4c17-83df-deb23899b7a4",
+      "taskName": "[P1] Define Firestore collections and indexing plan",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (heartbeat)"
+    },
+    {
+      "at": "2026-02-26T20:02:59.003Z",
+      "type": "task_moved",
+      "taskId": "2218c972-0530-402c-a011-1d255942e293",
+      "taskName": "[P1] Design event model for pet reactions and pantry changes",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (heartbeat)"
+    },
+    {
+      "at": "2026-02-26T20:02:59.003Z",
+      "type": "task_moved",
+      "taskId": "1f76e1d0-0314-417a-a88c-689df51989a5",
+      "taskName": "[P1] Write security rules baseline for Firestore/Storage",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution (heartbeat)"
+    },
+    {
+      "at": "2026-02-26T19:58:43.151Z",
+      "type": "task_moved",
+      "taskId": "d5acb575-0834-4c96-af8b-3b57133c13c9",
+      "taskName": "[P1] Define API/contracts for scanning + classification services",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent"
+    },
+    {
+      "at": "2026-02-26T19:58:15.000003Z",
+      "type": "task_moved",
+      "taskId": "30011eb5-4854-46b4-907a-8fedd0f7e4f5",
+      "taskName": "[P1] Scaffold Flutter app modules and folder conventions",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent"
+    },
+    {
+      "at": "2026-02-26T19:57:59.776Z",
+      "type": "task_moved",
+      "taskId": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
+      "taskName": "[P1] Create environment/config strategy (dev/staging/prod)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "completed by sub-agent"
+    },
+    {
+      "at": "2026-02-26T19:56:36.414Z",
+      "type": "task_moved",
+      "taskId": "d5acb575-0834-4c96-af8b-3b57133c13c9",
+      "taskName": "[P1] Define API/contracts for scanning + classification services",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution"
+    },
+    {
+      "at": "2026-02-26T19:56:36.413Z",
+      "type": "task_moved",
+      "taskId": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
+      "taskName": "[P1] Create environment/config strategy (dev/staging/prod)",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution"
+    },
+    {
+      "at": "2026-02-26T19:56:36.412Z",
+      "type": "task_moved",
+      "taskId": "30011eb5-4854-46b4-907a-8fedd0f7e4f5",
+      "taskName": "[P1] Scaffold Flutter app modules and folder conventions",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for parallel sub-agent execution"
+    },
+    {
+      "at": "2026-02-26T19:54:57.063Z",
+      "type": "task_added",
+      "taskId": "7424d962-fd80-4553-a84c-129b01e46c7d",
+      "taskName": "OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
+      "to": "done",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.057Z",
+      "type": "task_added",
+      "taskId": "8bfc26f1-fa97-46cd-a7de-42d530e79f90",
+      "taskName": "[P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
+      "to": "done",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.052Z",
+      "type": "task_added",
+      "taskId": "1aa6af66-731e-4da7-8ae0-b3c3c938c876",
+      "taskName": "[P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
+      "to": "done",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.046Z",
+      "type": "task_added",
+      "taskId": "a2f7bc8d-6a52-48e2-8489-9535c57f5d59",
+      "taskName": "[P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
+      "to": "done",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.041Z",
+      "type": "task_added",
+      "taskId": "09429660-b121-47d2-845f-bf3baa3be6d5",
+      "taskName": "[P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
+      "to": "done",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.035Z",
+      "type": "task_added",
+      "taskId": "c39330d0-bc74-413f-956e-12adb8ebc865",
+      "taskName": "[P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
+      "to": "done",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.030Z",
+      "type": "task_added",
+      "taskId": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
+      "taskName": "[P5] Launch checklist + app store assets + rollout plan",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.024Z",
+      "type": "task_added",
+      "taskId": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
+      "taskName": "[P5] Accessibility + localization readiness",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.019Z",
+      "type": "task_added",
+      "taskId": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
+      "taskName": "[P5] QA plan + test matrix (unit/widget/integration)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.013Z",
+      "type": "task_added",
+      "taskId": "93d240f5-d619-4509-836f-497fb5b0c643",
+      "taskName": "[P5] Performance pass (startup, list rendering, sync)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.007Z",
+      "type": "task_added",
+      "taskId": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
+      "taskName": "[P5] Add analytics instrumentation (funnel + retention events)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:57.002Z",
+      "type": "task_added",
+      "taskId": "20bb91f3-6263-4fca-9768-7f77ab351d41",
+      "taskName": "[P5] Add onboarding flow + permission education",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.996Z",
+      "type": "task_added",
+      "taskId": "5702ea57-c198-40d6-a165-7f1e274cf96b",
+      "taskName": "[P4] Add re-engagement messaging strategy (push + in-app)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.990Z",
+      "type": "task_added",
+      "taskId": "5f65417e-c225-4069-a1c2-000638727a61",
+      "taskName": "[P4] Build challenge/quest system (use expiring foods this week)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.985Z",
+      "type": "task_added",
+      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
+      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.979Z",
+      "type": "task_added",
+      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
+      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.973Z",
+      "type": "task_added",
+      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
+      "taskName": "[P4] Implement expiry reminders and urgency tiers",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.968Z",
+      "type": "task_added",
+      "taskId": "9bbb6d66-4c96-4b9f-97da-656d2448fdce",
+      "taskName": "[P3] Build pet timeline/history view for user feedback loop",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.962Z",
+      "type": "task_added",
+      "taskId": "956c668f-0d16-48b7-ac25-3e1830eb703d",
+      "taskName": "[P3] Implement hunger/sad behavior for expiring pantry items",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.957Z",
+      "type": "task_added",
+      "taskId": "33ab6340-2712-4dd5-bd6f-a1c322227b8d",
+      "taskName": "[P3] Define evolution/degradation thresholds and cadence",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.951Z",
+      "type": "task_added",
+      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
+      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.945Z",
+      "type": "task_added",
+      "taskId": "71fb9a7f-4b33-4b0f-8442-4151ff6437c0",
+      "taskName": "[P3] Implement pet animation state controller",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.940Z",
+      "type": "task_added",
+      "taskId": "26841502-9e0e-4034-9d5e-d7a812188223",
+      "taskName": "[P3] Map nutrition score deltas to pet stat updates",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.934Z",
+      "type": "task_added",
+      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
+      "taskName": "[P3] Design pet state machine and trigger rules",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.928Z",
+      "type": "task_added",
+      "taskId": "44df43d6-ff02-464f-909e-a5cb68719a6a",
+      "taskName": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.923Z",
+      "type": "task_added",
+      "taskId": "78ecd0ea-6c59-4342-8cd1-93f02c27ce49",
+      "taskName": "[P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.917Z",
+      "type": "task_added",
+      "taskId": "26b38058-9cb8-4e12-8a72-adc0314f966a",
+      "taskName": "[P2] Add confidence scoring + fallback for unknown items",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.911Z",
+      "type": "task_added",
+      "taskId": "9ebcec19-b972-4fe3-ae6f-6b9067161131",
+      "taskName": "[P2] Build food classification engine (category + nutrition quality score)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.906Z",
+      "type": "task_added",
+      "taskId": "5c90333a-91fc-41fe-8b16-b9d1d9a15aa9",
+      "taskName": "[P2] Normalize food names and units (dedupe + parsing)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.900Z",
+      "type": "task_added",
+      "taskId": "77b79633-56a9-48b2-8211-82239082dc53",
+      "taskName": "[P2] Implement photo-to-food item capture flow",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.894Z",
+      "type": "task_added",
+      "taskId": "86dc02f7-c52b-4e97-949c-fc075a40a288",
+      "taskName": "[P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.888Z",
+      "type": "task_added",
+      "taskId": "9ae1cd93-21a5-434e-8d30-f54628822e02",
+      "taskName": "[P2] Add expiry-date tracking and freshness status logic",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.883Z",
+      "type": "task_added",
+      "taskId": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
+      "taskName": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.877Z",
+      "type": "task_added",
+      "taskId": "30011eb5-4854-46b4-907a-8fedd0f7e4f5",
+      "taskName": "[P1] Scaffold Flutter app modules and folder conventions",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.871Z",
+      "type": "task_added",
+      "taskId": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
+      "taskName": "[P1] Create environment/config strategy (dev/staging/prod)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.866Z",
+      "type": "task_added",
+      "taskId": "d5acb575-0834-4c96-af8b-3b57133c13c9",
+      "taskName": "[P1] Define API/contracts for scanning + classification services",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.860Z",
+      "type": "task_added",
+      "taskId": "1f76e1d0-0314-417a-a88c-689df51989a5",
+      "taskName": "[P1] Write security rules baseline for Firestore/Storage",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.855Z",
+      "type": "task_added",
+      "taskId": "2218c972-0530-402c-a011-1d255942e293",
+      "taskName": "[P1] Design event model for pet reactions and pantry changes",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.849Z",
+      "type": "task_added",
+      "taskId": "b0f90eca-f62e-4c17-83df-deb23899b7a4",
+      "taskName": "[P1] Define Firestore collections and indexing plan",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.843Z",
+      "type": "task_added",
+      "taskId": "59242717-db00-413f-a540-346bc0b9debb",
+      "taskName": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.836Z",
+      "type": "task_added",
+      "taskId": "24f5de28-6e68-4c52-89de-7d263ba8a379",
+      "taskName": "[P1] Select state management approach (Riverpod/Bloc decision doc)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.830Z",
+      "type": "task_added",
+      "taskId": "856b4509-4b98-4c81-b26f-e3f213a8eda1",
+      "taskName": "[P1] Define app architecture (presentation/state/domain/data layers)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.823Z",
+      "type": "task_added",
+      "taskId": "4840b3d9-557b-4693-a495-8b69ded1e114",
+      "taskName": "[P1] Create PantryPal project brief and success metrics (MVP + north-star)",
+      "to": "todo",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.814Z",
+      "type": "task_added",
+      "taskId": "646cfb37-bbf5-45dc-860a-e8ad9d6a4f5d",
+      "taskName": "[P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
+      "to": "inProgress",
+      "detail": "Added task from migration"
+    },
+    {
+      "at": "2026-02-26T19:54:56.803Z",
+      "type": "task_added",
+      "taskId": "facc9d0c-9584-40af-8298-7a548e603843",
+      "taskName": "[P1] Wire Firebase config bootstrap + emulator/dev toggles",
+      "to": "inProgress",
+      "detail": "Added task from migration"
+    },
     {
       "at": "2026-02-26T19:37:02.048Z",
       "type": "task_added",
@@ -24,6 +3345,24 @@
       "taskName": "Smoke task",
       "to": "todo",
       "detail": "Added task from api-test"
+    },
+    {
+      "at": "2026-02-26T23:46:55Z",
+      "type": "task_moved",
+      "taskId": "84998ff0-62ff-4355-afa6-f92472c6888a",
+      "taskName": "[Rework QA] [P1] Create environment/config strategy (dev/staging/prod)",
+      "from": "todo",
+      "to": "done",
+      "detail": "Completed env/config strategy docs + scaffolding in pantrypal."
+    },
+    {
+      "at": "2026-02-26T23:49:33Z",
+      "type": "task_moved",
+      "taskId": "77a0607b-381f-446d-a2ab-6a1117eb7615",
+      "taskName": "[Rework QA] [P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed Firestore collections/indexing plan QA rework; expanded index contract docs and validated firestore.indexes.json (15 composites, 2 field overrides, no duplicates)."
     }
   ]
 }

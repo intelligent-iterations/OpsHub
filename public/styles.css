@@ -11,6 +11,13 @@ header {
   background: #141935;
 }
 
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
 main {
   padding: 16px;
   display: grid;
@@ -61,6 +68,20 @@ input, select, button {
 }
 
 button { cursor: pointer; }
+button:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.status {
+  margin: 8px 0 0;
+  font-size: 0.9em;
+}
+
+.status.ok {
+  color: #87f0b4;
+}
+
+.status.error {
+  color: #ff9d9d;
+}
 
 .sr-only {
   position: absolute;
@@ -100,4 +121,5 @@ button { cursor: pointer; }
 @media (max-width: 1100px) {
   .kanban-grid { grid-template-columns: 1fr 1fr; }
   .kanban-actions { grid-template-columns: 1fr; }
+  .header-row { flex-direction: column; align-items: flex-start; }
 }

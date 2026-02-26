@@ -8,9 +8,15 @@
   </head>
   <body>
     <header>
-      <h1>OpsHub</h1>
-      <p>Local OpenClaw monitoring dashboard</p>
+      <div class="header-row">
+        <div>
+          <h1>OpsHub</h1>
+          <p>Local OpenClaw monitoring dashboard</p>
+        </div>
+        <button id="refreshBtn" type="button" aria-label="Refresh dashboard now">Refresh now</button>
+      </div>
       <p id="meta" aria-live="polite"></p>
+      <p id="statusBanner" class="status muted" aria-live="polite"></p>
     </header>
 
     <main>

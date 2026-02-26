@@ -54,13 +54,37 @@ async function fetchJson(url, options) {
   return res.json();
 }
 
+let isLoading = false;
+
+function setStatus(message, tone = 'muted') {
+  const banner = el('statusBanner');
+  banner.className = `status ${tone}`;
+  banner.textContent = message || '';
+}
+
+function setLoadingState(loading) {
+  isLoading = loading;
+  const refreshBtn = el('refreshBtn');
+  refreshBtn.disabled = loading;
+  refreshBtn.textContent = loading ? 'Refreshing…' : 'Refresh now';
+}
+
 async function moveTask(taskId, to) {
-  await fetchJson('/api/kanban/move', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ taskId, to })
-  });
-  await loadKanban();
+  if (isLoading) return;
+  setLoadingState(true);
+  try {
+    await fetchJson('/api/kanban/move', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ taskId, to })
+    });
+    setStatus('Task moved successfully.', 'ok');
+    await loadKanban();
+  } catch (err) {
+    setStatus(`Failed to move task: ${err.message}`, 'error');
+  } finally {
+    setLoadingState(false);
+  }
 }
 
 function taskCard(task) {
@@ -118,20 +142,32 @@ async function loadKanban() {
 }
 
 async function addTask() {
+  if (isLoading) return;
   const name = el('taskName').value.trim();
   const description = el('taskDesc').value.trim();
   const priority = el('taskPriority').value;
-  if (!name) return;
+  if (!name) {
+    setStatus('Task name is required.', 'error');
+    return;
+  }
 
-  await fetchJson('/api/kanban/task', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, description, priority, status: 'backlog', source: 'ui' })
-  });
+  setLoadingState(true);
+  try {
+    await fetchJson('/api/kanban/task', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, description, priority, status: 'backlog', source: 'ui' })
+    });
 
-  el('taskName').value = '';
-  el('taskDesc').value = '';
-  await loadKanban();
+    el('taskName').value = '';
+    el('taskDesc').value = '';
+    setStatus('Task added to Backlog.', 'ok');
+    await loadKanban();
+  } catch (err) {
+    setStatus(`Failed to add task: ${err.message}`, 'error');
+  } finally {
+    setLoadingState(false);
+  }
 }
 
 async function loadDashboard() {
@@ -168,15 +204,22 @@ async function loadDashboard() {
 }
 
 async function load() {
+  if (isLoading) return;
+  setLoadingState(true);
   try {
     await Promise.all([loadDashboard(), loadKanban()]);
+    setStatus(`Dashboard refreshed at ${new Date().toLocaleTimeString()}.`, 'muted');
   } catch (err) {
     el('meta').textContent = `Failed to load OpsHub data: ${err.message}`;
+    setStatus(`Refresh failed: ${err.message}`, 'error');
     console.error(err);
+  } finally {
+    setLoadingState(false);
   }
 }
 
 el('addTaskBtn').addEventListener('click', addTask);
+el('refreshBtn').addEventListener('click', load);
 el('taskName').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') addTask();
 });
