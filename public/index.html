@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpsHub</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>OpsHub</h1>
+      <p>Local OpenClaw monitoring dashboard</p>
+      <p id="meta"></p>
+    </header>
+
+    <main>
+      <section>
+        <h2>1) Active sub-agents & current tasks</h2>
+        <div id="subagents"></div>
+      </section>
+
+      <section>
+        <h2>2) Recent sessions log</h2>
+        <div id="sessions"></div>
+      </section>
+
+      <section>
+        <h2>3) Error log</h2>
+        <div id="errors"></div>
+      </section>
+
+      <section>
+        <h2>4) Token usage tracker</h2>
+        <div id="tokens"></div>
+      </section>
+
+      <section>
+        <h2>5) Activity feed (last 20 actions)</h2>
+        <div id="activity"></div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
