@@ -15,6 +15,27 @@
 
     <main>
       <section>
+        <h2>Kanban Board</h2>
+        <p class="muted">Columns: Backlog, To Do, In Progress, Done</p>
+        <div class="kanban-actions">
+          <input id="taskName" placeholder="Task name" />
+          <select id="taskPriority">
+            <option value="high">high</option>
+            <option value="medium" selected>medium</option>
+            <option value="low">low</option>
+          </select>
+          <input id="taskDesc" placeholder="Description" />
+          <button id="addTaskBtn">Add Task</button>
+        </div>
+        <div class="kanban-grid" id="kanbanGrid"></div>
+      </section>
+
+      <section>
+        <h2>Kanban Activity Log</h2>
+        <div id="kanbanLog"></div>
+      </section>
+
+      <section>
         <h2>1) Active sub-agents & current tasks</h2>
         <div id="subagents"></div>
       </section>

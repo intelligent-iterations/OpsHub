@@ -1,0 +1,29 @@
+{
+  "columns": {
+    "backlog": [],
+    "todo": [
+      {
+        "id": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "todo",
+        "createdAt": "2026-02-26T19:37:02.048Z",
+        "completedAt": null,
+        "source": "api-test"
+      }
+    ],
+    "inProgress": [],
+    "done": []
+  },
+  "activityLog": [
+    {
+      "at": "2026-02-26T19:37:02.048Z",
+      "type": "task_added",
+      "taskId": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
+      "taskName": "Smoke task",
+      "to": "todo",
+      "detail": "Added task from api-test"
+    }
+  ]
+}
