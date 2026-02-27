@@ -78,3 +78,77 @@ test('kanban create + move flow works and validates bad input', async () => {
     await app.close();
   }
 });
+
+test('kanban lifecycle preserves completedAt semantics when reopened', async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Lifecycle task', status: 'done' })
+    });
+    assert.equal(create.status, 200);
+    const created = await create.json();
+    assert.equal(created.task.status, 'done');
+    assert.ok(created.task.completedAt);
+    const taskId = created.task.id;
+
+    const reopen = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ taskId, to: 'todo', summary: 'needs follow-up' })
+    });
+    assert.equal(reopen.status, 200);
+    const reopened = await reopen.json();
+    assert.equal(reopened.task.status, 'todo');
+    assert.equal(reopened.task.completedAt, null);
+
+    const reclose = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ taskId, to: 'done', summary: 'finally done' })
+    });
+    assert.equal(reclose.status, 200);
+    const reclosed = await reclose.json();
+    assert.equal(reclosed.task.status, 'done');
+    assert.ok(reclosed.task.completedAt);
+  } finally {
+    await app.close();
+  }
+});
+
+test('dashboard endpoint returns integrated payload and reflects kanban inProgress tasks', async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Integration dashboard task',
+        description: 'should appear in subagents.inProgressTasks',
+        status: 'inProgress'
+      })
+    });
+    assert.equal(create.status, 200);
+
+    const dashboard = await fetch(`${app.baseUrl}/api/dashboard`);
+    assert.equal(dashboard.status, 200);
+    const body = await dashboard.json();
+
+    assert.ok(body.generatedAt);
+    assert.equal(body.refreshSeconds, 60);
+
+    assert.ok(body.subagents);
+    assert.ok(body.subagents.counts);
+    assert.equal(typeof body.subagents.counts.inProgressTasks, 'number');
+    assert.ok(body.subagents.counts.inProgressTasks >= 1);
+
+    assert.ok(Array.isArray(body.sessions));
+    assert.ok(Array.isArray(body.errors));
+    assert.ok(body.tokenUsage);
+    assert.equal(typeof body.tokenUsage.quotaPct, 'number');
+    assert.ok(Array.isArray(body.activity));
+  } finally {
+    await app.close();
+  }
+});
