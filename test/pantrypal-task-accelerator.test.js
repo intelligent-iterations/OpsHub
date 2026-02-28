@@ -7,6 +7,7 @@ const {
   buildTaskQueue,
   isQueueLight,
   createLightQueueSeedTasks,
+  createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
   pickImmediateExecution,
   runValidationCommand,
@@ -74,6 +75,17 @@ test('createLightQueueSeedTasks returns pantrypal-ready tasks with acceptance in
   assert.equal(seeds[0].validationCommand, 'npm test -- pantrypal');
 });
 
+
+test('createAdaptiveSeedTasks skips duplicates and respects maxTasks', () => {
+  const experiments = [{ name: 'Rescue streak comeback experiment for lapsed households' }];
+  const seeds = createAdaptiveSeedTasks(experiments, { maxTasks: 2, validationCommand: 'npm test -- smoke' });
+
+  assert.equal(seeds.length, 2);
+  assert.equal(seeds[0].name, 'Smart defrost reminder timing tuned by prep-time tier');
+  assert.equal(seeds[1].name, 'Win-back pantry scan streak with 2-minute rescue plan teaser');
+  assert.equal(seeds[0].validationCommand, 'npm test -- smoke');
+});
+
 test('buildQueueWithAutoSeed seeds when minimumScore leaves queue light', () => {
   const experiments = [
     { name: 'Okay', impact: 0.7, confidence: 0.65, ease: 0.6, pantryPalFit: 0.8 }
@@ -88,6 +100,25 @@ test('buildQueueWithAutoSeed seeds when minimumScore leaves queue light', () => 
 
   assert.equal(seeded, true);
   assert.ok(queue.length >= 1);
+});
+
+
+test('buildQueueWithAutoSeed backfills to meet requested limit when queue is light', () => {
+  const experiments = [
+    { name: 'Strong baseline', impact: 0.88, confidence: 0.82, ease: 0.8, pantryPalFit: 0.94 }
+  ];
+
+  const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
+    minimumScore: 70,
+    limit: 4,
+    lightThreshold: 2,
+    defaultOwner: 'growth-oncall',
+    validationCommand: 'npm test -- smoke'
+  });
+
+  assert.equal(seeded, true);
+  assert.equal(queue.length, 4);
+  assert.ok(queue.every((task) => task.owner === 'growth-oncall'));
 });
 
 test('pickImmediateExecution chooses top queue item and includes validation step', () => {

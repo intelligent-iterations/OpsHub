@@ -82,6 +82,50 @@ function createLightQueueSeedTasks(options = {}) {
   ];
 }
 
+function createAdaptiveSeedTasks(experiments, options = {}) {
+  const maxTasks = Math.max(0, options.maxTasks ?? 2);
+  const existingNames = new Set(experiments.map((experiment) => (experiment.name ?? '').trim().toLowerCase()));
+  const catalog = createLightQueueSeedTasks(options).concat([
+    {
+      name: 'Win-back pantry scan streak with 2-minute rescue plan teaser',
+      impact: 0.81,
+      confidence: 0.68,
+      ease: 0.7,
+      pantryPalFit: 0.95,
+      primaryMetric: 'week-1 rescue plan creation rate',
+      targetLiftPct: 9,
+      minimumSampleSize: 1500,
+      experimentWindowDays: 14,
+      guardrail: 'session crash rate does not increase by >0.3%',
+      validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-task-accelerator.test.js'
+    },
+    {
+      name: 'Household buddy invite prompt after second rescue success',
+      impact: 0.75,
+      confidence: 0.64,
+      ease: 0.76,
+      pantryPalFit: 0.9,
+      primaryMetric: 'new household collaborator invites per activated user',
+      targetLiftPct: 6,
+      minimumSampleSize: 1300,
+      experimentWindowDays: 12,
+      guardrail: 'notification mute rate does not increase by >1.8%',
+      validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-growth-experiment-prioritizer.test.js'
+    }
+  ]);
+
+  const uniqueSeeds = [];
+  for (const seed of catalog) {
+    const key = seed.name.trim().toLowerCase();
+    if (existingNames.has(key)) continue;
+    uniqueSeeds.push(seed);
+    existingNames.add(key);
+    if (uniqueSeeds.length >= maxTasks) break;
+  }
+
+  return uniqueSeeds;
+}
+
 function buildQueueWithAutoSeed(experiments, options = {}) {
   const buildOptions = {
     defaultOwner: options.defaultOwner,
@@ -93,9 +137,17 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
   let queue = buildTaskQueue(experiments, buildOptions);
 
   if (isQueueLight(queue, options.lightThreshold)) {
-    seeded = true;
-    const seeds = createLightQueueSeedTasks({ validationCommand: options.validationCommand });
-    queue = buildTaskQueue(experiments.concat(seeds), buildOptions);
+    const desiredQueueSize = Math.max(options.limit ?? 3, (options.lightThreshold ?? 2) + 1);
+    const missingCount = Math.max(0, desiredQueueSize - queue.length);
+    const seeds = createAdaptiveSeedTasks(experiments, {
+      validationCommand: options.validationCommand,
+      maxTasks: missingCount
+    });
+
+    if (seeds.length) {
+      seeded = true;
+      queue = buildTaskQueue(experiments.concat(seeds), buildOptions);
+    }
   }
 
   if (!queue.length && typeof options.minimumScore === 'number') {
@@ -271,6 +323,7 @@ module.exports = {
   buildTaskQueue,
   isQueueLight,
   createLightQueueSeedTasks,
+  createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
   pickImmediateExecution,
   runValidationCommand,
