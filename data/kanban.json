@@ -65,32 +65,12 @@
         "source": "delight-rework-sweep"
       },
       {
-        "id": "2677a413-9820-4ff1-9d8f-0532e91f6235",
-        "name": "[Rework QA] [P4] Implement pet hunger notifications tied to pantry risk",
-        "description": "Rework QA PASS. Evidence: artifacts/rework-qa-p4-pet-hunger-notifications-pantry-risk-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.343Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
         "id": "a0c3ac65-2bfa-45e0-9dd0-42eb16385efd",
         "name": "[Rework QA] [P5] Accessibility + localization readiness",
         "description": "Rework QA PASS: localized companion card copy/labels (EN+ES), removed hardcoded strings on that surface, and added Spanish widget coverage. Verification: flutter test test/presentation/widgets/pet_companion_card_test.dart (4/4), flutter analyze lib/l10n/app_strings.dart lib/presentation/widgets/pet_companion_card.dart test/presentation/widgets/pet_companion_card_test.dart (clean). Evidence: artifacts/rework-qa-p5-accessibility-localization-readiness-evidence.md",
         "priority": "medium",
         "status": "toDo",
         "createdAt": "2026-02-26T22:39:17.354Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "df8ffcd0-dbad-4d1e-a6a9-0ad1bbd7525e",
-        "name": "[Rework QA] [P3] Implement pet animation state controller",
-        "description": "Rework QA PASS: implemented pet animation state controller verification with domain priority/jitter tests + visual golden coverage. Evidence: artifacts/rework-qa-p3-pet-animation-state-controller-evidence.md. Verification: flutter test test/domain/pet/animation_state_controller_test.dart test/presentation/widgets/pet_state_visual_golden_test.dart --update-goldens (9/9 passed).",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.360Z",
         "completedAt": null,
         "source": "delight-rework-sweep"
       },
@@ -1901,6 +1881,27 @@
     ],
     "done": [
       {
+        "id": "df8ffcd0-dbad-4d1e-a6a9-0ad1bbd7525e",
+        "name": "[Rework QA] [P3] Implement pet animation state controller",
+        "description": "Rework QA PASS: verified pet animation state controller implementation + automated coverage.\nEvidence: https://github.com/larryclaw/pantrypal/blob/main/artifacts/rework-qa-p3-pet-animation-state-controller-evidence.md\nController: https://github.com/larryclaw/pantrypal/blob/main/lib/domain/pet/animation_state_controller.dart\nTests: https://github.com/larryclaw/pantrypal/blob/main/test/domain/pet/animation_state_controller_test.dart\nGolden test: https://github.com/larryclaw/pantrypal/blob/main/test/presentation/widgets/pet_state_visual_golden_test.dart\nScreenshots: https://github.com/larryclaw/pantrypal/blob/main/test/presentation/widgets/goldens/pet_state_visual_happy.png and https://github.com/larryclaw/pantrypal/blob/main/test/presentation/widgets/goldens/pet_state_visual_sick.png\nVerification command: flutter test test/domain/pet/animation_state_controller_test.dart test/presentation/widgets/pet_state_visual_golden_test.dart (PASS: 9/9).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.360Z",
+        "completedAt": "2026-02-28T03:54:59Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "2677a413-9820-4ff1-9d8f-0532e91f6235",
+        "name": "[Rework QA] [P4] Implement pet hunger notifications tied to pantry risk",
+        "description": "Rework QA PASS: pet hunger notifications tied to pantry risk validated via targeted service tests (7/7 passing). Evidence: pantrypal/artifacts/rework-qa-p4-pet-hunger-notifications-pantry-risk-evidence.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.343Z",
+        "completedAt": "2026-02-28T03:46:00Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T03:46:00Z"
+      },
+      {
         "id": "df4c65e6-7430-4677-9802-52067421cc49",
         "name": "[P30][OpsHub] Ingest live social Slack mentions into OpsHub task queue",
         "description": "Owner: claw\nAcceptance Criteria:\n1) Pull recent social-channel messages/mentions from live provider (not sample file).\n2) Convert actionable messages into OpsHub task payloads (title, owner, acceptance criteria, priority) with dedupe by message id.\n3) Persist diagnostics for fetch count, actionable count, and feed errors with fallback behavior.\n4) Add tests + docs updates and keep npm test green.",
@@ -2947,6 +2948,15 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T03:46:00Z",
+      "type": "task_moved",
+      "taskId": "2677a413-9820-4ff1-9d8f-0532e91f6235",
+      "taskName": "[Rework QA] [P4] Implement pet hunger notifications tied to pantry risk",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA closure: verified pet hunger notification policy/service with passing targeted tests and evidence artifact."
+    },
     {
       "at": "2026-02-28T03:37:46.145Z",
       "type": "qa_gate_revert",
@@ -7289,6 +7299,15 @@
       "from": "inProgress",
       "to": "done",
       "detail": ""
+    },
+    {
+      "at": "2026-02-28T03:54:59Z",
+      "type": "task_moved",
+      "taskId": "df8ffcd0-dbad-4d1e-a6a9-0ad1bbd7525e",
+      "taskName": "[Rework QA] [P3] Implement pet animation state controller",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA closure with GitHub evidence + screenshot links added."
     }
   ]
 }
