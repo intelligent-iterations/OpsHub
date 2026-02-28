@@ -2357,6 +2357,14 @@
   },
   "activityLog": [
     {
+      "at": "2026-02-28T17:31:34.461Z",
+      "type": "remediation_bundle_shipped",
+      "taskId": "QDRIFT-2026-02-28-A",
+      "taskName": "Quality-drift remediation bundle (PantryPal-first + GitHub-only + correction logging + proactive launch)",
+      "to": "done",
+      "detail": "Shipped in commit https://github.com/intelligent-iterations/OpsHub/commit/57f3a27"
+    },
+    {
       "at": "2026-02-28T05:46:15.681Z",
       "type": "task_added",
       "taskId": "PP-GROWTH-004-family-size-adaptive-leftovers-remix-suggestions",
