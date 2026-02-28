@@ -829,6 +829,40 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   };
 }
 
+function writeDecisionLog(filePath, executionPlan, validationResult, health, metadata = {}) {
+  if (!filePath || !executionPlan?.taskId) return null;
+
+  const resolvedPath = path.resolve(process.cwd(), filePath);
+  const generatedAt = metadata.generatedAt ?? new Date().toISOString();
+  const rollbackTrigger = metadata.rollbackTrigger
+    ?? 'Rollback if first-hour guardrail breaches threshold or validation fails.';
+
+  const lines = [
+    '# PantryPal Decision Log',
+    '',
+    `Last updated: ${generatedAt}`,
+    '',
+    '## Latest launch decision',
+    `- Task ID: ${executionPlan.taskId}`,
+    `- Title: ${executionPlan.title ?? 'n/a'}`,
+    `- Owner: ${metadata.owner ?? 'growth-oncall'}`,
+    `- Launch date: ${generatedAt}`,
+    `- Validation status: ${validationResult?.status ?? 'NOT_RUN'}`,
+    `- Readiness: ${health?.readinessPct ?? 'n/a'}%`,
+    `- Rollback trigger: ${rollbackTrigger}`,
+    ''
+  ];
+
+  fs.writeFileSync(resolvedPath, `${lines.join('\n')}\n`, 'utf8');
+
+  return {
+    filePath,
+    generatedAt,
+    taskId: executionPlan.taskId,
+    rollbackTrigger
+  };
+}
+
 function parseCliOptions(argv = []) {
   const options = {
     outputFormat: argv.includes('--json') ? 'json' : 'markdown',
@@ -844,6 +878,7 @@ function parseCliOptions(argv = []) {
     validationCommand: null,
     executionBriefOut: null,
     experimentSpecOut: null,
+    decisionLogOut: null,
     syncKanban: false,
     kanbanFile: null,
     readyOnlySync: false,
@@ -892,6 +927,7 @@ function parseCliOptions(argv = []) {
       '--validation-command': 'validationCommand',
       '--execution-brief-out': 'executionBriefOut',
       '--experiment-spec-out': 'experimentSpecOut',
+      '--decision-log-out': 'decisionLogOut',
       '--kanban-file': 'kanbanFile'
     };
 
@@ -1155,9 +1191,15 @@ if (require.main === module) {
   const experimentSpec = cliOptions.experimentSpecOut
     ? writeExperimentSpec(cliOptions.experimentSpecOut, executionPlan, { generatedAt })
     : null;
+  const decisionLog = cliOptions.decisionLogOut
+    ? writeDecisionLog(cliOptions.decisionLogOut, executionPlan, validationResult, health, {
+      generatedAt,
+      owner: executionPlan?.experimentSpecTemplate?.owner ?? executionPlan?.owner ?? cliOptions.defaultOwner
+    })
+    : null;
 
   const output = cliOptions.outputFormat === 'json'
-    ? formatTaskJson(queue, executionPlan, validationResult, { seeded, generatedAt, sync: syncResult, executionBrief, experimentSpec }, health)
+    ? formatTaskJson(queue, executionPlan, validationResult, { seeded, generatedAt, sync: syncResult, executionBrief, experimentSpec, decisionLog }, health)
     : formatTaskMarkdown(queue, executionPlan, validationResult, health);
 
   process.stdout.write(output);
@@ -1189,6 +1231,7 @@ module.exports = {
   formatTaskJson,
   writeExperimentSpec,
   writeExecutionBrief,
+  writeDecisionLog,
   parseCliOptions,
   loadExperimentsFromFile,
   dedupeExperiments,

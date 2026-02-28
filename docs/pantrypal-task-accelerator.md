@@ -33,6 +33,7 @@ node scripts/pantrypal-task-accelerator.js --json
 - `--validation-timeout-ms <ms>` override validation command timeout (default: `120000`)
 - `--execution-brief-out <path>` write a focused immediate-execution launch brief (checklist + first-hour steps + validation)
 - `--experiment-spec-out <path>` write a structured JSON experiment spec for the immediate execution task (hypothesis, rollout, instrumentation, acceptance criteria)
+- `--decision-log-out <path>` write a launch decision log entry (owner, launch date, validation status, rollback trigger) for the immediate execution task
 
 ## Input file schema
 

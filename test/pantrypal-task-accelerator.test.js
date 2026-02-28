@@ -30,6 +30,7 @@ const {
   formatTaskJson,
   writeExperimentSpec,
   writeExecutionBrief,
+  writeDecisionLog,
   parseCliOptions,
   loadExperimentsFromFile,
   dedupeExperiments,
@@ -765,7 +766,8 @@ test('parseCliOptions accepts experiment file, owner, and validation command ove
     '--default-owner=growth-night-shift',
     '--validation-command', 'npm test -- test/pantrypal-task-accelerator.test.js',
     '--execution-brief-out', 'artifacts/pantrypal-execution-brief.md',
-    '--experiment-spec-out', 'artifacts/pantrypal-experiment-spec.json'
+    '--experiment-spec-out', 'artifacts/pantrypal-experiment-spec.json',
+    '--decision-log-out', 'artifacts/pantrypal-decision-log.md'
   ]);
 
   assert.equal(options.experimentsFile, 'data/pantrypal-experiments.json');
@@ -773,6 +775,7 @@ test('parseCliOptions accepts experiment file, owner, and validation command ove
   assert.equal(options.validationCommand, 'npm test -- test/pantrypal-task-accelerator.test.js');
   assert.equal(options.executionBriefOut, 'artifacts/pantrypal-execution-brief.md');
   assert.equal(options.experimentSpecOut, 'artifacts/pantrypal-experiment-spec.json');
+  assert.equal(options.decisionLogOut, 'artifacts/pantrypal-decision-log.md');
 });
 
 test('writeExperimentSpec persists immediate execution spec as JSON artifact', () => {
@@ -846,6 +849,33 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
   assert.match(content, /Owner load: growth-oncall total 3 \(ready 3, blocked 0, avg 88.1\)/);
   assert.match(content, /Status: PASS/);
   assert.match(content, /all good/);
+});
+
+
+test('writeDecisionLog persists a launch decision artifact with rollback trigger', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-decision-log-'));
+  const logPath = path.join(tempDir, 'decision-log.md');
+
+  const result = writeDecisionLog(logPath, {
+    taskId: 'PP-GROWTH-009-guardrail',
+    title: 'Guardrail launch decision'
+  }, {
+    status: 'PASS'
+  }, {
+    readinessPct: 100
+  }, {
+    generatedAt: '2026-02-28T03:35:00.000Z',
+    owner: 'growth-night'
+  });
+
+  const content = fs.readFileSync(logPath, 'utf8');
+  assert.equal(result.taskId, 'PP-GROWTH-009-guardrail');
+  assert.equal(result.generatedAt, '2026-02-28T03:35:00.000Z');
+  assert.match(content, /PantryPal Decision Log/);
+  assert.match(content, /Task ID: PP-GROWTH-009-guardrail/);
+  assert.match(content, /Owner: growth-night/);
+  assert.match(content, /Validation status: PASS/);
+  assert.match(content, /Rollback trigger:/);
 });
 
 test('loadExperimentsFromFile loads a valid JSON experiment array', () => {
