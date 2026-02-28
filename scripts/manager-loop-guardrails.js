@@ -89,9 +89,12 @@ function applyAutoNextActionScheduler(board, options = {}) {
   if (!candidate) return { board: normalized, changed: false, reason: 'no_candidate_task', dispatchedTaskId: null };
 
   const [task] = normalized.columns[candidate.from].splice(candidate.index, 1);
+  const nowIso = new Date(nowMs).toISOString();
   task.status = 'inProgress';
   task.completedAt = null;
-  task.nextActionScheduledAt = new Date(nowMs).toISOString();
+  task.startedAt = nowIso;
+  task.updatedAt = nowIso;
+  task.nextActionScheduledAt = nowIso;
   task.nextActionDispatchBy = new Date(nowMs + slaMinutes * 60 * 1000).toISOString();
 
   normalized.columns.inProgress.unshift(task);

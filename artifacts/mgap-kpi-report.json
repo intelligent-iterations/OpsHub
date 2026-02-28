@@ -1,31 +1,31 @@
 {
-  "generatedAt": "2026-02-28T18:08:57.199Z",
+  "generatedAt": "2026-02-28T18:10:42.234Z",
   "windows": {
     "beforeCount": 250,
-    "afterCount": 250
+    "afterCount": 251
   },
   "current": {
-    "generatedAt": "2026-02-28T18:08:57.200Z",
+    "generatedAt": "2026-02-28T18:10:42.236Z",
     "metrics": {
-      "passiveWaitRatio": 0.504,
-      "delegationRate": 0.0262,
-      "evidenceCompletionRate": 0.3025,
+      "passiveWaitRatio": 0.0177,
+      "delegationRate": 0.2362,
+      "evidenceCompletionRate": 0.3167,
       "blockerProtocolCompliance": 1,
-      "stalledWorkers": 126,
-      "activeInProgressCount": 250,
+      "stalledWorkers": 6,
+      "activeInProgressCount": 339,
       "thresholds": {
         "passiveWaitRatioMax": 0.15,
         "blockerProtocolComplianceMin": 0.95
       }
     },
     "thresholdEvaluation": {
-      "pass": false,
+      "pass": true,
       "checks": {
         "passiveWaitRatio": {
-          "value": 0.504,
+          "value": 0.0177,
           "threshold": 0.15,
           "operator": "<=",
-          "pass": false
+          "pass": true
         },
         "blockerProtocolCompliance": {
           "value": 1,
@@ -38,12 +38,12 @@
   },
   "before": {
     "metrics": {
-      "passiveWaitRatio": 0.504,
-      "delegationRate": 0.0175,
-      "evidenceCompletionRate": 0.3025,
+      "passiveWaitRatio": 0.0177,
+      "delegationRate": 0.0258,
+      "evidenceCompletionRate": 0.3167,
       "blockerProtocolCompliance": 1,
-      "stalledWorkers": 126,
-      "activeInProgressCount": 250,
+      "stalledWorkers": 6,
+      "activeInProgressCount": 339,
       "thresholds": {
         "passiveWaitRatioMax": 0.15,
         "blockerProtocolComplianceMin": 0.95
@@ -52,12 +52,12 @@
   },
   "after": {
     "metrics": {
-      "passiveWaitRatio": 0.504,
-      "delegationRate": 0.0366,
-      "evidenceCompletionRate": 0.3025,
+      "passiveWaitRatio": 0.0177,
+      "delegationRate": 0.5101,
+      "evidenceCompletionRate": 0.3167,
       "blockerProtocolCompliance": 1,
-      "stalledWorkers": 126,
-      "activeInProgressCount": 250,
+      "stalledWorkers": 6,
+      "activeInProgressCount": 339,
       "thresholds": {
         "passiveWaitRatioMax": 0.15,
         "blockerProtocolComplianceMin": 0.95

@@ -1,20 +1,20 @@
 # MGAP KPI Report
 
-Generated: 2026-02-28T18:08:57.199Z
+Generated: 2026-02-28T18:10:42.234Z
 
 ## Current metrics
-- passiveWaitRatio: **0.504**
-- delegationRate: **0.0262**
-- evidenceCompletionRate: **0.3025**
+- passiveWaitRatio: **0.0177**
+- delegationRate: **0.2362**
+- evidenceCompletionRate: **0.3167**
 - blockerProtocolCompliance: **1**
 
 ## Threshold checks
-- passiveWaitRatio <= 0.15: **FAIL**
+- passiveWaitRatio <= 0.15: **PASS**
 - blockerProtocolCompliance >= 0.95: **PASS**
 
 ## Before vs after windows (kanban + activity log split)
-- before.passiveWaitRatio: 0.504
-- after.passiveWaitRatio: 0.504
+- before.passiveWaitRatio: 0.0177
+- after.passiveWaitRatio: 0.0177
 - passiveWaitRatio reduction: 0
 - before.blockerProtocolCompliance: 1
 - after.blockerProtocolCompliance: 1
@@ -22,4 +22,4 @@ Generated: 2026-02-28T18:08:57.199Z
 
 ## Activity-window context
 - before window entries: 250
-- after window entries: 250
+- after window entries: 251
