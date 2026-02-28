@@ -17,6 +17,7 @@ const KANBAN_PATH = path.join(DATA_DIR, 'kanban.json');
 
 const VALID_COLUMNS = ['backlog', 'todo', 'inProgress', 'done'];
 const VALID_PRIORITIES = ['high', 'medium', 'low'];
+const { pollGatewaySubagents } = require('./scripts/gateway-polling-adapter');
 
 function nowIso() {
   return new Date().toISOString();
@@ -173,27 +174,13 @@ async function getSubagentsData() {
   const inProgressTasks = rawInProgress.map((t, idx) => normalizeInProgressTask(t, idx));
 
   // 2) Runtime sub-agent sessions from OpenClaw session store (recently active only)
-  const sess = await safeExec('~/.openclaw/bin/openclaw sessions --active 30 --json');
-  let activeSubagents = [];
-
-  if (sess.ok && sess.stdout?.trim()) {
-    try {
-      const parsed = JSON.parse(sess.stdout);
-      const sessions = Array.isArray(parsed?.sessions) ? parsed.sessions : [];
-      activeSubagents = sessions
-        .filter((s) => typeof s?.key === 'string' && s.key.includes(':subagent:'))
-        .filter((s) => Number(s?.ageMs ?? Number.MAX_SAFE_INTEGER) <= 3 * 60 * 1000)
-        .filter((s) => !s?.abortedLastRun)
-        .map((s) => ({
-          id: s.key,
-          task: s.lastUserMessage || s.sessionId || s.key,
-          status: 'Active',
-          source: 'OpenClaw sessions (last 3m)'
-        }));
-    } catch {
-      activeSubagents = [];
-    }
-  }
+  const gateway = await pollGatewaySubagents({
+    runner: (command) => safeExec(command),
+    nowIso,
+    activeMinutes: 30,
+    maxAgentAgeMs: 3 * 60 * 1000
+  });
+  const activeSubagents = gateway.agents;
 
   const diagnostics = buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks);
 
@@ -204,6 +191,7 @@ async function getSubagentsData() {
     activeSubagents,
     inProgressTasks: inProgressTasks.map(({ _kanbanId, ...task }) => task),
     diagnostics,
+    gateway,
     reason: diagnostics.syncOk ? null : 'kanban inProgress and dashboard payload require reconciliation',
     counts: {
       activeSubagents: activeSubagents.length,

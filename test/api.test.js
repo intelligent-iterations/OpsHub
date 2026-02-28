@@ -154,6 +154,11 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.deepEqual(body.subagents.diagnostics.missingFromPayload, []);
     assert.deepEqual(body.subagents.diagnostics.tasksMissingStableId, []);
 
+    assert.ok(body.subagents.gateway);
+    assert.ok(['ok', 'degraded', 'unavailable'].includes(body.subagents.gateway.status));
+    assert.ok(body.subagents.gateway.polledAt);
+    assert.ok(body.subagents.gateway.diagnostics);
+
     assert.ok(Array.isArray(body.sessions));
     assert.ok(Array.isArray(body.errors));
     assert.ok(body.tokenUsage);
