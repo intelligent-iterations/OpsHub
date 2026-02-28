@@ -131,20 +131,22 @@ test('buildQueueWithAutoSeed backfills to meet requested limit when queue is lig
   assert.ok(queue.every((task) => task.owner === 'growth-oncall'));
 });
 
-test('createQueueHealthSnapshot reports light queue and minimum score eligibility', () => {
+test('createQueueHealthSnapshot reports light queue, readiness, and minimum score eligibility', () => {
   const experiments = [
-    { name: 'Strong', impact: 0.9, confidence: 0.8, ease: 0.8, pantryPalFit: 0.9 },
+    { name: 'Strong', impact: 0.9, confidence: 0.8, ease: 0.8, pantryPalFit: 0.9, externalDependency: 'legal sign-off' },
     { name: 'Weak', impact: 0.5, confidence: 0.5, ease: 0.5, pantryPalFit: 0.5 }
   ];
-  const queue = buildTaskQueue(experiments, { minimumScore: 80, limit: 3 });
-  const health = createQueueHealthSnapshot(experiments, queue, { minimumScore: 80, lightThreshold: 2 });
+  const queue = buildTaskQueue(experiments, { minimumScore: 60, limit: 3 });
+  const health = createQueueHealthSnapshot(experiments, queue, { minimumScore: 60, lightThreshold: 2 });
 
   assert.equal(health.incomingExperiments, 2);
   assert.equal(health.eligibleExperiments, 1);
   assert.equal(health.queueSize, 1);
+  assert.equal(health.readyTasks, 0);
+  assert.equal(health.blockedTasks, 1);
   assert.equal(health.isLight, true);
   assert.equal(health.threshold, 2);
-  assert.equal(health.minimumScore, 80);
+  assert.equal(health.minimumScore, 60);
 });
 
 test('pickImmediateExecution chooses top queue item and includes acceptance checklist gating + validation step', () => {
@@ -225,11 +227,20 @@ test('pickImmediateExecution returns blocked queue summary when no ready tasks',
       blockedReasons: ['External dependency: legal sign-off'],
       acceptanceCriteria: ['c1'],
       validationCommand: 'npm test -- blocked'
+    },
+    {
+      id: 'PP-GROWTH-002-blocked',
+      title: 'Blocked too',
+      isReady: false,
+      blockedReasons: ['External dependency: legal sign-off', 'External dependency: data approval'],
+      acceptanceCriteria: ['c1'],
+      validationCommand: 'npm test -- blocked2'
     }
   ]);
 
   assert.equal(plan.blockedQueue, true);
   assert.equal(plan.taskId, null);
+  assert.equal(plan.blockedReasons.length, 2);
   assert.match(plan.blockedReasons[0], /legal sign-off/);
 });
 
@@ -238,12 +249,14 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
     [{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 91.23, owner: 'growth', acceptanceCriteria: ['a', 'b'] }],
     { taskId: 'PP-GROWTH-001-foo', title: 'Foo', acceptanceChecklist: ['c1'], executionNow: ['step1'] },
     { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 1234, outputSnippet: 'ok' },
-    { incomingExperiments: 3, eligibleExperiments: 2, queueSize: 1, isLight: true, threshold: 2 }
+    { incomingExperiments: 3, eligibleExperiments: 2, queueSize: 1, readyTasks: 1, blockedTasks: 0, isLight: true, threshold: 2 }
   );
 
   assert.match(markdown, /PantryPal Task Queue/);
   assert.match(markdown, /PP-GROWTH-001-foo/);
   assert.match(markdown, /Queue Health/);
+  assert.match(markdown, /Ready tasks: 1/);
+  assert.match(markdown, /Blocked tasks: 0/);
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Critical Acceptance Checklist/);
   assert.match(markdown, /Launch Steps/);

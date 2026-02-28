@@ -189,11 +189,15 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const aboveMinimum = typeof minimumScore === 'number'
     ? ranked.filter((experiment) => experiment.score >= minimumScore)
     : ranked;
+  const readyTasks = queue.filter((task) => task.isReady !== false).length;
+  const blockedTasks = Math.max(0, queue.length - readyTasks);
 
   return {
     incomingExperiments: experiments.length,
     eligibleExperiments: aboveMinimum.length,
     queueSize: queue.length,
+    readyTasks,
+    blockedTasks,
     isLight: isQueueLight(queue, threshold),
     threshold,
     minimumScore: typeof minimumScore === 'number' ? minimumScore : null
@@ -205,6 +209,7 @@ function pickImmediateExecution(taskQueue) {
 
   const top = taskQueue.find((task) => task.isReady !== false);
   if (!top) {
+    const blockedReasons = [...new Set(taskQueue.flatMap((task) => task.blockedReasons || []))];
     return {
       taskId: null,
       title: null,
@@ -212,7 +217,7 @@ function pickImmediateExecution(taskQueue) {
       acceptanceChecklist: [],
       executionNow: [],
       blockedQueue: true,
-      blockedReasons: taskQueue.flatMap((task) => task.blockedReasons || [])
+      blockedReasons
     };
   }
 
@@ -313,6 +318,8 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Incoming experiments: ${health.incomingExperiments}`,
       `Eligible experiments (minimum score): ${health.eligibleExperiments}`,
       `Queue size: ${health.queueSize}`,
+      `Ready tasks: ${health.readyTasks ?? 'n/a'}`,
+      `Blocked tasks: ${health.blockedTasks ?? 'n/a'}`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`
     ].join('\n')
     : 'Queue health unavailable';
