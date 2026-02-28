@@ -1,6 +1,6 @@
 # PantryPal Task Queue (Auto-generated)
 
-- [ ] PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter — Friday night rescue reminder with 20-minute cook filter (score: 81.90, owner: growth-oncall)
+- [ ] PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter — Friday night rescue reminder with 20-minute cook filter (score: 81.90, owner: growth-cron)
   - Acceptance criteria:
     - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).
     - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 9%.
@@ -8,7 +8,7 @@
     - [ ] Guardrail is monitored and passes: notification opt-out rate stays below 1.6%.
     - [ ] Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.
     - [ ] Decision log is updated with launch date, owner, and rollback trigger.
-- [ ] PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households — Post-checkout pantry scan nudge for first-week households (score: 81.45, owner: growth-oncall)
+- [ ] PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households — Post-checkout pantry scan nudge for first-week households (score: 81.45, owner: growth-cron)
   - Acceptance criteria:
     - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (week-1 pantry scan completion rate).
     - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 8%.
@@ -16,7 +16,7 @@
     - [ ] Guardrail is monitored and passes: session abandonment does not increase by >1.2%.
     - [ ] Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.
     - [ ] Decision log is updated with launch date, owner, and rollback trigger.
-- [ ] PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill — Sunday prep planner with expiring-ingredient auto-fill (score: 80.85, owner: growth-oncall)
+- [ ] PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill — Sunday prep planner with expiring-ingredient auto-fill (score: 80.85, owner: growth-cron)
   - Acceptance criteria:
     - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (weekly rescue plan creation rate).
     - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 11%.
@@ -62,15 +62,15 @@ Top task: PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter 
 Status: PASS
 Command: npm test -- test/pantrypal-task-accelerator.test.js
 Exit code: 0
-Duration: 189ms
+Duration: 191ms
 Recent output:
 ```
-# tests 39
+# tests 46
 # suites 0
-# pass 39
+# pass 46
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 65.980292
+# duration_ms 66.204541
 ```

@@ -400,6 +400,23 @@ test('pickImmediateExecution skips blocked tasks', () => {
   assert.equal(plan.validationCommand, 'npm test -- ready');
 });
 
+test('pickImmediateExecution enforces minimum acceptance criteria when configured', () => {
+  const plan = pickImmediateExecution([
+    {
+      id: 'PP-GROWTH-001-ready-thin',
+      title: 'Ready but thin criteria',
+      isReady: true,
+      blockedReasons: [],
+      acceptanceCriteria: ['c1', 'c2'],
+      validationCommand: 'npm test -- thin'
+    }
+  ], { minimumCriteria: 3 });
+
+  assert.equal(plan.blockedQueue, true);
+  assert.equal(plan.taskId, null);
+  assert.match(plan.blockedReasons.join(' | '), /minimum acceptance criteria \(3\)/);
+});
+
 test('runValidationCommand returns PASS with output snippet', () => {
   const result = runValidationCommand('npm test -- smoke', {
     runner: () => 'line1\nline2\nline3'

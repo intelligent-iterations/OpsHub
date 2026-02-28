@@ -384,12 +384,24 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   };
 }
 
-function pickImmediateExecution(taskQueue) {
+function pickImmediateExecution(taskQueue, options = {}) {
   if (!taskQueue.length) return null;
 
-  const top = taskQueue.find((task) => task.isReady !== false);
+  const minimumCriteria = Number.isFinite(options.minimumCriteria) && options.minimumCriteria > 0
+    ? Math.floor(options.minimumCriteria)
+    : 0;
+  const readyTasks = taskQueue.filter((task) => task && task.isReady !== false);
+  const top = readyTasks.find((task) => {
+    const criteriaCount = Array.isArray(task.acceptanceCriteria) ? task.acceptanceCriteria.length : 0;
+    return criteriaCount >= minimumCriteria;
+  });
+
   if (!top) {
     const blockedReasons = [...new Set(taskQueue.flatMap((task) => task.blockedReasons || []))];
+    if (readyTasks.length > 0 && minimumCriteria > 0) {
+      blockedReasons.push(`No ready tasks meet minimum acceptance criteria (${minimumCriteria}).`);
+    }
+
     return {
       taskId: null,
       title: null,
@@ -886,7 +898,9 @@ if (require.main === module) {
     autoSeed: cliOptions.autoSeed
   });
 
-  const executionPlan = pickImmediateExecution(queue);
+  const executionPlan = pickImmediateExecution(queue, {
+    minimumCriteria: cliOptions.minimumCriteria
+  });
   const validationResult = cliOptions.validate
     ? runValidationCommand(executionPlan?.validationCommand)
     : {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-02-28T04:08:18.457Z",
+  "generatedAt": "2026-02-28T04:33:40.595Z",
   "seeded": false,
   "sync": {
     "synced": false,
@@ -40,7 +40,7 @@
       "id": "PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter",
       "title": "Friday night rescue reminder with 20-minute cook filter",
       "score": 81.9,
-      "owner": "growth-oncall",
+      "owner": "growth-cron",
       "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
       "acceptanceCriteria": [
         "Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).",
@@ -57,7 +57,7 @@
       "id": "PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households",
       "title": "Post-checkout pantry scan nudge for first-week households",
       "score": 81.45,
-      "owner": "growth-oncall",
+      "owner": "growth-cron",
       "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
       "acceptanceCriteria": [
         "Experiment spec includes hypothesis, segment, channel, and success metric (week-1 pantry scan completion rate).",
@@ -74,7 +74,7 @@
       "id": "PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill",
       "title": "Sunday prep planner with expiring-ingredient auto-fill",
       "score": 80.85,
-      "owner": "growth-oncall",
+      "owner": "growth-cron",
       "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
       "acceptanceCriteria": [
         "Experiment spec includes hypothesis, segment, channel, and success metric (weekly rescue plan creation rate).",
@@ -109,7 +109,7 @@
     "status": "PASS",
     "command": "npm test -- test/pantrypal-task-accelerator.test.js",
     "exitCode": 0,
-    "durationMs": 193,
-    "outputSnippet": "# tests 39\n# suites 0\n# pass 39\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 66.17625"
+    "durationMs": 190,
+    "outputSnippet": "# tests 46\n# suites 0\n# pass 46\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 66.651833"
   }
 }
