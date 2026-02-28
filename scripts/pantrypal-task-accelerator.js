@@ -135,7 +135,8 @@ function createLightQueueSeedTasks(options = {}) {
 
 function createAdaptiveSeedTasks(experiments, options = {}) {
   const maxTasks = Math.max(0, options.maxTasks ?? 2);
-  const existingNames = new Set(experiments.map((experiment) => (experiment.name ?? '').trim().toLowerCase()));
+  const canonicalName = (name) => toSlug(String(name ?? '').trim());
+  const existingNames = new Set(experiments.map((experiment) => canonicalName(experiment.name)).filter(Boolean));
   const catalog = createLightQueueSeedTasks(options).concat([
     {
       name: 'Win-back pantry scan streak with 2-minute rescue plan teaser',
@@ -193,8 +194,8 @@ function createAdaptiveSeedTasks(experiments, options = {}) {
 
   const uniqueSeeds = [];
   for (const seed of catalog) {
-    const key = seed.name.trim().toLowerCase();
-    if (existingNames.has(key)) continue;
+    const key = canonicalName(seed.name);
+    if (!key || existingNames.has(key)) continue;
     uniqueSeeds.push(seed);
     existingNames.add(key);
     if (uniqueSeeds.length >= maxTasks) break;

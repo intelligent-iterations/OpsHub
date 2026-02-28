@@ -140,6 +140,17 @@ test('createAdaptiveSeedTasks skips duplicates and respects maxTasks', () => {
   assert.equal(seeds[0].validationCommand, 'npm test -- smoke');
 });
 
+test('createAdaptiveSeedTasks deduplicates punctuation variants using slug canonicalization', () => {
+  const experiments = [{ name: 'Smart defrost reminder timing tuned by prep time tier!!!' }];
+  const seeds = createAdaptiveSeedTasks(experiments, { maxTasks: 3 });
+
+  assert.equal(seeds.length, 3);
+  assert.equal(seeds[0].name, 'Rescue streak comeback experiment for lapsed households');
+  assert.equal(seeds[1].name, 'Win-back pantry scan streak with 2-minute rescue plan teaser');
+  assert.equal(seeds[2].name, 'Household buddy invite prompt after second rescue success');
+  assert.ok(!seeds.some((seed) => /Smart defrost reminder timing tuned by prep-time tier/.test(seed.name)));
+});
+
 test('createAdaptiveSeedTasks can supply a deeper PantryPal backlog when queue is very light', () => {
   const seeds = createAdaptiveSeedTasks([], { maxTasks: 6, validationCommand: 'npm test -- pantrypal' });
 
