@@ -18,6 +18,7 @@ const {
   summarizeBlockedReasons,
   summarizeQueueScores,
   summarizeValidationCoverage,
+  summarizeOwnerLoad,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
@@ -283,6 +284,21 @@ test('summarizeValidationCoverage counts PantryPal tests without test/ path and 
   assert.equal(summary.executableValidationPct, 50);
 });
 
+test('summarizeOwnerLoad reports per-owner ready/blocked totals and average score', () => {
+  const summary = summarizeOwnerLoad([
+    { owner: 'growth-oncall', score: 90, isReady: true },
+    { owner: 'growth-oncall', score: 80, isReady: false },
+    { owner: 'night-shift', score: 88, isReady: true },
+    { score: 70, isReady: true }
+  ]);
+
+  assert.deepEqual(summary, [
+    { owner: 'growth-oncall', total: 2, ready: 1, blocked: 1, avgScore: 85 },
+    { owner: 'night-shift', total: 1, ready: 1, blocked: 0, avgScore: 88 },
+    { owner: 'unassigned', total: 1, ready: 1, blocked: 0, avgScore: 70 }
+  ]);
+});
+
 test('createTaskAcceptanceAudit reports average criteria coverage and below-threshold tasks', () => {
   const audit = createTaskAcceptanceAudit([
     { id: 'PP-GROWTH-001', acceptanceCriteria: ['a', 'b', 'c', 'd', 'e', 'f'] },
@@ -339,6 +355,9 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.executableValidations, 1);
   assert.equal(health.validationCoveragePct, 100);
   assert.equal(health.executableValidationPct, 100);
+  assert.equal(health.ownerLoad.length, 1);
+  assert.equal(health.ownerLoad[0].owner, 'growth-oncall');
+  assert.equal(health.ownerLoad[0].blocked, 1);
   assert.match(health.nextAction, /Resolve blockers or auto-seed fresh PantryPal experiments/);
 });
 
@@ -521,6 +540,7 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
       executableValidations: 1,
       validationCoveragePct: 100,
       executableValidationPct: 100,
+      ownerLoad: [{ owner: 'growth', total: 1, ready: 1, blocked: 0, avgScore: 91.23 }],
       nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
     }
   );
@@ -539,6 +559,7 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Tasks below criteria threshold: 0/);
   assert.match(markdown, /Validation coverage: 1\/1 tasks \(100%\)/);
   assert.match(markdown, /Executable validation commands: 1\/1 tasks \(100%\)/);
+  assert.match(markdown, /Owner load: growth total 1 \(ready 1, blocked 0, avg 91.23\)/);
   assert.match(markdown, /Next action: Execute top ready PantryPal experiment now/);
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Critical Acceptance Checklist/);
@@ -667,6 +688,7 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
     minimumCriteria: 6,
     averageCriteriaCount: 6.67,
     tasksBelowCriteriaThreshold: [],
+    ownerLoad: [{ owner: 'growth-oncall', total: 3, ready: 3, blocked: 0, avgScore: 88.1 }],
     nextAction: 'Launch now.'
   }, {
     generatedAt: '2026-02-28T03:30:00.000Z'
@@ -684,6 +706,7 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
   assert.match(content, /Acceptance criteria coverage: 3\/3 tasks meet minimum 6 checks/);
   assert.match(content, /Average criteria per task: 6.67/);
   assert.match(content, /Tasks below criteria threshold: 0/);
+  assert.match(content, /Owner load: growth-oncall total 3 \(ready 3, blocked 0, avg 88.1\)/);
   assert.match(content, /Status: PASS/);
   assert.match(content, /all good/);
 });

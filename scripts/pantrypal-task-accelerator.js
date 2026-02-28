@@ -335,6 +335,44 @@ function summarizeValidationCoverage(taskQueue = []) {
   };
 }
 
+function summarizeOwnerLoad(taskQueue = []) {
+  const ownerCounts = new Map();
+
+  for (const task of taskQueue) {
+    const owner = typeof task?.owner === 'string' && task.owner.trim()
+      ? task.owner.trim()
+      : 'unassigned';
+
+    if (!ownerCounts.has(owner)) {
+      ownerCounts.set(owner, { owner, total: 0, ready: 0, blocked: 0, avgScore: 0, _scoreTotal: 0, _scoreCount: 0 });
+    }
+
+    const entry = ownerCounts.get(owner);
+    entry.total += 1;
+    if (task?.isReady === false) {
+      entry.blocked += 1;
+    } else {
+      entry.ready += 1;
+    }
+
+    const score = Number(task?.score);
+    if (Number.isFinite(score)) {
+      entry._scoreTotal += score;
+      entry._scoreCount += 1;
+    }
+  }
+
+  return [...ownerCounts.values()]
+    .map((entry) => ({
+      owner: entry.owner,
+      total: entry.total,
+      ready: entry.ready,
+      blocked: entry.blocked,
+      avgScore: entry._scoreCount ? Number((entry._scoreTotal / entry._scoreCount).toFixed(2)) : 0
+    }))
+    .sort((a, b) => b.total - a.total || b.ready - a.ready || b.avgScore - a.avgScore || a.owner.localeCompare(b.owner));
+}
+
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
@@ -355,6 +393,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const acceptanceAudit = createTaskAcceptanceAudit(queue, options.minimumCriteria);
   const scoreSummary = summarizeQueueScores(queue);
   const validationCoverage = summarizeValidationCoverage(queue);
+  const ownerLoad = summarizeOwnerLoad(queue);
 
   return {
     incomingExperiments: experiments.length,
@@ -385,6 +424,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     executableValidations: validationCoverage.executableValidations,
     validationCoveragePct: validationCoverage.validationCoveragePct,
     executableValidationPct: validationCoverage.executableValidationPct,
+    ownerLoad,
     nextAction: blockedTasks > 0 && readyTasks === 0
       ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
       : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
@@ -528,6 +568,7 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Tasks below criteria threshold: ${(health.tasksBelowCriteriaThreshold || []).length}`,
       `Validation coverage: ${health.tasksWithValidation ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks (${health.validationCoveragePct ?? 'n/a'}%)`,
       `Executable validation commands: ${health.executableValidations ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks (${health.executableValidationPct ?? 'n/a'}%)`,
+      `Owner load: ${(health.ownerLoad || []).length ? health.ownerLoad.map((entry) => `${entry.owner} total ${entry.total} (ready ${entry.ready}, blocked ${entry.blocked}, avg ${entry.avgScore})`).join('; ') : 'none'}`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
       `Ready capacity light: ${health.isReadyCapacityLight ? 'yes' : 'no'} (threshold: ${health.readyLightThreshold ?? 1})`,
       `Next action: ${health.nextAction ?? 'n/a'}`
@@ -619,6 +660,7 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Tasks below criteria threshold: ${(health?.tasksBelowCriteriaThreshold || []).length}`);
   lines.push(`Validation coverage: ${health?.tasksWithValidation ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks (${health?.validationCoveragePct ?? 'n/a'}%)`);
   lines.push(`Executable validation commands: ${health?.executableValidations ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks (${health?.executableValidationPct ?? 'n/a'}%)`);
+  lines.push(`Owner load: ${(health?.ownerLoad || []).length ? health.ownerLoad.map((entry) => `${entry.owner} total ${entry.total} (ready ${entry.ready}, blocked ${entry.blocked}, avg ${entry.avgScore})`).join('; ') : 'none'}`);
   lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
 
   lines.push('', '## Validation result');
@@ -958,6 +1000,7 @@ module.exports = {
   summarizeBlockedReasons,
   summarizeQueueScores,
   summarizeValidationCoverage,
+  summarizeOwnerLoad,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
