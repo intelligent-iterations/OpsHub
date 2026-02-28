@@ -4,6 +4,16 @@
     "todo": [],
     "inProgress": [
       {
+        "id": "d21285c7-25c0-4f02-b9df-7c911bc69625",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T00:16:21.649Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
         "id": "5b453af5-1cc5-4507-bc76-28ac94311724",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
@@ -34,16 +44,6 @@
         "source": "manual",
         "updatedAt": "2026-02-28T00:11:37.213Z",
         "startedAt": "2026-02-28T00:11:37.213Z"
-      },
-      {
-        "id": "a599d0e6-0d5d-47d2-b37d-909e7b568737",
-        "name": "[P25][PantryPal] Design rescue onboarding v2 with first-week habit loop and confidence nudges",
-        "description": "Create an onboarding flow that reaches first rescue completion within 24h, with progressive confidence cues and lightweight household setup.",
-        "priority": "high",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T00:08:53.959Z",
-        "completedAt": null,
-        "source": "intelligent-iteration"
       },
       {
         "id": "0f346228-ab38-4076-835a-aba0411b0d43",
@@ -107,6 +107,37 @@
       }
     ],
     "done": [
+      {
+        "id": "b1ae8f8e-c954-452a-8051-ac632bac58c1",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:16:21.634Z",
+        "completedAt": "2026-02-28T00:16:21.644Z",
+        "source": "manual"
+      },
+      {
+        "id": "975cf464-2731-4755-b5e4-890ca49156ed",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:16:21.622Z",
+        "completedAt": "2026-02-28T00:16:21.628Z",
+        "source": "manual"
+      },
+      {
+        "id": "a599d0e6-0d5d-47d2-b37d-909e7b568737",
+        "name": "[P25][PantryPal] Design rescue onboarding v2 with first-week habit loop and confidence nudges",
+        "description": "Create an onboarding flow that reaches first rescue completion within 24h, with progressive confidence cues and lightweight household setup.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:08:53.959Z",
+        "completedAt": "2026-02-28T00:16:06Z",
+        "source": "intelligent-iteration",
+        "completionDetails": "Completed 2026-02-27: Authored onboarding v2 product/design spec with first-week habit loop, confidence nudge framework, experiments, Flutter+Firebase implementation slices, and screenshot QA checklist. Included Claude Code benchmark research artifacts: artifacts/p25-claude-benchmark-research-v2.md and artifacts/p25-claude-research-notes.md."
+      },
       {
         "id": "1ec24829-29d7-42a0-8a44-2488aea1407a",
         "name": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
@@ -2074,6 +2105,66 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T00:16:21.649Z",
+      "type": "task_added",
+      "taskId": "d21285c7-25c0-4f02-b9df-7c911bc69625",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:16:21.644Z",
+      "type": "task_moved",
+      "taskId": "b1ae8f8e-c954-452a-8051-ac632bac58c1",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:16:21.639Z",
+      "type": "task_moved",
+      "taskId": "b1ae8f8e-c954-452a-8051-ac632bac58c1",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:16:21.634Z",
+      "type": "task_added",
+      "taskId": "b1ae8f8e-c954-452a-8051-ac632bac58c1",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:16:21.628Z",
+      "type": "task_moved",
+      "taskId": "975cf464-2731-4755-b5e4-890ca49156ed",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:16:21.622Z",
+      "type": "task_added",
+      "taskId": "975cf464-2731-4755-b5e4-890ca49156ed",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "id": "activity-a599d0e6-1772255766",
+      "type": "task_moved",
+      "taskId": "a599d0e6-0d5d-47d2-b37d-909e7b568737",
+      "fromColumn": "inProgress",
+      "toColumn": "done",
+      "timestamp": "2026-02-28T00:16:06Z",
+      "details": "Onboarding v2 spec delivered with implementation + QA evidence checklist."
+    },
     {
       "at": "2026-02-28T00:14:51.954Z",
       "type": "task_moved",
@@ -6316,70 +6407,6 @@
       "type": "task_added",
       "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
       "taskName": "[P4] Implement expiry reminders and urgency tiers",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.968Z",
-      "type": "task_added",
-      "taskId": "9bbb6d66-4c96-4b9f-97da-656d2448fdce",
-      "taskName": "[P3] Build pet timeline/history view for user feedback loop",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.962Z",
-      "type": "task_added",
-      "taskId": "956c668f-0d16-48b7-ac25-3e1830eb703d",
-      "taskName": "[P3] Implement hunger/sad behavior for expiring pantry items",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.957Z",
-      "type": "task_added",
-      "taskId": "33ab6340-2712-4dd5-bd6f-a1c322227b8d",
-      "taskName": "[P3] Define evolution/degradation thresholds and cadence",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.951Z",
-      "type": "task_added",
-      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
-      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.945Z",
-      "type": "task_added",
-      "taskId": "71fb9a7f-4b33-4b0f-8442-4151ff6437c0",
-      "taskName": "[P3] Implement pet animation state controller",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.940Z",
-      "type": "task_added",
-      "taskId": "26841502-9e0e-4034-9d5e-d7a812188223",
-      "taskName": "[P3] Map nutrition score deltas to pet stat updates",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.934Z",
-      "type": "task_added",
-      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
-      "taskName": "[P3] Design pet state machine and trigger rules",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.928Z",
-      "type": "task_added",
-      "taskId": "44df43d6-ff02-464f-909e-a5cb68719a6a",
-      "taskName": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
       "to": "todo",
       "detail": "Added task from migration"
     }
