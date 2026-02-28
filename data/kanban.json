@@ -1109,28 +1109,29 @@
       {
         "id": "58c52e29-9439-460f-b4b2-4352f989677b",
         "name": "Smoke task",
-        "description": "Smoke task verified and closed with GitHub-backed evidence. Verification run (2026-02-28): npm test (77/77 passing), including health endpoint + kanban create/move/lifecycle smoke coverage. Evidence: https://github.com/larryclaw/OpsHub/commit/3671dbe67540ca52620010a3fccd79c1f839b82e ; https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/server.js ; https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/README.md ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json",
+        "description": "Smoke task verified and closed with GitHub-backed evidence. Verification run (2026-02-28): npm test (77/77 passing), including health endpoint + kanban create/move/lifecycle smoke coverage. Implementation evidence: https://github.com/intelligent-iterations/OpsHub/commit/3671dbe67540ca52620010a3fccd79c1f839b82e ; https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/test/api.test.js ; https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/server.js ; https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/README.md . Closure evidence: https://github.com/intelligent-iterations/OpsHub/commit/60d8e8a08a2d0d31f4acba291889f8f323cd89f5 ; https://github.com/intelligent-iterations/OpsHub/blob/main/data/kanban.json.",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-28T00:53:16.767Z",
         "completedAt": "2026-02-28T17:07:35.425Z",
         "source": "manual",
-        "updatedAt": "2026-02-28T17:07:35.425Z",
-        "completionDetails": "Smoke task verified and closed with GitHub-backed evidence. Verification run (2026-02-28): npm test (77/77 passing), including health endpoint + kanban create/move/lifecycle smoke coverage. Evidence: https://github.com/larryclaw/OpsHub/commit/3671dbe67540ca52620010a3fccd79c1f839b82e ; https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/server.js ; https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/README.md ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json",
-        "evidence": "https://github.com/larryclaw/OpsHub/commit/3671dbe67540ca52620010a3fccd79c1f839b82e",
+        "updatedAt": "2026-02-28T17:08:04.055Z",
+        "completionDetails": "Smoke task verified and closed with GitHub-backed evidence. Verification run (2026-02-28): npm test (77/77 passing), including health endpoint + kanban create/move/lifecycle smoke coverage. Implementation evidence: https://github.com/intelligent-iterations/OpsHub/commit/3671dbe67540ca52620010a3fccd79c1f839b82e ; https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/test/api.test.js ; https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/server.js ; https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/README.md . Closure evidence: https://github.com/intelligent-iterations/OpsHub/commit/60d8e8a08a2d0d31f4acba291889f8f323cd89f5 ; https://github.com/intelligent-iterations/OpsHub/blob/main/data/kanban.json.",
+        "evidence": "https://github.com/intelligent-iterations/OpsHub/commit/60d8e8a08a2d0d31f4acba291889f8f323cd89f5",
         "metadata": {
           "evidenceLinks": [
-            "https://github.com/larryclaw/OpsHub/commit/3671dbe67540ca52620010a3fccd79c1f839b82e",
-            "https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/test/api.test.js",
-            "https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/server.js",
-            "https://github.com/larryclaw/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/README.md",
-            "https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
+            "https://github.com/intelligent-iterations/OpsHub/commit/3671dbe67540ca52620010a3fccd79c1f839b82e",
+            "https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/test/api.test.js",
+            "https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/server.js",
+            "https://github.com/intelligent-iterations/OpsHub/blob/3671dbe67540ca52620010a3fccd79c1f839b82e/README.md",
+            "https://github.com/intelligent-iterations/OpsHub/commit/60d8e8a08a2d0d31f4acba291889f8f323cd89f5",
+            "https://github.com/intelligent-iterations/OpsHub/blob/main/data/kanban.json"
           ],
           "verification": {
             "command": "npm test",
             "passCount": 77,
             "totalCount": 77,
-            "runAt": "2026-02-28T17:07:35.425Z"
+            "runAt": "2026-02-28T17:08:04.055Z"
           }
         }
       },
@@ -4206,6 +4207,13 @@
     ]
   },
   "activityLog": [
+    {
+      "type": "task_update",
+      "taskId": "58c52e29-9439-460f-b4b2-4352f989677b",
+      "taskName": "Smoke task",
+      "timestamp": "2026-02-28T17:08:04.055Z",
+      "note": "Refreshed GitHub evidence links to canonical repo + closure commit https://github.com/intelligent-iterations/OpsHub/commit/60d8e8a08a2d0d31f4acba291889f8f323cd89f5"
+    },
     {
       "at": "2026-02-28T17:07:38.480Z",
       "type": "task_added",
