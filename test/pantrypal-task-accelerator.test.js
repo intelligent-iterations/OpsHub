@@ -10,6 +10,7 @@ const {
   createLightQueueSeedTasks,
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
+  summarizeBlockedReasons,
   createQueueHealthSnapshot,
   pickImmediateExecution,
   runValidationCommand,
@@ -131,6 +132,20 @@ test('buildQueueWithAutoSeed backfills to meet requested limit when queue is lig
   assert.ok(queue.every((task) => task.owner === 'growth-oncall'));
 });
 
+
+test('summarizeBlockedReasons returns frequency-ranked blocker reasons', () => {
+  const blockers = summarizeBlockedReasons([
+    { blockedReasons: ['External dependency: legal sign-off', 'External dependency: data approval'] },
+    { blockedReasons: ['External dependency: legal sign-off'] },
+    { blockedReasons: [] }
+  ]);
+
+  assert.deepEqual(blockers, [
+    { reason: 'External dependency: legal sign-off', count: 2 },
+    { reason: 'External dependency: data approval', count: 1 }
+  ]);
+});
+
 test('createQueueHealthSnapshot reports light queue, readiness, and minimum score eligibility', () => {
   const experiments = [
     { name: 'Strong', impact: 0.9, confidence: 0.8, ease: 0.8, pantryPalFit: 0.9, externalDependency: 'legal sign-off' },
@@ -145,6 +160,8 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.readyTasks, 0);
   assert.equal(health.blockedTasks, 1);
   assert.equal(health.readinessPct, 0);
+  assert.equal(health.topBlockedReasons.length, 1);
+  assert.match(health.topBlockedReasons[0].reason, /legal sign-off/);
   assert.equal(health.isLight, true);
   assert.equal(health.threshold, 2);
   assert.equal(health.minimumScore, 60);
@@ -270,6 +287,7 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Ready tasks: 1/);
   assert.match(markdown, /Blocked tasks: 0/);
   assert.match(markdown, /Readiness: 100%/);
+  assert.match(markdown, /Top blockers: none/);
   assert.match(markdown, /Next action: Execute top ready PantryPal experiment now/);
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Critical Acceptance Checklist/);

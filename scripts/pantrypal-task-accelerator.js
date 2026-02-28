@@ -182,6 +182,24 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
   return { queue, seeded };
 }
 
+
+function summarizeBlockedReasons(taskQueue, limit = 3) {
+  const counts = new Map();
+
+  for (const task of taskQueue) {
+    for (const reason of task.blockedReasons || []) {
+      const key = String(reason).trim();
+      if (!key) continue;
+      counts.set(key, (counts.get(key) || 0) + 1);
+    }
+  }
+
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, limit)
+    .map(([reason, count]) => ({ reason, count }));
+}
+
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
@@ -192,6 +210,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const readyTasks = queue.filter((task) => task.isReady !== false).length;
   const blockedTasks = Math.max(0, queue.length - readyTasks);
   const readinessPct = queue.length ? Math.round((readyTasks / queue.length) * 100) : 0;
+  const topBlockedReasons = summarizeBlockedReasons(queue);
 
   return {
     incomingExperiments: experiments.length,
@@ -200,6 +219,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     readyTasks,
     blockedTasks,
     readinessPct,
+    topBlockedReasons,
     isLight: isQueueLight(queue, threshold),
     threshold,
     minimumScore: typeof minimumScore === 'number' ? minimumScore : null,
@@ -326,6 +346,7 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Ready tasks: ${health.readyTasks ?? 'n/a'}`,
       `Blocked tasks: ${health.blockedTasks ?? 'n/a'}`,
       `Readiness: ${health.readinessPct ?? 'n/a'}%`,
+      `Top blockers: ${(health.topBlockedReasons || []).length ? health.topBlockedReasons.map((entry) => `${entry.reason} (${entry.count})`).join('; ') : 'none'}`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
       `Next action: ${health.nextAction ?? 'n/a'}`
     ].join('\n')
@@ -430,6 +451,7 @@ module.exports = {
   createLightQueueSeedTasks,
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
+  summarizeBlockedReasons,
   createQueueHealthSnapshot,
   pickImmediateExecution,
   runValidationCommand,
