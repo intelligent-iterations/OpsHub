@@ -45,61 +45,6 @@
     ],
     "todo": [
       {
-        "id": "0fe09e5d-4426-4dd0-868b-b04756d4cf29",
-        "name": "[P10] Design household nudges dashboard for weekly waste prevention habits",
-        "description": "Household nudges dashboard design complete with weekly risk KPIs, prioritized action feed, and collaboration-ready habit nudges. Evidence: pantrypal/docs/p10_household_nudges_dashboard.md; artifacts/p10-household-nudges-dashboard-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-27T01:03:04.594Z",
-        "completedAt": null,
-        "source": "intelligent-iteration"
-      },
-      {
-        "id": "abaf7e9d-1ee1-429c-8fa9-b4587dd4a227",
-        "createdAt": "2026-02-27T04:28:10.738Z",
-        "name": "[P11] Implement personalized leftover transformation suggestions by cuisine + time budget",
-        "description": "Completed P11 personalized leftover transformations spec with cuisine/time-budget ranking model and UX contract. Evidence: pantrypal/docs/p11_personalized_leftover_transformation_suggestions.md; artifacts/p11-personalized-leftover-transformations-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T04:28:10.738Z",
-        "completedAt": null
-      },
-      {
-        "id": "673264fc-b7f0-4bf9-8392-2a6b3e3dfbaf",
-        "createdAt": "2026-02-27T04:43:07Z",
-        "name": "[P12] Implement grocery price-volatility watchlist with swap recommendations",
-        "description": "Implemented volatility-watchlist service + tests + docs/evidence. Evidence: artifacts/p12-grocery-price-volatility-watchlist-evidence.md; doc: pantrypal/docs/p12_grocery_price_volatility_watchlist_swap_recommendations.md; tests: flutter test test/domain/services/grocery_price_volatility_watchlist_service_test.dart (4/4 pass).",
-        "priority": "medium",
-        "status": "toDo",
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T04:47:00Z",
-        "completedAt": null
-      },
-      {
-        "id": "b0b6ac72-a451-4730-9524-8eaa3e34f3ed",
-        "createdAt": "2026-02-27T04:43:07Z",
-        "name": "[P12] Design proactive weekend prep plan generator from expiry risk + household schedule",
-        "description": "Implemented weekend prep plan generator + tests/docs. Evidence: artifacts/p12-weekend-prep-plan-generator-evidence.md; doc: pantrypal/docs/p12_weekend_prep_plan_generator.md; tests: flutter test test/weekend_prep_plan_generator_test.dart (3/3 pass).",
-        "priority": "medium",
-        "status": "toDo",
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T04:47:00Z",
-        "completedAt": null
-      },
-      {
-        "id": "349b6310-8764-4009-8c27-f3a2f444294f",
-        "createdAt": "2026-02-27T04:43:07Z",
-        "name": "[P12] Add dynamic leftover shelf-life confidence scoring with user correction loop",
-        "description": "Completed P12 shelf-life confidence scoring + user correction loop spec. Evidence: pantrypal/docs/p12_leftover_shelf_life_confidence_scoring.md; artifacts/p12-leftover-shelf-life-confidence-scoring-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T04:58:08.616Z",
-        "updatedAt": "2026-02-27T04:58:08.623Z",
-        "completedAt": null
-      },
-      {
         "id": "02988c0f-206f-4971-a9cf-9fe30cd4a912",
         "name": "[P13] Add leftover safety timeline with reheating quality decay recommendations",
         "description": "Completed P13 leftover safety timeline + reheating quality decay spec. Evidence: artifacts/p13-leftover-safety-timeline-quality-decay-evidence.md; doc: pantrypal/docs/p13_leftover_safety_timeline_quality_decay.md",
@@ -110,30 +55,6 @@
         "source": "intelligent-iteration",
         "startedAt": "2026-02-27T14:58:09.865Z",
         "updatedAt": "2026-02-27T14:58:09.865Z"
-      },
-      {
-        "id": "af26a684-3a30-4ecd-90c2-8959356d82ec",
-        "name": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
-        "description": "Completed P13 weekly auto-rescue planner design. Evidence: artifacts/p13-weekly-auto-rescue-planner-evidence.md; doc: pantrypal/docs/p13_weekly_auto_rescue_planner.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-27T14:53:13.393Z",
-        "completedAt": null,
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T14:58:09.865Z",
-        "updatedAt": "2026-02-27T14:58:09.865Z"
-      },
-      {
-        "id": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-        "name": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
-        "description": "Completed P15 rescue streak freeze design + bounded service/test scaffold. Evidence: artifacts/p15-household-rescue-streak-freeze-evidence.md; doc: pantrypal/docs/p15_household_rescue_streak_freeze.md; note: local flutter test run blocked by host Xcode license (code 69).",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-27T15:58:19.707Z",
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T16:03:00.717Z",
-        "updatedAt": "2026-02-27T16:03:00.717Z",
-        "completedAt": null
       },
       {
         "id": "c32e6a38-f99e-4a31-b885-9b8829f3753b",
@@ -150,7 +71,7 @@
       {
         "id": "67802eac-d2f5-476a-a141-5f7df97908a8",
         "name": "[P16] Implement confidence-aware inventory decay model using user correction feedback",
-        "description": "Add adaptive spoilage/quality decay adjustments that learn from user \u201cstill good / already bad\u201d corrections and surface confidence bands. Completed P16 confidence-aware decay model with EMA correction learning, confidence bands, docs/tests/evidence. Evidence: artifacts/p16-confidence-aware-decay-evidence.md; commit fc2a582; tests: flutter test test/domain/services/confidence_aware_inventory_decay_service_test.dart (4/4 pass).",
+        "description": "Add adaptive spoilage/quality decay adjustments that learn from user “still good / already bad” corrections and surface confidence bands. Completed P16 confidence-aware decay model with EMA correction learning, confidence bands, docs/tests/evidence. Evidence: artifacts/p16-confidence-aware-decay-evidence.md; commit fc2a582; tests: flutter test test/domain/services/confidence_aware_inventory_decay_service_test.dart (4/4 pass).",
         "priority": "medium",
         "status": "toDo",
         "createdAt": "2026-02-27T16:33:03.772Z",
@@ -174,7 +95,7 @@
       {
         "id": "7ba6ea3f-94ea-4fdc-8835-f7505e201e46",
         "name": "[P17] Add leftover transformation suggestions to meal detail cards",
-        "description": "Surface 2-3 \u201cnext meal from leftovers\u201d suggestions in meal detail UX using branch plans and pantry availability. Implemented leftover transformation suggestions on weekly meal detail assignments with pantry-aware ranking/cap (<=3), added tests and evidence note. Evidence: pantrypal/artifacts/p17-leftover-transformation-suggestions-meal-detail-evidence.md. Test: flutter test test/weekly_meal_prep_optimizer_test.dart (6/6 pass).",
+        "description": "Surface 2-3 “next meal from leftovers” suggestions in meal detail UX using branch plans and pantry availability. Implemented leftover transformation suggestions on weekly meal detail assignments with pantry-aware ranking/cap (<=3), added tests and evidence note. Evidence: pantrypal/artifacts/p17-leftover-transformation-suggestions-meal-detail-evidence.md. Test: flutter test test/weekly_meal_prep_optimizer_test.dart (6/6 pass).",
         "priority": "medium",
         "status": "toDo",
         "createdAt": "2026-02-27T16:44:36.903Z",
@@ -300,7 +221,7 @@
       },
       {
         "id": "8fe524f4-663b-42e2-a243-220e7377240c",
-        "name": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
+        "name": "[P14] Implement weekly “save vs waste” simulation preview before grocery trip",
         "description": "Create pre-trip simulation that forecasts waste reduction and savings from planned purchases/meal plan adjustments.",
         "priority": "medium",
         "status": "toDo",
@@ -312,7 +233,7 @@
       {
         "id": "eb153f2a-488c-4e45-ba47-c8eca2ac93a5",
         "name": "[P14] Build pantry confidence explainer cards that justify each recommendation",
-        "description": "Generate plain-language \u201cwhy this suggestion\u201d cards (expiry risk, budget impact, nutrition trade-off) for each pantry action.",
+        "description": "Generate plain-language “why this suggestion” cards (expiry risk, budget impact, nutrition trade-off) for each pantry action.",
         "priority": "medium",
         "status": "toDo",
         "createdAt": "2026-02-27T15:28:02.002Z",
@@ -323,7 +244,7 @@
       },
       {
         "id": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-        "name": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+        "name": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
         "description": "Propose meal batching bundles that prioritize soon-to-expire items while respecting user prep-time tiers and weekday constraints.",
         "priority": "medium",
         "status": "toDo",
@@ -335,7 +256,7 @@
       },
       {
         "id": "01f1208a-170b-402f-bcf9-256127fc716c",
-        "name": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+        "name": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
         "description": "Design and implement a planner that turns expiring items into one base cook with 3 derived meals across the week, respecting prep-time and dietary constraints.",
         "priority": "medium",
         "status": "toDo",
@@ -1493,6 +1414,16 @@
     ],
     "inProgress": [
       {
+        "id": "d8eb7308-830f-4042-8846-c1439fd88176",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T14:34:12.862Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
         "id": "9adadf33-1da8-4d37-ba32-7e2634f379d2",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
@@ -1554,6 +1485,73 @@
       }
     ],
     "done": [
+      {
+        "id": "af26a684-3a30-4ecd-90c2-8959356d82ec",
+        "name": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
+        "description": "Completed P13 weekly auto-rescue planner design + verification. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/p13-weekly-auto-rescue-planner-verification.md ; Design doc: https://github.com/larryclaw/pantrypal/blob/56882d8e145ec8f89989e89e414f83074491a8cd/docs/p13_weekly_auto_rescue_planner.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-27T14:53:13.393Z",
+        "completedAt": "2026-02-28T14:34:34.639Z",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T14:58:09.865Z",
+        "updatedAt": "2026-02-28T14:34:34.639Z"
+      },
+      {
+        "id": "8446555c-30e2-490c-a589-41bf4ae48dc1",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T14:34:12.841Z",
+        "completedAt": "2026-02-28T14:34:12.855Z",
+        "source": "manual"
+      },
+      {
+        "id": "4bc32c31-7a24-41a9-93af-31aebeaef955",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T14:34:12.824Z",
+        "completedAt": "2026-02-28T14:34:12.832Z",
+        "source": "manual"
+      },
+      {
+        "id": "abaf7e9d-1ee1-429c-8fa9-b4587dd4a227",
+        "createdAt": "2026-02-27T04:28:10.738Z",
+        "name": "[P11] Implement personalized leftover transformation suggestions by cuisine + time budget",
+        "description": "Implemented personalized leftover transformation suggestions with cuisine preference matching and transformation time-budget filtering in weekly meal prep optimizer. Validated via targeted tests (8/8 passing). Evidence: https://github.com/larryclaw/pantrypal/blob/main/artifacts/p11-personalized-leftover-transformations-evidence.md; Tests: https://github.com/larryclaw/pantrypal/blob/main/test/weekly_meal_prep_optimizer_test.dart; Implementation: https://github.com/larryclaw/pantrypal/blob/main/lib/domain/services/weekly_meal_prep_optimizer.dart",
+        "priority": "medium",
+        "status": "done",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T04:28:10.738Z",
+        "completedAt": "2026-02-28T14:25:24Z",
+        "updatedAt": "2026-02-28T14:25:24Z"
+      },
+      {
+        "id": "673264fc-b7f0-4bf9-8392-2a6b3e3dfbaf",
+        "createdAt": "2026-02-27T04:43:07Z",
+        "name": "[P12] Implement grocery price-volatility watchlist with swap recommendations",
+        "description": "Completed P12 grocery price-volatility watchlist with swap recommendations and verified tests. Evidence: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 ; Service: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/services/grocery_price_volatility_watchlist_service.dart ; Test: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/domain/services/grocery_price_volatility_watchlist_service_test.dart ; Doc: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/docs/p12_grocery_price_volatility_watchlist_swap_recommendations.md ; Verification: flutter test test/domain/services/grocery_price_volatility_watchlist_service_test.dart (4/4 pass on 2026-02-28).",
+        "priority": "medium",
+        "status": "done",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T04:47:00Z",
+        "completedAt": "2026-02-28T14:16:57.788Z",
+        "updatedAt": "2026-02-28T14:16:57.788Z"
+      },
+      {
+        "id": "0fe09e5d-4426-4dd0-868b-b04756d4cf29",
+        "name": "[P10] Design household nudges dashboard for weekly waste prevention habits",
+        "description": "Household nudges dashboard design implemented and verified (tests + analyze passing). Evidence: https://github.com/larryclaw/pantrypal/commit/91e3cae70b27023d5873a5e7b26033fd476a62b2; https://github.com/larryclaw/pantrypal/blob/91e3cae70b27023d5873a5e7b26033fd476a62b2/docs/p10_household_nudges_dashboard.md; https://github.com/larryclaw/pantrypal/blob/91e3cae70b27023d5873a5e7b26033fd476a62b2/artifacts/p10-household-nudges-dashboard-evidence.md; https://github.com/larryclaw/pantrypal/blob/91e3cae70b27023d5873a5e7b26033fd476a62b2/test/domain/services/household_nudges_dashboard_service_test.dart; https://github.com/larryclaw/pantrypal/blob/91e3cae70b27023d5873a5e7b26033fd476a62b2/test/presentation/widgets/household_nudges_dashboard_card_test.dart",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-27T01:03:04.594Z",
+        "completedAt": "2026-02-28T14:20:00Z",
+        "source": "intelligent-iteration",
+        "updatedAt": "2026-02-28T14:20:00Z"
+      },
       {
         "id": "6b6701af-0f27-4bf0-8159-3c62a8609032",
         "name": "[P9] Create household accountability dashboard for waste reduction goals",
@@ -1922,8 +1920,8 @@
       },
       {
         "id": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
-        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan\u2192plan\u2192cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).\n\nCompletion: Delivered P25 rescue friction telemetry map with implementable schema (events/properties/funnel/sample payloads/KPIs), benchmark-informed rationale via delegated Claude research notes, instrumentation readiness checklist, and schema lint script. Artifacts: docs/p25_rescue_friction_telemetry_map.md; data/p25_rescue_friction_telemetry_schema.json; docs/p25_instrumentation_readiness_checklist.md; scripts/p25-telemetry-spec-lint.js; artifacts/p25-claude-research-notes.md. Validation: node scripts/p25-telemetry-spec-lint.js (pass), npm test (12/12 pass).",
+        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
+        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan→plan→cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).\n\nCompletion: Delivered P25 rescue friction telemetry map with implementable schema (events/properties/funnel/sample payloads/KPIs), benchmark-informed rationale via delegated Claude research notes, instrumentation readiness checklist, and schema lint script. Artifacts: docs/p25_rescue_friction_telemetry_map.md; data/p25_rescue_friction_telemetry_schema.json; docs/p25_instrumentation_readiness_checklist.md; scripts/p25-telemetry-spec-lint.js; artifacts/p25-claude-research-notes.md. Validation: node scripts/p25-telemetry-spec-lint.js (pass), npm test (12/12 pass).",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-28T00:08:53.965Z",
@@ -2958,7 +2956,7 @@
       {
         "id": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
         "name": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
-        "description": "Rework QA PASS: verified nutrition delta \u2192 pet stat mapping with deterministic deadband/spike/cap logic and targeted test coverage. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/nutrition_delta_mapper.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/nutrition_delta_mapper_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/nutrition_delta_mapper_test.dart (10/10 passing on 2026-02-28).",
+        "description": "Rework QA PASS: verified nutrition delta → pet stat mapping with deterministic deadband/spike/cap logic and targeted test coverage. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/nutrition_delta_mapper.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/nutrition_delta_mapper_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/nutrition_delta_mapper_test.dart (10/10 passing on 2026-02-28).",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-26T22:39:17.359Z",
@@ -3011,17 +3009,129 @@
       {
         "id": "53f3e69f-4452-403b-960c-10a8d9a6bc7c",
         "name": "[Rework QA] [P5] QA plan + test matrix (unit/widget/integration)",
-        "description": "Rework QA update complete: audited QA strategy + unit/widget/integration test matrix, corrected integration coverage mapping to existing harness, and ran focused verification across representative suites (unit/widget/integration) with all tests passing. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p5-qa-plan-test-matrix-evidence.md ; Matrix doc: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/qa_strategy_test_matrix.md ; Integration suite: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/integration/app_integration_test.dart",
+        "description": "Rework QA update complete: audited QA strategy + unit/widget/integration test matrix, corrected integration coverage mapping to existing harness, and ran focused verification across representative suites (unit/widget/integration) with all tests passing. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p5-qa-plan-test-matrix-evidence.md ; https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/qa_strategy_test_matrix.md ; https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/integration/app_integration_test.dart ; https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/ui-integration-screenshots/24-e2e-after-onboarding.png",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-26T22:39:17.352Z",
         "completedAt": "2026-02-28T14:07:43.008718Z",
         "source": "delight-rework-sweep",
         "updatedAt": "2026-02-28T14:07:43.008718Z"
+      },
+      {
+        "id": "b0b6ac72-a451-4730-9524-8eaa3e34f3ed",
+        "createdAt": "2026-02-27T04:43:07Z",
+        "name": "[P12] Design proactive weekend prep plan generator from expiry risk + household schedule",
+        "description": "Implemented weekend prep plan generator + tests/docs. Evidence: https://github.com/larryclaw/pantrypal/blob/main/artifacts/p12-weekend-prep-plan-generator-evidence.md; doc: https://github.com/larryclaw/pantrypal/blob/main/docs/p12_weekend_prep_plan_generator.md; service: https://github.com/larryclaw/pantrypal/blob/main/lib/domain/services/weekend_prep_plan_generator.dart; tests: https://github.com/larryclaw/pantrypal/blob/main/test/weekend_prep_plan_generator_test.dart; verification run 2026-02-28: flutter test test/weekend_prep_plan_generator_test.dart (3/3 pass).",
+        "priority": "medium",
+        "status": "done",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T04:47:00Z",
+        "completedAt": "2026-02-28T14:25:20Z"
+      },
+      {
+        "id": "349b6310-8764-4009-8c27-f3a2f444294f",
+        "createdAt": "2026-02-27T04:43:07Z",
+        "name": "[P12] Add dynamic leftover shelf-life confidence scoring with user correction loop",
+        "description": "Implemented dynamic leftover shelf-life confidence scoring with a user-correction learning loop and verified with targeted tests. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/confidence_aware_inventory_decay_service.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/confidence_aware_inventory_decay_service_test.dart | Spec+closure: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/p12_leftover_shelf_life_confidence_scoring.md | https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/p12-leftover-shelf-life-confidence-scoring-evidence.md",
+        "priority": "medium",
+        "status": "done",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T04:58:08.616Z",
+        "updatedAt": "2026-02-28T14:26:00Z",
+        "completedAt": "2026-02-28T14:26:00Z"
+      },
+      {
+        "id": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
+        "name": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
+        "description": "Re-verified P15 rescue streak freeze mechanic and closed task with GitHub-backed evidence. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/p15_household_rescue_streak_freeze.md | https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/rescue_streak_freeze_service.dart | https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/rescue_streak_freeze_service_test.dart | https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/rescue_streak_freeze_service_test.dart (5/5 pass) and flutter analyze lib/domain/services/rescue_streak_freeze_service.dart test/domain/services/rescue_streak_freeze_service_test.dart (clean) on 2026-02-28.",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-27T15:58:19.707Z",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T16:03:00.717Z",
+        "updatedAt": "2026-02-28T14:34:18Z",
+        "completedAt": "2026-02-28T14:34:18Z"
       }
     ]
   },
   "activityLog": [
+    {
+      "type": "task_completed",
+      "taskId": "af26a684-3a30-4ecd-90c2-8959356d82ec",
+      "taskName": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
+      "detail": "closed with github-backed evidence links + opshub tests passing (77/77)",
+      "timestamp": "2026-02-28T14:34:34.639Z"
+    },
+    {
+      "at": "2026-02-28T14:34:12.862Z",
+      "type": "task_added",
+      "taskId": "d8eb7308-830f-4042-8846-c1439fd88176",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T14:34:12.855Z",
+      "type": "task_moved",
+      "taskId": "8446555c-30e2-490c-a589-41bf4ae48dc1",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T14:34:12.849Z",
+      "type": "task_moved",
+      "taskId": "8446555c-30e2-490c-a589-41bf4ae48dc1",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T14:34:12.841Z",
+      "type": "task_added",
+      "taskId": "8446555c-30e2-490c-a589-41bf4ae48dc1",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T14:34:12.832Z",
+      "type": "task_moved",
+      "taskId": "4bc32c31-7a24-41a9-93af-31aebeaef955",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T14:34:12.824Z",
+      "type": "task_added",
+      "taskId": "4bc32c31-7a24-41a9-93af-31aebeaef955",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "id": "log-abaf7e9d-1ee1-429c-8fa9-b4587dd4a227-done",
+      "type": "task.moved",
+      "taskId": "abaf7e9d-1ee1-429c-8fa9-b4587dd4a227",
+      "taskName": "[P11] Implement personalized leftover transformation suggestions by cuisine + time budget",
+      "from": "todo",
+      "to": "done",
+      "timestamp": "2026-02-28T14:25:24Z",
+      "note": "Closed after implementation + test validation with evidence links."
+    },
+    {
+      "type": "task_moved",
+      "taskId": "673264fc-b7f0-4bf9-8392-2a6b3e3dfbaf",
+      "taskName": "[P12] Implement grocery price-volatility watchlist with swap recommendations",
+      "from": "todo",
+      "to": "done",
+      "timestamp": "2026-02-28T14:16:57.788Z",
+      "detail": "Closed after verification with GitHub evidence links for implementation, tests, docs, and commit."
+    },
     {
       "type": "task_moved",
       "taskId": "53f3e69f-4452-403b-960c-10a8d9a6bc7c",
@@ -5891,7 +6001,7 @@
       "at": "2026-02-28T00:14:51.954Z",
       "type": "task_moved",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "from": "done",
       "to": "done",
       "detail": "Completed P25 telemetry spec + schema + checklist + lint tooling; validated via schema lint and npm test."
@@ -6011,7 +6121,7 @@
       "at": "2026-02-28T00:12:18.115Z",
       "type": "task_moved",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed by sub-agent sp15-p25-rescue-telemetry; added telemetry model/service+CSV, tests/docs/evidence; flutter test passed."
@@ -6055,7 +6165,7 @@
       "at": "2026-02-28T00:09:14.200Z",
       "type": "task_moved",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "from": "todo",
       "to": "inProgress",
       "detail": ""
@@ -6081,7 +6191,7 @@
       "at": "2026-02-28T00:08:53.965Z",
       "type": "task_added",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "to": "todo",
       "detail": "Added task from intelligent-iteration"
     },
@@ -7131,7 +7241,7 @@
       "at": "2026-02-27T16:44:25.216Z",
       "type": "task_moved",
       "taskId": "01f1208a-170b-402f-bcf9-256127fc716c",
-      "taskName": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+      "taskName": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed directly in main agent: implemented leftovers branching in smart batch cook planner (base + 2 derived meals), added model updates + test coverage; flutter test test/smart_batch_cook_planner_service_test.dart passed (6/6)."
@@ -7176,7 +7286,7 @@
       "at": "2026-02-27T16:33:03.772Z",
       "type": "task_moved",
       "taskId": "01f1208a-170b-402f-bcf9-256127fc716c",
-      "taskName": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+      "taskName": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
       "from": "todo",
       "to": "inProgress",
       "detail": "Started directly in main agent (social-progress-15min cron)"
@@ -7201,7 +7311,7 @@
       "at": "2026-02-27T16:33:03.772Z",
       "type": "task_added",
       "taskId": "01f1208a-170b-402f-bcf9-256127fc716c",
-      "taskName": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+      "taskName": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
       "to": "todo",
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },
@@ -7209,7 +7319,7 @@
       "at": "2026-02-27T16:14:51.765Z",
       "type": "task_moved",
       "taskId": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-      "taskName": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+      "taskName": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed P15 use-it-first meal batching with prep-time tiers. Added PrepTimeTier caps (quick/standard/extended), stronger expiring-first scoring, new tests (5/5 pass), docs + evidence at pantrypal/docs/p15_use_it_first_meal_batching.md and artifacts/p15-use-it-first-meal-batching-evidence.md."
@@ -7218,7 +7328,7 @@
       "at": "2026-02-27T16:05:42Z",
       "type": "task_moved",
       "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-      "taskName": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
+      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed P15 rescue streak freeze design+service/tests. Evidence: artifacts/p15-household-rescue-streak-freeze-evidence.md (flutter test blocked on host Xcode license)."
@@ -7227,7 +7337,7 @@
       "at": "2026-02-27T16:03:00.717Z",
       "type": "task_moved",
       "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-      "taskName": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
+      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
       "from": "todo",
       "to": "inProgress",
       "detail": "Assigned for parallel sub-agent execution (social-progress-15min cron)"
@@ -7245,7 +7355,7 @@
       "at": "2026-02-27T15:58:19.707Z",
       "type": "task_moved",
       "taskId": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-      "taskName": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+      "taskName": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
       "from": "todo",
       "to": "inProgress",
       "detail": "Started directly in main agent (social-progress-15min cron)"
@@ -7254,7 +7364,7 @@
       "at": "2026-02-27T15:58:19.707Z",
       "type": "task_added",
       "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-      "taskName": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
+      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
       "to": "todo",
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },
@@ -7270,7 +7380,7 @@
       "at": "2026-02-27T15:58:19.707Z",
       "type": "task_added",
       "taskId": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-      "taskName": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+      "taskName": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
       "to": "todo",
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },
@@ -7284,224 +7394,12 @@
       "detail": ""
     },
     {
-      "at": "2026-02-27T15:42:00.000Z",
-      "type": "task_moved",
-      "taskId": "8fe524f4-663b-42e2-a243-220e7377240c",
-      "taskName": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed P14 weekly save-vs-waste simulation preview spec + domain model/service/tests. Evidence: pantrypal/docs/p14_weekly_save_vs_waste_simulation_preview.md (commit/test run blocked by Xcode license on host)."
-    },
-    {
-      "at": "2026-02-27T15:42:00.000Z",
-      "type": "task_moved",
-      "taskId": "d3a9e2f1-72f8-4228-8951-aa3433148f16",
-      "taskName": "[P14] Design micro-habit nudge timing model to reduce ignored reminders",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed P14 micro-habit nudge timing model design + service/tests. Evidence: pantrypal/docs/p14_micro_habit_nudge_timing_model.md; artifacts/p14-micro-habit-nudge-timing-model-evidence.md (commit blocked by Xcode license on host)."
-    },
-    {
-      "at": "2026-02-27T15:33:13.497Z",
-      "type": "task_moved",
-      "taskId": "d3a9e2f1-72f8-4228-8951-aa3433148f16",
-      "taskName": "[P14] Design micro-habit nudge timing model to reduce ignored reminders",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-27T15:33:13.488Z",
-      "type": "task_moved",
-      "taskId": "8fe524f4-663b-42e2-a243-220e7377240c",
-      "taskName": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-27T15:28:02.002Z",
-      "type": "task_moved",
-      "taskId": "eb153f2a-488c-4e45-ba47-c8eca2ac93a5",
-      "taskName": "[P14] Build pantry confidence explainer cards that justify each recommendation",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Started directly in main agent (social-progress-15min cron)"
-    },
-    {
-      "at": "2026-02-27T15:28:02.002Z",
-      "type": "task_added",
-      "taskId": "8fe524f4-663b-42e2-a243-220e7377240c",
-      "taskName": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
-    },
-    {
-      "at": "2026-02-27T15:28:02.002Z",
-      "type": "task_added",
-      "taskId": "d3a9e2f1-72f8-4228-8951-aa3433148f16",
-      "taskName": "[P14] Design micro-habit nudge timing model to reduce ignored reminders",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
-    },
-    {
-      "at": "2026-02-27T15:28:02.002Z",
-      "type": "task_added",
-      "taskId": "eb153f2a-488c-4e45-ba47-c8eca2ac93a5",
-      "taskName": "[P14] Build pantry confidence explainer cards that justify each recommendation",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
-    },
-    {
-      "at": "2026-02-27T15:08:46.154Z",
-      "type": "task_moved",
-      "taskId": "16992628-525c-447a-823e-bc9fc8cdf7af",
-      "taskName": "[P13] Implement pantry item substitution graph using nutrition+price similarity",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed substitution-graph spec with deterministic nutrition+price+availability scoring and fallback reasons. Evidence: artifacts/p13-pantry-substitution-graph-evidence.md"
-    },
-    {
-      "at": "2026-02-27T14:59:27.845Z",
-      "type": "task_moved",
-      "taskId": "af26a684-3a30-4ecd-90c2-8959356d82ec",
-      "taskName": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p13-weekly-auto-rescue-planner; evidence artifacts/p13-weekly-auto-rescue-planner-evidence.md"
-    },
-    {
-      "at": "2026-02-27T14:59:12.114Z",
-      "type": "task_moved",
-      "taskId": "02988c0f-206f-4971-a9cf-9fe30cd4a912",
-      "taskName": "[P13] Add leftover safety timeline with reheating quality decay recommendations",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p13-leftover-safety-timeline; evidence artifacts/p13-leftover-safety-timeline-quality-decay-evidence.md"
-    },
-    {
-      "at": "2026-02-27T14:58:09.865Z",
-      "type": "task_moved",
-      "taskId": "af26a684-3a30-4ecd-90c2-8959356d82ec",
-      "taskName": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-27T14:58:09.865Z",
-      "type": "task_moved",
-      "taskId": "02988c0f-206f-4971-a9cf-9fe30cd4a912",
-      "taskName": "[P13] Add leftover safety timeline with reheating quality decay recommendations",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-27T14:53:28.215Z",
-      "type": "task_moved",
-      "taskId": "16992628-525c-447a-823e-bc9fc8cdf7af",
-      "taskName": "[P13] Implement pantry item substitution graph using nutrition+price similarity",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Started directly in main agent (social-progress cron)"
-    },
-    {
-      "at": "2026-02-27T14:53:13.393Z",
-      "type": "task_added",
-      "taskId": "af26a684-3a30-4ecd-90c2-8959356d82ec",
-      "taskName": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
-      "to": "todo",
-      "detail": "Added task from intelligent-iteration"
-    },
-    {
-      "at": "2026-02-27T14:53:13.383Z",
-      "type": "task_added",
-      "taskId": "02988c0f-206f-4971-a9cf-9fe30cd4a912",
-      "taskName": "[P13] Add leftover safety timeline with reheating quality decay recommendations",
-      "to": "todo",
-      "detail": "Added task from intelligent-iteration"
-    },
-    {
-      "id": "log-5a8ebea6-b01b-4abb-94fa-25269a51933b-2026-02-28T13:09:36Z",
-      "type": "task.completed",
-      "taskId": "5a8ebea6-b01b-4abb-94fa-25269a51933b",
-      "timestamp": "2026-02-28T13:09:36Z",
-      "details": {
-        "fromColumn": "todo",
-        "toColumn": "done",
-        "summary": "Closed with GitHub evidence URLs and verification results."
-      }
-    },
-    {
-      "at": "2026-02-28T13:12:57Z",
-      "type": "task_moved",
-      "taskId": "4fb291a2-d96b-4cad-a7cd-3b9a2a989011",
-      "taskName": "[Rework QA] [P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
-      "from": "todo",
-      "to": "done",
-      "detail": "Rework QA PASS with GitHub-linked evidence; targeted receipt pipeline tests passing and analyzer warnings documented."
-    },
-    {
-      "type": "task_moved",
-      "taskId": "335459e5-6eac-4394-9f4c-07f0d8064f82",
-      "taskName": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
-      "from": "todo",
-      "to": "done",
-      "timestamp": "2026-02-28T13:25:00.702Z",
-      "detail": "Rework QA closure: pantry summary dashboard validated; evidence and commit links added."
-    },
-    {
-      "type": "task_moved",
-      "taskId": "d4efe638-9179-40ed-a793-fce15a82921f",
-      "taskName": "[Rework QA] [P2] Build food classification engine (category + nutrition quality score)",
-      "from": "todo",
-      "to": "done",
-      "timestamp": "2026-02-28T13:26:00.000Z",
-      "detail": "Rework QA closure: food classification engine verified with targeted Flutter tests and GitHub evidence links added."
-    },
-    {
-      "at": "2026-02-28T13:36:00.000Z",
-      "type": "task_moved",
-      "taskId": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
-      "taskName": "[Rework QA] [P7] Build meal planner suggestions from expiring pantry items",
-      "from": "todo",
-      "to": "done",
-      "detail": "Rework QA PASS with focused verification and GitHub-backed evidence links."
-    },
-    {
-      "at": "2026-02-28T13:34:43Z",
-      "type": "task_moved",
-      "taskId": "376fe6d7-1792-4eec-8018-9cbe619da89e",
-      "taskName": "[Rework QA] [P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
-      "from": "todo",
-      "to": "done",
-      "detail": "Rework QA PASS: validated P8 household pantry assignment with GitHub evidence links and passing targeted checks."
-    },
-    {
-      "at": "2026-02-28T13:37:10Z",
-      "type": "task_moved",
-      "taskId": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
-      "taskName": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
-      "from": "todo",
-      "to": "done",
-      "detail": "Rework QA closure: verified nutrition delta mapper implementation/tests and attached GitHub evidence links."
-    },
-    {
-      "at": "2026-02-28T14:02:22Z",
-      "type": "task_moved",
-      "taskId": "706c918c-50e0-459f-ad91-2f6a5258f894",
-      "taskName": "[Rework QA] [Ops] Verify Claude delegate workflow end-to-end",
-      "from": "todo",
-      "to": "done",
-      "detail": "Rework QA PASS: verified delegate skill contract, Claude CLI availability, prior delegate commit evidence, and published GitHub-backed artifact."
-    },
-    {
+      "id": "activity-a675cbdf-3c57-4681-9745-8f0b2fd9c827-close-2026-02-28T14:34:18Z",
       "type": "task_completed",
-      "taskId": "96b68b0b-7650-441f-a271-ea7b9b714edc",
-      "taskName": "[Rework QA] [P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
-      "timestamp": "2026-02-28T14:20:00.000Z",
-      "detail": "Rework QA closure: verified cook-tonight recommendation implementation/tests and attached GitHub evidence links."
+      "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
+      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
+      "timestamp": "2026-02-28T14:34:18Z",
+      "detail": "Closed after re-verification with GitHub-backed evidence links; tests pass (flutter test rescue_streak_freeze_service_test.dart 5/5, flutter analyze clean)."
     }
   ]
 }
