@@ -34,7 +34,7 @@ Includes a lightweight API smoke suite for health checks + kanban flows.
 ## Endpoints
 
 - `GET /api/health` → health check
-- `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays)
+- `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays; each in-progress task includes `id`, `task`, `description`, and `priority`)
 - `GET /api/kanban` → kanban board + activity log
 - `POST /api/kanban/task` → create task
 - `POST /api/kanban/move` → move task to another column
@@ -67,6 +67,7 @@ Use the safe cleanup script to detect stale `inProgress` tasks with no active su
 
 - Dry-run by default (no board changes)
 - Optional `--apply` moves stale tasks back to `todo`
+- Optional `--task-id <id>` scopes remediation/reporting to specific stuck cards
 - Adds `activityLog` entries for every auto-reassigned task
 
 ```bash

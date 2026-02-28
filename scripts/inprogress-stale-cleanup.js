@@ -23,7 +23,8 @@ function parseArgs(argv) {
     activeWindowMinutes: 3,
     reportJsonOut: null,
     reportMdOut: null,
-    apply: false
+    apply: false,
+    taskIds: []
   };
 
   for (let i = 2; i < argv.length; i += 1) {
@@ -34,6 +35,7 @@ function parseArgs(argv) {
     else if (token === '--report-json-out') args.reportJsonOut = path.resolve(argv[++i]);
     else if (token === '--report-md-out') args.reportMdOut = path.resolve(argv[++i]);
     else if (token === '--apply') args.apply = true;
+    else if (token === '--task-id') args.taskIds.push(String(argv[++i] || '').trim());
     else if (token === '--help' || token === '-h') {
       printHelp();
       process.exit(0);
@@ -42,11 +44,12 @@ function parseArgs(argv) {
     }
   }
 
+  args.taskIds = uniq(args.taskIds.map((id) => id.trim())).filter(Boolean);
   return args;
 }
 
 function printHelp() {
-  console.log(`inprogress-stale-cleanup\n\nUsage:\n  node scripts/inprogress-stale-cleanup.js [options]\n\nOptions:\n  --kanban <path>                 Path to kanban.json (default: OpsHub/data/kanban.json)\n  --stale-minutes <n>             Task age threshold in minutes (default: 20)\n  --active-window-minutes <n>     OpenClaw active session recency in minutes (default: 3)\n  --report-json-out <path>        Write JSON report\n  --report-md-out <path>          Write markdown report\n  --apply                         Move stale tasks from inProgress -> todo + add activityLog entries\n  -h, --help                      Show help\n\nBy default this script is dry-run only.`);
+  console.log(`inprogress-stale-cleanup\n\nUsage:\n  node scripts/inprogress-stale-cleanup.js [options]\n\nOptions:\n  --kanban <path>                 Path to kanban.json (default: OpsHub/data/kanban.json)\n  --stale-minutes <n>             Task age threshold in minutes (default: 20)\n  --active-window-minutes <n>     OpenClaw active session recency in minutes (default: 3)\n  --report-json-out <path>        Write JSON report\n  --report-md-out <path>          Write markdown report\n  --task-id <id>                  Restrict remediation/reporting to specific task id (repeatable)\n  --apply                         Move stale tasks from inProgress -> todo + add activityLog entries\n  -h, --help                      Show help\n\nBy default this script is dry-run only.`);
 }
 
 function safeReadJson(filePath) {
@@ -222,6 +225,9 @@ function toMarkdown(report) {
   lines.push(`Generated: ${report.generatedAt}`);
   lines.push(`Mode: ${report.applyMode ? 'apply' : 'dry-run'}`);
   lines.push(`Kanban: ${report.kanbanPath}`);
+  if (Array.isArray(report.scopedTaskIds) && report.scopedTaskIds.length > 0) {
+    lines.push(`Task scope: ${report.scopedTaskIds.map((id) => `\`${id}\``).join(', ')}`);
+  }
   lines.push('');
   lines.push('## Summary');
   lines.push('');
@@ -270,16 +276,25 @@ async function main() {
     activeSessions
   });
 
+  const scopedTaskIds = new Set(args.taskIds.map(normalizeKey));
+  const scopedInspected =
+    scopedTaskIds.size === 0
+      ? inspected
+      : inspected.map((item) => {
+          if (scopedTaskIds.has(normalizeKey(item.taskId))) return item;
+          return { ...item, stale: false };
+        });
+
   let updatedBoard = original;
   let movedTaskIds = [];
   if (args.apply) {
-    const applied = applyRemediation(original, inspected, { staleMinutes: args.staleMinutes });
+    const applied = applyRemediation(original, scopedInspected, { staleMinutes: args.staleMinutes });
     updatedBoard = applied.board;
     movedTaskIds = applied.movedTaskIds;
     fs.writeFileSync(args.kanban, JSON.stringify(updatedBoard, null, 2), 'utf8');
   }
 
-  const staleCandidates = inspected.filter((r) => r.stale);
+  const staleCandidates = scopedInspected.filter((r) => r.stale);
   const report = {
     generatedAt: new Date().toISOString(),
     applyMode: args.apply,
@@ -294,7 +309,8 @@ async function main() {
       staleCandidates: staleCandidates.length,
       reassignedCount: movedTaskIds.length
     },
-    rootCause: inferLikelyRootCauses(inspected),
+    rootCause: inferLikelyRootCauses(scopedInspected),
+    scopedTaskIds: args.taskIds,
     staleCandidates,
     movedTaskIds
   };

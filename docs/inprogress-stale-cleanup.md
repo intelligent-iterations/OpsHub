@@ -50,3 +50,14 @@ node scripts/inprogress-stale-cleanup.js \
   --report-json-out artifacts/inprogress-stale-report.json \
   --report-md-out artifacts/inprogress-stale-report.md
 ```
+
+Target a single stuck task id (repeat `--task-id` for multiple):
+
+```bash
+node scripts/inprogress-stale-cleanup.js \
+  --kanban data/kanban.json \
+  --stale-minutes 20 \
+  --active-window-minutes 3 \
+  --task-id 1677c75c-fdb4-4c75-b6c0-df9a52a122ce \
+  --apply
+```

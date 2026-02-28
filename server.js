@@ -131,6 +131,8 @@ async function getSubagentsData() {
   const inProgressTasks = (board.columns.inProgress || []).map((t) => ({
     id: t.id,
     task: t.name,
+    description: t.description || '',
+    priority: t.priority || 'medium',
     status: 'In Progress',
     source: 'OpsHub kanban'
   }));

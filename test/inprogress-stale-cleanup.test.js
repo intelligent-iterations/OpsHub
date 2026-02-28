@@ -103,3 +103,34 @@ test('inferLikelyRootCauses identifies generic manual integration dashboard patt
   assert.equal(root.genericIntegrationTaskCount, 2);
   assert.match(root.likelyCause, /created manually as generic placeholders/i);
 });
+
+test('parseArgs accepts repeatable --task-id and de-duplicates values', () => {
+  const args = cleanup.parseArgs([
+    'node',
+    'scripts/inprogress-stale-cleanup.js',
+    '--task-id',
+    'abc',
+    '--task-id',
+    'abc',
+    '--task-id',
+    'def'
+  ]);
+
+  assert.deepEqual(args.taskIds, ['abc', 'def']);
+});
+
+test('applyRemediation honors scoped stale results for targeted task cleanup', () => {
+  const board = makeBoard([
+    { id: 'target', name: 'Integration dashboard task', status: 'inProgress' },
+    { id: 'other', name: 'Integration dashboard task', status: 'inProgress' }
+  ]);
+
+  const staleResults = [
+    { taskId: 'target', taskName: 'Integration dashboard task', stale: true },
+    { taskId: 'other', taskName: 'Integration dashboard task', stale: false }
+  ];
+
+  const applied = cleanup.applyRemediation(board, staleResults, { staleMinutes: 5 });
+  assert.deepEqual(applied.movedTaskIds, ['target']);
+  assert.equal(applied.board.columns.inProgress.some((t) => t.id === 'other'), true);
+});

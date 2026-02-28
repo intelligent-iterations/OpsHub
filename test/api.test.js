@@ -144,7 +144,10 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.ok(body.subagents.counts.inProgressTasks >= 1);
 
     assert.ok(Array.isArray(body.subagents.inProgressTasks));
-    assert.ok(body.subagents.inProgressTasks.some((item) => item.task === 'Integration dashboard task'));
+    const integrationTask = body.subagents.inProgressTasks.find((item) => item.id && item.task === 'Integration dashboard task');
+    assert.ok(integrationTask);
+    assert.equal(integrationTask.description, 'should appear in subagents.inProgressTasks');
+    assert.equal(integrationTask.priority, 'medium');
 
     assert.ok(Array.isArray(body.sessions));
     assert.ok(Array.isArray(body.errors));
