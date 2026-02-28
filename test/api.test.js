@@ -426,6 +426,59 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
   }
 });
 
+test('dashboard auto-next-action scheduler dispatches queued work when passive wait is detected', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const staleInProgress = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Worker waiting task',
+        description: 'waiting for instruction',
+        status: 'inProgress'
+      })
+    });
+    assert.equal(staleInProgress.status, 200);
+
+    const todo = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Auto-dispatch candidate',
+        description: 'ready for next action',
+        status: 'todo'
+      })
+    });
+    assert.equal(todo.status, 200);
+    const todoBody = await todo.json();
+
+    await new Promise((resolve) => setTimeout(resolve, 20));
+
+    const dashboard = await fetch(`${app.baseUrl}/api/dashboard`);
+    assert.equal(dashboard.status, 200);
+    const body = await dashboard.json();
+
+    assert.ok(body.subagents.managerLoop.autoNextAction);
+    assert.equal(typeof body.subagents.managerLoop.autoNextAction.changed, 'boolean');
+
+    const kanban = await fetch(`${app.baseUrl}/api/kanban`);
+    const kanbanBody = await kanban.json();
+    const movedTask = kanbanBody.board.columns.inProgress.find((task) => task.id === todoBody.task.id);
+    const hasScheduleEvent = kanbanBody.board.activityLog.some((entry) => entry.type === 'next_action_scheduled' && entry.taskId === todoBody.task.id);
+
+    if (body.subagents.managerLoop.autoNextAction.reason === 'cooldown_active') {
+      assert.equal(hasScheduleEvent, false);
+      assert.equal(Boolean(movedTask), false);
+    } else {
+      assert.ok(movedTask);
+      assert.equal(movedTask.status, 'inProgress');
+      assert.equal(hasScheduleEvent, true);
+    }
+  } finally {
+    await app.close();
+  }
+});
+
 test('dashboard exposes PantryPal WIP share metric with drift alert when share drops below threshold', { concurrency: false }, async () => {
   const app = await makeServer();
   try {
@@ -469,6 +522,71 @@ test('dashboard exposes PantryPal WIP share metric with drift alert when share d
     assert.ok(body.subagents.managerLoop.thresholdEvaluation);
     assert.equal(typeof body.subagents.managerLoop.thresholdEvaluation.checks.passiveWaitRatio.pass, 'boolean');
     assert.equal(typeof body.subagents.managerLoop.thresholdEvaluation.checks.blockerProtocolCompliance.pass, 'boolean');
+  } finally {
+    await app.close();
+  }
+});
+
+
+test('moving complex task to inProgress enforces delegation trigger metadata', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Complex MGAP task',
+        status: 'todo',
+        description: 'Acceptance criteria:\n- step one\n- step two\n- step three'
+      })
+    });
+    const created = await create.json();
+
+    const move = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ taskId: created.task.id, to: 'inProgress', summary: 'delegating now' })
+    });
+    assert.equal(move.status, 200);
+    const body = await move.json();
+    assert.equal(body.task.delegation.required, true);
+
+    const boardRes = await fetch(`${app.baseUrl}/api/kanban`);
+    const boardBody = await boardRes.json();
+    const reminder = boardBody.board.activityLog.find((entry) => entry.type === 'delegation_triggered' && entry.taskId === created.task.id);
+    assert.ok(reminder);
+  } finally {
+    await app.close();
+  }
+});
+
+test('failed done transition logs closeout contract reminder activity', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Closeout reminder target', status: 'inProgress' })
+    });
+    const created = await create.json();
+
+    const move = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'done',
+        completionDetails: 'Evidence: artifacts/local.md'
+      })
+    });
+    assert.equal(move.status, 400);
+
+    const boardRes = await fetch(`${app.baseUrl}/api/kanban`);
+    const boardBody = await boardRes.json();
+    const reminder = boardBody.board.activityLog.find(
+      (entry) => entry.type === 'closeout_contract_reminder' && entry.taskId === created.task.id
+    );
+    assert.ok(reminder);
   } finally {
     await app.close();
   }

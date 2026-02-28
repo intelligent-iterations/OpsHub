@@ -1,7 +1,12 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { computeManagerLoopMetrics, evaluateManagerLoopThresholds } = require('../scripts/manager-loop-guardrails');
+const {
+  computeManagerLoopMetrics,
+  evaluateManagerLoopThresholds,
+  applyAutoNextActionScheduler,
+  applyManagerContractImprovements
+} = require('../scripts/manager-loop-guardrails');
 
 function makeBoard(overrides = {}) {
   return {
@@ -56,6 +61,55 @@ test('computeManagerLoopMetrics reports passive wait and blocker compliance dete
   assert.equal(metrics.delegationRate, 0.5);
   assert.equal(metrics.evidenceCompletionRate, 1);
   assert.equal(metrics.blockerProtocolCompliance, 0.5);
+});
+
+test('auto-next-action scheduler dispatches next todo task when passive wait is detected', () => {
+  const nowMs = Date.parse('2026-02-28T01:00:00.000Z');
+  const board = makeBoard({
+    columns: {
+      todo: [{ id: 'todo-1', name: 'Queued follow-up', status: 'todo', createdAt: '2026-02-28T00:10:00.000Z' }],
+      inProgress: [{ id: 'ip-1', name: 'Worker waiting', status: 'inProgress', createdAt: '2026-02-28T00:00:00.000Z' }]
+    }
+  });
+
+  const result = applyAutoNextActionScheduler(board, {
+    staleMinutes: 20,
+    nowMs,
+    cooldownMs: 5 * 60 * 1000,
+    slaMinutes: 3
+  });
+
+  assert.equal(result.changed, true);
+  assert.equal(result.reason, 'dispatched');
+  assert.equal(result.dispatchedTaskId, 'todo-1');
+  assert.equal(result.board.columns.todo.length, 0);
+  assert.equal(result.board.columns.inProgress.length, 2);
+  assert.equal(result.board.columns.inProgress[0].id, 'todo-1');
+  assert.equal(result.board.columns.inProgress[0].status, 'inProgress');
+  assert.equal(result.board.activityLog[0].type, 'next_action_scheduled');
+  assert.equal(result.board.activityLog[1].type, 'task_moved');
+});
+
+test('auto-next-action scheduler respects cooldown and avoids spam dispatch loops', () => {
+  const nowMs = Date.parse('2026-02-28T01:00:00.000Z');
+  const board = makeBoard({
+    columns: {
+      todo: [{ id: 'todo-2', name: 'Second queued action', status: 'todo', createdAt: '2026-02-28T00:20:00.000Z' }],
+      inProgress: [{ id: 'ip-1', name: 'Worker waiting', status: 'inProgress', createdAt: '2026-02-28T00:00:00.000Z' }]
+    },
+    activityLog: [{ at: '2026-02-28T00:58:30.000Z', type: 'next_action_scheduled', taskId: 'prior' }]
+  });
+
+  const result = applyAutoNextActionScheduler(board, {
+    staleMinutes: 20,
+    nowMs,
+    cooldownMs: 5 * 60 * 1000
+  });
+
+  assert.equal(result.changed, false);
+  assert.equal(result.reason, 'cooldown_active');
+  assert.equal(result.board.columns.todo.length, 1);
+  assert.equal(result.board.columns.inProgress.length, 1);
 });
 
 test('evaluateManagerLoopThresholds enforces MGAP thresholds', () => {

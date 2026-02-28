@@ -5,7 +5,11 @@ const { exec } = require('child_process');
 const util = require('util');
 const crypto = require('crypto');
 const { computePantryPalWipMetrics, computeStrategicQueueMetrics, prioritizeWithGuardrails } = require('./scripts/pantrypal-priority-guardrails');
-const { computeManagerLoopMetrics, evaluateManagerLoopThresholds } = require('./scripts/manager-loop-guardrails');
+const {
+  computeManagerLoopMetrics,
+  evaluateManagerLoopThresholds,
+  applyAutoNextActionScheduler
+} = require('./scripts/manager-loop-guardrails');
 const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 const { evaluateBlockerProtocol, captureBlockerProofArtifact } = require('./lib/blocker-protocol');
 
@@ -48,6 +52,27 @@ function hasVerificationRecord(task, payload = {}) {
   return Boolean(inbound || task?.verification || task?.metadata?.verification || task?.verifiedAt || task?.metadata?.verifiedAt);
 }
 
+
+
+function requiresDelegationTrigger(task = {}) {
+  const name = cleanText(task?.name || '', 400).toLowerCase();
+  const description = cleanText(task?.description || '', 4000);
+  const lowered = description.toLowerCase();
+  const bulletCount = (description.match(/\n\s*[-*]/g) || []).length;
+  const keywordHit = /(acceptance criteria|multi-step|cross-team|integration|kpi report|simulation fixture|recompute|delegate)/.test(`${name} ${lowered}`);
+  return keywordHit || description.length >= 280 || bulletCount >= 3;
+}
+
+function upsertCloseoutReminder(board, task, issues = []) {
+  const detail = `Closeout contract reminder: ${issues.length ? issues.join('; ') : 'missing GitHub evidence and/or verification.'}`;
+  pushActivity(board, {
+    type: 'closeout_contract_reminder',
+    taskId: task.id,
+    taskName: task.name,
+    to: task.status || 'inProgress',
+    detail
+  });
+}
 function cleanText(value, maxLen = 3000) {
   const str = String(value ?? '')
     .replace(/[\u0000-\u001f\u007f]/g, ' ')
@@ -285,7 +310,12 @@ function computeBehaviorGapMetrics(board, thresholds = { passiveWaitRatio: 0.15,
 }
 
 async function getSubagentsData() {
-  const board = await loadKanban();
+  let board = await loadKanban();
+  const scheduleResult = applyAutoNextActionScheduler(board, { staleMinutes: 20 });
+  if (scheduleResult.changed) {
+    board = scheduleResult.board;
+    await saveKanban(board);
+  }
 
   // 1) Ground truth for current tasks = kanban In Progress
   const rawInProgress = Array.isArray(board?.columns?.inProgress) ? board.columns.inProgress : [];
@@ -351,7 +381,12 @@ async function getSubagentsData() {
     })),
     managerLoop: {
       metrics: managerLoopMetrics,
-      thresholdEvaluation: managerLoopThresholds
+      thresholdEvaluation: managerLoopThresholds,
+      autoNextAction: {
+        changed: scheduleResult.changed,
+        reason: scheduleResult.reason,
+        dispatchedTaskId: scheduleResult.dispatchedTaskId
+      }
     },
     reason: diagnostics.syncOk ? null : 'kanban inProgress and dashboard payload require reconciliation',
     counts: {
@@ -699,6 +734,8 @@ function createApp() {
         const gate = validateHumanFacingUpdate({ text: completionText, requireGitHubEvidence: true });
         if (!gate.pass) {
           board.columns[found.col].splice(found.idx, 0, task);
+          upsertCloseoutReminder(board, task, gate.issues.map((issue) => issue.code || issue.message));
+          await saveKanban(board);
           return res.status(400).json({
             error: 'done transition failed human-facing output policy gate',
             issues: gate.issues
@@ -707,6 +744,8 @@ function createApp() {
 
         if (!hasVerificationRecord(task, { verification })) {
           board.columns[found.col].splice(found.idx, 0, task);
+          upsertCloseoutReminder(board, task, ['MISSING_VERIFICATION_RECORD']);
+          await saveKanban(board);
           return res.status(422).json({
             error: 'done transition requires verification record',
             code: 'MISSING_VERIFICATION_RECORD'
@@ -716,6 +755,8 @@ function createApp() {
         const correctionOccurredFlag = didCorrectionOccur(task, { correctionOccurred });
         if (correctionOccurredFlag && !hasCorrectionLogRecord(task, { correctionLog })) {
           board.columns[found.col].splice(found.idx, 0, task);
+          upsertCloseoutReminder(board, task, ['MISSING_CORRECTION_LOG']);
+          await saveKanban(board);
           return res.status(422).json({
             error: 'done transition requires correction log when correction occurred',
             code: 'MISSING_CORRECTION_LOG'
@@ -726,6 +767,15 @@ function createApp() {
         task.correctionOccurred = correctionOccurredFlag;
         if (correctionLog) task.correctionLog = correctionLog;
         if (verification) task.verification = verification;
+      }
+
+      if (to === 'inProgress' && requiresDelegationTrigger(task)) {
+        task.delegation = {
+          ...(task.delegation || {}),
+          required: true,
+          triggeredAt: nowIso(),
+          trigger: 'complexity/context threshold exceeded'
+        };
       }
 
       task.status = to;
@@ -741,6 +791,16 @@ function createApp() {
         to,
         detail: cleanedSummary
       });
+      if (to === 'inProgress' && task?.delegation?.required) {
+        pushActivity(board, {
+          type: 'delegation_triggered',
+          taskId: task.id,
+          taskName: task.name,
+          from,
+          to,
+          detail: 'Delegation trigger enforced: complexity/context threshold exceeded'
+        });
+      }
       if (blockerEval.blockerDetected) {
         pushActivity(board, {
           type: 'blocker_handler_spawned',

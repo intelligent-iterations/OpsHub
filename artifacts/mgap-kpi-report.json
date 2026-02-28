@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-02-28T18:02:10.857Z",
+  "generatedAt": "2026-02-28T18:08:57.199Z",
   "windows": {
     "beforeCount": 250,
     "afterCount": 250
   },
   "current": {
-    "generatedAt": "2026-02-28T18:02:10.858Z",
+    "generatedAt": "2026-02-28T18:08:57.200Z",
     "metrics": {
-      "passiveWaitRatio": 0.6722,
-      "delegationRate": 0.0172,
-      "evidenceCompletionRate": 0.2412,
+      "passiveWaitRatio": 0.504,
+      "delegationRate": 0.0262,
+      "evidenceCompletionRate": 0.3025,
       "blockerProtocolCompliance": 1,
-      "stalledWorkers": 121,
-      "activeInProgressCount": 180,
+      "stalledWorkers": 126,
+      "activeInProgressCount": 250,
       "thresholds": {
         "passiveWaitRatioMax": 0.15,
         "blockerProtocolComplianceMin": 0.95
@@ -22,7 +22,7 @@
       "pass": false,
       "checks": {
         "passiveWaitRatio": {
-          "value": 0.6722,
+          "value": 0.504,
           "threshold": 0.15,
           "operator": "<=",
           "pass": false
@@ -38,12 +38,12 @@
   },
   "before": {
     "metrics": {
-      "passiveWaitRatio": 0.6722,
-      "delegationRate": 0.0168,
-      "evidenceCompletionRate": 0.2412,
+      "passiveWaitRatio": 0.504,
+      "delegationRate": 0.0175,
+      "evidenceCompletionRate": 0.3025,
       "blockerProtocolCompliance": 1,
-      "stalledWorkers": 121,
-      "activeInProgressCount": 180,
+      "stalledWorkers": 126,
+      "activeInProgressCount": 250,
       "thresholds": {
         "passiveWaitRatioMax": 0.15,
         "blockerProtocolComplianceMin": 0.95
@@ -52,12 +52,12 @@
   },
   "after": {
     "metrics": {
-      "passiveWaitRatio": 0.6722,
-      "delegationRate": 0.0175,
-      "evidenceCompletionRate": 0.2412,
+      "passiveWaitRatio": 0.504,
+      "delegationRate": 0.0366,
+      "evidenceCompletionRate": 0.3025,
       "blockerProtocolCompliance": 1,
-      "stalledWorkers": 121,
-      "activeInProgressCount": 180,
+      "stalledWorkers": 126,
+      "activeInProgressCount": 250,
       "thresholds": {
         "passiveWaitRatioMax": 0.15,
         "blockerProtocolComplianceMin": 0.95
