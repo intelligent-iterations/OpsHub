@@ -2325,18 +2325,6 @@
         "startedAt": "2026-02-28T18:10:38.256Z"
       },
       {
-        "id": "c392e5c8-8f9d-4cbd-98be-1ff6b1e1a84c",
-        "name": "[MGAP-04] Drive passiveWaitRatio down via auto-next-action scheduler",
-        "description": "Acceptance criteria:\n- Implement scheduler that auto-queues next action when manager loop detects idle/passive wait state.\n- Add cooldown/debounce to prevent spam loops while guaranteeing progress.\n- Add tests proving passive wait events trigger next action dispatch within SLA.\n- Recompute KPI report; passiveWaitRatio must decrease vs previous baseline.\n- completionDetails with GitHub links only.",
-        "priority": "critical",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T18:03:47.669Z",
-        "updatedAt": "2026-02-28T18:10:38.256Z",
-        "completedAt": null,
-        "source": "manager-gap-investigation",
-        "startedAt": "2026-02-28T18:10:38.256Z"
-      },
-      {
         "id": "74a2907b-c8ee-4418-91bf-55b8d42ba9b7",
         "name": "PantryPal rescue planner tune-up",
         "description": "",
@@ -5023,6 +5011,24 @@
       }
     ],
     "done": [
+      {
+        "id": "c392e5c8-8f9d-4cbd-98be-1ff6b1e1a84c",
+        "name": "[MGAP-04] Drive passiveWaitRatio down via auto-next-action scheduler",
+        "description": "Acceptance criteria:\n- Implement scheduler that auto-queues next action when manager loop detects idle/passive wait state.\n- Add cooldown/debounce to prevent spam loops while guaranteeing progress.\n- Add tests proving passive wait events trigger next action dispatch within SLA.\n- Recompute KPI report; passiveWaitRatio must decrease vs previous baseline.\n- completionDetails with GitHub links only.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T18:03:47.669Z",
+        "updatedAt": "2026-02-28T18:10:38.256Z",
+        "completedAt": "2026-02-28T18:11:55.348Z",
+        "source": "manager-gap-investigation",
+        "startedAt": "2026-02-28T18:10:38.256Z",
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T18:11:55.348Z"
+        },
+        "completionDetails": "Implemented MGAP-04 auto-next-action scheduler heartbeat refresh + KPI recompute.\n- Commit: https://github.com/intelligent-iterations/OpsHub/commit/6073568c30f4f9d042c30857f6fce96f7605a5a6\n- Scheduler file: https://github.com/intelligent-iterations/OpsHub/blob/6073568c30f4f9d042c30857f6fce96f7605a5a6/scripts/manager-loop-guardrails.js\n- KPI report: https://github.com/intelligent-iterations/OpsHub/blob/6073568c30f4f9d042c30857f6fce96f7605a5a6/artifacts/mgap-kpi-report.md"
+      },
       {
         "id": "4748fe95-7023-4cf8-b7d5-f6adb6fe238d",
         "name": "Needs correction",
@@ -10745,6 +10751,15 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T18:11:55.348Z",
+      "type": "task_moved",
+      "taskId": "c392e5c8-8f9d-4cbd-98be-1ff6b1e1a84c",
+      "taskName": "[MGAP-04] Drive passiveWaitRatio down via auto-next-action scheduler",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed MGAP-04 with GitHub evidence links"
+    },
     {
       "at": "2026-02-28T18:10:38.256Z",
       "type": "next_action_scheduled",
