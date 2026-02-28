@@ -56,6 +56,7 @@ test('kanban create + move flow works and validates bad input', { concurrency: f
     assert.equal(create.status, 200);
     const createBody = await create.json();
     assert.equal(createBody.ok, true);
+    assert.equal(createBody.task.ttlMinutes, 60);
     const taskId = createBody.task.id;
 
     const badMove = await fetch(`${app.baseUrl}/api/kanban/move`, {

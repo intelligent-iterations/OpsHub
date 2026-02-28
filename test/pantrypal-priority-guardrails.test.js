@@ -4,8 +4,11 @@ const assert = require('node:assert/strict');
 const {
   isPantryPalTask,
   isSyntheticChurnTask,
+  isStrategicTask,
+  mapScoreToPriority,
   prioritizeWithGuardrails,
-  computePantryPalWipMetrics
+  computePantryPalWipMetrics,
+  computeStrategicQueueMetrics
 } = require('../scripts/pantrypal-priority-guardrails');
 
 test('prioritizeWithGuardrails keeps PantryPal strategy work ahead of synthetic churn', () => {
@@ -29,6 +32,23 @@ test('prioritizeWithGuardrails quarantines synthetic overflow beyond cap', () =>
   assert.equal(ranked.quarantined.length, 2);
 });
 
+test('prioritizeWithGuardrails enforces strategic reservation when strategic candidates are present', () => {
+  const ranked = prioritizeWithGuardrails([
+    { id: 'n1', name: 'Generic QA follow-up', priority: 'high' },
+    { id: 's1', name: 'PantryPal winback conversion playbook', priority: 'medium' }
+  ], {
+    strategicReserveShare: 0.3,
+    existingActiveTasks: [
+      { id: 'a1', name: 'Generic support triage' },
+      { id: 'a2', name: 'Smoke lifecycle run' },
+      { id: 'a3', name: 'Backoffice cleanup' }
+    ]
+  });
+
+  assert.equal(ranked.prioritized[0].id, 's1');
+  assert.equal(ranked.quarantined.some((task) => task.id === 'n1'), true);
+});
+
 test('computePantryPalWipMetrics raises drift alert when PantryPal share falls below threshold', () => {
   const metrics = computePantryPalWipMetrics({
     columns: {
@@ -47,7 +67,36 @@ test('computePantryPalWipMetrics raises drift alert when PantryPal share falls b
   assert.equal(metrics.driftAlert, true);
 });
 
-test('classification helpers identify PantryPal and synthetic churn signatures', () => {
+test('computeStrategicQueueMetrics flags non-strategic drift in active queue', () => {
+  const metrics = computeStrategicQueueMetrics({
+    columns: {
+      todo: [
+        { id: '1', name: 'Generic QA check' },
+        { id: '2', name: 'Smoke lifecycle replay' }
+      ],
+      inProgress: [
+        { id: '3', name: 'Backoffice cleanup' },
+        { id: '4', name: 'PantryPal rescue planner' }
+      ]
+    }
+  }, { reserveShare: 0.3, nonStrategicCeiling: 0.7, minActiveQueue: 3 });
+
+  assert.equal(metrics.activeQueueCount, 4);
+  assert.equal(metrics.strategicCount, 1);
+  assert.equal(metrics.strategicShare, 0.25);
+  assert.equal(metrics.reserveAlert, true);
+  assert.equal(metrics.nonStrategicAlert, true);
+  assert.equal(metrics.driftAlert, true);
+});
+
+test('classification helpers identify PantryPal, synthetic churn, and strategic signatures', () => {
   assert.equal(isPantryPalTask({ name: 'Pantry waste rescue pack' }), true);
   assert.equal(isSyntheticChurnTask({ name: 'Lifecycle smoke replay' }), true);
+  assert.equal(isStrategicTask({ name: 'Growth conversion winback test' }), true);
+});
+
+test('mapScoreToPriority maps guardrail scores to kanban priorities', () => {
+  assert.equal(mapScoreToPriority(6), 'high');
+  assert.equal(mapScoreToPriority(3), 'medium');
+  assert.equal(mapScoreToPriority(1), 'low');
 });

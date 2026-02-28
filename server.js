@@ -4,7 +4,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const util = require('util');
 const crypto = require('crypto');
-const { computePantryPalWipMetrics, prioritizeWithGuardrails } = require('./scripts/pantrypal-priority-guardrails');
+const { computePantryPalWipMetrics, computeStrategicQueueMetrics, prioritizeWithGuardrails } = require('./scripts/pantrypal-priority-guardrails');
 const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 
 const execAsync = util.promisify(exec);
@@ -68,16 +68,30 @@ function defaultKanban() {
   };
 }
 
+function isSyntheticTtlCandidate(taskLike = {}) {
+  const name = cleanText(taskLike?.name || '', 200).toLowerCase();
+  const source = cleanText(taskLike?.source || '', 100).toLowerCase();
+  if (source === 'intelligent-iteration') return false;
+  return /^(smoke task|lifecycle task|integration dashboard task)$/.test(name);
+}
+
+function inferDefaultTtlMinutes(taskLike = {}) {
+  return isSyntheticTtlCandidate(taskLike) ? 60 : null;
+}
+
 function newTask({ name, description = '', priority = 'medium', source = 'manual' }) {
+  const cleanedName = cleanText(name, 200);
+  const cleanedSource = cleanText(source, 100) || 'manual';
   return {
     id: crypto.randomUUID(),
-    name: cleanText(name, 200),
+    name: cleanedName,
     description: cleanText(description, 2000),
     priority: VALID_PRIORITIES.includes(priority) ? priority : 'medium',
     status: 'backlog',
     createdAt: nowIso(),
     completedAt: null,
-    source: cleanText(source, 100) || 'manual'
+    source: cleanedSource,
+    ttlMinutes: inferDefaultTtlMinutes({ name: cleanedName, source: cleanedSource })
   };
 }
 
@@ -220,8 +234,15 @@ async function getSubagentsData() {
 
   const diagnostics = buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks);
   const pantryPalWip = computePantryPalWipMetrics(board, { threshold: 0.6, minActiveWip: 3 });
+  const strategicQueue = computeStrategicQueueMetrics(board, { reserveShare: 0.3, nonStrategicCeiling: 0.7, minActiveQueue: 3 });
   const todoCards = Array.isArray(board?.columns?.todo) ? board.columns.todo : [];
-  const guardrailedTodo = prioritizeWithGuardrails(todoCards, { syntheticCap: 2 });
+  const inProgressCards = Array.isArray(board?.columns?.inProgress) ? board.columns.inProgress : [];
+  const guardrailedTodo = prioritizeWithGuardrails(todoCards, {
+    syntheticCap: 2,
+    strategicReserveShare: 0.3,
+    nonStrategicCeiling: 0.7,
+    existingActiveTasks: [...todoCards, ...inProgressCards]
+  });
 
   return {
     // Backward-compatible merged list used by current UI
@@ -231,6 +252,7 @@ async function getSubagentsData() {
     inProgressTasks: inProgressTasks.map(({ _kanbanId, ...task }) => task),
     diagnostics,
     pantryPalWip,
+    strategicQueue,
     recommendedTodoOrder: guardrailedTodo.prioritized.map((task) => ({
       id: task.id,
       name: task.name,
