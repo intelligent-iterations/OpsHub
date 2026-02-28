@@ -372,6 +372,10 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
       readinessPct: 100,
       isLight: true,
       threshold: 2,
+      minimumCriteria: 6,
+      tasksMeetingMinimum: 1,
+      averageCriteriaCount: 6.5,
+      tasksBelowCriteriaThreshold: [],
       nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
     }
   );
@@ -383,6 +387,9 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Blocked tasks: 0/);
   assert.match(markdown, /Readiness: 100%/);
   assert.match(markdown, /Top blockers: none/);
+  assert.match(markdown, /Acceptance criteria coverage: 1\/1 tasks meet minimum 6 checks/);
+  assert.match(markdown, /Average criteria per task: 6.5/);
+  assert.match(markdown, /Tasks below criteria threshold: 0/);
   assert.match(markdown, /Next action: Execute top ready PantryPal experiment now/);
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Critical Acceptance Checklist/);
@@ -489,9 +496,15 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
     exitCode: 0,
     outputSnippet: 'all good'
   }, {
+    queueSize: 3,
     readyTasks: 3,
     blockedTasks: 0,
     readinessPct: 100,
+    topBlockedReasons: [],
+    tasksMeetingMinimum: 3,
+    minimumCriteria: 6,
+    averageCriteriaCount: 6.67,
+    tasksBelowCriteriaThreshold: [],
     nextAction: 'Launch now.'
   }, {
     generatedAt: '2026-02-28T03:30:00.000Z'
@@ -503,6 +516,10 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
   assert.match(content, /PantryPal Immediate Execution Brief/);
   assert.match(content, /Top task: PP-GROWTH-001-fast-rescue/);
   assert.match(content, /- \[ \] criterion 1/);
+  assert.match(content, /Top blockers: none/);
+  assert.match(content, /Acceptance criteria coverage: 3\/3 tasks meet minimum 6 checks/);
+  assert.match(content, /Average criteria per task: 6.67/);
+  assert.match(content, /Tasks below criteria threshold: 0/);
   assert.match(content, /Status: PASS/);
   assert.match(content, /all good/);
 });

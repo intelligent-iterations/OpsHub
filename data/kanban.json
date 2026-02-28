@@ -49,9 +49,67 @@
           "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
           "isReady": true
         }
+      },
+      {
+        "id": "PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter",
+        "name": "[PantryPal] Friday night rescue reminder with 20-minute cook filter",
+        "description": "Score: 81.90\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-task-accelerator.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 9%.\n3. Sample-size gate is defined: at least 1500 qualified households over 10 days.\n4. Guardrail is monitored and passes: notification opt-out rate stays below 1.6%.\n5. Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T03:52:16.952Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 81.9,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+          "isReady": true
+        }
+      },
+      {
+        "id": "PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households",
+        "name": "[PantryPal] Post-checkout pantry scan nudge for first-week households",
+        "description": "Score: 81.45\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (week-1 pantry scan completion rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 8%.\n3. Sample-size gate is defined: at least 1700 qualified households over 14 days.\n4. Guardrail is monitored and passes: session abandonment does not increase by >1.2%.\n5. Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T03:52:16.952Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 81.45,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
+          "isReady": true
+        }
+      },
+      {
+        "id": "PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill",
+        "name": "[PantryPal] Sunday prep planner with expiring-ingredient auto-fill",
+        "description": "Score: 80.85\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-task-accelerator.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (weekly rescue plan creation rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 11%.\n3. Sample-size gate is defined: at least 1800 qualified households over 14 days.\n4. Guardrail is monitored and passes: recipe dismiss rate stays below 18%.\n5. Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T03:52:16.952Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 80.85,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+          "isReady": true
+        }
       }
     ],
     "inProgress": [
+      {
+        "id": "d1bca519-411c-467c-bf35-24ddbfe77566",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T03:40:13.866Z",
+        "completedAt": null,
+        "source": "manual"
+      },
       {
         "id": "b07af96b-9465-4187-b03a-3cc199ffee20",
         "name": "Integration dashboard task",
@@ -176,6 +234,26 @@
       }
     ],
     "done": [
+      {
+        "id": "5edd4c40-4c5d-43c4-89cb-4050df9e456e",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T03:40:13.849Z",
+        "completedAt": "2026-02-28T03:40:13.860Z",
+        "source": "manual"
+      },
+      {
+        "id": "fb79140b-5919-40e9-8cee-70fe90b1c64b",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T03:40:13.831Z",
+        "completedAt": "2026-02-28T03:40:13.839Z",
+        "source": "manual"
+      },
       {
         "id": "22a1d9df-ea3e-46ef-8030-282386884422",
         "name": "Lifecycle task",
@@ -2214,6 +2292,81 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T03:52:16.952Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill",
+      "taskName": "[PantryPal] Sunday prep planner with expiring-ingredient auto-fill",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T03:52:16.952Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households",
+      "taskName": "[PantryPal] Post-checkout pantry scan nudge for first-week households",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T03:52:16.952Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter",
+      "taskName": "[PantryPal] Friday night rescue reminder with 20-minute cook filter",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T03:40:13.866Z",
+      "type": "task_added",
+      "taskId": "d1bca519-411c-467c-bf35-24ddbfe77566",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T03:40:13.860Z",
+      "type": "task_moved",
+      "taskId": "5edd4c40-4c5d-43c4-89cb-4050df9e456e",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T03:40:13.854Z",
+      "type": "task_moved",
+      "taskId": "5edd4c40-4c5d-43c4-89cb-4050df9e456e",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T03:40:13.849Z",
+      "type": "task_added",
+      "taskId": "5edd4c40-4c5d-43c4-89cb-4050df9e456e",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T03:40:13.839Z",
+      "type": "task_moved",
+      "taskId": "fb79140b-5919-40e9-8cee-70fe90b1c64b",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T03:40:13.831Z",
+      "type": "task_added",
+      "taskId": "fb79140b-5919-40e9-8cee-70fe90b1c64b",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
     {
       "at": "2026-02-28T02:55:01.399Z",
       "type": "task_added",
@@ -6472,82 +6625,6 @@
       "from": "inProgress",
       "to": "done",
       "detail": "completed by sub-agent"
-    },
-    {
-      "at": "2026-02-26T19:57:59.776Z",
-      "type": "task_moved",
-      "taskId": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
-      "taskName": "[P1] Create environment/config strategy (dev/staging/prod)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent"
-    },
-    {
-      "at": "2026-02-26T19:56:36.414Z",
-      "type": "task_moved",
-      "taskId": "d5acb575-0834-4c96-af8b-3b57133c13c9",
-      "taskName": "[P1] Define API/contracts for scanning + classification services",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution"
-    },
-    {
-      "at": "2026-02-26T19:56:36.413Z",
-      "type": "task_moved",
-      "taskId": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
-      "taskName": "[P1] Create environment/config strategy (dev/staging/prod)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution"
-    },
-    {
-      "at": "2026-02-26T19:56:36.412Z",
-      "type": "task_moved",
-      "taskId": "30011eb5-4854-46b4-907a-8fedd0f7e4f5",
-      "taskName": "[P1] Scaffold Flutter app modules and folder conventions",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution"
-    },
-    {
-      "at": "2026-02-26T19:54:57.063Z",
-      "type": "task_added",
-      "taskId": "7424d962-fd80-4553-a84c-129b01e46c7d",
-      "taskName": "OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.057Z",
-      "type": "task_added",
-      "taskId": "8bfc26f1-fa97-46cd-a7de-42d530e79f90",
-      "taskName": "[P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.052Z",
-      "type": "task_added",
-      "taskId": "1aa6af66-731e-4da7-8ae0-b3c3c938c876",
-      "taskName": "[P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.046Z",
-      "type": "task_added",
-      "taskId": "a2f7bc8d-6a52-48e2-8489-9535c57f5d59",
-      "taskName": "[P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.041Z",
-      "type": "task_added",
-      "taskId": "09429660-b121-47d2-845f-bf3baa3be6d5",
-      "taskName": "[P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
-      "to": "done",
-      "detail": "Added task from migration"
     }
   ]
 }

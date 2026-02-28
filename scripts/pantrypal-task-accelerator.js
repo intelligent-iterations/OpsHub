@@ -274,6 +274,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     minimumScore: typeof minimumScore === 'number' ? minimumScore : null,
     averageCriteriaCount: acceptanceAudit.averageCriteriaCount,
     minimumCriteria: acceptanceAudit.minimumCriteria,
+    tasksMeetingMinimum: acceptanceAudit.tasksMeetingMinimum,
     tasksBelowCriteriaThreshold: acceptanceAudit.tasksBelowMinimum,
     nextAction: blockedTasks > 0 && readyTasks === 0
       ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
@@ -399,6 +400,9 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Blocked tasks: ${health.blockedTasks ?? 'n/a'}`,
       `Readiness: ${health.readinessPct ?? 'n/a'}%`,
       `Top blockers: ${(health.topBlockedReasons || []).length ? health.topBlockedReasons.map((entry) => `${entry.reason} (${entry.count})`).join('; ') : 'none'}`,
+      `Acceptance criteria coverage: ${health.tasksMeetingMinimum ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks meet minimum ${health.minimumCriteria ?? 'n/a'} checks`,
+      `Average criteria per task: ${health.averageCriteriaCount ?? 'n/a'}`,
+      `Tasks below criteria threshold: ${(health.tasksBelowCriteriaThreshold || []).length}`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
       `Ready capacity light: ${health.isReadyCapacityLight ? 'yes' : 'no'} (threshold: ${health.readyLightThreshold ?? 1})`,
       `Next action: ${health.nextAction ?? 'n/a'}`
@@ -482,6 +486,10 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Ready tasks: ${health?.readyTasks ?? 'n/a'}`);
   lines.push(`Blocked tasks: ${health?.blockedTasks ?? 'n/a'}`);
   lines.push(`Readiness: ${health?.readinessPct ?? 'n/a'}%`);
+  lines.push(`Top blockers: ${(health?.topBlockedReasons || []).length ? health.topBlockedReasons.map((entry) => `${entry.reason} (${entry.count})`).join('; ') : 'none'}`);
+  lines.push(`Acceptance criteria coverage: ${health?.tasksMeetingMinimum ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks meet minimum ${health?.minimumCriteria ?? 'n/a'} checks`);
+  lines.push(`Average criteria per task: ${health?.averageCriteriaCount ?? 'n/a'}`);
+  lines.push(`Tasks below criteria threshold: ${(health?.tasksBelowCriteriaThreshold || []).length}`);
   lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
 
   lines.push('', '## Validation result');
