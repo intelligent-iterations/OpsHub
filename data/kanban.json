@@ -1418,17 +1418,6 @@
         "startedAt": "2026-02-28T18:00:42.354Z"
       },
       {
-        "id": "fa5dfabe-2509-4da2-ab61-ab49cfbf5b09",
-        "name": "[MGAP-02] Enforce blocker protocol compliance (auto blocker-handler + 2-attempt rule)",
-        "description": "Acceptance criteria:\n- Implement blocker classifier + policy gate with allowed escalation categories only: permissions/sudo/auth/secrets/access.\n- Auto-spawn blocker-handler whenever blocker detected.\n- Enforce exactly 2 Claude Code repair attempts before escalation path is allowed.\n- Persist auditable proof artifacts for both attempts (inputs, outputs, outcomes, timestamps).\n- Reject/flag escalations lacking proof of both attempts.\n- Add tests for compliant and non-compliant blocker flows.\n- Task completionDetails must contain GitHub links only.",
-        "priority": "critical",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T17:58:26.422Z",
-        "updatedAt": "2026-02-28T17:58:26.422Z",
-        "completedAt": null,
-        "source": "manager-gap-investigation"
-      },
-      {
         "id": "691b1545-1c4b-41a7-9bb3-9cc195c1ec11",
         "name": "PantryPal rescue planner tune-up",
         "description": "",
@@ -2940,6 +2929,24 @@
       }
     ],
     "done": [
+      {
+        "id": "fa5dfabe-2509-4da2-ab61-ab49cfbf5b09",
+        "name": "[MGAP-02] Enforce blocker protocol compliance (auto blocker-handler + 2-attempt rule)",
+        "description": "Acceptance criteria:\n- Implement blocker classifier + policy gate with allowed escalation categories only: permissions/sudo/auth/secrets/access.\n- Auto-spawn blocker-handler whenever blocker detected.\n- Enforce exactly 2 Claude Code repair attempts before escalation path is allowed.\n- Persist auditable proof artifacts for both attempts (inputs, outputs, outcomes, timestamps).\n- Reject/flag escalations lacking proof of both attempts.\n- Add tests for compliant and non-compliant blocker flows.\n- Task completionDetails must contain GitHub links only.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T17:58:26.422Z",
+        "updatedAt": "2026-02-28T17:58:26.422Z",
+        "completedAt": "2026-02-28T18:02:42.631Z",
+        "source": "manager-gap-investigation",
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T18:02:42.632Z",
+          "commit": "https://github.com/intelligent-iterations/OpsHub/commit/2a9539558456a00bca3116a394ab7d822b505647"
+        },
+        "completionDetails": "https://github.com/intelligent-iterations/OpsHub/commit/2a9539558456a00bca3116a394ab7d822b505647\nhttps://github.com/intelligent-iterations/OpsHub/blob/2a9539558456a00bca3116a394ab7d822b505647/lib/blocker-protocol.js\nhttps://github.com/intelligent-iterations/OpsHub/blob/2a9539558456a00bca3116a394ab7d822b505647/server.js\nhttps://github.com/intelligent-iterations/OpsHub/blob/2a9539558456a00bca3116a394ab7d822b505647/test/api.test.js"
+      },
       {
         "id": "d2ad58ec-0a33-42e3-ad77-713ba5fbf67c",
         "name": "[MGAP-03] Add measurable behavior-gap reduction report + dashboard checks",
@@ -8056,6 +8063,15 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T18:02:42.632Z",
+      "type": "task_moved",
+      "taskId": "fa5dfabe-2509-4da2-ab61-ab49cfbf5b09",
+      "taskName": "[MGAP-02] Enforce blocker protocol compliance (auto blocker-handler + 2-attempt rule)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "https://github.com/intelligent-iterations/OpsHub/commit/2a9539558456a00bca3116a394ab7d822b505647"
+    },
     {
       "at": "2026-02-28T18:02:21.719Z",
       "type": "task_moved",
