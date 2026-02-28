@@ -45,42 +45,6 @@
     ],
     "todo": [
       {
-        "id": "02988c0f-206f-4971-a9cf-9fe30cd4a912",
-        "name": "[P13] Add leftover safety timeline with reheating quality decay recommendations",
-        "description": "Completed P13 leftover safety timeline + reheating quality decay spec. Evidence: artifacts/p13-leftover-safety-timeline-quality-decay-evidence.md; doc: pantrypal/docs/p13_leftover_safety_timeline_quality_decay.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-27T14:53:13.383Z",
-        "completedAt": null,
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T14:58:09.865Z",
-        "updatedAt": "2026-02-27T14:58:09.865Z"
-      },
-      {
-        "id": "c32e6a38-f99e-4a31-b885-9b8829f3753b",
-        "name": "[P15] Implement adaptive grocery basket guardrails against duplicate perishables",
-        "description": "Implemented adaptive duplicate-perishable guardrails in smart shopping list generation (inventory age + planned meal demand + historical waste), added tests/docs. Evidence: artifacts/p15-adaptive-grocery-basket-guardrails-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-27T15:58:19.707Z",
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T16:03:00.717Z",
-        "updatedAt": "2026-02-27T16:12:00.000Z",
-        "completedAt": null
-      },
-      {
-        "id": "67802eac-d2f5-476a-a141-5f7df97908a8",
-        "name": "[P16] Implement confidence-aware inventory decay model using user correction feedback",
-        "description": "Add adaptive spoilage/quality decay adjustments that learn from user “still good / already bad” corrections and surface confidence bands. Completed P16 confidence-aware decay model with EMA correction learning, confidence bands, docs/tests/evidence. Evidence: artifacts/p16-confidence-aware-decay-evidence.md; commit fc2a582; tests: flutter test test/domain/services/confidence_aware_inventory_decay_service_test.dart (4/4 pass).",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-27T16:33:03.772Z",
-        "source": "intelligent-iteration",
-        "startedAt": "2026-02-27T16:38:14.000Z",
-        "updatedAt": "2026-02-27T16:40:00.000Z",
-        "completedAt": null
-      },
-      {
         "id": "59b83f59-e5f8-4498-b788-9d3c000a45f7",
         "name": "[P16] Design household fairness engine for pantry rescue task assignment",
         "description": "Create assignment logic that balances load across household members using availability, past participation, and urgency while keeping nudges lightweight. Completed P16 household fairness engine with assignment logic, docs/tests/evidence. Evidence: artifacts/p16-household-fairness-engine-evidence.md; commit 974ff5f; tests: flutter test test/domain/services/household_fairness_engine_test.dart (4/4 pass).",
@@ -1485,6 +1449,30 @@
       }
     ],
     "done": [
+      {
+        "id": "67802eac-d2f5-476a-a141-5f7df97908a8",
+        "name": "[P16] Implement confidence-aware inventory decay model using user correction feedback",
+        "description": "Add adaptive spoilage/quality decay adjustments that learn from user “still good / already bad” corrections and surface confidence bands. Completed and verified with GitHub-backed evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/p16-confidence-aware-decay-evidence.md ; implementation commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 ; tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/domain/services/confidence_aware_inventory_decay_service_test.dart",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-27T16:33:03.772Z",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T16:38:14.000Z",
+        "updatedAt": "2026-02-28T14:37:04.454Z",
+        "completedAt": "2026-02-28T14:37:04.454Z"
+      },
+      {
+        "id": "c32e6a38-f99e-4a31-b885-9b8829f3753b",
+        "name": "[P15] Implement adaptive grocery basket guardrails against duplicate perishables",
+        "description": "Implemented and verified adaptive duplicate-perishable guardrails for smart shopping list generation. Includes risk scoring (inventory age + planned meal demand + historical waste), perishable confidence checks, and quantity capping/tagging via duplicate_perishable_guardrail. Evidence: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 ; Service: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/services/smart_shopping_list_generator.dart ; Tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/smart_shopping_list_generator_test.dart ; Docs: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/docs/smart_shopping_list_generator.md . Verification run: flutter test test/smart_shopping_list_generator_test.dart (8/8 passing) on 2026-02-28.",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-27T15:58:19.707Z",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T16:03:00.717Z",
+        "updatedAt": "2026-02-28T14:36:57Z",
+        "completedAt": "2026-02-28T14:36:57Z"
+      },
       {
         "id": "af26a684-3a30-4ecd-90c2-8959356d82ec",
         "name": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
@@ -3051,6 +3039,18 @@
         "startedAt": "2026-02-27T16:03:00.717Z",
         "updatedAt": "2026-02-28T14:34:18Z",
         "completedAt": "2026-02-28T14:34:18Z"
+      },
+      {
+        "id": "02988c0f-206f-4971-a9cf-9fe30cd4a912",
+        "name": "[P13] Add leftover safety timeline with reheating quality decay recommendations",
+        "description": "Completed P13 leftover safety timeline + reheating quality decay recommendations. GitHub evidence: https://github.com/larryclaw/pantrypal/blob/main/docs/p13_leftover_safety_timeline_quality_decay.md ; https://github.com/larryclaw/OpsHub/blob/main/artifacts/p13-leftover-safety-timeline-quality-decay-evidence.md (verification: docs/spec scope; no executable tests run for this docs-only task).",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-27T14:53:13.383Z",
+        "completedAt": "2026-02-28T14:35:16Z",
+        "source": "intelligent-iteration",
+        "startedAt": "2026-02-27T14:58:09.865Z",
+        "updatedAt": "2026-02-28T14:35:16Z"
       }
     ]
   },
@@ -7377,29 +7377,22 @@
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },
     {
-      "at": "2026-02-27T15:58:19.707Z",
-      "type": "task_added",
-      "taskId": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-      "taskName": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
-    },
-    {
-      "at": "2026-02-27T15:48:20.634Z",
+      "at": "2026-02-28T14:36:57Z",
       "type": "task_moved",
-      "taskId": "eb153f2a-488c-4e45-ba47-c8eca2ac93a5",
-      "taskName": "[P14] Build pantry confidence explainer cards that justify each recommendation",
-      "from": "inProgress",
+      "taskId": "c32e6a38-f99e-4a31-b885-9b8829f3753b",
+      "taskName": "[P15] Implement adaptive grocery basket guardrails against duplicate perishables",
+      "from": "todo",
       "to": "done",
-      "detail": ""
+      "detail": "Closed with GitHub-backed implementation + test evidence links."
     },
     {
-      "id": "activity-a675cbdf-3c57-4681-9745-8f0b2fd9c827-close-2026-02-28T14:34:18Z",
-      "type": "task_completed",
-      "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
-      "timestamp": "2026-02-28T14:34:18Z",
-      "detail": "Closed after re-verification with GitHub-backed evidence links; tests pass (flutter test rescue_streak_freeze_service_test.dart 5/5, flutter analyze clean)."
+      "at": "2026-02-28T14:37:04.454Z",
+      "type": "task_moved",
+      "taskId": "67802eac-d2f5-476a-a141-5f7df97908a8",
+      "taskName": "[P16] Implement confidence-aware inventory decay model using user correction feedback",
+      "from": "todo",
+      "to": "done",
+      "detail": "Reconciled stale card state and closed with GitHub-backed evidence links. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/p16-confidence-aware-decay-evidence.md"
     }
   ]
 }
