@@ -388,6 +388,40 @@ function formatTaskJson(taskQueue, executionPlan, validationResult = null, metad
   }, null, 2);
 }
 
+function parseCliOptions(argv = []) {
+  const options = {
+    outputFormat: argv.includes('--json') ? 'json' : 'markdown',
+    limit: 3,
+    minimumScore: 75,
+    lightThreshold: 2,
+    validate: !argv.includes('--no-validate')
+  };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const token = argv[index];
+    if (!token.startsWith('--')) continue;
+
+    const [rawFlag, rawValue] = token.split('=');
+    const value = rawValue ?? argv[index + 1];
+
+    const numericFlagMap = {
+      '--limit': 'limit',
+      '--minimum-score': 'minimumScore',
+      '--light-threshold': 'lightThreshold'
+    };
+
+    if (!(rawFlag in numericFlagMap)) continue;
+
+    const parsedValue = Number.parseInt(value, 10);
+    if (Number.isFinite(parsedValue) && parsedValue > 0) {
+      options[numericFlagMap[rawFlag]] = parsedValue;
+      if (rawValue === undefined) index += 1;
+    }
+  }
+
+  return options;
+}
+
 if (require.main === module) {
   let experiments = [
     {
@@ -419,23 +453,31 @@ if (require.main === module) {
     }
   ];
 
-  const outputFormat = process.argv.includes('--json') ? 'json' : 'markdown';
+  const cliOptions = parseCliOptions(process.argv.slice(2));
 
   const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
     defaultOwner: 'growth-oncall',
-    limit: 3,
-    minimumScore: 75,
-    lightThreshold: 2
+    limit: cliOptions.limit,
+    minimumScore: cliOptions.minimumScore,
+    lightThreshold: cliOptions.lightThreshold
   });
 
   const executionPlan = pickImmediateExecution(queue);
-  const validationResult = runValidationCommand(executionPlan?.validationCommand);
+  const validationResult = cliOptions.validate
+    ? runValidationCommand(executionPlan?.validationCommand)
+    : {
+      status: 'NOT_RUN',
+      command: executionPlan?.validationCommand ?? null,
+      exitCode: null,
+      durationMs: 0,
+      outputSnippet: 'Skipped by --no-validate flag.'
+    };
   const health = createQueueHealthSnapshot(experiments, queue, {
-    minimumScore: 75,
-    lightThreshold: 2
+    minimumScore: cliOptions.minimumScore,
+    lightThreshold: cliOptions.lightThreshold
   });
 
-  const output = outputFormat === 'json'
+  const output = cliOptions.outputFormat === 'json'
     ? formatTaskJson(queue, executionPlan, validationResult, { seeded }, health)
     : formatTaskMarkdown(queue, executionPlan, validationResult, health);
 
@@ -456,5 +498,6 @@ module.exports = {
   pickImmediateExecution,
   runValidationCommand,
   formatTaskMarkdown,
-  formatTaskJson
+  formatTaskJson,
+  parseCliOptions
 };

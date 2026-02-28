@@ -15,7 +15,8 @@ const {
   pickImmediateExecution,
   runValidationCommand,
   formatTaskMarkdown,
-  formatTaskJson
+  formatTaskJson,
+  parseCliOptions
 } = require('../scripts/pantrypal-task-accelerator');
 
 test('toSlug normalizes experiment names', () => {
@@ -324,4 +325,23 @@ test('formatTaskJson emits seeded metadata and validation payload', () => {
   assert.equal(parsed.queue.length, 1);
   assert.equal(parsed.immediateExecution.taskId, 'PP-GROWTH-001-foo');
   assert.equal(parsed.validation.status, 'PASS');
+});
+
+test('parseCliOptions supports explicit thresholds and json mode', () => {
+  const options = parseCliOptions(['--json', '--limit', '5', '--minimum-score=82', '--light-threshold', '4']);
+
+  assert.equal(options.outputFormat, 'json');
+  assert.equal(options.limit, 5);
+  assert.equal(options.minimumScore, 82);
+  assert.equal(options.lightThreshold, 4);
+  assert.equal(options.validate, true);
+});
+
+test('parseCliOptions preserves defaults for invalid numeric values and disables validation', () => {
+  const options = parseCliOptions(['--limit', '0', '--minimum-score', 'abc', '--no-validate']);
+
+  assert.equal(options.limit, 3);
+  assert.equal(options.minimumScore, 75);
+  assert.equal(options.lightThreshold, 2);
+  assert.equal(options.validate, false);
 });
