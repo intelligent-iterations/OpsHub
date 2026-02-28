@@ -432,6 +432,18 @@ function classifyLaunchRisk({ readyTasks = 0, blockedTasks = 0, readinessPct = 0
   return 'low';
 }
 
+function classifyExecutionPriority({ launchRisk = 'high', isLight = false, isReadyCapacityLight = false, readyTasks = 0 } = {}) {
+  if (readyTasks <= 0 || launchRisk === 'high') {
+    return 'stabilize';
+  }
+
+  if (isLight || isReadyCapacityLight) {
+    return 'seed-and-launch';
+  }
+
+  return 'launch-now';
+}
+
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
@@ -462,6 +474,14 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     readinessPct,
     executableValidationPct: validationCoverage.executableValidationPct
   });
+  const isLight = isQueueLight(queue, threshold);
+  const isReadyCapacityLight = isExecutionCapacityLight(queue, readyLightThreshold);
+  const executionPriority = classifyExecutionPriority({
+    launchRisk,
+    isLight,
+    isReadyCapacityLight,
+    readyTasks
+  });
 
   return {
     incomingExperiments: experiments.length,
@@ -479,8 +499,9 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     scoreMax: scoreSummary.max,
     scoreReadyAverage: scoreSummary.readyAverage,
     scoreBlockedAverage: scoreSummary.blockedAverage,
-    isLight: isQueueLight(queue, threshold),
-    isReadyCapacityLight: isExecutionCapacityLight(queue, readyLightThreshold),
+    isLight,
+    isReadyCapacityLight,
+    executionPriority,
     threshold,
     readyLightThreshold,
     minimumScore: typeof minimumScore === 'number' ? minimumScore : null,
@@ -495,9 +516,11 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     ownerLoad,
     readyToBlockedRatio,
     launchRisk,
-    nextAction: blockedTasks > 0 && readyTasks === 0
+    nextAction: executionPriority === 'stabilize'
       ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
-      : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
+      : executionPriority === 'seed-and-launch'
+        ? 'Backfill queue depth while launching top ready PantryPal experiment this cycle.'
+        : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
   };
 }
 
@@ -673,6 +696,7 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Owner load: ${(health.ownerLoad || []).length ? health.ownerLoad.map((entry) => `${entry.owner} total ${entry.total} (ready ${entry.ready}, blocked ${entry.blocked}, avg ${entry.avgScore})`).join('; ') : 'none'}`,
       `Ready/blocked ratio: ${health.readyToBlockedRatio === Number.POSITIVE_INFINITY ? 'inf' : (health.readyToBlockedRatio ?? 'n/a')}`,
       `Launch risk: ${health.launchRisk ?? 'n/a'}`,
+      `Execution priority: ${health.executionPriority ?? 'n/a'}`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
       `Ready capacity light: ${health.isReadyCapacityLight ? 'yes' : 'no'} (threshold: ${health.readyLightThreshold ?? 1})`,
       `Next action: ${health.nextAction ?? 'n/a'}`
@@ -786,6 +810,7 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Owner load: ${(health?.ownerLoad || []).length ? health.ownerLoad.map((entry) => `${entry.owner} total ${entry.total} (ready ${entry.ready}, blocked ${entry.blocked}, avg ${entry.avgScore})`).join('; ') : 'none'}`);
   lines.push(`Ready/blocked ratio: ${health?.readyToBlockedRatio === Number.POSITIVE_INFINITY ? 'inf' : (health?.readyToBlockedRatio ?? 'n/a')}`);
   lines.push(`Launch risk: ${health?.launchRisk ?? 'n/a'}`);
+  lines.push(`Execution priority: ${health?.executionPriority ?? 'n/a'}`);
   lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
 
   lines.push('', '## Validation result');
@@ -1154,6 +1179,7 @@ module.exports = {
   summarizeValidationCoverage,
   summarizeOwnerLoad,
   classifyLaunchRisk,
+  classifyExecutionPriority,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   buildExperimentSpecTemplate,

@@ -20,6 +20,7 @@ const {
   summarizeValidationCoverage,
   summarizeOwnerLoad,
   classifyLaunchRisk,
+  classifyExecutionPriority,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   buildExperimentSpecTemplate,
@@ -378,6 +379,12 @@ test('classifyLaunchRisk grades high/medium/low launch posture from readiness an
   assert.equal(classifyLaunchRisk({ readyTasks: 4, blockedTasks: 1, readinessPct: 80, executableValidationPct: 100 }), 'low');
 });
 
+test('classifyExecutionPriority maps queue posture to stabilize/seed-and-launch/launch-now', () => {
+  assert.equal(classifyExecutionPriority({ launchRisk: 'high', isLight: false, isReadyCapacityLight: false, readyTasks: 1 }), 'stabilize');
+  assert.equal(classifyExecutionPriority({ launchRisk: 'medium', isLight: true, isReadyCapacityLight: false, readyTasks: 2 }), 'seed-and-launch');
+  assert.equal(classifyExecutionPriority({ launchRisk: 'low', isLight: false, isReadyCapacityLight: false, readyTasks: 3 }), 'launch-now');
+});
+
 test('createTaskAcceptanceAudit reports average criteria coverage and below-threshold tasks', () => {
   const audit = createTaskAcceptanceAudit([
     { id: 'PP-GROWTH-001', acceptanceCriteria: ['a', 'b', 'c', 'd', 'e', 'f'] },
@@ -439,6 +446,7 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.ownerLoad[0].blocked, 1);
   assert.equal(health.readyToBlockedRatio, 0);
   assert.equal(health.launchRisk, 'high');
+  assert.equal(health.executionPriority, 'stabilize');
   assert.match(health.nextAction, /Resolve blockers or auto-seed fresh PantryPal experiments/);
 });
 
