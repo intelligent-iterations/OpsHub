@@ -24,6 +24,7 @@ node scripts/pantrypal-task-accelerator.js --json
 - `--no-validate` skip immediate validation command execution
 - `--limit <n>` cap queue size (default: `3`)
 - `--minimum-score <n>` filter by score before ranking (default: `75`)
+- `--require-executable-validation` only pick immediate execution tasks that have an executable PantryPal test command
 - `--light-threshold <n>` queue-light threshold for auto-seeding (default: `2`)
 - `--seed-max-tasks <n>` cap how many auto-seeded experiments can be injected during a light-queue cycle (default: computed gap-to-target)
 - `--no-auto-seed` disable synthetic queue seeding and only rank existing backlog experiments

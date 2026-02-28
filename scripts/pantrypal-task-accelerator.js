@@ -560,16 +560,22 @@ function pickImmediateExecution(taskQueue, options = {}) {
   const minimumCriteria = Number.isFinite(options.minimumCriteria) && options.minimumCriteria > 0
     ? Math.floor(options.minimumCriteria)
     : 0;
+  const requireExecutableValidation = options.requireExecutableValidation === true;
   const readyTasks = taskQueue.filter((task) => task && task.isReady !== false);
   const top = readyTasks.find((task) => {
     const criteriaCount = Array.isArray(task.acceptanceCriteria) ? task.acceptanceCriteria.length : 0;
-    return criteriaCount >= minimumCriteria;
+    if (criteriaCount < minimumCriteria) return false;
+    if (!requireExecutableValidation) return true;
+    return isExecutablePantryPalValidationCommand(task.validationCommand);
   });
 
   if (!top) {
     const blockedReasons = [...new Set(taskQueue.flatMap((task) => task.blockedReasons || []))];
     if (readyTasks.length > 0 && minimumCriteria > 0) {
       blockedReasons.push(`No ready tasks meet minimum acceptance criteria (${minimumCriteria}).`);
+    }
+    if (readyTasks.length > 0 && requireExecutableValidation) {
+      blockedReasons.push('No ready tasks have executable PantryPal validation commands.');
     }
 
     return {
@@ -871,6 +877,7 @@ function parseCliOptions(argv = []) {
     lightThreshold: 2,
     readyLightThreshold: 1,
     minimumCriteria: 6,
+    requireExecutableValidation: false,
     validate: !argv.includes('--no-validate'),
     validationTimeoutMs: null,
     experimentsFile: null,
@@ -950,6 +957,10 @@ function parseCliOptions(argv = []) {
 
     if (rawFlag === '--no-auto-seed') {
       options.autoSeed = false;
+    }
+
+    if (rawFlag === '--require-executable-validation') {
+      options.requireExecutableValidation = true;
     }
   }
 
@@ -1156,6 +1167,7 @@ if (require.main === module) {
   const generatedAt = new Date().toISOString();
   const executionPlan = pickImmediateExecution(queue, {
     minimumCriteria: cliOptions.minimumCriteria,
+    requireExecutableValidation: cliOptions.requireExecutableValidation,
     generatedAt
   });
   const validationResult = cliOptions.validate

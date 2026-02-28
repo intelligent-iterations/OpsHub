@@ -567,6 +567,31 @@ test('pickImmediateExecution enforces minimum acceptance criteria when configure
   assert.match(plan.blockedReasons.join(' | '), /minimum acceptance criteria \(3\)/);
 });
 
+test('pickImmediateExecution can require executable PantryPal validation commands', () => {
+  const plan = pickImmediateExecution([
+    {
+      id: 'PP-GROWTH-001-ready-non-test',
+      title: 'Ready with non-test command',
+      isReady: true,
+      blockedReasons: [],
+      acceptanceCriteria: ['c1', 'c2', 'c3'],
+      validationCommand: 'npm run pantrypal:tasks'
+    },
+    {
+      id: 'PP-GROWTH-002-ready-test',
+      title: 'Ready with executable test command',
+      isReady: true,
+      blockedReasons: [],
+      acceptanceCriteria: ['c1', 'c2', 'c3'],
+      validationCommand: 'npm test -- test/pantrypal-task-accelerator.test.js'
+    }
+  ], { requireExecutableValidation: true });
+
+  assert.equal(plan.taskId, 'PP-GROWTH-002-ready-test');
+  assert.equal(plan.validationCommand, 'npm test -- test/pantrypal-task-accelerator.test.js');
+});
+
+
 test('runValidationCommand returns PASS with output snippet', () => {
   const result = runValidationCommand('npm test -- smoke', {
     runner: () => 'line1\nline2\nline3'
@@ -619,6 +644,23 @@ test('pickImmediateExecution returns blocked queue summary when no ready tasks',
   assert.equal(plan.taskId, null);
   assert.equal(plan.blockedReasons.length, 2);
   assert.match(plan.blockedReasons[0], /legal sign-off/);
+});
+
+test('pickImmediateExecution reports blocker when executable validation is required but unavailable', () => {
+  const plan = pickImmediateExecution([
+    {
+      id: 'PP-GROWTH-001-ready-non-test',
+      title: 'Ready with non-test command',
+      isReady: true,
+      blockedReasons: [],
+      acceptanceCriteria: ['c1', 'c2', 'c3'],
+      validationCommand: 'npm run pantrypal:tasks'
+    }
+  ], { requireExecutableValidation: true });
+
+  assert.equal(plan.blockedQueue, true);
+  assert.equal(plan.taskId, null);
+  assert.match(plan.blockedReasons.join(' | '), /executable PantryPal validation commands/);
 });
 
 test('formatTaskMarkdown renders queue execution and validation section', () => {
@@ -759,6 +801,12 @@ test('parseCliOptions captures no-auto-seed flag', () => {
   const options = parseCliOptions(['--no-auto-seed']);
 
   assert.equal(options.autoSeed, false);
+});
+
+test('parseCliOptions captures require-executable-validation flag', () => {
+  const options = parseCliOptions(['--require-executable-validation']);
+
+  assert.equal(options.requireExecutableValidation, true);
 });
 test('parseCliOptions accepts experiment file, owner, and validation command overrides', () => {
   const options = parseCliOptions([
