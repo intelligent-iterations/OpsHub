@@ -1,0 +1,39 @@
+artifacts/qdrift-03-qa-gate-report.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json
+artifacts/qdrift-03-qa-gate-report.md:Artifacts dir: /Users/claw/.openclaw/workspace/artifacts
+artifacts/qdrift-03-rollback-proof.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/artifacts/qdrift-03-qa-fixture-kanban.json
+artifacts/qdrift-03-rollback-proof.md:Artifacts dir: /Users/claw/.openclaw/workspace/artifacts
+artifacts/p28-kanban-quarantine-sample.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+artifacts/qdrift-01-recovery-proof.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/qdrift-01-recovery-fixture-kanban.json",
+artifacts/qdrift-03-rollback-proof.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/qdrift-03-qa-fixture-kanban.json",
+artifacts/qdrift-03-rollback-proof.json:  "artifactsDir": "/Users/claw/.openclaw/workspace/artifacts",
+artifacts/qdrift-03-qa-gate-report.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+artifacts/qdrift-03-qa-gate-report.json:  "artifactsDir": "/Users/claw/.openclaw/workspace/artifacts",
+artifacts/p28-inprogress-cleanup-report.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json
+artifacts/dbc0400d-integrity-check.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+artifacts/dbc0400d-integrity-check.json:  "artifactsDir": "/Users/claw/.openclaw/workspace/OpsHub",
+artifacts/p31-qa-evidence-integrity.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json
+artifacts/p31-qa-evidence-integrity.md:Artifacts dir: /Users/claw/.openclaw/workspace/artifacts
+artifacts/inprogress-stale-report.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json
+artifacts/qdrift-claude-research-quality-drift-findings.md:**17 instances** of absolute local filesystem paths leaked across **13 artifact files**. All leak the pattern `/Users/claw/.openclaw/workspace/OpsHub/...` into user-facing JSON reports and markdown deliverables.
+artifacts/qdrift-claude-research-quality-drift-findings.md:| JSON `kanbanPath` field | 7 files | `kanbanPath`, `artifactsDir` | `"kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json"` |
+artifacts/qdrift-claude-research-quality-drift-findings.md:| Markdown report headers | 6 files | `Kanban:`, `Artifacts dir:` | `Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json` |
+artifacts/qdrift-claude-research-quality-drift-findings.md:- [ ] Regex catches `/Users/`, `/home/`, `/root/`, `C:\Users\`, and `/var/` patterns
+artifacts/qdrift-claude-research-quality-drift-findings.md:- [ ] Test asserts that `sanitizeArtifactPaths('/Users/foo/bar/data/kanban.json')` returns `data/kanban.json`
+artifacts/qdrift-claude-research-quality-drift-findings.md:- [ ] CLAUDE.md contains rule: `- Never include absolute local filesystem paths (e.g., /Users/*, /home/*) in artifact outputs. Use project-relative paths only.`
+artifacts/qdrift-claude-research-quality-drift-findings.md:- [ ] `grep -r '/Users/' artifacts/` returns zero matches post-cleanup
+artifacts/qdrift-claude-research-output-priority.md:Every artifact report embeds `/Users/claw/.openclaw/workspace/OpsHub/...` in `kanbanPath` and `artifactsDir` fields. This is classified as **OWASP LLM02:2025** (Sensitive Information Disclosure, ranked #2 risk). CVE-2026-25593 documents a directly related OpenClaw path-injection vulnerability.
+artifacts/p31-qa-evidence-integrity.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+artifacts/p31-qa-evidence-integrity.json:  "artifactsDir": "/Users/claw/.openclaw/workspace/artifacts",
+artifacts/p29-auto-seed-report.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json"
+artifacts/qdrift-01-recovery-report.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+artifacts/inprogress-stale-report.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+artifacts/p29-kanban-quarantine-report.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json
+artifacts/p28-kanban-quarantine-sample.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json
+artifacts/dbc0400d-integrity-check.md:Kanban: /Users/claw/.openclaw/workspace/OpsHub/data/kanban.json
+artifacts/dbc0400d-integrity-check.md:Artifacts dir: /Users/claw/.openclaw/workspace/OpsHub
+artifacts/qdrift-run2-findings-b.md:**What**: Absolute paths (`/Users/claw/.openclaw/workspace/OpsHub/...`) embedded in 24 instances across 13 artifact files via `kanbanPath` and `artifactsDir` metadata fields. Classified as **OWASP LLM02:2025** (Sensitive Information Disclosure).
+artifacts/qdrift-run2-findings-b.md:- **RC-2: QDRIFT-02 gate scoped too narrowly.** The `lib/human-deliverable-guard.js` regex correctly detects `/Users/`, `/home/`, `/tmp/` paths — but it's only wired into **done-transition task descriptions**, not artifact file generation.
+artifacts/qdrift-run2-findings-b.md:| AC-1 | `sanitizeArtifactPaths(content)` strips `/Users/*`, `/home/*`, `/root/*`, `C:\Users\*`, `/var/*` before any `fs.writeFileSync` in report scripts | Unit test with fixture containing each pattern |
+artifacts/qdrift-run2-findings-b.md:| AC-3 | 13 existing contaminated artifacts retroactively cleaned | `grep -r '/Users/' artifacts/` returns 0 hits |
+artifacts/p28-inprogress-cleanup-report.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+artifacts/p29-kanban-quarantine-report.json:  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",

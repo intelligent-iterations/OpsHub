@@ -1,0 +1,577 @@
+
+> opshub@1.0.0 test
+> node --test
+
+TAP version 13
+# OpsHub running at http://localhost:64588
+# Subtest: health endpoint returns ok
+ok 1 - health endpoint returns ok
+  ---
+  duration_ms: 40.105542
+  type: 'test'
+  ...
+# OpsHub running at http://localhost:64590
+# Subtest: kanban create + move flow works and validates bad input
+ok 2 - kanban create + move flow works and validates bad input
+  ---
+  duration_ms: 31.243625
+  type: 'test'
+  ...
+# OpsHub running at http://localhost:64593
+# Subtest: kanban lifecycle preserves completedAt semantics when reopened
+ok 3 - kanban lifecycle preserves completedAt semantics when reopened
+  ---
+  duration_ms: 21.951125
+  type: 'test'
+  ...
+# OpsHub running at http://localhost:64596
+# Subtest: done task creation is rejected when description leaks local path evidence
+ok 4 - done task creation is rejected when description leaks local path evidence
+  ---
+  duration_ms: 3.120667
+  type: 'test'
+  ...
+# OpsHub running at http://localhost:64598
+# Subtest: done transition requires GitHub evidence in completion details
+ok 5 - done transition requires GitHub evidence in completion details
+  ---
+  duration_ms: 15.104416
+  type: 'test'
+  ...
+# OpsHub running at http://localhost:64601
+# Subtest: done transition enforces correction-log-before-claim-done protocol
+ok 6 - done transition enforces correction-log-before-claim-done protocol
+  ---
+  duration_ms: 15.343833
+  type: 'test'
+  ...
+# OpsHub running at http://localhost:64604
+# Subtest: dashboard endpoint returns integrated payload and reflects kanban inProgress tasks
+ok 7 - dashboard endpoint returns integrated payload and reflects kanban inProgress tasks
+  ---
+  duration_ms: 680.217542
+  type: 'test'
+  ...
+# OpsHub running at http://localhost:64608
+# Subtest: dashboard exposes PantryPal WIP share metric with drift alert when share drops below threshold
+ok 8 - dashboard exposes PantryPal WIP share metric with drift alert when share drops below threshold
+  ---
+  duration_ms: 680.435417
+  type: 'test'
+  ...
+# Subtest: normalizeInProgressTask assigns fallback id and sane defaults
+ok 9 - normalizeInProgressTask assigns fallback id and sane defaults
+  ---
+  duration_ms: 0.640708
+  type: 'test'
+  ...
+# Subtest: buildInProgressSyncDiagnostics reports missing stable ids as sync drift
+ok 10 - buildInProgressSyncDiagnostics reports missing stable ids as sync drift
+  ---
+  duration_ms: 0.572625
+  type: 'test'
+  ...
+# Subtest: passes when completion text has GitHub evidence and no local paths
+ok 11 - passes when completion text has GitHub evidence and no local paths
+  ---
+  duration_ms: 1.507375
+  type: 'test'
+  ...
+# Subtest: fails when completion text leaks local absolute path
+ok 12 - fails when completion text leaks local absolute path
+  ---
+  duration_ms: 0.742459
+  type: 'test'
+  ...
+# Subtest: fails when completion text has no GitHub evidence URL
+ok 13 - fails when completion text has no GitHub evidence URL
+  ---
+  duration_ms: 0.298667
+  type: 'test'
+  ...
+# Subtest: detectStaleInProgressTasks marks stale when old and unmatched
+ok 14 - detectStaleInProgressTasks marks stale when old and unmatched
+  ---
+  duration_ms: 0.854542
+  type: 'test'
+  ...
+# Subtest: detectStaleInProgressTasks flags waiting tasks as stalled workers
+ok 15 - detectStaleInProgressTasks flags waiting tasks as stalled workers
+  ---
+  duration_ms: 0.153708
+  type: 'test'
+  ...
+# Subtest: applyRemediation executes self-recovery and dispatches up to 2 fallback tasks
+ok 16 - applyRemediation executes self-recovery and dispatches up to 2 fallback tasks
+  ---
+  duration_ms: 1.289333
+  type: 'test'
+  ...
+# Subtest: applyRemediation caps fallback dispatch at 2 even if higher requested
+ok 17 - applyRemediation caps fallback dispatch at 2 even if higher requested
+  ---
+  duration_ms: 0.067334
+  type: 'test'
+  ...
+# Subtest: detectSyntheticCards matches integration dashboard spam cards in todo/inProgress
+ok 18 - detectSyntheticCards matches integration dashboard spam cards in todo/inProgress
+  ---
+  duration_ms: 1.08525
+  type: 'test'
+  ...
+# Subtest: applyQuarantine removes synthetic cards and creates one rollup card in backlog
+ok 19 - applyQuarantine removes synthetic cards and creates one rollup card in backlog
+  ---
+  duration_ms: 0.225
+  type: 'test'
+  ...
+# Subtest: parseArgs defaults to report mode when no mode flag provided
+ok 20 - parseArgs defaults to report mode when no mode flag provided
+  ---
+  duration_ms: 0.150959
+  type: 'test'
+  ...
+# Subtest: resolveTtlMinutes defaults synthetic smoke/lifecycle/integration to 60 minutes
+ok 21 - resolveTtlMinutes defaults synthetic smoke/lifecycle/integration to 60 minutes
+  ---
+  duration_ms: 0.661083
+  type: 'test'
+  ...
+# Subtest: kanban TTL sweep expires 61-minute-old synthetic task and keeps strategic tasks
+ok 22 - kanban TTL sweep expires 61-minute-old synthetic task and keeps strategic tasks
+  ---
+  duration_ms: 1.532208
+  type: 'test'
+  ...
+# Subtest: classifyDormancy maps days to expected buckets
+ok 23 - classifyDormancy maps days to expected buckets
+  ---
+  duration_ms: 0.735459
+  type: 'test'
+  ...
+# Subtest: buildWinbackSegments enforces deterministic eligibility filters and split
+ok 24 - buildWinbackSegments enforces deterministic eligibility filters and split
+  ---
+  duration_ms: 1.112708
+  type: 'test'
+  ...
+# Subtest: shouldHoldout is deterministic for the same key/week
+ok 25 - shouldHoldout is deterministic for the same key/week
+  ---
+  duration_ms: 0.060167
+  type: 'test'
+  ...
+# Subtest: buildWinbackSegments is deterministic for same users/weekKey
+ok 26 - buildWinbackSegments is deterministic for same users/weekKey
+  ---
+  duration_ms: 1.024833
+  type: 'test'
+  ...
+# Subtest: holdout assignment rotates across week keys for at least one user
+ok 27 - holdout assignment rotates across week keys for at least one user
+  ---
+  duration_ms: 0.275541
+  type: 'test'
+  ...
+# Subtest: buildMdeTable returns per-segment MDE and uses 0.05/0.8 defaults
+ok 28 - buildMdeTable returns per-segment MDE and uses 0.05/0.8 defaults
+  ---
+  duration_ms: 0.2115
+  type: 'test'
+  ...
+# Subtest: calculateHoldoutSizes uses provided rate and returns integer counts
+ok 29 - calculateHoldoutSizes uses provided rate and returns integer counts
+  ---
+  duration_ms: 0.083833
+  type: 'test'
+  ...
+# Subtest: calculateMde returns null when sample sizes are empty
+ok 30 - calculateMde returns null when sample sizes are empty
+  ---
+  duration_ms: 0.034042
+  type: 'test'
+  ...
+# Subtest: getWeekKey returns ISO Monday-based key in UTC
+ok 31 - getWeekKey returns ISO Monday-based key in UTC
+  ---
+  duration_ms: 0.223958
+  type: 'test'
+  ...
+# Subtest: clamp keeps values in bounds
+ok 32 - clamp keeps values in bounds
+  ---
+  duration_ms: 1.30075
+  type: 'test'
+  ...
+# Subtest: scoreExperiment applies weighted score and rounds
+ok 33 - scoreExperiment applies weighted score and rounds
+  ---
+  duration_ms: 0.165334
+  type: 'test'
+  ...
+# Subtest: rankExperiments sorts descending by score
+ok 34 - rankExperiments sorts descending by score
+  ---
+  duration_ms: 0.128084
+  type: 'test'
+  ...
+# Subtest: formatMarkdown outputs ranked table
+ok 35 - formatMarkdown outputs ranked table
+  ---
+  duration_ms: 0.277583
+  type: 'test'
+  ...
+# Subtest: prioritizeWithGuardrails keeps PantryPal strategy work ahead of synthetic churn
+ok 36 - prioritizeWithGuardrails keeps PantryPal strategy work ahead of synthetic churn
+  ---
+  duration_ms: 1.379125
+  type: 'test'
+  ...
+# Subtest: prioritizeWithGuardrails quarantines synthetic overflow beyond cap
+ok 37 - prioritizeWithGuardrails quarantines synthetic overflow beyond cap
+  ---
+  duration_ms: 0.153333
+  type: 'test'
+  ...
+# Subtest: prioritizeWithGuardrails prefers strategic candidate first when reserve share is below target
+ok 38 - prioritizeWithGuardrails prefers strategic candidate first when reserve share is below target
+  ---
+  duration_ms: 0.1955
+  type: 'test'
+  ...
+# Subtest: computePantryPalWipMetrics raises drift alert when PantryPal share falls below threshold
+ok 39 - computePantryPalWipMetrics raises drift alert when PantryPal share falls below threshold
+  ---
+  duration_ms: 0.079541
+  type: 'test'
+  ...
+# Subtest: computeStrategicQueueMetrics flags non-strategic drift in active queue
+ok 40 - computeStrategicQueueMetrics flags non-strategic drift in active queue
+  ---
+  duration_ms: 0.163833
+  type: 'test'
+  ...
+# Subtest: classification helpers identify PantryPal, synthetic churn, and strategic signatures
+ok 41 - classification helpers identify PantryPal, synthetic churn, and strategic signatures
+  ---
+  duration_ms: 0.044
+  type: 'test'
+  ...
+# Subtest: mapScoreToPriority maps guardrail scores to kanban priorities
+ok 42 - mapScoreToPriority maps guardrail scores to kanban priorities
+  ---
+  duration_ms: 0.070708
+  type: 'test'
+  ...
+# Subtest: scoreVariants ranks by confidence score and picks eligible winner
+ok 43 - scoreVariants ranks by confidence score and picks eligible winner
+  ---
+  duration_ms: 0.910792
+  type: 'test'
+  ...
+# Subtest: scoreVariants returns null winner when no variant meets threshold
+ok 44 - scoreVariants returns null winner when no variant meets threshold
+  ---
+  duration_ms: 0.065375
+  type: 'test'
+  ...
+# Subtest: scoreVariants output includes guardrails and policy fields
+ok 45 - scoreVariants output includes guardrails and policy fields
+  ---
+  duration_ms: 0.111291
+  type: 'test'
+  ...
+# Subtest: confidence floor blocks winner below threshold
+ok 46 - confidence floor blocks winner below threshold
+  ---
+  duration_ms: 0.054291
+  type: 'test'
+  ...
+# Subtest: confidence floor allows winner above threshold
+ok 47 - confidence floor allows winner above threshold
+  ---
+  duration_ms: 0.143208
+  type: 'test'
+  ...
+# Subtest: anomalous variant is flagged and excluded from winner
+ok 48 - anomalous variant is flagged and excluded from winner
+  ---
+  duration_ms: 0.054291
+  type: 'test'
+  ...
+# Subtest: variants within max conversion rate are not flagged
+ok 49 - variants within max conversion rate are not flagged
+  ---
+  duration_ms: 0.091
+  type: 'test'
+  ...
+# Subtest: srmCheck detects balanced traffic (no mismatch)
+ok 50 - srmCheck detects balanced traffic (no mismatch)
+  ---
+  duration_ms: 0.040375
+  type: 'test'
+  ...
+# Subtest: srmCheck detects severely imbalanced traffic
+ok 51 - srmCheck detects severely imbalanced traffic
+  ---
+  duration_ms: 0.232167
+  type: 'test'
+  ...
+# Subtest: srmCheck blocks winner when mismatch detected
+ok 52 - srmCheck blocks winner when mismatch detected
+  ---
+  duration_ms: 0.249459
+  type: 'test'
+  ...
+# Subtest: srmCheck handles single variant gracefully
+ok 53 - srmCheck handles single variant gracefully
+  ---
+  duration_ms: 0.088167
+  type: 'test'
+  ...
+# Subtest: srmCheck handles zero traffic
+ok 54 - srmCheck handles zero traffic
+  ---
+  duration_ms: 0.031084
+  type: 'test'
+  ...
+# Subtest: wilsonLowerBound returns 0 for zero visitors
+ok 55 - wilsonLowerBound returns 0 for zero visitors
+  ---
+  duration_ms: 0.025375
+  type: 'test'
+  ...
+# Subtest: wilsonLowerBound returns value between 0 and observed rate
+ok 56 - wilsonLowerBound returns value between 0 and observed rate
+  ---
+  duration_ms: 0.026
+  type: 'test'
+  ...
+# Subtest: wilsonLowerBound increases with more data at same rate
+ok 57 - wilsonLowerBound increases with more data at same rate
+  ---
+  duration_ms: 0.023459
+  type: 'test'
+  ...
+# Subtest: chiSquaredCdf returns 0 for x <= 0
+ok 58 - chiSquaredCdf returns 0 for x <= 0
+  ---
+  duration_ms: 0.0215
+  type: 'test'
+  ...
+# Subtest: chiSquaredCdf returns ~1 for very large x
+ok 59 - chiSquaredCdf returns ~1 for very large x
+  ---
+  duration_ms: 0.022208
+  type: 'test'
+  ...
+# Subtest: chiSquaredCdf produces reasonable p-value for df=3
+ok 60 - chiSquaredCdf produces reasonable p-value for df=3
+  ---
+  duration_ms: 0.023792
+  type: 'test'
+  ...
+# Subtest: scoreVariants throws on invalid variant data
+ok 61 - scoreVariants throws on invalid variant data
+  ---
+  duration_ms: 0.13625
+  type: 'test'
+  ...
+# Subtest: CLI emits valid JSON payload with guardrails
+ok 62 - CLI emits valid JSON payload with guardrails
+  ---
+  duration_ms: 50.341292
+  type: 'test'
+  ...
+# Subtest: CLI respects --confidence-floor flag
+ok 63 - CLI respects --confidence-floor flag
+  ---
+  duration_ms: 42.336375
+  type: 'test'
+  ...
+# Subtest: CLI respects --max-conversion-rate flag
+ok 64 - CLI respects --max-conversion-rate flag
+  ---
+  duration_ms: 40.127125
+  type: 'test'
+  ...
+# Subtest: parseArgs sets defaults when no flags provided
+ok 65 - parseArgs sets defaults when no flags provided
+  ---
+  duration_ms: 0.517333
+  type: 'test'
+  ...
+# Subtest: parseArgs parses all new flags
+ok 66 - parseArgs parses all new flags
+  ---
+  duration_ms: 0.05975
+  type: 'test'
+  ...
+# Subtest: parseArgs parses sequential policy flags
+ok 67 - parseArgs parses sequential policy flags
+  ---
+  duration_ms: 2.820083
+  type: 'test'
+  ...
+# Subtest: parseArgs rejects invalid integer policy values
+ok 68 - parseArgs rejects invalid integer policy values
+  ---
+  duration_ms: 0.189583
+  type: 'test'
+  ...
+# Subtest: validateSequentialSafety passes default sample input
+ok 69 - validateSequentialSafety passes default sample input
+  ---
+  duration_ms: 0.231625
+  type: 'test'
+  ...
+# Subtest: validateSequentialSafety flags peeking and alpha overspend
+ok 70 - validateSequentialSafety flags peeking and alpha overspend
+  ---
+  duration_ms: 0.131458
+  type: 'test'
+  ...
+# Subtest: validateSequentialSafety flags non-monotonic cumulative series
+ok 71 - validateSequentialSafety flags non-monotonic cumulative series
+  ---
+  duration_ms: 0.208542
+  type: 'test'
+  ...
+# Subtest: CLI returns non-zero with --fail-on-issues for failing input
+ok 72 - CLI returns non-zero with --fail-on-issues for failing input
+  ---
+  duration_ms: 56.185875
+  type: 'test'
+  ...
+# Subtest: CLI emits JSON summary for deterministic as-of
+ok 73 - CLI emits JSON summary for deterministic as-of
+  ---
+  duration_ms: 41.253125
+  type: 'test'
+  ...
+# Subtest: parseArgs reads rollback flag
+ok 74 - parseArgs reads rollback flag
+  ---
+  duration_ms: 0.567833
+  type: 'test'
+  ...
+# Subtest: checkTask fails when correction occurred without correction log
+ok 75 - checkTask fails when correction occurred without correction log
+  ---
+  duration_ms: 1.871708
+  type: 'test'
+  ...
+# Subtest: applyRollback moves failing done tasks back to inProgress
+ok 76 - applyRollback moves failing done tasks back to inProgress
+  ---
+  duration_ms: 2.01775
+  type: 'test'
+  ...
+# Subtest: cli rollback path writes updated kanban and exits non-zero on failure threshold
+ok 77 - cli rollback path writes updated kanban and exits non-zero on failure threshold
+  ---
+  duration_ms: 50.115666
+  type: 'test'
+  ...
+# Subtest: report template linter passes compliant template
+ok 78 - report template linter passes compliant template
+  ---
+  duration_ms: 1.6485
+  type: 'test'
+  ...
+# Subtest: report template linter fails template with local path leak
+ok 79 - report template linter fails template with local path leak
+  ---
+  duration_ms: 0.218916
+  type: 'test'
+  ...
+# Subtest: resolveSlackUpdateTarget uses configured channel id directly
+ok 80 - resolveSlackUpdateTarget uses configured channel id directly
+  ---
+  duration_ms: 0.667917
+  type: 'test'
+  ...
+# Subtest: resolveSlackUpdateTarget falls back from missing configured name to fallback channel name lookup
+ok 81 - resolveSlackUpdateTarget falls back from missing configured name to fallback channel name lookup
+  ---
+  duration_ms: 0.168584
+  type: 'test'
+  ...
+# Subtest: routeHeartbeatPost performs safe no-op with logging when target cannot be resolved
+ok 82 - routeHeartbeatPost performs safe no-op with logging when target cannot be resolved
+  ---
+  duration_ms: 0.1245
+  type: 'test'
+  ...
+# [social-mention-ingest] provider fetch failed (slack api unavailable)
+# [social-mention-ingest] feed file unavailable (ENOENT: no such file or directory, open '/tmp/does-not-exist-social-feed.json')
+# Subtest: fetchSocialMessages returns fallback diagnostics when no source is configured
+ok 83 - fetchSocialMessages returns fallback diagnostics when no source is configured
+  ---
+  duration_ms: 0.72125
+  type: 'test'
+  ...
+# Subtest: ingestSocialMentions emits fallback diagnostics when provider and file are unavailable
+ok 84 - ingestSocialMentions emits fallback diagnostics when provider and file are unavailable
+  ---
+  duration_ms: 1.473041
+  type: 'test'
+  ...
+# Subtest: fetchSocialMessages prefers live provider and records source
+ok 85 - fetchSocialMessages prefers live provider and records source
+  ---
+  duration_ms: 0.209958
+  type: 'test'
+  ...
+# [social-mention-ingest] provider fetch failed (provider offline)
+# Subtest: fetchSocialMessages falls back to file when provider fails
+ok 86 - fetchSocialMessages falls back to file when provider fails
+  ---
+  duration_ms: 6.645917
+  type: 'test'
+  ...
+# Subtest: buildStructuredQueue normalizes mentions and marks actionable content
+ok 87 - buildStructuredQueue normalizes mentions and marks actionable content
+  ---
+  duration_ms: 1.095875
+  type: 'test'
+  ...
+# Subtest: mapQueueToTaskPayloads extracts fields and dedupes by source message id
+ok 88 - mapQueueToTaskPayloads extracts fields and dedupes by source message id
+  ---
+  duration_ms: 0.338916
+  type: 'test'
+  ...
+# Subtest: ingestSocialMentions writes queue/tasks/diagnostics artifacts and supports provider path
+ok 89 - ingestSocialMentions writes queue/tasks/diagnostics artifacts and supports provider path
+  ---
+  duration_ms: 3.715459
+  type: 'test'
+  ...
+# Subtest: resolveListMessagesProvider loads exported function from module path
+ok 90 - resolveListMessagesProvider loads exported function from module path
+  ---
+  duration_ms: 2.0085
+  type: 'test'
+  ...
+# Subtest: enqueueTaskPayloadsToKanban adds todo cards, writes back guardrail priority, and skips existing source message ids
+ok 91 - enqueueTaskPayloadsToKanban adds todo cards, writes back guardrail priority, and skips existing source message ids
+  ---
+  duration_ms: 4.092416
+  type: 'test'
+  ...
+# Subtest: enqueueTaskPayloadsToKanban quarantines synthetic churn overflow and protects strategic reservation
+ok 92 - enqueueTaskPayloadsToKanban quarantines synthetic churn overflow and protects strategic reservation
+  ---
+  duration_ms: 2.772709
+  type: 'test'
+  ...
+1..92
+# tests 92
+# suites 0
+# pass 92
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1627.298375

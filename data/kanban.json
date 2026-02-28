@@ -75,17 +75,6 @@
     ],
     "todo": [
       {
-        "id": "dcfa1330-237f-41dc-ae5e-6dcc41abd92c",
-        "name": "[QDRIFT-06] Enforce strategic queue reservation + priority writeback",
-        "description": "From Claude research: strategic PantryPal/growth tasks are starved by queue churn and scoring is not enforced operationally.\n\nAcceptance criteria:\n- Enforce admission control reserving >=30% active queue for strategic intelligent-iteration tasks.\n- Reject/add quarantine path for synthetic additions when non-strategic share exceeds threshold.\n- Wire growth prioritizer score writeback into kanban priority fields (high/medium/low mapping).\n- Add dashboard drift metric + alert threshold for strategic share.\n- Add tests covering rejection, reservation behavior, and score writeback correctness.\n- Completion details must include GitHub commit/PR/test links only.",
-        "priority": "critical",
-        "status": "todo",
-        "createdAt": "2026-02-28T17:31:30.726Z",
-        "updatedAt": "2026-02-28T17:31:30.726Z",
-        "completedAt": null,
-        "source": "quality-diagnosis"
-      },
-      {
         "id": "d916e7ac-c663-4a28-bf85-74889c687148",
         "name": "Move target",
         "description": "",
@@ -681,6 +670,193 @@
       }
     ],
     "inProgress": [
+      {
+        "id": "ffc9bf3f-1585-4abd-98fe-5fd597f3d547",
+        "name": "[QDRIFT-R2-04] Implement PantryPal priority reservation + verification reporting",
+        "description": "Acceptance criteria:\n- Strategic reservation + drift metrics are enforced and test-covered.\n- Verification artifact added with test and drift checks.\n- npm test passes.\n- Completion details include GitHub commit/test links only.",
+        "priority": "high",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:03.743Z",
+        "updatedAt": "2026-02-28T17:37:22.712Z",
+        "completedAt": null,
+        "source": "quality-diagnosis-run2"
+      },
+      {
+        "id": "f0528757-f066-4b93-a3ab-279a94bcb5d5",
+        "name": "[QDRIFT-R2-03] Implement sanitization + correction-log QA hard gates",
+        "description": "Acceptance criteria:\n- Local-path leakage blocked in deliverables and reports.\n- Correction log integrity checker enforces missing-evidence failures.\n- npm test passes.\n- Completion details include GitHub commit/test links only.",
+        "priority": "high",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:03.743Z",
+        "updatedAt": "2026-02-28T17:37:22.712Z",
+        "completedAt": null,
+        "source": "quality-diagnosis-run2"
+      },
+      {
+        "id": "4002f5b0-ea01-47d2-87dd-4322aa352e8f",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:09.143Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "e89a38a9-4985-4b9b-91a3-d37d28573c41",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:09.139Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "7d1590c5-5c37-4aea-b352-4c3bd0266386",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:09.135Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "6ee91dc9-8dad-4434-bd89-e5eb089e6543",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:09.131Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "c6305179-bef0-467d-8cb5-6b82da4c8193",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:08.451Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "dcbd8912-15cf-4d21-b94c-e4fa09f6d773",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:06.920Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "14d891d7-fa84-4d19-8d7e-715146467634",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:06.915Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a5abd69f-016d-4185-b573-0982ea55568c",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:06.912Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "2ff09ba2-1484-4ab1-9901-992bf9ba601e",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:06.908Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "b54affa7-68f4-4a1f-aa81-5ed66b733fe8",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:37:05.751Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "2f132b60-4340-4249-af83-337a8b6e35a1",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:36:31.923Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "1094d3b6-ba45-46d9-87dd-ada1c988a85a",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:36:31.919Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "c1a95175-3eb0-4fa1-a594-780cb623603b",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:36:31.916Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "ba17e31a-696b-4074-9c4e-92a2bd990441",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:36:31.912Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "dc68b2fd-13cf-4913-b200-b51ae49f5949",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:36:31.139Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
       {
         "id": "b3d879c5-7161-45b1-9715-47cbbeb650fd",
         "name": "PantryPal rescue planner tune-up",
@@ -1643,6 +1819,254 @@
       }
     ],
     "done": [
+      {
+        "id": "b1221e9b-5566-4968-b9ed-eddb36daba20",
+        "name": "[QDRIFT-R2-02] Diagnose local-path leakage + PantryPal priority drift (Claude-backed)",
+        "description": "Acceptance criteria:\n- Findings cite external sources and Claude-produced artifacts.\n- Root causes include output sanitization gaps and strategic-priority starvation.\n- OpsHub remediation tasks include measurable acceptance tests.\n- Completion details include GitHub links only.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:03.743Z",
+        "updatedAt": "2026-02-28T17:37:22.712Z",
+        "completedAt": "2026-02-28T17:37:22.712Z",
+        "source": "quality-diagnosis-run2",
+        "completionDetails": "Claude-backed root-cause research completed. Evidence: https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-run2-findings-b.md, https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-run2-claude-log.txt"
+      },
+      {
+        "id": "ebbba2ec-af4b-40a0-97da-70d24d486f2f",
+        "name": "[QDRIFT-R2-01] Diagnose execution stall + correction logging root causes (Claude-backed)",
+        "description": "Acceptance criteria:\n- Findings cite external sources and Claude-produced artifacts.\n- Root causes include waiting-for-instruction + correction logging coverage gaps.\n- OpsHub task links capture remediation scope and ownership.\n- Completion details include GitHub links only.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:03.743Z",
+        "updatedAt": "2026-02-28T17:37:22.712Z",
+        "completedAt": "2026-02-28T17:37:22.712Z",
+        "source": "quality-diagnosis-run2",
+        "completionDetails": "Claude-backed root-cause research completed. Evidence: https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-run2-findings-a.md, https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-run2-claude-log.txt"
+      },
+      {
+        "id": "dcfa1330-237f-41dc-ae5e-6dcc41abd92c",
+        "name": "[QDRIFT-06] Enforce strategic queue reservation + priority writeback",
+        "description": "From Claude research: strategic PantryPal/growth tasks are starved by queue churn and scoring is not enforced operationally.\n\nAcceptance criteria:\n- Enforce admission control reserving >=30% active queue for strategic intelligent-iteration tasks.\n- Reject/add quarantine path for synthetic additions when non-strategic share exceeds threshold.\n- Wire growth prioritizer score writeback into kanban priority fields (high/medium/low mapping).\n- Add dashboard drift metric + alert threshold for strategic share.\n- Add tests covering rejection, reservation behavior, and score writeback correctness.\n- Completion details must include GitHub commit/PR/test links only.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T17:31:30.726Z",
+        "updatedAt": "2026-02-28T17:37:18.657Z",
+        "completedAt": "2026-02-28T17:37:18.657Z",
+        "source": "quality-diagnosis",
+        "startedAt": "2026-02-28T17:37:18.657Z",
+        "verification": {
+          "command": "npm test",
+          "result": "pass"
+        },
+        "completionDetails": "QDRIFT-06 complete. Evidence: https://github.com/intelligent-iterations/OpsHub/blob/main/scripts/pantrypal-priority-guardrails.js https://github.com/intelligent-iterations/OpsHub/blob/main/scripts/social-mention-ingest.js https://github.com/intelligent-iterations/OpsHub/blob/main/server.js https://github.com/intelligent-iterations/OpsHub/blob/main/test/pantrypal-priority-guardrails.test.js https://github.com/intelligent-iterations/OpsHub/blob/main/test/social-mention-ingest.test.js https://github.com/intelligent-iterations/OpsHub/blob/main/test/api.test.js"
+      },
+      {
+        "id": "d51af1a9-c1d5-4ea7-bb9f-329a5124ba93",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:08.436Z",
+        "completedAt": "2026-02-28T17:37:08.445Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T17:37:08.444Z"
+        }
+      },
+      {
+        "id": "13fc8033-aff0-4302-b003-e82411112c14",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:08.421Z",
+        "completedAt": "2026-02-28T17:37:08.429Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "298c4e9b-7b0a-481d-96b6-3571820c465a",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:08.397Z",
+        "completedAt": "2026-02-28T17:37:08.411Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "a39ccb7f-9f37-45aa-a11e-9296e013851d",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:08.374Z",
+        "completedAt": "2026-02-28T17:37:08.385Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T17:37:08.382Z"
+        }
+      },
+      {
+        "id": "4adc1e9f-8e6c-443a-9786-14f71351a653",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:05.736Z",
+        "completedAt": "2026-02-28T17:37:05.746Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T17:37:05.745Z"
+        }
+      },
+      {
+        "id": "65e9ffdc-ad2c-4759-b90b-bab70a79ab93",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:05.721Z",
+        "completedAt": "2026-02-28T17:37:05.729Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "9654d12b-b355-4838-9afe-6259f49fc749",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:05.697Z",
+        "completedAt": "2026-02-28T17:37:05.711Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "2d7d7bcd-6ca3-4262-bf8f-17da2388329d",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T17:37:05.673Z",
+        "completedAt": "2026-02-28T17:37:05.684Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T17:37:05.681Z"
+        }
+      },
+      {
+        "id": "9d286b1c-512f-4743-9d14-f31154ec5814",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:36:31.124Z",
+        "completedAt": "2026-02-28T17:36:31.134Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T17:36:31.133Z"
+        }
+      },
+      {
+        "id": "6937be9e-45f3-43c3-9c55-f0dea261eac8",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:36:31.110Z",
+        "completedAt": "2026-02-28T17:36:31.118Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "04721c7a-8b78-468d-8342-2c0f7e990bf0",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:36:31.088Z",
+        "completedAt": "2026-02-28T17:36:31.101Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "73757cee-3850-4a5c-90f4-4a590dffc14f",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T17:36:31.060Z",
+        "completedAt": "2026-02-28T17:36:31.074Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T17:36:31.071Z"
+        }
+      },
       {
         "id": "0b442283-465d-4414-813a-35d7f884540b",
         "name": "[QDRIFT-05] Add synthetic task TTL + auto-expiry sweep",
@@ -5387,6 +5811,445 @@
     ]
   },
   "activityLog": [
+    {
+      "id": "9434c9b0-12f5-484e-919a-37a73fb8589b",
+      "type": "task-moved",
+      "taskId": "ffc9bf3f-1585-4abd-98fe-5fd597f3d547",
+      "from": "todo",
+      "to": "inProgress",
+      "at": "2026-02-28T17:37:22.712Z",
+      "note": "QDRIFT run2 workflow"
+    },
+    {
+      "id": "07e1823a-2a3c-4a60-95c3-1491c50b2ed3",
+      "type": "task-moved",
+      "taskId": "f0528757-f066-4b93-a3ab-279a94bcb5d5",
+      "from": "todo",
+      "to": "inProgress",
+      "at": "2026-02-28T17:37:22.712Z",
+      "note": "QDRIFT run2 workflow"
+    },
+    {
+      "id": "e9ca87e9-f72d-4e5b-8f90-5b921b1c699b",
+      "type": "task-moved",
+      "taskId": "b1221e9b-5566-4968-b9ed-eddb36daba20",
+      "from": "todo",
+      "to": "done",
+      "at": "2026-02-28T17:37:22.712Z",
+      "note": "QDRIFT run2 workflow"
+    },
+    {
+      "id": "0fb06587-d7e9-4c87-9021-841d15686de7",
+      "type": "task-moved",
+      "taskId": "ebbba2ec-af4b-40a0-97da-70d24d486f2f",
+      "from": "todo",
+      "to": "done",
+      "at": "2026-02-28T17:37:22.712Z",
+      "note": "QDRIFT run2 workflow"
+    },
+    {
+      "id": "activity-dcfa1330-237f-41dc-ae5e-6dcc41abd92c-start",
+      "taskId": "dcfa1330-237f-41dc-ae5e-6dcc41abd92c",
+      "taskName": "[QDRIFT-06] Enforce strategic queue reservation + priority writeback",
+      "type": "task_moved",
+      "from": "todo",
+      "to": "inProgress",
+      "at": "2026-02-28T17:37:18.657Z",
+      "detail": "QDRIFT batch B execution started"
+    },
+    {
+      "id": "activity-dcfa1330-237f-41dc-ae5e-6dcc41abd92c-done",
+      "taskId": "dcfa1330-237f-41dc-ae5e-6dcc41abd92c",
+      "taskName": "[QDRIFT-06] Enforce strategic queue reservation + priority writeback",
+      "type": "task_moved",
+      "from": "todo",
+      "to": "done",
+      "at": "2026-02-28T17:37:18.657Z",
+      "detail": "QDRIFT-06 implemented with strategic reservation, synthetic rejection, priority writeback, and dashboard drift metric; npm test pass."
+    },
+    {
+      "at": "2026-02-28T17:37:09.143Z",
+      "type": "task_added",
+      "taskId": "4002f5b0-ea01-47d2-87dd-4322aa352e8f",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:09.139Z",
+      "type": "task_added",
+      "taskId": "e89a38a9-4985-4b9b-91a3-d37d28573c41",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:09.135Z",
+      "type": "task_added",
+      "taskId": "7d1590c5-5c37-4aea-b352-4c3bd0266386",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:09.131Z",
+      "type": "task_added",
+      "taskId": "6ee91dc9-8dad-4434-bd89-e5eb089e6543",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:08.451Z",
+      "type": "task_added",
+      "taskId": "c6305179-bef0-467d-8cb5-6b82da4c8193",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:08.445Z",
+      "type": "task_moved",
+      "taskId": "d51af1a9-c1d5-4ea7-bb9f-329a5124ba93",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T17:37:08.436Z",
+      "type": "task_added",
+      "taskId": "d51af1a9-c1d5-4ea7-bb9f-329a5124ba93",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:08.429Z",
+      "type": "task_moved",
+      "taskId": "13fc8033-aff0-4302-b003-e82411112c14",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T17:37:08.421Z",
+      "type": "task_added",
+      "taskId": "13fc8033-aff0-4302-b003-e82411112c14",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:08.411Z",
+      "type": "task_moved",
+      "taskId": "298c4e9b-7b0a-481d-96b6-3571820c465a",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T17:37:08.405Z",
+      "type": "task_moved",
+      "taskId": "298c4e9b-7b0a-481d-96b6-3571820c465a",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T17:37:08.397Z",
+      "type": "task_added",
+      "taskId": "298c4e9b-7b0a-481d-96b6-3571820c465a",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:08.385Z",
+      "type": "task_moved",
+      "taskId": "a39ccb7f-9f37-45aa-a11e-9296e013851d",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T17:37:08.374Z",
+      "type": "task_added",
+      "taskId": "a39ccb7f-9f37-45aa-a11e-9296e013851d",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:06.920Z",
+      "type": "task_added",
+      "taskId": "dcbd8912-15cf-4d21-b94c-e4fa09f6d773",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:06.915Z",
+      "type": "task_added",
+      "taskId": "14d891d7-fa84-4d19-8d7e-715146467634",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:06.912Z",
+      "type": "task_added",
+      "taskId": "a5abd69f-016d-4185-b573-0982ea55568c",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:06.908Z",
+      "type": "task_added",
+      "taskId": "2ff09ba2-1484-4ab1-9901-992bf9ba601e",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:05.751Z",
+      "type": "task_added",
+      "taskId": "b54affa7-68f4-4a1f-aa81-5ed66b733fe8",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:05.746Z",
+      "type": "task_moved",
+      "taskId": "4adc1e9f-8e6c-443a-9786-14f71351a653",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T17:37:05.736Z",
+      "type": "task_added",
+      "taskId": "4adc1e9f-8e6c-443a-9786-14f71351a653",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:05.729Z",
+      "type": "task_moved",
+      "taskId": "65e9ffdc-ad2c-4759-b90b-bab70a79ab93",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T17:37:05.721Z",
+      "type": "task_added",
+      "taskId": "65e9ffdc-ad2c-4759-b90b-bab70a79ab93",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:05.711Z",
+      "type": "task_moved",
+      "taskId": "9654d12b-b355-4838-9afe-6259f49fc749",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T17:37:05.705Z",
+      "type": "task_moved",
+      "taskId": "9654d12b-b355-4838-9afe-6259f49fc749",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T17:37:05.697Z",
+      "type": "task_added",
+      "taskId": "9654d12b-b355-4838-9afe-6259f49fc749",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:37:05.684Z",
+      "type": "task_moved",
+      "taskId": "2d7d7bcd-6ca3-4262-bf8f-17da2388329d",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T17:37:05.673Z",
+      "type": "task_added",
+      "taskId": "2d7d7bcd-6ca3-4262-bf8f-17da2388329d",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "id": "6a38e063-7237-4d18-9bff-159ee51ac401",
+      "type": "task-created",
+      "taskId": "ffc9bf3f-1585-4abd-98fe-5fd597f3d547",
+      "to": "todo",
+      "at": "2026-02-28T17:37:03.743Z",
+      "note": "QDRIFT run2 seeded"
+    },
+    {
+      "id": "8bf3d434-1a5b-4b8a-a4e1-47ff2e3d67e5",
+      "type": "task-created",
+      "taskId": "f0528757-f066-4b93-a3ab-279a94bcb5d5",
+      "to": "todo",
+      "at": "2026-02-28T17:37:03.743Z",
+      "note": "QDRIFT run2 seeded"
+    },
+    {
+      "id": "35607613-705d-45bc-9614-252ff602028d",
+      "type": "task-created",
+      "taskId": "b1221e9b-5566-4968-b9ed-eddb36daba20",
+      "to": "todo",
+      "at": "2026-02-28T17:37:03.743Z",
+      "note": "QDRIFT run2 seeded"
+    },
+    {
+      "id": "762bc77d-6450-41f6-92c3-71b36363d734",
+      "type": "task-created",
+      "taskId": "ebbba2ec-af4b-40a0-97da-70d24d486f2f",
+      "to": "todo",
+      "at": "2026-02-28T17:37:03.743Z",
+      "note": "QDRIFT run2 seeded"
+    },
+    {
+      "at": "2026-02-28T17:36:31.923Z",
+      "type": "task_added",
+      "taskId": "2f132b60-4340-4249-af83-337a8b6e35a1",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.919Z",
+      "type": "task_added",
+      "taskId": "1094d3b6-ba45-46d9-87dd-ada1c988a85a",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.916Z",
+      "type": "task_added",
+      "taskId": "c1a95175-3eb0-4fa1-a594-780cb623603b",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.912Z",
+      "type": "task_added",
+      "taskId": "ba17e31a-696b-4074-9c4e-92a2bd990441",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.139Z",
+      "type": "task_added",
+      "taskId": "dc68b2fd-13cf-4913-b200-b51ae49f5949",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.134Z",
+      "type": "task_moved",
+      "taskId": "9d286b1c-512f-4743-9d14-f31154ec5814",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T17:36:31.124Z",
+      "type": "task_added",
+      "taskId": "9d286b1c-512f-4743-9d14-f31154ec5814",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.118Z",
+      "type": "task_moved",
+      "taskId": "6937be9e-45f3-43c3-9c55-f0dea261eac8",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T17:36:31.110Z",
+      "type": "task_added",
+      "taskId": "6937be9e-45f3-43c3-9c55-f0dea261eac8",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.101Z",
+      "type": "task_moved",
+      "taskId": "04721c7a-8b78-468d-8342-2c0f7e990bf0",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T17:36:31.095Z",
+      "type": "task_moved",
+      "taskId": "04721c7a-8b78-468d-8342-2c0f7e990bf0",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T17:36:31.088Z",
+      "type": "task_added",
+      "taskId": "04721c7a-8b78-468d-8342-2c0f7e990bf0",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:36:31.074Z",
+      "type": "task_moved",
+      "taskId": "73757cee-3850-4a5c-90f4-4a590dffc14f",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T17:36:31.060Z",
+      "type": "task_added",
+      "taskId": "73757cee-3850-4a5c-90f4-4a590dffc14f",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
     {
       "at": "2026-02-28T17:36:01.873Z",
       "type": "task_moved",
