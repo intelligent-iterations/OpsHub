@@ -31,6 +31,7 @@ const {
   writeExecutionBrief,
   parseCliOptions,
   loadExperimentsFromFile,
+  dedupeExperiments,
   upsertQueueIntoKanban,
   syncQueueToKanban
 } = require('../scripts/pantrypal-task-accelerator');
@@ -92,6 +93,18 @@ test('buildTaskQueue ranks experiments and emits stable ids', () => {
   assert.equal(queue[0].owner, 'qa-owner');
   assert.match(queue[0].id, /^PP-GROWTH-001-higher-score$/);
   assert.equal(queue[0].validationCommand, 'npm test');
+});
+
+test('dedupeExperiments removes duplicate-name variants and keeps highest-scoring candidate', () => {
+  const deduped = dedupeExperiments([
+    { name: 'Rescue streak comeback experiment', impact: 0.7, confidence: 0.6, ease: 0.6, pantryPalFit: 0.8 },
+    { name: 'Rescue streak comeback experiment!!!', impact: 0.93, confidence: 0.88, ease: 0.8, pantryPalFit: 0.96 },
+    { name: 'Fresh household invite', impact: 0.75, confidence: 0.7, ease: 0.7, pantryPalFit: 0.9 }
+  ]);
+
+  assert.equal(deduped.length, 2);
+  assert.equal(deduped[0].name, 'Rescue streak comeback experiment!!!');
+  assert.equal(deduped[1].name, 'Fresh household invite');
 });
 
 test('buildTaskQueue supports minimumScore filtering', () => {
@@ -176,6 +189,21 @@ test('buildQueueWithAutoSeed seeds when minimumScore leaves queue light', () => 
 
   assert.equal(seeded, true);
   assert.ok(queue.length >= 1);
+});
+
+test('buildQueueWithAutoSeed deduplicates repeated experiment names before queueing', () => {
+  const { queue, seeded } = buildQueueWithAutoSeed([
+    { name: 'Duplicate rescue plan', impact: 0.91, confidence: 0.8, ease: 0.72, pantryPalFit: 0.95 },
+    { name: 'Duplicate rescue plan!!!', impact: 0.7, confidence: 0.6, ease: 0.6, pantryPalFit: 0.8 }
+  ], {
+    minimumScore: 70,
+    limit: 2,
+    autoSeed: false
+  });
+
+  assert.equal(seeded, false);
+  assert.equal(queue.length, 1);
+  assert.equal(queue[0].title, 'Duplicate rescue plan');
 });
 
 test('buildQueueWithAutoSeed can disable auto-seeding for strict backlog-only runs', () => {

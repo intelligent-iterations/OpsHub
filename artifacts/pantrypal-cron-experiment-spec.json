@@ -1,9 +1,9 @@
 {
-  "experimentId": "PP-GROWTH-001-low-stock-protein-rescue-cards-in-3-tap-meal-builder",
-  "title": "Low-stock protein rescue cards in 3-tap meal builder",
+  "experimentId": "PP-GROWTH-001-personalized-rescue-recipes-from-expiring-inventory",
+  "title": "Personalized rescue recipes from expiring inventory",
   "owner": "growth-oncall",
-  "generatedAt": "2026-02-28T05:46:15.484Z",
-  "hypothesis": "If we run \"Low-stock protein rescue cards in 3-tap meal builder\" for qualified PantryPal households, then low-stock protein rescue cards in 3-tap meal builder should improve its primary success metric while keeping guardrails healthy.",
+  "generatedAt": "2026-02-28T05:49:21.267Z",
+  "hypothesis": "If we run \"Personalized rescue recipes from expiring inventory\" for qualified PantryPal households, then personalized rescue recipes from expiring inventory should improve its primary success metric while keeping guardrails healthy.",
   "segment": "Qualified PantryPal households active in the past 14 days",
   "channel": "In-app + push",
   "rolloutPlan": {
@@ -24,10 +24,10 @@
     "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
   },
   "acceptanceCriteria": [
-    "Experiment spec includes hypothesis, segment, channel, and success metric (protein-category rescue completion rate).",
-    "A/B test is configured with event instrumentation and minimum detectable lift target of 10%.",
-    "Sample-size gate is defined: at least 1650 qualified households over 12 days.",
-    "Guardrail is monitored and passes: meal-builder exit rate does not increase by >1.1%.",
+    "Experiment spec includes hypothesis, segment, channel, and success metric (weekly meal-plan saves).",
+    "A/B test is configured with event instrumentation and minimum detectable lift target of 12%.",
+    "Sample-size gate is defined: at least 1200 qualified households over 14 days.",
+    "Guardrail is monitored and passes: recipe dismiss rate stays below 20%.",
     "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
     "Decision log is updated with launch date, owner, and rollback trigger."
   ]

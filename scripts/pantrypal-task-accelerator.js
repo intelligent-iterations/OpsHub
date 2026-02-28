@@ -67,6 +67,21 @@ function deriveBlockedReasons(experiment) {
   return ['External dependency must be cleared before launch'];
 }
 
+function dedupeExperiments(experiments = []) {
+  const ranked = rankExperiments(Array.isArray(experiments) ? experiments : []);
+  const seen = new Set();
+  const deduped = [];
+
+  for (const experiment of ranked) {
+    const key = toSlug(experiment?.name ?? '');
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(experiment);
+  }
+
+  return deduped;
+}
+
 function buildTaskQueue(experiments, options = {}) {
   const limit = options.limit ?? 3;
   const minimumScore = options.minimumScore;
@@ -211,8 +226,10 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
     minimumScore: options.minimumScore
   };
 
+  const uniqueExperiments = dedupeExperiments(experiments);
+
   let seeded = false;
-  let queue = buildTaskQueue(experiments, buildOptions);
+  let queue = buildTaskQueue(uniqueExperiments, buildOptions);
 
   const readyLightThreshold = options.readyLightThreshold ?? 1;
   const queueIsLight = isQueueLight(queue, options.lightThreshold);
@@ -226,19 +243,19 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
     const requestedSeedTasks = Number.isFinite(options.seedMaxTasks) && options.seedMaxTasks > 0
       ? Math.floor(options.seedMaxTasks)
       : computedSeedTarget;
-    const seeds = createAdaptiveSeedTasks(experiments, {
+    const seeds = createAdaptiveSeedTasks(uniqueExperiments, {
       validationCommand: options.validationCommand,
       maxTasks: requestedSeedTasks
     });
 
     if (seeds.length) {
       seeded = true;
-      queue = buildTaskQueue(experiments.concat(seeds), buildOptions);
+      queue = buildTaskQueue(uniqueExperiments.concat(seeds), buildOptions);
     }
   }
 
   if (!queue.length && typeof options.minimumScore === 'number') {
-    queue = buildTaskQueue(experiments, {
+    queue = buildTaskQueue(uniqueExperiments, {
       defaultOwner: options.defaultOwner,
       limit: options.limit
     });
@@ -1132,6 +1149,7 @@ module.exports = {
   writeExecutionBrief,
   parseCliOptions,
   loadExperimentsFromFile,
+  dedupeExperiments,
   upsertQueueIntoKanban,
   syncQueueToKanban
 };
