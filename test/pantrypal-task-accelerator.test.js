@@ -138,12 +138,21 @@ test('createQueueHealthSnapshot reports light queue and minimum score eligibilit
   assert.equal(health.minimumScore, 80);
 });
 
-test('pickImmediateExecution chooses top queue item and includes validation step', () => {
-  const plan = pickImmediateExecution([{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 90, acceptanceCriteria: [], validationCommand: 'npm test -- foo' }]);
+test('pickImmediateExecution chooses top queue item and includes acceptance checklist gating + validation step', () => {
+  const plan = pickImmediateExecution([{
+    id: 'PP-GROWTH-001-foo',
+    title: 'Foo',
+    score: 90,
+    acceptanceCriteria: ['criterion 1', 'criterion 2', 'criterion 3', 'criterion 4'],
+    validationCommand: 'npm test -- foo'
+  }]);
+
   assert.equal(plan.taskId, 'PP-GROWTH-001-foo');
-  assert.equal(plan.executionNow.length, 4);
+  assert.equal(plan.acceptanceChecklist.length, 3);
+  assert.equal(plan.executionNow.length, 5);
   assert.equal(plan.validationCommand, 'npm test -- foo');
-  assert.match(plan.executionNow[2], /npm test -- foo/);
+  assert.match(plan.executionNow[2], /critical checks/);
+  assert.match(plan.executionNow[3], /npm test -- foo/);
 });
 
 test('runValidationCommand returns PASS with output snippet', () => {
@@ -177,7 +186,7 @@ test('runValidationCommand returns FAIL when runner throws', () => {
 test('formatTaskMarkdown renders queue execution and validation section', () => {
   const markdown = formatTaskMarkdown(
     [{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 91.23, owner: 'growth', acceptanceCriteria: ['a', 'b'] }],
-    { taskId: 'PP-GROWTH-001-foo', title: 'Foo', executionNow: ['step1'] },
+    { taskId: 'PP-GROWTH-001-foo', title: 'Foo', acceptanceChecklist: ['c1'], executionNow: ['step1'] },
     { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 1234, outputSnippet: 'ok' },
     { incomingExperiments: 3, eligibleExperiments: 2, queueSize: 1, isLight: true, threshold: 2 }
   );
@@ -186,6 +195,8 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /PP-GROWTH-001-foo/);
   assert.match(markdown, /Queue Health/);
   assert.match(markdown, /Execute Immediately/);
+  assert.match(markdown, /Critical Acceptance Checklist/);
+  assert.match(markdown, /Launch Steps/);
   assert.match(markdown, /Validation Result/);
   assert.match(markdown, /Status: PASS/);
 });
@@ -193,7 +204,7 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
 test('formatTaskJson emits seeded metadata and validation payload', () => {
   const json = formatTaskJson(
     [{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 91.23, owner: 'growth', acceptanceCriteria: [] }],
-    { taskId: 'PP-GROWTH-001-foo', title: 'Foo', executionNow: ['step1'] },
+    { taskId: 'PP-GROWTH-001-foo', title: 'Foo', acceptanceChecklist: ['c1'], executionNow: ['step1'] },
     { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 20, outputSnippet: 'ok' },
     { seeded: true, generatedAt: '2026-02-28T01:56:00.000Z' },
     { incomingExperiments: 4, eligibleExperiments: 3, queueSize: 1, isLight: true, threshold: 2 }

@@ -182,13 +182,17 @@ function pickImmediateExecution(taskQueue) {
   if (!taskQueue.length) return null;
 
   const [top] = taskQueue;
+  const acceptanceChecklist = (top.acceptanceCriteria || []).slice(0, 3);
+
   return {
     taskId: top.id,
     title: top.title,
     validationCommand: top.validationCommand,
+    acceptanceChecklist,
     executionNow: [
       'Draft experiment brief in tracker with owner + rollout window.',
       'Prepare treatment/control variants and QA events in staging.',
+      `Gate launch against acceptance checklist (${acceptanceChecklist.length} critical checks).`,
       `Run validation: ${top.validationCommand}.`,
       'Launch to 10% holdout split and monitor first-hour guardrail.'
     ]
@@ -243,6 +247,10 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
     return `- [ ] ${task.id} — ${task.title} (score: ${task.score.toFixed(2)}, owner: ${task.owner})\n  - Acceptance criteria:\n${criteria}`;
   }).join('\n');
 
+  const acceptanceLines = executionPlan?.acceptanceChecklist?.length
+    ? executionPlan.acceptanceChecklist.map((line, idx) => `${idx + 1}. ${line}`).join('\n')
+    : '1. No critical checklist available';
+
   const executionLines = executionPlan
     ? executionPlan.executionNow.map((step, idx) => `${idx + 1}. ${step}`).join('\n')
     : '1. No tasks available';
@@ -279,6 +287,10 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
     '',
     '## Execute Immediately',
     executionPlan ? `Top task: ${executionPlan.taskId} — ${executionPlan.title}` : 'Top task: none',
+    '### Critical Acceptance Checklist',
+    acceptanceLines,
+    '',
+    '### Launch Steps',
     executionLines,
     '',
     '## Validation Result',
