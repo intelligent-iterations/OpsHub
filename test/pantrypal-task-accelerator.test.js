@@ -62,6 +62,22 @@ test('deriveBlockedReasons maps external dependencies', () => {
   ]);
 });
 
+
+test('deriveBlockedReasons supports structured dependency metadata', () => {
+  const reasons = deriveBlockedReasons({
+    externalDependency: {
+      name: 'vendor webhook allowlist',
+      owner: 'infra',
+      eta: '2026-03-01',
+      status: 'pending'
+    }
+  });
+
+  assert.deepEqual(reasons, [
+    'External dependency: vendor webhook allowlist (owner: infra, eta: 2026-03-01, status: pending)'
+  ]);
+});
+
 test('buildTaskQueue ranks experiments and emits stable ids', () => {
   const queue = buildTaskQueue([
     { name: 'Lower score', impact: 0.4, confidence: 0.5, ease: 0.5, pantryPalFit: 0.5 },

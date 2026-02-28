@@ -45,6 +45,25 @@ function deriveBlockedReasons(experiment) {
       .map((item) => `External dependency: ${item}`);
   }
 
+  if (typeof experiment.externalDependency === 'object') {
+    const name = String(
+      experiment.externalDependency.name
+      ?? experiment.externalDependency.dependency
+      ?? experiment.externalDependency.id
+      ?? ''
+    ).trim();
+
+    const metadata = [
+      experiment.externalDependency.owner ? `owner: ${String(experiment.externalDependency.owner).trim()}` : '',
+      experiment.externalDependency.eta ? `eta: ${String(experiment.externalDependency.eta).trim()}` : '',
+      experiment.externalDependency.status ? `status: ${String(experiment.externalDependency.status).trim()}` : ''
+    ].filter(Boolean);
+
+    if (name && metadata.length) return [`External dependency: ${name} (${metadata.join(', ')})`];
+    if (name) return [`External dependency: ${name}`];
+    if (metadata.length) return [`External dependency: ${metadata.join(', ')}`];
+  }
+
   return ['External dependency must be cleared before launch'];
 }
 
