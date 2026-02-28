@@ -3,18 +3,29 @@
     "backlog": [],
     "todo": [
       {
-        "id": "ee585d13-8a52-4a5b-a23e-ba0f832e00d8",
+        "id": "f7b915a0-c4ab-45c1-ae36-e4721cd13c36",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T18:14:08.568Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "662850dc-41cd-43de-88a0-4596278e8cf1",
         "name": "Compliant escalation task",
         "description": "",
         "priority": "medium",
         "status": "todo",
-        "createdAt": "2026-02-28T18:10:11.753Z",
+        "createdAt": "2026-02-28T18:14:07.178Z",
         "completedAt": null,
         "source": "manual",
         "ttlMinutes": null,
         "blockerProtocol": {
           "autoSpawned": true,
-          "autoSpawnedAt": "2026-02-28T18:10:11.760Z",
+          "autoSpawnedAt": "2026-02-28T18:14:07.186Z",
           "assignedAgent": "blocker-handler",
           "attempts": [
             {
@@ -22,14 +33,14 @@
               "input": "attempt fix #1",
               "output": "still blocked",
               "outcome": "failed",
-              "timestamp": "2026-02-28T18:10:11.758Z"
+              "timestamp": "2026-02-28T18:14:07.183Z"
             },
             {
               "agent": "claude code",
               "input": "attempt fix #2",
               "output": "still blocked",
               "outcome": "failed",
-              "timestamp": "2026-02-28T18:10:11.758Z"
+              "timestamp": "2026-02-28T18:14:07.183Z"
             }
           ],
           "escalation": {
@@ -41,6 +52,136 @@
       }
     ],
     "inProgress": [
+      {
+        "id": "d8929d21-c081-4da9-b342-719699d546d3",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:10.047Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "db952b0e-3dd3-4b96-979f-5def1a6cad3c",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:10.027Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T18:14:10.034Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "4143a5b0-92cd-400c-a5ce-4a642cee28dc",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:09.323Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "922138f5-02f9-4d76-8729-303dfbdeff56",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:09.317Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a8f7de13-3b0e-4dca-bf67-67bbbd36c7ec",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:09.311Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "4981e49b-8437-4ba6-9d79-512cbb7c3439",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:09.305Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "253bee07-7776-4735-a6b0-f3dc99c6c558",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:08.562Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "e97f24ac-fcec-4ccf-8d22-233199e57666",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:07.194Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "7534aab3-e31a-4bed-b35e-cae9441c6817",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:07.168Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "7d69e04d-b54d-4de3-9298-df8ccf091f9a",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T18:14:07.160Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T18:14:07.160Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T18:14:07.158Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
       {
         "id": "868f3392-5e6e-4aed-aee6-53278bec6dd3",
         "name": "Closeout reminder target",
@@ -5012,6 +5153,75 @@
     ],
     "done": [
       {
+        "id": "2d19a93c-08b0-4523-ac79-c4abff069f5d",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T18:14:07.138Z",
+        "completedAt": "2026-02-28T18:14:07.154Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T18:14:07.152Z"
+        }
+      },
+      {
+        "id": "b8e91e90-5326-4589-b2af-79183ab7fbf9",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T18:14:07.117Z",
+        "completedAt": "2026-02-28T18:14:07.128Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "a71ee1db-2dc5-479d-9aad-21357248f579",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T18:14:07.088Z",
+        "completedAt": "2026-02-28T18:14:07.104Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "529052e8-ba28-4666-a039-e8c3a05a83fa",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T18:14:07.067Z",
+        "completedAt": "2026-02-28T18:14:07.078Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T18:14:07.075Z"
+        }
+      },
+      {
         "id": "c392e5c8-8f9d-4cbd-98be-1ff6b1e1a84c",
         "name": "[MGAP-04] Drive passiveWaitRatio down via auto-next-action scheduler",
         "description": "Acceptance criteria:\n- Implement scheduler that auto-queues next action when manager loop detects idle/passive wait state.\n- Add cooldown/debounce to prevent spam loops while guaranteeing progress.\n- Add tests proving passive wait events trigger next action dispatch within SLA.\n- Recompute KPI report; passiveWaitRatio must decrease vs previous baseline.\n- completionDetails with GitHub links only.",
@@ -5618,7 +5828,7 @@
       },
       {
         "id": "d87d0b76-d32f-4276-8dea-2c0469fc568b",
-        "name": "[MGAP-01] Enforce manager-mode proactive loop (claim→delegate→verify→close)",
+        "name": "[MGAP-01] Enforce manager-mode proactive loop (claim\u2192delegate\u2192verify\u2192close)",
         "description": "Acceptance criteria:\n- Add manager-mode policy module enforcing immediate delegation trigger for actionable coding tasks.\n- Add anti-passivity watchdog: detect waiting/no-action states and auto-dispatch next action.\n- Add stale ownership sweeper that requeues unprogressed in-progress tasks with audit log.\n- Add KPI computation: passiveWaitRatio, delegationRate, evidenceCompletionRate.\n- Add tests covering delegation trigger, anti-passivity recovery, and stale-task remediation.\n- Task completionDetails must contain GitHub links only.",
         "priority": "critical",
         "status": "done",
@@ -8695,7 +8905,7 @@
       },
       {
         "id": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-        "name": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
+        "name": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
         "description": "Propose meal batching bundles that prioritize soon-to-expire items while respecting user prep-time tiers and weekday constraints.",
         "priority": "medium",
         "status": "done",
@@ -8719,8 +8929,8 @@
       },
       {
         "id": "8fe524f4-663b-42e2-a243-220e7377240c",
-        "name": "[P14] Implement weekly “save vs waste” simulation preview before grocery trip",
-        "description": "Implemented and verified weekly “save vs waste” simulation preview before grocery trips, including deterministic baseline-vs-optimized forecast, duplicate-candidate guardrails, confidence-delta recommendation cards, and supporting docs/tests. Evidence: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 ; Model: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/models/weekly_save_vs_waste_preview.dart ; Service: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/services/weekly_save_vs_waste_simulation_service.dart ; Widget: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/presentation/widgets/save_vs_waste_recommendations_card.dart ; Service tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/weekly_save_vs_waste_simulation_service_test.dart ; Widget tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/save_vs_waste_recommendations_card_test.dart ; Docs: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/docs/p14_weekly_save_vs_waste_simulation_preview.md ; Verification: flutter test test/weekly_save_vs_waste_simulation_service_test.dart test/save_vs_waste_recommendations_card_test.dart (5/5 passing on 2026-02-28).",
+        "name": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
+        "description": "Implemented and verified weekly \u201csave vs waste\u201d simulation preview before grocery trips, including deterministic baseline-vs-optimized forecast, duplicate-candidate guardrails, confidence-delta recommendation cards, and supporting docs/tests. Evidence: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 ; Model: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/models/weekly_save_vs_waste_preview.dart ; Service: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/services/weekly_save_vs_waste_simulation_service.dart ; Widget: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/presentation/widgets/save_vs_waste_recommendations_card.dart ; Service tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/weekly_save_vs_waste_simulation_service_test.dart ; Widget tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/save_vs_waste_recommendations_card_test.dart ; Docs: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/docs/p14_weekly_save_vs_waste_simulation_preview.md ; Verification: flutter test test/weekly_save_vs_waste_simulation_service_test.dart test/save_vs_waste_recommendations_card_test.dart (5/5 passing on 2026-02-28).",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-27T15:28:02.002Z",
@@ -8832,7 +9042,7 @@
       {
         "id": "7ba6ea3f-94ea-4fdc-8835-f7505e201e46",
         "name": "[P17] Add leftover transformation suggestions to meal detail cards",
-        "description": "Surface 2-3 “next meal from leftovers” suggestions in meal detail UX using branch plans and pantry availability. Verified implementation and tests; pantry-aware ranked/capped leftover suggestions are attached to meal detail assignments. Evidence: https://github.com/larryclaw/pantrypal/commit/596fbd4bba77b8eb43922a0caba5b00e91a1f8f4 https://github.com/larryclaw/pantrypal/blob/596fbd4bba77b8eb43922a0caba5b00e91a1f8f4/lib/domain/services/weekly_meal_prep_optimizer.dart https://github.com/larryclaw/pantrypal/blob/596fbd4bba77b8eb43922a0caba5b00e91a1f8f4/test/weekly_meal_prep_optimizer_test.dart",
+        "description": "Surface 2-3 \u201cnext meal from leftovers\u201d suggestions in meal detail UX using branch plans and pantry availability. Verified implementation and tests; pantry-aware ranked/capped leftover suggestions are attached to meal detail assignments. Evidence: https://github.com/larryclaw/pantrypal/commit/596fbd4bba77b8eb43922a0caba5b00e91a1f8f4 https://github.com/larryclaw/pantrypal/blob/596fbd4bba77b8eb43922a0caba5b00e91a1f8f4/lib/domain/services/weekly_meal_prep_optimizer.dart https://github.com/larryclaw/pantrypal/blob/596fbd4bba77b8eb43922a0caba5b00e91a1f8f4/test/weekly_meal_prep_optimizer_test.dart",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-27T16:44:36.903Z",
@@ -8844,7 +9054,7 @@
       {
         "id": "67802eac-d2f5-476a-a141-5f7df97908a8",
         "name": "[P16] Implement confidence-aware inventory decay model using user correction feedback",
-        "description": "Add adaptive spoilage/quality decay adjustments that learn from user “still good / already bad” corrections and surface confidence bands. Completed and verified with GitHub-backed evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/p16-confidence-aware-decay-evidence.md ; implementation commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 ; tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/domain/services/confidence_aware_inventory_decay_service_test.dart",
+        "description": "Add adaptive spoilage/quality decay adjustments that learn from user \u201cstill good / already bad\u201d corrections and surface confidence bands. Completed and verified with GitHub-backed evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/p16-confidence-aware-decay-evidence.md ; implementation commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 ; tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/domain/services/confidence_aware_inventory_decay_service_test.dart",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-27T16:33:03.772Z",
@@ -9300,8 +9510,8 @@
       },
       {
         "id": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
-        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan→plan→cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).\n\nCompletion: Delivered P25 rescue friction telemetry map with implementable schema (events/properties/funnel/sample payloads/KPIs), benchmark-informed rationale via delegated Claude research notes, instrumentation readiness checklist, and schema lint script. Artifacts: docs/p25_rescue_friction_telemetry_map.md; data/p25_rescue_friction_telemetry_schema.json; docs/p25_instrumentation_readiness_checklist.md; scripts/p25-telemetry-spec-lint.js; artifacts/p25-claude-research-notes.md. Validation: node scripts/p25-telemetry-spec-lint.js (pass), npm test (12/12 pass).",
+        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan\u2192plan\u2192cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).\n\nCompletion: Delivered P25 rescue friction telemetry map with implementable schema (events/properties/funnel/sample payloads/KPIs), benchmark-informed rationale via delegated Claude research notes, instrumentation readiness checklist, and schema lint script. Artifacts: docs/p25_rescue_friction_telemetry_map.md; data/p25_rescue_friction_telemetry_schema.json; docs/p25_instrumentation_readiness_checklist.md; scripts/p25-telemetry-spec-lint.js; artifacts/p25-claude-research-notes.md. Validation: node scripts/p25-telemetry-spec-lint.js (pass), npm test (12/12 pass).",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-28T00:08:53.965Z",
@@ -10336,7 +10546,7 @@
       {
         "id": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
         "name": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
-        "description": "Rework QA PASS: verified nutrition delta → pet stat mapping with deterministic deadband/spike/cap logic and targeted test coverage. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/nutrition_delta_mapper.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/nutrition_delta_mapper_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/nutrition_delta_mapper_test.dart (10/10 passing on 2026-02-28).",
+        "description": "Rework QA PASS: verified nutrition delta \u2192 pet stat mapping with deterministic deadband/spike/cap logic and targeted test coverage. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/nutrition_delta_mapper.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/nutrition_delta_mapper_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/nutrition_delta_mapper_test.dart (10/10 passing on 2026-02-28).",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-26T22:39:17.359Z",
@@ -10422,7 +10632,7 @@
       },
       {
         "id": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-        "name": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
+        "name": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
         "description": "Re-verified P15 rescue streak freeze mechanic and closed task with GitHub-backed evidence. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/p15_household_rescue_streak_freeze.md | https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/rescue_streak_freeze_service.dart | https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/rescue_streak_freeze_service_test.dart | https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/rescue_streak_freeze_service_test.dart (5/5 pass) and flutter analyze lib/domain/services/rescue_streak_freeze_service.dart test/domain/services/rescue_streak_freeze_service_test.dart (clean) on 2026-02-28.",
         "priority": "medium",
         "status": "done",
@@ -10492,7 +10702,7 @@
       },
       {
         "id": "01f1208a-170b-402f-bcf9-256127fc716c",
-        "name": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
+        "name": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
         "description": "Implemented pantry-first batch-cook planning with leftovers branching (base + two derived meals), including prep-time tier filtering, cluster urgency ordering, and freezer-first recommendation logic with thaw prompts/defrost windows. https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/services/smart_batch_cook_planner_service.dart https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/models/smart_batch_cook_plan.dart https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/smart_batch_cook_planner_service_test.dart https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/docs/p14_smart_batch_cook_planner.md Verification rerun: flutter test test/smart_batch_cook_planner_service_test.dart (11/11 pass).",
         "priority": "medium",
         "status": "done",
@@ -10517,7 +10727,7 @@
       {
         "id": "eb153f2a-488c-4e45-ba47-c8eca2ac93a5",
         "name": "[P14] Build pantry confidence explainer cards that justify each recommendation",
-        "description": "Generate plain-language ‘why this suggestion’ cards (expiry risk, budget impact, nutrition trade-off) for each pantry action. Implemented pantry confidence explainers end-to-end for weekly save-vs-waste recommendations, including explainer model fields (primary reason, supporting reasons, risk/impact bands, confidence label, alternate option), deterministic service generation logic, UI rendering in recommendation cards, and automated tests. Evidence: Spec https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/docs/p14_pantry_confidence_explainer_cards.md ; Model https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/lib/domain/models/weekly_save_vs_waste_preview.dart ; Service https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/lib/domain/services/weekly_save_vs_waste_simulation_service.dart ; Widget https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/lib/presentation/widgets/save_vs_waste_recommendations_card.dart ; Service tests https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/test/weekly_save_vs_waste_simulation_service_test.dart ; Widget tests https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/test/save_vs_waste_recommendations_card_test.dart ; Commit https://github.com/larryclaw/pantrypal/commit/efb01dc111ba58f66408146e8224aade57ce2c60 . Verification: flutter test -r compact test/weekly_save_vs_waste_simulation_service_test.dart test/save_vs_waste_recommendations_card_test.dart (5/5 passing).",
+        "description": "Generate plain-language \u2018why this suggestion\u2019 cards (expiry risk, budget impact, nutrition trade-off) for each pantry action. Implemented pantry confidence explainers end-to-end for weekly save-vs-waste recommendations, including explainer model fields (primary reason, supporting reasons, risk/impact bands, confidence label, alternate option), deterministic service generation logic, UI rendering in recommendation cards, and automated tests. Evidence: Spec https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/docs/p14_pantry_confidence_explainer_cards.md ; Model https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/lib/domain/models/weekly_save_vs_waste_preview.dart ; Service https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/lib/domain/services/weekly_save_vs_waste_simulation_service.dart ; Widget https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/lib/presentation/widgets/save_vs_waste_recommendations_card.dart ; Service tests https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/test/weekly_save_vs_waste_simulation_service_test.dart ; Widget tests https://github.com/larryclaw/pantrypal/blob/efb01dc111ba58f66408146e8224aade57ce2c60/test/save_vs_waste_recommendations_card_test.dart ; Commit https://github.com/larryclaw/pantrypal/commit/efb01dc111ba58f66408146e8224aade57ce2c60 . Verification: flutter test -r compact test/weekly_save_vs_waste_simulation_service_test.dart test/save_vs_waste_recommendations_card_test.dart (5/5 passing).",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-27T15:28:02.002Z",
@@ -10747,10 +10957,314 @@
         "source": "manual",
         "updatedAt": "2026-02-28T16:55:46Z",
         "completionDetails": "Smoke verification complete for OpsHub kanban/API flow. Verification run (2026-02-28): npm test (77/77 passing, includes kanban create/move/lifecycle coverage in test/api.test.js). GitHub evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/test/kanban-lifecycle.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
+      },
+      {
+        "id": "ee585d13-8a52-4a5b-a23e-ba0f832e00d8",
+        "name": "Compliant escalation task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/ee585d13-escalation-closure-evidence.md\nImplementation: https://github.com/larryclaw/OpsHub/blob/main/server.js#L625-L819\nRegression test: https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js#L331-L370",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T18:10:11.753Z",
+        "completedAt": "2026-02-28T18:14:31Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T18:10:11.760Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T18:10:11.758Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T18:10:11.758Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        },
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/ee585d13-escalation-closure-evidence.md\nImplementation: https://github.com/larryclaw/OpsHub/blob/main/server.js#L625-L819\nRegression test: https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js#L331-L370"
       }
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T18:14:10.054Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "d8929d21-c081-4da9-b342-719699d546d3",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T18:14:10.047Z",
+      "type": "task_added",
+      "taskId": "d8929d21-c081-4da9-b342-719699d546d3",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:10.034Z",
+      "type": "delegation_triggered",
+      "taskId": "db952b0e-3dd3-4b96-979f-5def1a6cad3c",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T18:14:10.034Z",
+      "type": "task_moved",
+      "taskId": "db952b0e-3dd3-4b96-979f-5def1a6cad3c",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T18:14:10.027Z",
+      "type": "task_added",
+      "taskId": "db952b0e-3dd3-4b96-979f-5def1a6cad3c",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:09.323Z",
+      "type": "task_added",
+      "taskId": "4143a5b0-92cd-400c-a5ce-4a642cee28dc",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:09.317Z",
+      "type": "task_added",
+      "taskId": "922138f5-02f9-4d76-8729-303dfbdeff56",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:09.311Z",
+      "type": "task_added",
+      "taskId": "a8f7de13-3b0e-4dca-bf67-67bbbd36c7ec",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:09.305Z",
+      "type": "task_added",
+      "taskId": "4981e49b-8437-4ba6-9d79-512cbb7c3439",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:08.568Z",
+      "type": "task_added",
+      "taskId": "f7b915a0-c4ab-45c1-ae36-e4721cd13c36",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:08.562Z",
+      "type": "task_added",
+      "taskId": "253bee07-7776-4735-a6b0-f3dc99c6c558",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.194Z",
+      "type": "task_added",
+      "taskId": "e97f24ac-fcec-4ccf-8d22-233199e57666",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.186Z",
+      "type": "blocker_proof_captured",
+      "taskId": "662850dc-41cd-43de-88a0-4596278e8cf1",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/662850dc-41cd-43de-88a0-4596278e8cf1-2026-02-28T18-14-07-186Z.json"
+    },
+    {
+      "at": "2026-02-28T18:14:07.186Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "662850dc-41cd-43de-88a0-4596278e8cf1",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T18:14:07.186Z",
+      "type": "task_moved",
+      "taskId": "662850dc-41cd-43de-88a0-4596278e8cf1",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T18:14:07.178Z",
+      "type": "task_added",
+      "taskId": "662850dc-41cd-43de-88a0-4596278e8cf1",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.168Z",
+      "type": "task_added",
+      "taskId": "7534aab3-e31a-4bed-b35e-cae9441c6817",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.160Z",
+      "type": "blocker_proof_captured",
+      "taskId": "7d69e04d-b54d-4de3-9298-df8ccf091f9a",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/7d69e04d-b54d-4de3-9298-df8ccf091f9a-2026-02-28T18-14-07-160Z.json"
+    },
+    {
+      "at": "2026-02-28T18:14:07.160Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "7d69e04d-b54d-4de3-9298-df8ccf091f9a",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T18:14:07.160Z",
+      "type": "task_added",
+      "taskId": "7d69e04d-b54d-4de3-9298-df8ccf091f9a",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.154Z",
+      "type": "task_moved",
+      "taskId": "2d19a93c-08b0-4523-ac79-c4abff069f5d",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T18:14:07.150Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "2d19a93c-08b0-4523-ac79-c4abff069f5d",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T18:14:07.145Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "2d19a93c-08b0-4523-ac79-c4abff069f5d",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T18:14:07.138Z",
+      "type": "task_added",
+      "taskId": "2d19a93c-08b0-4523-ac79-c4abff069f5d",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.128Z",
+      "type": "task_moved",
+      "taskId": "b8e91e90-5326-4589-b2af-79183ab7fbf9",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T18:14:07.124Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "b8e91e90-5326-4589-b2af-79183ab7fbf9",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T18:14:07.117Z",
+      "type": "task_added",
+      "taskId": "b8e91e90-5326-4589-b2af-79183ab7fbf9",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.104Z",
+      "type": "task_moved",
+      "taskId": "a71ee1db-2dc5-479d-9aad-21357248f579",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T18:14:07.097Z",
+      "type": "task_moved",
+      "taskId": "a71ee1db-2dc5-479d-9aad-21357248f579",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T18:14:07.088Z",
+      "type": "task_added",
+      "taskId": "a71ee1db-2dc5-479d-9aad-21357248f579",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T18:14:07.078Z",
+      "type": "task_moved",
+      "taskId": "529052e8-ba28-4666-a039-e8c3a05a83fa",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T18:14:07.067Z",
+      "type": "task_added",
+      "taskId": "529052e8-ba28-4666-a039-e8c3a05a83fa",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
     {
       "at": "2026-02-28T18:11:55.348Z",
       "type": "task_moved",
@@ -14102,7 +14616,7 @@
       "at": "2026-02-28T18:03:14.214Z",
       "type": "task_moved",
       "taskId": "d87d0b76-d32f-4276-8dea-2c0469fc568b",
-      "taskName": "[MGAP-01] Enforce manager-mode proactive loop (claim→delegate→verify→close)",
+      "taskName": "[MGAP-01] Enforce manager-mode proactive loop (claim\u2192delegate\u2192verify\u2192close)",
       "from": "inProgress",
       "to": "done",
       "detail": "https://github.com/intelligent-iterations/OpsHub/commit/6cc0a6ebf066f9f2bcbfdf9d2964dbeebaf7ec87"
@@ -14753,289 +15267,13 @@
       "detail": "Added task from manual"
     },
     {
-      "at": "2026-02-28T18:02:05.746Z",
+      "at": "2026-02-28T18:14:31Z",
       "type": "task_moved",
-      "taskId": "76818971-7705-41fb-9538-7b18213341fe",
-      "taskName": "Needs correction",
-      "from": "inProgress",
-      "to": "done",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-28T18:02:05.734Z",
-      "type": "task_added",
-      "taskId": "76818971-7705-41fb-9538-7b18213341fe",
-      "taskName": "Needs correction",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:02:05.724Z",
-      "type": "task_moved",
-      "taskId": "045150fa-f2f3-4a50-aa31-3907a9dcc471",
-      "taskName": "Move target",
+      "taskId": "ee585d13-8a52-4a5b-a23e-ba0f832e00d8",
+      "taskName": "Compliant escalation task",
       "from": "todo",
       "to": "done",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-28T18:02:05.715Z",
-      "type": "task_added",
-      "taskId": "045150fa-f2f3-4a50-aa31-3907a9dcc471",
-      "taskName": "Move target",
-      "to": "todo",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:02:05.700Z",
-      "type": "task_moved",
-      "taskId": "db6c96a7-d4af-4a77-bc1e-410ea7294984",
-      "taskName": "Lifecycle task",
-      "from": "todo",
-      "to": "done",
-      "detail": "finally done"
-    },
-    {
-      "at": "2026-02-28T18:02:05.690Z",
-      "type": "task_moved",
-      "taskId": "db6c96a7-d4af-4a77-bc1e-410ea7294984",
-      "taskName": "Lifecycle task",
-      "from": "done",
-      "to": "todo",
-      "detail": "needs follow-up"
-    },
-    {
-      "at": "2026-02-28T18:02:05.682Z",
-      "type": "task_added",
-      "taskId": "db6c96a7-d4af-4a77-bc1e-410ea7294984",
-      "taskName": "Lifecycle task",
-      "to": "done",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:02:05.662Z",
-      "type": "task_moved",
-      "taskId": "3c413342-84de-4af7-acbf-2fa9172ff2fe",
-      "taskName": "Smoke task",
-      "from": "backlog",
-      "to": "done",
-      "detail": "finished"
-    },
-    {
-      "at": "2026-02-28T18:02:05.647Z",
-      "type": "task_added",
-      "taskId": "3c413342-84de-4af7-acbf-2fa9172ff2fe",
-      "taskName": "Smoke task",
-      "to": "backlog",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:55.227Z",
-      "type": "task_added",
-      "taskId": "a6e33021-bcd7-44dd-8aea-9e72c606f740",
-      "taskName": "PantryPal rescue planner tune-up",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:55.223Z",
-      "type": "task_added",
-      "taskId": "a6d2d7f4-4433-4e2f-995c-b34bd9a4a255",
-      "taskName": "Generic QA pass",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:55.218Z",
-      "type": "task_added",
-      "taskId": "270b8d18-d169-4722-8a7d-a88f8587bf33",
-      "taskName": "Smoke lifecycle replay",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:55.213Z",
-      "type": "task_added",
-      "taskId": "d512f8a2-9afd-46b4-b996-880c24111b99",
-      "taskName": "Integration dashboard task",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.540Z",
-      "type": "task_added",
-      "taskId": "77fa6999-6719-4d7b-aa1d-782d06ca84da",
-      "taskName": "Integration dashboard task",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.533Z",
-      "type": "blocker_proof_captured",
-      "taskId": "39952ab5-e205-4312-be5a-0c6549856e21",
-      "taskName": "Compliant escalation task",
-      "from": "inProgress",
-      "to": "todo",
-      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/39952ab5-e205-4312-be5a-0c6549856e21-2026-02-28T18-01-54-532Z.json"
-    },
-    {
-      "at": "2026-02-28T18:01:54.532Z",
-      "type": "blocker_handler_spawned",
-      "taskId": "39952ab5-e205-4312-be5a-0c6549856e21",
-      "taskName": "Compliant escalation task",
-      "from": "inProgress",
-      "to": "todo",
-      "detail": "Auto-spawned blocker-handler due to blocker detection"
-    },
-    {
-      "at": "2026-02-28T18:01:54.532Z",
-      "type": "task_moved",
-      "taskId": "39952ab5-e205-4312-be5a-0c6549856e21",
-      "taskName": "Compliant escalation task",
-      "from": "inProgress",
-      "to": "todo",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-28T18:01:54.526Z",
-      "type": "task_added",
-      "taskId": "39952ab5-e205-4312-be5a-0c6549856e21",
-      "taskName": "Compliant escalation task",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.518Z",
-      "type": "task_added",
-      "taskId": "32f31a10-26b6-4ef5-9222-37f0eaa6a4c2",
-      "taskName": "Escalation gate task",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.511Z",
-      "type": "blocker_proof_captured",
-      "taskId": "e09986ec-e281-4f36-8df0-51a74136e895",
-      "taskName": "Blocker card",
-      "to": "inProgress",
-      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/e09986ec-e281-4f36-8df0-51a74136e895-2026-02-28T18-01-54-511Z.json"
-    },
-    {
-      "at": "2026-02-28T18:01:54.511Z",
-      "type": "blocker_handler_spawned",
-      "taskId": "e09986ec-e281-4f36-8df0-51a74136e895",
-      "taskName": "Blocker card",
-      "to": "inProgress",
-      "detail": "Auto-spawned blocker-handler due to blocker detection"
-    },
-    {
-      "at": "2026-02-28T18:01:54.511Z",
-      "type": "task_added",
-      "taskId": "e09986ec-e281-4f36-8df0-51a74136e895",
-      "taskName": "Blocker card",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.505Z",
-      "type": "task_moved",
-      "taskId": "546d484e-6e69-4f71-af9d-b326ab775c05",
-      "taskName": "Needs correction",
-      "from": "inProgress",
-      "to": "done",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-28T18:01:54.494Z",
-      "type": "task_added",
-      "taskId": "546d484e-6e69-4f71-af9d-b326ab775c05",
-      "taskName": "Needs correction",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.485Z",
-      "type": "task_moved",
-      "taskId": "5cb20524-c1ce-44f1-b861-977aecb44c48",
-      "taskName": "Move target",
-      "from": "todo",
-      "to": "done",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-28T18:01:54.476Z",
-      "type": "task_added",
-      "taskId": "5cb20524-c1ce-44f1-b861-977aecb44c48",
-      "taskName": "Move target",
-      "to": "todo",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.465Z",
-      "type": "task_moved",
-      "taskId": "969dad63-c02a-40da-ad0d-3f13d83b6692",
-      "taskName": "Lifecycle task",
-      "from": "todo",
-      "to": "done",
-      "detail": "finally done"
-    },
-    {
-      "at": "2026-02-28T18:01:54.457Z",
-      "type": "task_moved",
-      "taskId": "969dad63-c02a-40da-ad0d-3f13d83b6692",
-      "taskName": "Lifecycle task",
-      "from": "done",
-      "to": "todo",
-      "detail": "needs follow-up"
-    },
-    {
-      "at": "2026-02-28T18:01:54.449Z",
-      "type": "task_added",
-      "taskId": "969dad63-c02a-40da-ad0d-3f13d83b6692",
-      "taskName": "Lifecycle task",
-      "to": "done",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:54.434Z",
-      "type": "task_moved",
-      "taskId": "d3f53c7a-1a9f-48cc-af8a-e8aa757e0bcf",
-      "taskName": "Smoke task",
-      "from": "backlog",
-      "to": "done",
-      "detail": "finished"
-    },
-    {
-      "at": "2026-02-28T18:01:54.420Z",
-      "type": "task_added",
-      "taskId": "d3f53c7a-1a9f-48cc-af8a-e8aa757e0bcf",
-      "taskName": "Smoke task",
-      "to": "backlog",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:21.301Z",
-      "type": "task_added",
-      "taskId": "ec8fe75f-adfe-466f-bfa6-09e9671d9ea0",
-      "taskName": "PantryPal rescue planner tune-up",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:21.297Z",
-      "type": "task_added",
-      "taskId": "08c9bc7b-3acc-4507-90b4-f853350df97f",
-      "taskName": "Generic QA pass",
-      "to": "inProgress",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T18:01:21.292Z",
-      "type": "task_added",
-      "taskId": "43e8eec0-e874-401c-9f62-ca47c9832d57",
-      "taskName": "Smoke lifecycle replay",
-      "to": "inProgress",
-      "detail": "Added task from manual"
+      "detail": "Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/ee585d13-escalation-closure-evidence.md\nImplementation: https://github.com/larryclaw/OpsHub/blob/main/server.js#L625-L819\nRegression test: https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js#L331-L370"
     }
   ]
 }
