@@ -45,62 +45,6 @@
     ],
     "todo": [
       {
-        "id": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
-        "name": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
-        "description": "Rework QA PASS: verified nutrition delta \u2192 pet stat mapping with deterministic deadband/spike/cap logic and targeted test coverage. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/nutrition_delta_mapper.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/nutrition_delta_mapper_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/nutrition_delta_mapper_test.dart (10/10 passing on 2026-02-28).",
-        "priority": "high",
-        "status": "done",
-        "createdAt": "2026-02-26T22:39:17.359Z",
-        "completedAt": "2026-02-28T13:24:44.000Z",
-        "source": "delight-rework-sweep",
-        "startedAt": "2026-02-28T13:24:44.000Z",
-        "updatedAt": "2026-02-28T13:24:44.000Z"
-      },
-      {
-        "id": "b72cbfdc-b0d2-4141-b1d7-49824939a9c4",
-        "name": "[Rework QA] [P7] Implement household activity feed with undo for pantry actions",
-        "description": "Rework QA PASS: implemented and revalidated household pantry activity feed undo lifecycle (requested/applied/conflict) plus undo edge cases (notFound + alreadyUndone). Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p7-household-activity-feed-undo-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/application/use_cases/log_pantry_activity_with_undo_use_case.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/presentation/widgets/pet_timeline_history_view.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/log_pantry_activity_with_undo_use_case_test.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/presentation/widgets/pet_timeline_history_view_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/cc837b40244826fdbea5e06658385b328fd4804d | Verification: flutter test test/log_pantry_activity_with_undo_use_case_test.dart test/presentation/widgets/pet_timeline_history_view_test.dart (11/11 passing on 2026-02-28).",
-        "priority": "high",
-        "status": "done",
-        "createdAt": "2026-02-26T22:39:17.333Z",
-        "completedAt": "2026-02-28T13:28:30.000Z",
-        "source": "delight-rework-sweep",
-        "startedAt": "2026-02-28T13:28:30.000Z",
-        "updatedAt": "2026-02-28T13:28:30.000Z"
-      },
-      {
-        "id": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
-        "name": "[Rework QA] [P7] Build meal planner suggestions from expiring pantry items",
-        "description": "Rework QA PASS: validated and hardened meal planner suggestions from expiring pantry items. Added guard for invalid prepTimeCapMin (ArgumentError) and expanded targeted tests. Verification: flutter test test/meal_planner_suggestion_service_test.dart (5/5 passing); flutter analyze lib/domain/services/meal_planner_suggestion_service.dart lib/domain/models/meal_planner_suggestion.dart test/meal_planner_suggestion_service_test.dart (clean). Evidence: artifacts/rework-qa-p7-meal-planner-expiring-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.336Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep",
-        "startedAt": "2026-02-27T00:44:56Z",
-        "updatedAt": "2026-02-27T00:44:56Z"
-      },
-      {
-        "id": "48c98705-ed2a-4a15-b4c0-669286fec15e",
-        "name": "[Rework QA] [P3] Build pet timeline/history view for user feedback loop",
-        "description": "Rework QA PASS: pet timeline/history view validated for feedback-loop events + visual baseline. Evidence: artifacts/rework-qa-p3-pet-timeline-history-view-evidence.md (tests/analyze/golden all passing).",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.358Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "4d423e6c-b6f1-456f-8729-71c61a4a07d5",
-        "name": "[Rework QA] [P5] Launch checklist + app store assets + rollout plan",
-        "description": "Rework QA PASS: launch checklist, app store asset matrix, and phased rollout plan validated. Evidence: artifacts/rework-qa-p5-launch-assets-rollout-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.353Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
         "id": "239f82df-0c60-420e-832f-cfc00ada7326",
         "name": "[Rework QA] [P4] Build challenge/quest system (use expiring foods this week)",
         "description": "Rework QA PASS. Evidence: artifacts/rework-qa-p4-challenge-quest-system-evidence.md",
@@ -157,16 +101,6 @@
         "priority": "high",
         "status": "toDo",
         "createdAt": "2026-02-26T22:39:17.337Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "376fe6d7-1792-4eec-8018-9cbe619da89e",
-        "name": "[Rework QA] [P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
-        "description": "Rework QA PASS: verified done-state consistency and evidence link integrity for collaborative household pantry task assignment (buy/use/freeze). Evidence: artifacts/rework-qa-p8-household-task-assignment-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.329Z",
         "completedAt": null,
         "source": "delight-rework-sweep"
       },
@@ -1701,6 +1635,41 @@
     ],
     "done": [
       {
+        "id": "4d423e6c-b6f1-456f-8729-71c61a4a07d5",
+        "name": "[Rework QA] [P5] Launch checklist + app store assets + rollout plan",
+        "description": "Rework QA PASS: verified launch checklist, app store asset matrix, and phased rollout plan with focused structural/cross-link validation. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p5-launch-assets-rollout-evidence.md | Checklist: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/launch_readiness_checklist.md | Asset matrix: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/app_store_asset_matrix.md | Rollout plan: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/phased_rollout_plan.md | Validation log: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p5-launch-assets-rollout-validation.txt | Commit: https://github.com/larryclaw/pantrypal/commit/b23a02a",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.353Z",
+        "completedAt": "2026-02-28T13:52:30Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T13:52:30Z"
+      },
+      {
+        "id": "48c98705-ed2a-4a15-b4c0-669286fec15e",
+        "name": "[Rework QA] [P3] Build pet timeline/history view for user feedback loop",
+        "description": "Rework QA PASS: pet timeline/history view validated for feedback-loop events + visual baseline. Evidence: https://github.com/intelligent-iterations/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-pet-timeline-history-view-evidence.md | Implementation: https://github.com/intelligent-iterations/pantrypal/blob/p36-github-remote-publish-path/lib/presentation/widgets/pet_timeline_history_view.dart | Tests: https://github.com/intelligent-iterations/pantrypal/blob/p36-github-remote-publish-path/test/presentation/widgets/pet_timeline_history_view_test.dart and https://github.com/intelligent-iterations/pantrypal/blob/p36-github-remote-publish-path/test/presentation/widgets/pet_timeline_history_view_golden_test.dart | Commits: https://github.com/intelligent-iterations/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 and https://github.com/intelligent-iterations/pantrypal/commit/257df27a41884af2bbab83f490c5574309499fa2 | Verification: flutter test test/presentation/widgets/pet_timeline_history_view_test.dart test/data/repositories/in_memory_timeline_repository_test.dart test/domain/models/timeline_event_test.dart; flutter analyze lib/presentation/widgets/pet_timeline_history_view.dart test/presentation/widgets/pet_timeline_history_view_test.dart test/presentation/widgets/pet_timeline_history_view_golden_test.dart; flutter test test/presentation/widgets/pet_timeline_history_view_golden_test.dart (all passing on 2026-02-28).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.358Z",
+        "completedAt": "2026-02-28T13:35:00.000Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-28T13:35:00.000Z",
+        "updatedAt": "2026-02-28T13:35:00.000Z"
+      },
+      {
+        "id": "b72cbfdc-b0d2-4141-b1d7-49824939a9c4",
+        "name": "[Rework QA] [P7] Implement household activity feed with undo for pantry actions",
+        "description": "Rework QA PASS: implemented and revalidated household pantry activity feed undo lifecycle (requested/applied/conflict) plus undo edge cases (notFound + alreadyUndone). Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p7-household-activity-feed-undo-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/application/use_cases/log_pantry_activity_with_undo_use_case.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/presentation/widgets/pet_timeline_history_view.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/log_pantry_activity_with_undo_use_case_test.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/presentation/widgets/pet_timeline_history_view_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/cc837b40244826fdbea5e06658385b328fd4804d | Verification: flutter test test/log_pantry_activity_with_undo_use_case_test.dart test/presentation/widgets/pet_timeline_history_view_test.dart (11/11 passing on 2026-02-28).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.333Z",
+        "completedAt": "2026-02-28T13:28:30.000Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-28T13:28:30.000Z",
+        "updatedAt": "2026-02-28T13:36:18Z"
+      },
+      {
         "id": "335459e5-6eac-4394-9f4c-07f0d8064f82",
         "name": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
         "description": "Rework QA PASS: pantry summary dashboard (healthy/unhealthy balance) validated with targeted widget+domain coverage and static analysis. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p2-pantry-summary-dashboard-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/presentation/widgets/pantry_summary_dashboard.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/pantry_health_balance_calculator.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/presentation/widgets/pantry_summary_dashboard_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/pantry_health_balance_calculator_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/0c06dc2",
@@ -3009,10 +2978,63 @@
         "startedAt": "2026-02-27T00:07:58.182Z",
         "updatedAt": "2026-02-28T13:26:00.000Z",
         "details": "Implemented + verified food classification engine (category mapping, nutrition score, quality band, confidence/review flags) and validated via targeted Flutter tests covering classification, receipt scan pipeline, and photo capture fallback paths."
+      },
+      {
+        "id": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
+        "name": "[Rework QA] [P7] Build meal planner suggestions from expiring pantry items",
+        "description": "Rework QA PASS: meal planner suggestions from expiring pantry items verified and hardened, including invalid prepTimeCapMin guard and substitution-output coverage. Verification: flutter test test/meal_planner_suggestion_service_test.dart (7/7 passing on 2026-02-28); flutter analyze lib/domain/services/meal_planner_suggestion_service.dart lib/domain/models/meal_planner_suggestion.dart test/meal_planner_suggestion_service_test.dart (clean). Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p7-meal-planner-expiring-evidence.md ; Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/meal_planner_suggestion_service.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/models/meal_planner_suggestion.dart ; Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/meal_planner_suggestion_service_test.dart ; Commit: https://github.com/larryclaw/pantrypal/commit/56882d8",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.336Z",
+        "completedAt": "2026-02-28T13:36:00.000Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-27T00:44:56Z",
+        "updatedAt": "2026-02-28T13:36:00.000Z"
+      },
+      {
+        "id": "376fe6d7-1792-4eec-8018-9cbe619da89e",
+        "name": "[Rework QA] [P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+        "description": "Rework QA PASS: verified collaborative household pantry action assignment (buy/use/freeze) implementation and targeted checks. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p8-household-task-assignment-evidence.md | Spec: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/p8_household_pantry_task_assignment.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/household_pantry_rescue_load_balancer.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/household_pantry_rescue_load_balancer_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/household_pantry_rescue_load_balancer_test.dart (9/9 pass) and flutter analyze lib/domain/services/household_pantry_rescue_load_balancer.dart test/domain/services/household_pantry_rescue_load_balancer_test.dart (clean) on 2026-02-28.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.329Z",
+        "completedAt": "2026-02-28T13:34:43Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-28T13:34:43Z",
+        "updatedAt": "2026-02-28T13:34:43Z"
+      },
+      {
+        "id": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
+        "name": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
+        "description": "Rework QA PASS: verified nutrition delta \u2192 pet stat mapping with deterministic deadband/spike/cap logic and targeted test coverage. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/nutrition_delta_mapper.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/nutrition_delta_mapper_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/nutrition_delta_mapper_test.dart (10/10 passing on 2026-02-28).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.359Z",
+        "completedAt": "2026-02-28T13:24:44.000Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-28T13:24:44.000Z",
+        "updatedAt": "2026-02-28T13:37:10Z"
       }
     ]
   },
   "activityLog": [
+    {
+      "id": "rework-qa-p5-launch-assets-rollout-2026-02-28T13:52:30Z",
+      "type": "task_completed",
+      "taskId": "4d423e6c-b6f1-456f-8729-71c61a4a07d5",
+      "taskName": "[Rework QA] [P5] Launch checklist + app store assets + rollout plan",
+      "timestamp": "2026-02-28T13:52:30Z",
+      "detail": "Rework QA closure: validated launch docs and added GitHub evidence links in Kanban."
+    },
+    {
+      "at": "2026-02-28T13:36:18Z",
+      "type": "task_moved",
+      "taskId": "b72cbfdc-b0d2-4141-b1d7-49824939a9c4",
+      "taskName": "[Rework QA] [P7] Implement household activity feed with undo for pantry actions",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA closeout verified with evidence links and passing targeted undo/feed tests."
+    },
     {
       "at": "2026-02-28T13:09:24.019Z",
       "type": "task_added",
@@ -7378,6 +7400,33 @@
       "to": "done",
       "timestamp": "2026-02-28T13:26:00.000Z",
       "detail": "Rework QA closure: food classification engine verified with targeted Flutter tests and GitHub evidence links added."
+    },
+    {
+      "at": "2026-02-28T13:36:00.000Z",
+      "type": "task_moved",
+      "taskId": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
+      "taskName": "[Rework QA] [P7] Build meal planner suggestions from expiring pantry items",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA PASS with focused verification and GitHub-backed evidence links."
+    },
+    {
+      "at": "2026-02-28T13:34:43Z",
+      "type": "task_moved",
+      "taskId": "376fe6d7-1792-4eec-8018-9cbe619da89e",
+      "taskName": "[Rework QA] [P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA PASS: validated P8 household pantry assignment with GitHub evidence links and passing targeted checks."
+    },
+    {
+      "at": "2026-02-28T13:37:10Z",
+      "type": "task_moved",
+      "taskId": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
+      "taskName": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA closure: verified nutrition delta mapper implementation/tests and attached GitHub evidence links."
     }
   ]
 }
