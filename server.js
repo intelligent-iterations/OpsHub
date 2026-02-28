@@ -5,7 +5,9 @@ const { exec } = require('child_process');
 const util = require('util');
 const crypto = require('crypto');
 const { computePantryPalWipMetrics, computeStrategicQueueMetrics, prioritizeWithGuardrails } = require('./scripts/pantrypal-priority-guardrails');
+const { computeManagerLoopMetrics, evaluateManagerLoopThresholds } = require('./scripts/manager-loop-guardrails');
 const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
+const { evaluateBlockerProtocol, captureBlockerProofArtifact } = require('./lib/blocker-protocol');
 
 const execAsync = util.promisify(exec);
 const PORT = Number(process.env.PORT) || 4180;
@@ -16,6 +18,7 @@ const DATA_DIR = process.env.OPSHUB_DATA_DIR
   ? path.resolve(process.env.OPSHUB_DATA_DIR)
   : path.join(OPSHUB_DIR, 'data');
 const KANBAN_PATH = path.join(DATA_DIR, 'kanban.json');
+const BLOCKER_PROOF_DIR = path.join(OPSHUB_DIR, 'artifacts', 'blocker-proofs');
 
 const VALID_COLUMNS = ['backlog', 'todo', 'inProgress', 'done'];
 const VALID_PRIORITIES = ['high', 'medium', 'low'];
@@ -121,7 +124,7 @@ async function loadKanban() {
 
 async function saveKanban(board) {
   await ensureDataDir();
-  const tmpPath = `${KANBAN_PATH}.tmp`;
+  const tmpPath = `${KANBAN_PATH}.${process.pid}.${crypto.randomUUID()}.tmp`;
   await fs.writeFile(tmpPath, JSON.stringify(board, null, 2), 'utf8');
   await fs.rename(tmpPath, KANBAN_PATH);
 }
@@ -202,6 +205,85 @@ function buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks) {
   };
 }
 
+function buildBehaviorSignal(entry = {}) {
+  const text = cleanText(`${entry?.type || ''} ${entry?.detail || ''} ${entry?.taskName || ''} ${entry?.summary || ''}`, 500).toLowerCase();
+  const toState = cleanText(entry?.to || '', 30).toLowerCase();
+
+  const proactive =
+    /delegate|delegated|dispatch|dispatched|verify|verified|close|closed|implement|implemented/.test(text) ||
+    (entry?.type === 'task_moved' && (toState === 'inprogress' || toState === 'done'));
+  const passive = /wait|waiting|idle|no-action|stale/.test(text);
+  const blocker = /blocker|escalat|permission|auth|secret|sudo|access denied/.test(text);
+  const blockerCompliant = blocker && /attempt\s*2|two-attempt|proof|artifact|verification/.test(text);
+
+  return { proactive, passive, blocker, blockerCompliant };
+}
+
+function summarizeBehaviorSignals(entries = [], thresholds = { passiveWaitRatio: 0.15, blockerProtocolCompliance: 0.95 }) {
+  const signals = entries.map(buildBehaviorSignal);
+  const proactiveSignals = signals.filter((s) => s.proactive).length;
+  const passiveSignals = signals.filter((s) => s.passive).length;
+  const totalSignals = proactiveSignals + passiveSignals;
+  const totalBlockerEvents = signals.filter((s) => s.blocker).length;
+  const compliantBlockerEvents = signals.filter((s) => s.blockerCompliant).length;
+
+  const passiveWaitRatio = totalSignals > 0 ? Number((passiveSignals / totalSignals).toFixed(4)) : 0;
+  const blockerProtocolCompliance = totalBlockerEvents > 0 ? Number((compliantBlockerEvents / totalBlockerEvents).toFixed(4)) : 1;
+
+  return {
+    proactiveSignals,
+    passiveSignals,
+    totalSignals,
+    passiveWaitRatio,
+    blockerProtocolCompliance,
+    totalBlockerEvents,
+    compliantBlockerEvents,
+    passiveThresholdMet: passiveWaitRatio <= thresholds.passiveWaitRatio,
+    blockerThresholdMet: blockerProtocolCompliance >= thresholds.blockerProtocolCompliance
+  };
+}
+
+function computeBehaviorGapMetrics(board, thresholds = { passiveWaitRatio: 0.15, blockerProtocolCompliance: 0.95 }) {
+  const entries = Array.isArray(board?.activityLog) ? [...board.activityLog].reverse() : [];
+  const midpoint = Math.ceil(entries.length / 2);
+  const beforeEntries = entries.slice(0, midpoint);
+  const afterEntries = entries.slice(midpoint);
+
+  const overall = summarizeBehaviorSignals(entries, thresholds);
+  const before = summarizeBehaviorSignals(beforeEntries, thresholds);
+  const after = summarizeBehaviorSignals(afterEntries, thresholds);
+
+  return {
+    proactiveLoop: {
+      proactiveSignals: overall.proactiveSignals,
+      passiveSignals: overall.passiveSignals,
+      totalSignals: overall.totalSignals,
+      passiveWaitRatio: overall.passiveWaitRatio,
+      threshold: thresholds.passiveWaitRatio,
+      thresholdMet: overall.passiveThresholdMet
+    },
+    blockerCompliance: {
+      totalBlockerEvents: overall.totalBlockerEvents,
+      compliantBlockerEvents: overall.compliantBlockerEvents,
+      blockerProtocolCompliance: overall.blockerProtocolCompliance,
+      threshold: thresholds.blockerProtocolCompliance,
+      thresholdMet: overall.blockerThresholdMet
+    },
+    beforeAfter: {
+      before: {
+        passiveWaitRatio: before.passiveWaitRatio,
+        blockerProtocolCompliance: before.blockerProtocolCompliance
+      },
+      after: {
+        passiveWaitRatio: after.passiveWaitRatio,
+        blockerProtocolCompliance: after.blockerProtocolCompliance
+      },
+      passiveWaitRatioReduction: Number((before.passiveWaitRatio - after.passiveWaitRatio).toFixed(4)),
+      blockerProtocolComplianceLift: Number((after.blockerProtocolCompliance - before.blockerProtocolCompliance).toFixed(4))
+    }
+  };
+}
+
 async function getSubagentsData() {
   const board = await loadKanban();
 
@@ -233,6 +315,7 @@ async function getSubagentsData() {
   }
 
   const diagnostics = buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks);
+  const behaviorGap = computeBehaviorGapMetrics(board);
   const pantryPalWip = computePantryPalWipMetrics(board, { threshold: 0.6, minActiveWip: 3 });
   const strategicQueue = computeStrategicQueueMetrics(board, { reserveShare: 0.3, nonStrategicCeiling: 0.7, minActiveQueue: 3 });
   const todoCards = Array.isArray(board?.columns?.todo) ? board.columns.todo : [];
@@ -243,6 +326,8 @@ async function getSubagentsData() {
     nonStrategicCeiling: 0.7,
     existingActiveTasks: [...todoCards, ...inProgressCards]
   });
+  const managerLoopMetrics = computeManagerLoopMetrics(board, { staleMinutes: 20 });
+  const managerLoopThresholds = evaluateManagerLoopThresholds(managerLoopMetrics);
 
   return {
     // Backward-compatible merged list used by current UI
@@ -251,6 +336,7 @@ async function getSubagentsData() {
     activeSubagents,
     inProgressTasks: inProgressTasks.map(({ _kanbanId, ...task }) => task),
     diagnostics,
+    behaviorGap,
     pantryPalWip,
     strategicQueue,
     recommendedTodoOrder: guardrailedTodo.prioritized.map((task) => ({
@@ -263,6 +349,10 @@ async function getSubagentsData() {
       name: task.name,
       priority: VALID_PRIORITIES.includes(task?.priority) ? task.priority : 'medium'
     })),
+    managerLoop: {
+      metrics: managerLoopMetrics,
+      thresholdEvaluation: managerLoopThresholds
+    },
     reason: diagnostics.syncOk ? null : 'kanban inProgress and dashboard payload require reconciliation',
     counts: {
       activeSubagents: activeSubagents.length,
@@ -448,7 +538,18 @@ function createApp() {
   app.post(
     '/api/kanban/task',
     asyncHandler(async (req, res) => {
-      const { name, description, priority, status = 'backlog', source = 'manual', correctionOccurred, correctionLog, verification } = req.body || {};
+      const {
+        name,
+        description,
+        priority,
+        status = 'backlog',
+        source = 'manual',
+        correctionOccurred,
+        correctionLog,
+        verification,
+        blockerProtocol,
+        blocker
+      } = req.body || {};
       const cleanedName = cleanText(name, 200);
       if (!cleanedName) return res.status(400).json({ error: 'name is required' });
 
@@ -486,6 +587,27 @@ function createApp() {
         task.correctionLog = correctionLog || null;
       }
 
+      const blockerEval = evaluateBlockerProtocol({ blockerProtocol, blocker });
+      let blockerProofPath = null;
+      if (blockerEval.blockerDetected) {
+        task.blockerProtocol = {
+          ...(task.blockerProtocol || {}),
+          autoSpawned: true,
+          autoSpawnedAt: nowIso(),
+          assignedAgent: 'blocker-handler',
+          attempts: blockerEval.attempts,
+          escalation: blockerProtocol?.escalation || blocker?.escalation || null
+        };
+        blockerProofPath = await captureBlockerProofArtifact({
+          artifactDir: BLOCKER_PROOF_DIR,
+          taskId: task.id,
+          from: null,
+          to: target,
+          protocolEval: blockerEval,
+          payload: { blockerProtocol, blocker }
+        });
+      }
+
       board.columns[target].unshift(task);
       pushActivity(board, {
         type: 'task_added',
@@ -494,6 +616,24 @@ function createApp() {
         to: target,
         detail: `Added task from ${task.source}`
       });
+      if (blockerEval.blockerDetected) {
+        pushActivity(board, {
+          type: 'blocker_handler_spawned',
+          taskId: task.id,
+          taskName: task.name,
+          to: target,
+          detail: 'Auto-spawned blocker-handler due to blocker detection'
+        });
+      }
+      if (blockerProofPath) {
+        pushActivity(board, {
+          type: 'blocker_proof_captured',
+          taskId: task.id,
+          taskName: task.name,
+          to: target,
+          detail: blockerProofPath
+        });
+      }
 
       await saveKanban(board);
       res.json({ ok: true, task, board });
@@ -503,7 +643,17 @@ function createApp() {
   app.post(
     '/api/kanban/move',
     asyncHandler(async (req, res) => {
-      const { taskId, to, summary = '', completionDetails = '', correctionOccurred, correctionLog, verification } = req.body || {};
+      const {
+        taskId,
+        to,
+        summary = '',
+        completionDetails = '',
+        correctionOccurred,
+        correctionLog,
+        verification,
+        blockerProtocol,
+        blocker
+      } = req.body || {};
       if (!taskId || !to) return res.status(400).json({ error: 'taskId and to are required' });
       if (!VALID_COLUMNS.includes(to)) return res.status(400).json({ error: 'invalid target column' });
 
@@ -514,8 +664,36 @@ function createApp() {
       const [task] = board.columns[found.col].splice(found.idx, 1);
       const from = found.col;
 
+      const blockerEval = evaluateBlockerProtocol({
+        blockerProtocol: blockerProtocol
+          ? { ...blockerProtocol, autoSpawned: blockerProtocol.autoSpawned || Boolean(blockerProtocol.detected || blockerProtocol.summary || blockerProtocol.reason) }
+          : blockerProtocol,
+        blocker: blocker ? { ...blocker, autoSpawned: blocker.autoSpawned || Boolean(blocker.detected || blocker.summary || blocker.reason) } : blocker
+      });
+
+      if (blockerEval.escalationRequested && !blockerEval.compliant) {
+        board.columns[found.col].splice(found.idx, 0, task);
+        return res.status(422).json({
+          error: 'blocker escalation rejected: protocol requires auto blocker-handler + exactly 2 Claude Code attempts with proof',
+          code: 'BLOCKER_PROTOCOL_NON_COMPLIANT',
+          issues: blockerEval.issues
+        });
+      }
+
       const cleanedSummary = cleanText(summary, 500);
       const cleanedCompletionDetails = cleanText(completionDetails, 2000);
+      let blockerProofPath = null;
+      if (blockerEval.blockerDetected) {
+        task.blockerProtocol = {
+          ...(task.blockerProtocol || {}),
+          autoSpawned: true,
+          autoSpawnedAt: nowIso(),
+          assignedAgent: 'blocker-handler',
+          attempts: blockerEval.attempts,
+          escalation: blockerProtocol?.escalation || blocker?.escalation || null
+        };
+      }
+
       if (to === 'done') {
         const completionText = cleanedCompletionDetails || cleanedSummary || task.completionDetails || task.description;
         const gate = validateHumanFacingUpdate({ text: completionText, requireGitHubEvidence: true });
@@ -563,6 +741,34 @@ function createApp() {
         to,
         detail: cleanedSummary
       });
+      if (blockerEval.blockerDetected) {
+        pushActivity(board, {
+          type: 'blocker_handler_spawned',
+          taskId: task.id,
+          taskName: task.name,
+          from,
+          to,
+          detail: 'Auto-spawned blocker-handler due to blocker detection'
+        });
+        blockerProofPath = await captureBlockerProofArtifact({
+          artifactDir: BLOCKER_PROOF_DIR,
+          taskId: task.id,
+          from,
+          to,
+          protocolEval: blockerEval,
+          payload: { blockerProtocol, blocker }
+        });
+      }
+      if (blockerProofPath) {
+        pushActivity(board, {
+          type: 'blocker_proof_captured',
+          taskId: task.id,
+          taskName: task.name,
+          from,
+          to,
+          detail: blockerProofPath
+        });
+      }
 
       await saveKanban(board);
       res.json({ ok: true, task, board });
@@ -596,5 +802,6 @@ module.exports = {
   loadKanban,
   saveKanban,
   normalizeInProgressTask,
-  buildInProgressSyncDiagnostics
+  buildInProgressSyncDiagnostics,
+  computeBehaviorGapMetrics
 };

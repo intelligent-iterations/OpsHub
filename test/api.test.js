@@ -249,6 +249,128 @@ test('done transition enforces correction-log-before-claim-done protocol', { con
   }
 });
 
+test('blocker detection auto-spawns blocker-handler and stores blocker protocol metadata', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Blocker card',
+        status: 'inProgress',
+        blockerProtocol: {
+          detected: true,
+          summary: 'auth token issue',
+          attempts: [
+            {
+              agent: 'Claude Code',
+              input: 'retry login flow',
+              output: 'still failing',
+              outcome: 'failed',
+              timestamp: new Date().toISOString()
+            }
+          ]
+        }
+      })
+    });
+    assert.equal(create.status, 200);
+    const created = await create.json();
+    assert.equal(created.task.blockerProtocol.assignedAgent, 'blocker-handler');
+    assert.equal(created.task.blockerProtocol.autoSpawned, true);
+  } finally {
+    await app.close();
+  }
+});
+
+test('blocker escalation is rejected when fewer than exactly 2 Claude Code attempts are provided', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Escalation gate task', status: 'inProgress' })
+    });
+    const created = await create.json();
+
+    const escalate = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'todo',
+        blockerProtocol: {
+          detected: true,
+          escalation: { requested: true, category: 'auth', reason: 'cannot access auth provider' },
+          attempts: [
+            {
+              agent: 'Claude Code',
+              input: 'attempt fix #1',
+              output: 'failed',
+              outcome: 'failed',
+              timestamp: new Date().toISOString()
+            }
+          ]
+        }
+      })
+    });
+
+    assert.equal(escalate.status, 422);
+    const body = await escalate.json();
+    assert.equal(body.code, 'BLOCKER_PROTOCOL_NON_COMPLIANT');
+  } finally {
+    await app.close();
+  }
+});
+
+test('blocker escalation is allowed only with exactly 2 Claude Code attempts + allowlisted category', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Compliant escalation task', status: 'inProgress' })
+    });
+    const created = await create.json();
+
+    const now = new Date().toISOString();
+    const escalate = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'todo',
+        blockerProtocol: {
+          detected: true,
+          escalation: { requested: true, category: 'permissions', reason: 'permission denied on deployment key' },
+          attempts: [
+            {
+              agent: 'Claude Code',
+              input: 'attempt fix #1',
+              output: 'still blocked',
+              outcome: 'failed',
+              timestamp: now
+            },
+            {
+              agent: 'Claude Code',
+              input: 'attempt fix #2',
+              output: 'still blocked',
+              outcome: 'failed',
+              timestamp: now
+            }
+          ]
+        }
+      })
+    });
+
+    assert.equal(escalate.status, 200);
+    const moved = await escalate.json();
+    assert.equal(moved.task.status, 'todo');
+    assert.equal(moved.task.blockerProtocol.assignedAgent, 'blocker-handler');
+  } finally {
+    await app.close();
+  }
+});
+
 test('dashboard endpoint returns integrated payload and reflects kanban inProgress tasks', { concurrency: false }, async () => {
   const app = await makeServer();
   try {
@@ -285,6 +407,14 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.equal(body.subagents.diagnostics.syncOk, true);
     assert.deepEqual(body.subagents.diagnostics.missingFromPayload, []);
     assert.deepEqual(body.subagents.diagnostics.tasksMissingStableId, []);
+
+    assert.ok(body.subagents.behaviorGap);
+    assert.ok(body.subagents.behaviorGap.proactiveLoop);
+    assert.equal(typeof body.subagents.behaviorGap.proactiveLoop.passiveWaitRatio, 'number');
+    assert.equal(body.subagents.behaviorGap.proactiveLoop.threshold, 0.15);
+    assert.ok(body.subagents.behaviorGap.blockerCompliance);
+    assert.equal(typeof body.subagents.behaviorGap.blockerCompliance.blockerProtocolCompliance, 'number');
+    assert.equal(body.subagents.behaviorGap.blockerCompliance.threshold, 0.95);
 
     assert.ok(Array.isArray(body.sessions));
     assert.ok(Array.isArray(body.errors));
@@ -325,6 +455,20 @@ test('dashboard exposes PantryPal WIP share metric with drift alert when share d
     assert.ok(body.subagents.pantryPalWip.pantryPalWipShare <= 1);
     assert.equal(body.subagents.pantryPalWip.threshold, 0.6);
     assert.equal(typeof body.subagents.pantryPalWip.driftAlert, 'boolean');
+
+    assert.ok(body.subagents.strategicQueue);
+    assert.equal(body.subagents.strategicQueue.reserveShare, 0.3);
+    assert.equal(body.subagents.strategicQueue.nonStrategicCeiling, 0.7);
+    assert.ok(body.subagents.strategicQueue.activeQueueCount >= 4);
+    assert.equal(typeof body.subagents.strategicQueue.driftAlert, 'boolean');
+
+    assert.ok(body.subagents.managerLoop);
+    assert.ok(body.subagents.managerLoop.metrics);
+    assert.equal(typeof body.subagents.managerLoop.metrics.passiveWaitRatio, 'number');
+    assert.equal(typeof body.subagents.managerLoop.metrics.blockerProtocolCompliance, 'number');
+    assert.ok(body.subagents.managerLoop.thresholdEvaluation);
+    assert.equal(typeof body.subagents.managerLoop.thresholdEvaluation.checks.passiveWaitRatio.pass, 'boolean');
+    assert.equal(typeof body.subagents.managerLoop.thresholdEvaluation.checks.blockerProtocolCompliance.pass, 'boolean');
   } finally {
     await app.close();
   }
