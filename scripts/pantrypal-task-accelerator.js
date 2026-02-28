@@ -162,6 +162,32 @@ function createAdaptiveSeedTasks(experiments, options = {}) {
       experimentWindowDays: 12,
       guardrail: 'notification mute rate does not increase by >1.8%',
       validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-growth-experiment-prioritizer.test.js'
+    },
+    {
+      name: 'Price-drop rescue alerts bundled into weekly save packs',
+      impact: 0.79,
+      confidence: 0.66,
+      ease: 0.68,
+      pantryPalFit: 0.93,
+      primaryMetric: 'weekly rescue pack claim rate',
+      targetLiftPct: 8,
+      minimumSampleSize: 1450,
+      experimentWindowDays: 14,
+      guardrail: 'deal alert unsubscribe rate does not increase by >1.2%',
+      validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-task-accelerator.test.js'
+    },
+    {
+      name: 'Post-dinner leftover remix prompt for next-day lunch',
+      impact: 0.74,
+      confidence: 0.67,
+      ease: 0.72,
+      pantryPalFit: 0.91,
+      primaryMetric: 'leftover remix plan saves per active household',
+      targetLiftPct: 7,
+      minimumSampleSize: 1350,
+      experimentWindowDays: 11,
+      guardrail: 'next-day notification dismiss rate does not increase by >1.7%',
+      validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-growth-experiment-prioritizer.test.js'
     }
   ]);
 

@@ -139,6 +139,15 @@ test('createAdaptiveSeedTasks skips duplicates and respects maxTasks', () => {
   assert.equal(seeds[0].validationCommand, 'npm test -- smoke');
 });
 
+test('createAdaptiveSeedTasks can supply a deeper PantryPal backlog when queue is very light', () => {
+  const seeds = createAdaptiveSeedTasks([], { maxTasks: 6, validationCommand: 'npm test -- pantrypal' });
+
+  assert.equal(seeds.length, 6);
+  assert.equal(seeds[4].name, 'Price-drop rescue alerts bundled into weekly save packs');
+  assert.equal(seeds[5].name, 'Post-dinner leftover remix prompt for next-day lunch');
+  assert.ok(seeds.every((seed) => seed.validationCommand === 'npm test -- pantrypal'));
+});
+
 test('buildQueueWithAutoSeed seeds when minimumScore leaves queue light', () => {
   const experiments = [
     { name: 'Okay', impact: 0.7, confidence: 0.65, ease: 0.6, pantryPalFit: 0.8 }
@@ -205,6 +214,24 @@ test('buildQueueWithAutoSeed respects seedMaxTasks cap when queue is light', () 
 
   assert.equal(seeded, true);
   assert.equal(queue.length, 2);
+});
+
+test('buildQueueWithAutoSeed can backfill to six tasks for aggressive PantryPal work loops', () => {
+  const experiments = [
+    { name: 'Strong baseline', impact: 0.88, confidence: 0.82, ease: 0.8, pantryPalFit: 0.94 }
+  ];
+
+  const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
+    minimumScore: 70,
+    limit: 6,
+    lightThreshold: 2,
+    defaultOwner: 'growth-oncall',
+    validationCommand: 'npm test -- pantrypal'
+  });
+
+  assert.equal(seeded, true);
+  assert.equal(queue.length, 6);
+  assert.ok(queue.filter((task) => task.validationCommand === 'npm test -- pantrypal').length >= 5);
 });
 
 test('buildQueueWithAutoSeed seeds when queue has no ready tasks even if size is not light', () => {
