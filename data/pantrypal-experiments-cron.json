@@ -11,5 +11,31 @@
     "experimentWindowDays": 10,
     "guardrail": "notification opt-out rate stays below 1.6%",
     "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
+  },
+  {
+    "name": "Post-checkout pantry scan nudge for first-week households",
+    "impact": 0.84,
+    "confidence": 0.72,
+    "ease": 0.74,
+    "pantryPalFit": 0.95,
+    "primaryMetric": "week-1 pantry scan completion rate",
+    "targetLiftPct": 8,
+    "minimumSampleSize": 1700,
+    "experimentWindowDays": 14,
+    "guardrail": "session abandonment does not increase by >1.2%",
+    "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js"
+  },
+  {
+    "name": "Sunday prep planner with expiring-ingredient auto-fill",
+    "impact": 0.9,
+    "confidence": 0.69,
+    "ease": 0.62,
+    "pantryPalFit": 0.98,
+    "primaryMetric": "weekly rescue plan creation rate",
+    "targetLiftPct": 11,
+    "minimumSampleSize": 1800,
+    "experimentWindowDays": 14,
+    "guardrail": "recipe dismiss rate stays below 18%",
+    "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
   }
 ]
