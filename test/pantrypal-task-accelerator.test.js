@@ -144,9 +144,11 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.queueSize, 1);
   assert.equal(health.readyTasks, 0);
   assert.equal(health.blockedTasks, 1);
+  assert.equal(health.readinessPct, 0);
   assert.equal(health.isLight, true);
   assert.equal(health.threshold, 2);
   assert.equal(health.minimumScore, 60);
+  assert.match(health.nextAction, /Resolve blockers or auto-seed fresh PantryPal experiments/);
 });
 
 test('pickImmediateExecution chooses top queue item and includes acceptance checklist gating + validation step', () => {
@@ -249,7 +251,17 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
     [{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 91.23, owner: 'growth', acceptanceCriteria: ['a', 'b'] }],
     { taskId: 'PP-GROWTH-001-foo', title: 'Foo', acceptanceChecklist: ['c1'], executionNow: ['step1'] },
     { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 1234, outputSnippet: 'ok' },
-    { incomingExperiments: 3, eligibleExperiments: 2, queueSize: 1, readyTasks: 1, blockedTasks: 0, isLight: true, threshold: 2 }
+    {
+      incomingExperiments: 3,
+      eligibleExperiments: 2,
+      queueSize: 1,
+      readyTasks: 1,
+      blockedTasks: 0,
+      readinessPct: 100,
+      isLight: true,
+      threshold: 2,
+      nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
+    }
   );
 
   assert.match(markdown, /PantryPal Task Queue/);
@@ -257,6 +269,8 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Queue Health/);
   assert.match(markdown, /Ready tasks: 1/);
   assert.match(markdown, /Blocked tasks: 0/);
+  assert.match(markdown, /Readiness: 100%/);
+  assert.match(markdown, /Next action: Execute top ready PantryPal experiment now/);
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Critical Acceptance Checklist/);
   assert.match(markdown, /Launch Steps/);
@@ -270,13 +284,25 @@ test('formatTaskJson emits seeded metadata and validation payload', () => {
     { taskId: 'PP-GROWTH-001-foo', title: 'Foo', acceptanceChecklist: ['c1'], executionNow: ['step1'] },
     { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 20, outputSnippet: 'ok' },
     { seeded: true, generatedAt: '2026-02-28T01:56:00.000Z' },
-    { incomingExperiments: 4, eligibleExperiments: 3, queueSize: 1, isLight: true, threshold: 2 }
+    {
+      incomingExperiments: 4,
+      eligibleExperiments: 3,
+      queueSize: 1,
+      readyTasks: 1,
+      blockedTasks: 0,
+      readinessPct: 100,
+      isLight: true,
+      threshold: 2,
+      nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
+    }
   );
 
   const parsed = JSON.parse(json);
   assert.equal(parsed.seeded, true);
   assert.equal(parsed.generatedAt, '2026-02-28T01:56:00.000Z');
   assert.equal(parsed.health.eligibleExperiments, 3);
+  assert.equal(parsed.health.readinessPct, 100);
+  assert.match(parsed.health.nextAction, /Execute top ready PantryPal experiment now/);
   assert.equal(parsed.queue.length, 1);
   assert.equal(parsed.immediateExecution.taskId, 'PP-GROWTH-001-foo');
   assert.equal(parsed.validation.status, 'PASS');

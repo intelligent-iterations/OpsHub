@@ -191,6 +191,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     : ranked;
   const readyTasks = queue.filter((task) => task.isReady !== false).length;
   const blockedTasks = Math.max(0, queue.length - readyTasks);
+  const readinessPct = queue.length ? Math.round((readyTasks / queue.length) * 100) : 0;
 
   return {
     incomingExperiments: experiments.length,
@@ -198,9 +199,13 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     queueSize: queue.length,
     readyTasks,
     blockedTasks,
+    readinessPct,
     isLight: isQueueLight(queue, threshold),
     threshold,
-    minimumScore: typeof minimumScore === 'number' ? minimumScore : null
+    minimumScore: typeof minimumScore === 'number' ? minimumScore : null,
+    nextAction: blockedTasks > 0 && readyTasks === 0
+      ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
+      : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
   };
 }
 
@@ -320,7 +325,9 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Queue size: ${health.queueSize}`,
       `Ready tasks: ${health.readyTasks ?? 'n/a'}`,
       `Blocked tasks: ${health.blockedTasks ?? 'n/a'}`,
-      `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`
+      `Readiness: ${health.readinessPct ?? 'n/a'}%`,
+      `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
+      `Next action: ${health.nextAction ?? 'n/a'}`
     ].join('\n')
     : 'Queue health unavailable';
 

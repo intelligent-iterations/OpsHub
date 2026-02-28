@@ -1,0 +1,93 @@
+{
+  "generatedAt": "2026-02-28T02:30:39.781Z",
+  "seeded": true,
+  "health": {
+    "incomingExperiments": 3,
+    "eligibleExperiments": 1,
+    "queueSize": 3,
+    "readyTasks": 3,
+    "blockedTasks": 0,
+    "readinessPct": 100,
+    "isLight": false,
+    "threshold": 2,
+    "minimumScore": 75,
+    "nextAction": "Execute top ready PantryPal experiment now and monitor first-hour guardrail."
+  },
+  "queue": [
+    {
+      "id": "PP-GROWTH-001-personalized-rescue-recipes-from-expiring-inventory",
+      "title": "Personalized rescue recipes from expiring inventory",
+      "score": 80.2,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+      "acceptanceCriteria": [
+        "Experiment spec includes hypothesis, segment, channel, and success metric (weekly meal-plan saves).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 12%.",
+        "Sample-size gate is defined: at least 1200 qualified households over 14 days.",
+        "Guardrail is monitored and passes: recipe dismiss rate stays below 20%.",
+        "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
+        "Decision log is updated with launch date, owner, and rollback trigger."
+      ],
+      "blockedReasons": [],
+      "isReady": true
+    },
+    {
+      "id": "PP-GROWTH-002-rescue-streak-comeback-experiment-for-lapsed-households",
+      "title": "Rescue streak comeback experiment for lapsed households",
+      "score": 78.95,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
+      "acceptanceCriteria": [
+        "Experiment spec includes hypothesis, segment, channel, and success metric (week-2 rescue completion rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 10%.",
+        "Sample-size gate is defined: at least 1600 qualified households over 14 days.",
+        "Guardrail is monitored and passes: notification opt-out rate stays below 1.5%.",
+        "Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.",
+        "Decision log is updated with launch date, owner, and rollback trigger."
+      ],
+      "blockedReasons": [],
+      "isReady": true
+    },
+    {
+      "id": "PP-GROWTH-003-smart-defrost-reminder-timing-tuned-by-prep-time-tier",
+      "title": "Smart defrost reminder timing tuned by prep-time tier",
+      "score": 76.45,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+      "acceptanceCriteria": [
+        "Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 7%.",
+        "Sample-size gate is defined: at least 1400 qualified households over 10 days.",
+        "Guardrail is monitored and passes: push dismiss rate does not increase by >2%.",
+        "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
+        "Decision log is updated with launch date, owner, and rollback trigger."
+      ],
+      "blockedReasons": [],
+      "isReady": true
+    }
+  ],
+  "immediateExecution": {
+    "taskId": "PP-GROWTH-001-personalized-rescue-recipes-from-expiring-inventory",
+    "title": "Personalized rescue recipes from expiring inventory",
+    "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+    "acceptanceChecklist": [
+      "Experiment spec includes hypothesis, segment, channel, and success metric (weekly meal-plan saves).",
+      "A/B test is configured with event instrumentation and minimum detectable lift target of 12%.",
+      "Sample-size gate is defined: at least 1200 qualified households over 14 days."
+    ],
+    "executionNow": [
+      "Draft experiment brief in tracker with owner + rollout window.",
+      "Prepare treatment/control variants and QA events in staging.",
+      "Gate launch against acceptance checklist (3 critical checks).",
+      "Run validation: npm test -- test/pantrypal-task-accelerator.test.js.",
+      "Launch to 10% holdout split and monitor first-hour guardrail."
+    ]
+  },
+  "validation": {
+    "status": "PASS",
+    "command": "npm test -- test/pantrypal-task-accelerator.test.js",
+    "exitCode": 0,
+    "durationMs": 187,
+    "outputSnippet": "# tests 18\n# suites 0\n# pass 18\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 57.435"
+  }
+}
