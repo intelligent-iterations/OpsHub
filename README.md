@@ -61,7 +61,7 @@ npm run lint:report-templates
 ## Endpoints
 
 - `GET /api/health` → health check
-- `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays; each in-progress task includes `id`, `task`, `description`, and `priority`; `subagents.diagnostics` reports sync drift/missing IDs between kanban and payload)
+- `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays; each in-progress task includes `id`, `task`, `description`, and `priority`; `subagents.diagnostics` reports sync drift/missing IDs between kanban and payload; `subagents.behaviorGap` includes proactive-loop passive-wait and blocker-protocol compliance KPI thresholds)
 - `GET /api/kanban` → kanban board + activity log
 - `POST /api/kanban/task` → create task
 - `POST /api/kanban/move` → move task to another column

@@ -9,7 +9,8 @@
     "qa:evidence-check": "node scripts/qa-evidence-integrity-checker.js",
     "lint:report-templates": "node scripts/report-template-lint.js",
     "paywall:sequential-check": "node scripts/paywall-sequential-check.js",
-    "cleanup:inprogress-stale": "node scripts/inprogress-stale-cleanup.js"
+    "cleanup:inprogress-stale": "node scripts/inprogress-stale-cleanup.js",
+    "report:mgap-kpi": "node scripts/manager-gap-kpi-report.js"
   },
   "dependencies": {
     "express": "^4.21.2"
