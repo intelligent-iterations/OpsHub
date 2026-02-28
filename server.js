@@ -126,36 +126,46 @@ async function safeExec(command, cwd = WORKSPACE) {
 
 async function getSubagentsData() {
   const board = await loadKanban();
-  const activeFromKanban = (board.columns.inProgress || []).map((t) => ({
+
+  // 1) Ground truth for current tasks = kanban In Progress
+  const taskItems = (board.columns.inProgress || []).map((t) => ({
     id: t.id,
     task: t.name,
     status: 'In Progress',
     source: 'OpsHub kanban'
   }));
 
-  const ps = await safeExec("ps -ax -o pid=,command= | grep -i 'subagent' | grep -v grep | head -n 20");
-  const activeFromPs = ps.ok
-    ? ps.stdout
-        .split('\n')
-        .filter(Boolean)
-        .map((line) => {
-          const trimmed = line.trim();
-          const firstSpace = trimmed.indexOf(' ');
-          return {
-            id: firstSpace > -1 ? trimmed.slice(0, firstSpace) : trimmed,
-            task: firstSpace > -1 ? trimmed.slice(firstSpace + 1) : trimmed,
-            status: 'Running',
-            source: 'process list'
-          };
-        })
-    : [];
+  // 2) Runtime sub-agent sessions from OpenClaw session store (recently active only)
+  const sess = await safeExec('~/.openclaw/bin/openclaw sessions --active 30 --json');
+  let runtimeItems = [];
 
-  const merged = [...activeFromPs, ...activeFromKanban];
-  const reason = merged.length
-    ? null
-    : 'No direct OpenClaw subagent runtime API is available in this environment; showing inferred status only.';
+  if (sess.ok && sess.stdout?.trim()) {
+    try {
+      const parsed = JSON.parse(sess.stdout);
+      const sessions = Array.isArray(parsed?.sessions) ? parsed.sessions : [];
+      runtimeItems = sessions
+        .filter((s) => typeof s?.key === 'string' && s.key.includes(':subagent:'))
+        .filter((s) => Number(s?.ageMs ?? Number.MAX_SAFE_INTEGER) <= 3 * 60 * 1000)
+        .filter((s) => !s?.abortedLastRun)
+        .map((s) => ({
+          id: s.key,
+          task: s.lastUserMessage || s.sessionId || s.key,
+          status: 'Active',
+          source: 'OpenClaw sessions (last 3m)'
+        }));
+    } catch {
+      runtimeItems = [];
+    }
+  }
 
-  return { items: merged, reason };
+  return {
+    items: [...runtimeItems, ...taskItems],
+    reason: null,
+    counts: {
+      activeSubagents: runtimeItems.length,
+      inProgressTasks: taskItems.length
+    }
+  };
 }
 
 async function getSessionsData() {
