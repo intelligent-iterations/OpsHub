@@ -45,17 +45,6 @@
     ],
     "todo": [
       {
-        "id": "137aa1cf-889a-46ed-a232-e9ee493dad9a",
-        "name": "Smoke task",
-        "description": "verify kanban",
-        "priority": "high",
-        "status": "todo",
-        "createdAt": "2026-02-28T00:59:21.035Z",
-        "completedAt": null,
-        "source": "manual",
-        "updatedAt": "2026-02-28T03:29:59.234Z"
-      },
-      {
         "id": "33be643c-9cf8-4691-9a22-0b597f8e5e07",
         "name": "Smoke task",
         "description": "verify kanban",
@@ -698,6 +687,16 @@
     ],
     "inProgress": [
       {
+        "id": "13378b91-67e1-4afd-bc49-11877a2fc1ee",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T17:01:22.776Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
         "id": "25fa2267-b977-410e-b401-c83ba6b96a81",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
@@ -1080,6 +1079,39 @@
     ],
     "done": [
       {
+        "id": "137aa1cf-889a-46ed-a232-e9ee493dad9a",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:59:21.035Z",
+        "completedAt": "2026-02-28T17:01:33.068Z",
+        "source": "manual",
+        "updatedAt": "2026-02-28T17:01:33.068Z",
+        "completionDetails": "Smoke verification complete for OpsHub kanban/API flow. Verification run (2026-02-28): npm test (77/77 passing, includes kanban create/move/lifecycle coverage in test/api.test.js). GitHub evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/README.md ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json",
+        "evidence": "https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js"
+      },
+      {
+        "id": "a0f85cfb-c4e5-4bc5-9015-f595cc085a57",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T17:01:22.751Z",
+        "completedAt": "2026-02-28T17:01:22.769Z",
+        "source": "manual"
+      },
+      {
+        "id": "323e8687-ec02-4546-b3d3-847cf7e2e886",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T17:01:22.728Z",
+        "completedAt": "2026-02-28T17:01:22.737Z",
+        "source": "manual"
+      },
+      {
         "id": "09368e4a-c861-4ef0-be62-8d3e16f4b7bf",
         "name": "Lifecycle task",
         "description": "",
@@ -1089,8 +1121,8 @@
         "completedAt": "2026-02-28T17:01:08.711Z",
         "source": "manual",
         "updatedAt": "2026-02-28T17:01:08.711Z",
-        "completionDetails": "Verified lifecycle implementation/tests and closed task with GitHub-backed evidence. Validation run (2026-02-28): npm test (77/77 passing), including lifecycle coverage for completedAt semantics on reopen. Evidence: https://github.com/larryclaw/OpsHub/commit/d62d4650e0fcaae7158fbefb20f5ea1f6896257e ; https://github.com/larryclaw/OpsHub/blob/d62d4650e0fcaae7158fbefb20f5ea1f6896257e/server.js ; https://github.com/larryclaw/OpsHub/blob/d62d4650e0fcaae7158fbefb20f5ea1f6896257e/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json",
-        "evidence": "https://github.com/larryclaw/OpsHub/commit/d62d4650e0fcaae7158fbefb20f5ea1f6896257e"
+        "completionDetails": "Verified lifecycle implementation/tests and closed task with GitHub-backed evidence. Validation run (2026-02-28): npm test (77/77 passing), including lifecycle coverage for completedAt semantics on reopen. Implementation evidence: https://github.com/intelligent-iterations/OpsHub/commit/d62d4650e0fcaae7158fbefb20f5ea1f6896257e ; https://github.com/intelligent-iterations/OpsHub/blob/d62d4650e0fcaae7158fbefb20f5ea1f6896257e/server.js ; https://github.com/intelligent-iterations/OpsHub/blob/d62d4650e0fcaae7158fbefb20f5ea1f6896257e/test/api.test.js . Closure evidence: https://github.com/intelligent-iterations/OpsHub/commit/b221347fefa94518535f1c469c5dd258fd01ba27 ; https://github.com/intelligent-iterations/OpsHub/blob/main/data/kanban.json",
+        "evidence": "https://github.com/intelligent-iterations/OpsHub/commit/b221347fefa94518535f1c469c5dd258fd01ba27"
       },
       {
         "id": "6bf91516-01da-4ff4-8c20-2cafa04cfb2c",
@@ -4066,6 +4098,67 @@
     ]
   },
   "activityLog": [
+    {
+      "id": "log-1772298093068",
+      "type": "task_moved",
+      "taskId": "137aa1cf-889a-46ed-a232-e9ee493dad9a",
+      "taskName": "Smoke task",
+      "from": "todo",
+      "to": "done",
+      "timestamp": "2026-02-28T17:01:33.068Z",
+      "detail": "Smoke task closed after verification run with GitHub-backed evidence links."
+    },
+    {
+      "at": "2026-02-28T17:01:22.776Z",
+      "type": "task_added",
+      "taskId": "13378b91-67e1-4afd-bc49-11877a2fc1ee",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:01:22.769Z",
+      "type": "task_moved",
+      "taskId": "a0f85cfb-c4e5-4bc5-9015-f595cc085a57",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T17:01:22.763Z",
+      "type": "task_moved",
+      "taskId": "a0f85cfb-c4e5-4bc5-9015-f595cc085a57",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T17:01:22.751Z",
+      "type": "task_added",
+      "taskId": "a0f85cfb-c4e5-4bc5-9015-f595cc085a57",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T17:01:22.737Z",
+      "type": "task_moved",
+      "taskId": "323e8687-ec02-4546-b3d3-847cf7e2e886",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T17:01:22.728Z",
+      "type": "task_added",
+      "taskId": "323e8687-ec02-4546-b3d3-847cf7e2e886",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
     {
       "timestamp": "2026-02-28T17:01:08.711Z",
       "type": "task_moved",
