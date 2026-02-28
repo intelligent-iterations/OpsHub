@@ -317,6 +317,8 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.readyTasks, 0);
   assert.equal(health.blockedTasks, 1);
   assert.equal(health.readinessPct, 0);
+  assert.deepEqual(health.topReadyTaskIds, []);
+  assert.equal(health.topReadyScore, 0);
   assert.equal(health.topBlockedReasons.length, 1);
   assert.match(health.topBlockedReasons[0].reason, /legal sign-off/);
   assert.equal(health.scoreAverage, queue[0].score);
@@ -357,6 +359,26 @@ test('createQueueHealthSnapshot applies custom minimumCriteria thresholds', () =
 
   assert.equal(health.minimumCriteria, 6);
   assert.deepEqual(health.tasksBelowCriteriaThreshold, ['PP-GROWTH-001-strong']);
+});
+
+test('createQueueHealthSnapshot exposes top ready tasks sorted by score', () => {
+  const experiments = [
+    { name: 'A', impact: 0.9, confidence: 0.8, ease: 0.7, pantryPalFit: 0.9 },
+    { name: 'B', impact: 0.8, confidence: 0.8, ease: 0.8, pantryPalFit: 0.9 },
+    { name: 'C', impact: 0.7, confidence: 0.7, ease: 0.8, pantryPalFit: 0.9 },
+    { name: 'D', impact: 0.9, confidence: 0.9, ease: 0.8, pantryPalFit: 0.95 }
+  ];
+  const queue = [
+    { id: 'PP-1', title: 'One', score: 75, acceptanceCriteria: ['a'], blockedReasons: [], isReady: true },
+    { id: 'PP-2', title: 'Two', score: 92, acceptanceCriteria: ['a'], blockedReasons: [], isReady: true },
+    { id: 'PP-3', title: 'Three', score: 81, acceptanceCriteria: ['a'], blockedReasons: [], isReady: true },
+    { id: 'PP-4', title: 'Four', score: 88, acceptanceCriteria: ['a'], blockedReasons: ['policy'], isReady: false }
+  ];
+
+  const health = createQueueHealthSnapshot(experiments, queue);
+
+  assert.deepEqual(health.topReadyTaskIds, ['PP-2', 'PP-3', 'PP-1']);
+  assert.equal(health.topReadyScore, 92);
 });
 
 test('pickImmediateExecution chooses top queue item and includes acceptance checklist gating + validation step', () => {

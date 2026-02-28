@@ -346,6 +346,11 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const readyTasks = countReadyTasks(queue);
   const blockedTasks = Math.max(0, queue.length - readyTasks);
   const readinessPct = queue.length ? Math.round((readyTasks / queue.length) * 100) : 0;
+  const readyQueue = queue
+    .filter((task) => task && task.isReady !== false)
+    .sort((a, b) => (Number(b.score) || 0) - (Number(a.score) || 0));
+  const topReadyTaskIds = readyQueue.slice(0, 3).map((task) => task.id);
+  const topReadyScore = readyQueue.length ? Number(readyQueue[0].score) || 0 : 0;
   const topBlockedReasons = summarizeBlockedReasons(queue);
   const acceptanceAudit = createTaskAcceptanceAudit(queue, options.minimumCriteria);
   const scoreSummary = summarizeQueueScores(queue);
@@ -358,6 +363,8 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     readyTasks,
     blockedTasks,
     readinessPct,
+    topReadyTaskIds,
+    topReadyScore,
     topBlockedReasons,
     scoreAverage: scoreSummary.average,
     scoreMedian: scoreSummary.median,
