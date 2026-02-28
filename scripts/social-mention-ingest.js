@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { prioritizeWithGuardrails } = require('./pantrypal-priority-guardrails');
 
 function normalizeMentions(rawMentions, text) {
   const fromArray = Array.isArray(rawMentions) ? rawMentions : [];
@@ -287,7 +288,19 @@ function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = consol
   const addedTaskIds = [];
   let skippedDuplicateCount = 0;
 
-  for (const payload of taskPayloads || []) {
+  const normalizedPayloadTasks = (taskPayloads || []).map((payload) => ({
+    id: String(payload?.source?.messageId || payload?.title || `payload-${Date.now()}`),
+    name: payload?.title || 'Slack follow-up task',
+    description: Array.isArray(payload?.acceptanceCriteria) ? payload.acceptanceCriteria.join(' | ') : '',
+    source: 'slack-social-mention',
+    priority: payload?.priority || 'medium',
+    _payload: payload
+  }));
+
+  const guardrailed = prioritizeWithGuardrails(normalizedPayloadTasks, { syntheticCap: 2 });
+
+  for (const task of guardrailed.prioritized) {
+    const payload = task._payload;
     const messageId = String(payload?.source?.messageId || '').trim();
     if (messageId && existingMessageIds.has(messageId)) {
       skippedDuplicateCount += 1;
@@ -331,14 +344,37 @@ function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = consol
     if (messageId) existingMessageIds.add(messageId);
   }
 
+  const quarantinedTaskIds = [];
+  for (const task of guardrailed.quarantined) {
+    const payload = task._payload;
+    const messageId = String(payload?.source?.messageId || '').trim() || null;
+    const quarantineId = `quarantine-social-${messageId || Date.now().toString(36)}`;
+    board.columns.backlog.unshift({
+      id: quarantineId,
+      name: `[Quarantine] ${payload?.title || 'Synthetic social task'}`,
+      description: 'Auto-quarantined by PantryPal priority guardrails due to synthetic churn cap.',
+      priority: 'low',
+      status: 'backlog',
+      source: 'pantrypal-priority-guardrails',
+      sourceMessageId: messageId,
+      createdAt: now,
+      updatedAt: now,
+      completedAt: null,
+      startedAt: null
+    });
+    quarantinedTaskIds.push(quarantineId);
+  }
+
   fs.writeFileSync(kanbanPath, `${JSON.stringify(board, null, 2)}\n`);
-  logger.info?.(`[social-mention-ingest] enqueued ${addedTaskIds.length} task(s) to kanban`);
+  logger.info?.(`[social-mention-ingest] enqueued ${addedTaskIds.length} task(s) to kanban; quarantined ${quarantinedTaskIds.length}`);
 
   return {
     attempted: true,
     addedCount: addedTaskIds.length,
     skippedDuplicateCount,
     addedTaskIds,
+    quarantinedCount: quarantinedTaskIds.length,
+    quarantinedTaskIds,
     reason: null,
   };
 }

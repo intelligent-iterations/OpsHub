@@ -1,0 +1,5 @@
+# Claude Code Usage Evidence (QDRIFT-04)
+Sat Feb 28 17:32:17 UTC 2026
+
+$ /opt/homebrew/bin/claude --version
+2.1.50 (Claude Code)

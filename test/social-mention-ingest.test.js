@@ -213,6 +213,7 @@ test('enqueueTaskPayloadsToKanban adds todo cards and skips existing source mess
       logger: { info: () => {} },
     });
     assert.equal(first.addedCount, 1);
+    assert.equal(first.quarantinedCount, 0);
 
     const second = enqueueTaskPayloadsToKanban({
       kanbanPath,
@@ -231,6 +232,34 @@ test('enqueueTaskPayloadsToKanban adds todo cards and skips existing source mess
     const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
     assert.equal(board.columns.todo.length, 1);
     assert.equal(board.columns.todo[0].sourceMessageId, 'm-1');
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('enqueueTaskPayloadsToKanban quarantines synthetic churn overflow beyond cap', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-quarantine-'));
+  const kanbanPath = join(dir, 'kanban.json');
+  try {
+    await writeFile(kanbanPath, JSON.stringify({ columns: { backlog: [], todo: [], inProgress: [], done: [] }, activityLog: [] }, null, 2), 'utf8');
+
+    const result = enqueueTaskPayloadsToKanban({
+      kanbanPath,
+      taskPayloads: [
+        { title: 'Smoke lifecycle run 1', priority: 'high', source: { messageId: 's-1' } },
+        { title: 'Smoke lifecycle run 2', priority: 'high', source: { messageId: 's-2' } },
+        { title: 'Smoke lifecycle run 3', priority: 'high', source: { messageId: 's-3' } },
+        { title: 'PantryPal rescue optimization', priority: 'medium', source: { messageId: 'p-1' } }
+      ],
+      logger: { info: () => {} },
+    });
+
+    assert.equal(result.addedCount, 3);
+    assert.equal(result.quarantinedCount, 1);
+
+    const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
+    assert.equal(board.columns.todo.some((t) => String(t.name).includes('PantryPal rescue optimization')), true);
+    assert.equal(board.columns.backlog.some((t) => String(t.name).startsWith('[Quarantine]')), true);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

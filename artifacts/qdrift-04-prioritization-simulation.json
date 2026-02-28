@@ -1,0 +1,136 @@
+{
+  "generatedAt": "2026-02-28T17:32:27.824Z",
+  "before": {
+    "totalTodo": 56,
+    "pantryPalTodo": 3,
+    "syntheticTodo": 51
+  },
+  "after": {
+    "prioritizedCount": 7,
+    "quarantinedCount": 49,
+    "top10": [
+      {
+        "id": "a599d0e6-0d5d-47d2-b37d-909e7b568737",
+        "name": "[P25][PantryPal] Design rescue onboarding v2 with first-week habit loop and confidence nudges",
+        "priority": "high",
+        "score": 6,
+        "pantryPal": true,
+        "synthetic": false
+      },
+      {
+        "id": "0b442283-465d-4414-813a-35d7f884540b",
+        "name": "[QDRIFT-05] Add synthetic task TTL + auto-expiry sweep",
+        "priority": "high",
+        "score": 4,
+        "pantryPal": true,
+        "synthetic": true
+      },
+      {
+        "id": "dcfa1330-237f-41dc-ae5e-6dcc41abd92c",
+        "name": "[QDRIFT-06] Enforce strategic queue reservation + priority writeback",
+        "priority": "critical",
+        "score": 3,
+        "pantryPal": true,
+        "synthetic": true
+      },
+      {
+        "id": "c24d8d6f-1a0f-4f1f-8c73-3f2c8bb6e2af",
+        "name": "[P31][Growth] Build dormant-user segment builder + holdout calculator for win-back experiments",
+        "priority": "high",
+        "score": 3,
+        "pantryPal": false,
+        "synthetic": false
+      },
+      {
+        "id": "d916e7ac-c663-4a28-bf85-74889c687148",
+        "name": "Move target",
+        "priority": "medium",
+        "score": 2,
+        "pantryPal": false,
+        "synthetic": false
+      },
+      {
+        "id": "62827ebf-a8d8-45ba-9a1c-b350205f4038",
+        "name": "Move target",
+        "priority": "medium",
+        "score": 2,
+        "pantryPal": false,
+        "synthetic": false
+      },
+      {
+        "id": "cc607f30-7779-4c6d-8343-0f0789b8916c",
+        "name": "[P25][OpenClaw] Implement Slack update target resolver + fallback routing for heartbeat posts",
+        "priority": "medium",
+        "score": 2,
+        "pantryPal": false,
+        "synthetic": false
+      }
+    ],
+    "quarantinedTop10": [
+      {
+        "id": "871e603d-6642-4377-9628-b2c91753e05e",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "d349be01-1e8d-465a-ae3f-becfe2f83c05",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "11d56fdb-a8c2-42ee-b2f1-19302e164a6e",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "2c5da22d-d8a2-4743-bac5-88e5b58329a5",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "dc28731a-d552-4795-b50d-8c0ae81ef901",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "d656458e-4064-439c-84b5-7b2b05a25935",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "493f7449-ef0c-409c-bbe0-4a585df52587",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "81686976-b7bf-44c3-96d9-d6396852baa8",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "7f937f03-2429-4e95-9a11-2e860031e981",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      },
+      {
+        "id": "32b222b2-4565-4d9f-8211-b152c5015568",
+        "name": "Smoke task",
+        "priority": "high",
+        "score": 1
+      }
+    ]
+  },
+  "wip": {
+    "total": 79,
+    "pantryPal": 7
+  }
+}
