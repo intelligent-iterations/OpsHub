@@ -149,6 +149,11 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.equal(integrationTask.description, 'should appear in subagents.inProgressTasks');
     assert.equal(integrationTask.priority, 'medium');
 
+    assert.ok(body.subagents.diagnostics);
+    assert.equal(body.subagents.diagnostics.syncOk, true);
+    assert.deepEqual(body.subagents.diagnostics.missingFromPayload, []);
+    assert.deepEqual(body.subagents.diagnostics.tasksMissingStableId, []);
+
     assert.ok(Array.isArray(body.sessions));
     assert.ok(Array.isArray(body.errors));
     assert.ok(body.tokenUsage);

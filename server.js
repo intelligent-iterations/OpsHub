@@ -124,18 +124,53 @@ async function safeExec(command, cwd = WORKSPACE) {
   }
 }
 
+function normalizeInProgressTask(task, index) {
+  const rawId = cleanText(task?.id, 200);
+  const hasStableId = Boolean(rawId);
+  return {
+    id: hasStableId ? rawId : `kanban-inprogress-${index}`,
+    task: cleanText(task?.name, 200) || '(untitled task)',
+    description: cleanText(task?.description, 2000),
+    priority: VALID_PRIORITIES.includes(task?.priority) ? task.priority : 'medium',
+    status: 'In Progress',
+    source: 'OpsHub kanban',
+    _kanbanId: hasStableId ? rawId : null
+  };
+}
+
+function buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks) {
+  const kanbanIds = rawInProgress.map((t) => cleanText(t?.id, 200)).filter(Boolean);
+  const payloadIds = inProgressTasks.map((t) => t._kanbanId).filter(Boolean);
+
+  const missingFromPayload = kanbanIds.filter((id) => !payloadIds.includes(id));
+  const extrasInPayload = payloadIds.filter((id) => !kanbanIds.includes(id));
+  const tasksMissingStableId = inProgressTasks
+    .filter((t) => !t._kanbanId)
+    .map((t) => ({ id: t.id, task: t.task }));
+
+  const duplicatePayloadIds = payloadIds.filter((id, i) => payloadIds.indexOf(id) !== i);
+
+  return {
+    syncOk:
+      missingFromPayload.length === 0 &&
+      extrasInPayload.length === 0 &&
+      duplicatePayloadIds.length === 0 &&
+      tasksMissingStableId.length === 0,
+    kanbanInProgressCount: rawInProgress.length,
+    payloadInProgressCount: inProgressTasks.length,
+    missingFromPayload,
+    extrasInPayload,
+    duplicatePayloadIds: [...new Set(duplicatePayloadIds)],
+    tasksMissingStableId
+  };
+}
+
 async function getSubagentsData() {
   const board = await loadKanban();
 
   // 1) Ground truth for current tasks = kanban In Progress
-  const inProgressTasks = (board.columns.inProgress || []).map((t) => ({
-    id: t.id,
-    task: t.name,
-    description: t.description || '',
-    priority: t.priority || 'medium',
-    status: 'In Progress',
-    source: 'OpsHub kanban'
-  }));
+  const rawInProgress = Array.isArray(board?.columns?.inProgress) ? board.columns.inProgress : [];
+  const inProgressTasks = rawInProgress.map((t, idx) => normalizeInProgressTask(t, idx));
 
   // 2) Runtime sub-agent sessions from OpenClaw session store (recently active only)
   const sess = await safeExec('~/.openclaw/bin/openclaw sessions --active 30 --json');
@@ -160,13 +195,16 @@ async function getSubagentsData() {
     }
   }
 
+  const diagnostics = buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks);
+
   return {
     // Backward-compatible merged list used by current UI
     items: [...activeSubagents, ...inProgressTasks],
     // Explicit contract fields for integrations
     activeSubagents,
-    inProgressTasks,
-    reason: null,
+    inProgressTasks: inProgressTasks.map(({ _kanbanId, ...task }) => task),
+    diagnostics,
+    reason: diagnostics.syncOk ? null : 'kanban inProgress and dashboard payload require reconciliation',
     counts: {
       activeSubagents: activeSubagents.length,
       inProgressTasks: inProgressTasks.length
@@ -432,5 +470,7 @@ module.exports = {
   createApp,
   startServer,
   loadKanban,
-  saveKanban
+  saveKanban,
+  normalizeInProgressTask,
+  buildInProgressSyncDiagnostics
 };
