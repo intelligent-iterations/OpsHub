@@ -478,4 +478,54 @@ test('parseCliOptions captures sync-kanban and kanban-file flags', () => {
   const options = parseCliOptions(['--sync-kanban', '--kanban-file', 'data/kanban.json']);
   assert.equal(options.syncKanban, true);
   assert.equal(options.kanbanFile, 'data/kanban.json');
+  assert.equal(options.readyOnlySync, false);
+});
+
+test('parseCliOptions captures ready-only-sync flag', () => {
+  const options = parseCliOptions(['--sync-kanban', '--kanban-file', 'data/kanban.json', '--ready-only-sync']);
+  assert.equal(options.syncKanban, true);
+  assert.equal(options.readyOnlySync, true);
+});
+
+test('syncQueueToKanban can skip blocked tasks in ready-only mode', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-kanban-ready-only-'));
+  const kanbanFile = path.join(tempDir, 'kanban.json');
+  fs.writeFileSync(kanbanFile, JSON.stringify({ columns: { todo: [] }, activityLog: [] }), 'utf8');
+
+  const result = syncQueueToKanban([
+    {
+      id: 'PP-GROWTH-010-ready',
+      title: 'Ready task',
+      score: 82,
+      owner: 'growth-oncall',
+      validationCommand: 'npm test',
+      acceptanceCriteria: ['c1'],
+      blockedReasons: [],
+      isReady: true
+    },
+    {
+      id: 'PP-GROWTH-011-blocked',
+      title: 'Blocked task',
+      score: 84,
+      owner: 'growth-oncall',
+      validationCommand: 'npm test',
+      acceptanceCriteria: ['c1'],
+      blockedReasons: ['External dependency: legal sign-off'],
+      isReady: false
+    }
+  ], {
+    kanbanFile,
+    source: 'unit-test',
+    now: '2026-02-28T03:20:00.000Z',
+    readyOnly: true
+  });
+
+  const persisted = JSON.parse(fs.readFileSync(kanbanFile, 'utf8'));
+  assert.equal(result.synced, true);
+  assert.equal(result.readyOnly, true);
+  assert.equal(result.attempted, 1);
+  assert.equal(result.skippedBlocked, 1);
+  assert.equal(result.inserted, 1);
+  assert.equal(persisted.columns.todo.length, 1);
+  assert.equal(persisted.columns.todo[0].id, 'PP-GROWTH-010-ready');
 });

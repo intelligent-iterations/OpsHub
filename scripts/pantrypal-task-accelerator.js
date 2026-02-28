@@ -432,7 +432,8 @@ function parseCliOptions(argv = []) {
     defaultOwner: 'growth-oncall',
     validationCommand: null,
     syncKanban: false,
-    kanbanFile: null
+    kanbanFile: null,
+    readyOnlySync: false
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -471,6 +472,10 @@ function parseCliOptions(argv = []) {
 
     if (rawFlag === '--sync-kanban') {
       options.syncKanban = true;
+    }
+
+    if (rawFlag === '--ready-only-sync') {
+      options.readyOnlySync = true;
     }
   }
 
@@ -562,11 +567,17 @@ function syncQueueToKanban(taskQueue, options = {}) {
     return { synced: false, inserted: 0, reason: 'No kanban file configured.' };
   }
 
+  const readyOnly = options.readyOnly === true;
+  const sourceQueue = readyOnly
+    ? taskQueue.filter((task) => task && task.isReady !== false)
+    : taskQueue;
+  const skippedBlocked = Math.max(0, taskQueue.length - sourceQueue.length);
+
   const resolvedPath = path.resolve(process.cwd(), options.kanbanFile);
   const raw = fs.readFileSync(resolvedPath, 'utf8');
   const kanban = JSON.parse(raw);
 
-  const result = upsertQueueIntoKanban(taskQueue, kanban, {
+  const result = upsertQueueIntoKanban(sourceQueue, kanban, {
     source: options.source,
     now: options.now
   });
@@ -578,6 +589,9 @@ function syncQueueToKanban(taskQueue, options = {}) {
   return {
     synced: true,
     inserted: result.inserted,
+    attempted: sourceQueue.length,
+    skippedBlocked,
+    readyOnly,
     kanbanFile: options.kanbanFile
   };
 }
@@ -645,7 +659,8 @@ if (require.main === module) {
   const syncResult = cliOptions.syncKanban
     ? syncQueueToKanban(queue, {
       kanbanFile: cliOptions.kanbanFile,
-      source: 'pantrypal-task-accelerator'
+      source: 'pantrypal-task-accelerator',
+      readyOnly: cliOptions.readyOnlySync
     })
     : { synced: false, inserted: 0, reason: 'Sync disabled.' };
 
