@@ -172,7 +172,7 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
   const queueIsLight = isQueueLight(queue, options.lightThreshold);
   const readyCapacityIsLight = isExecutionCapacityLight(queue, readyLightThreshold);
 
-  if (queueIsLight || readyCapacityIsLight) {
+  if (options.autoSeed !== false && (queueIsLight || readyCapacityIsLight)) {
     const desiredQueueSize = Math.max(options.limit ?? 3, (options.lightThreshold ?? 2) + 1);
     const missingCount = Math.max(0, desiredQueueSize - queue.length);
     const readyTaskDeficit = Math.max(0, readyLightThreshold + 1 - countReadyTasks(queue));
@@ -609,7 +609,8 @@ function parseCliOptions(argv = []) {
     syncKanban: false,
     kanbanFile: null,
     readyOnlySync: false,
-    seedMaxTasks: null
+    seedMaxTasks: null,
+    autoSeed: true
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -664,6 +665,10 @@ function parseCliOptions(argv = []) {
 
     if (rawFlag === '--ready-only-sync') {
       options.readyOnlySync = true;
+    }
+
+    if (rawFlag === '--no-auto-seed') {
+      options.autoSeed = false;
     }
   }
 
@@ -828,7 +833,8 @@ if (require.main === module) {
     lightThreshold: cliOptions.lightThreshold,
     readyLightThreshold: cliOptions.readyLightThreshold,
     validationCommand: cliOptions.validationCommand,
-    seedMaxTasks: cliOptions.seedMaxTasks
+    seedMaxTasks: cliOptions.seedMaxTasks,
+    autoSeed: cliOptions.autoSeed
   });
 
   const executionPlan = pickImmediateExecution(queue);

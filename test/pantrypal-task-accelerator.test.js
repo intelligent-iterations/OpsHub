@@ -138,6 +138,22 @@ test('buildQueueWithAutoSeed seeds when minimumScore leaves queue light', () => 
   assert.ok(queue.length >= 1);
 });
 
+test('buildQueueWithAutoSeed can disable auto-seeding for strict backlog-only runs', () => {
+  const experiments = [
+    { name: 'Okay', impact: 0.7, confidence: 0.65, ease: 0.6, pantryPalFit: 0.8 }
+  ];
+
+  const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
+    minimumScore: 85,
+    limit: 3,
+    lightThreshold: 2,
+    autoSeed: false
+  });
+
+  assert.equal(seeded, false);
+  assert.equal(queue.length, 1);
+  assert.match(queue[0].title, /Okay/);
+});
 
 test('buildQueueWithAutoSeed backfills to meet requested limit when queue is light', () => {
   const experiments = [
@@ -530,6 +546,13 @@ test('parseCliOptions preserves defaults for invalid numeric values and disables
   assert.equal(options.readyLightThreshold, 1);
   assert.equal(options.minimumCriteria, 6);
   assert.equal(options.validate, false);
+  assert.equal(options.autoSeed, true);
+});
+
+test('parseCliOptions captures no-auto-seed flag', () => {
+  const options = parseCliOptions(['--no-auto-seed']);
+
+  assert.equal(options.autoSeed, false);
 });
 test('parseCliOptions accepts experiment file, owner, and validation command overrides', () => {
   const options = parseCliOptions([
