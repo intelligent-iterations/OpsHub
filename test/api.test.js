@@ -393,6 +393,9 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.equal(body.refreshSeconds, 60);
 
     assert.ok(body.subagents);
+    assert.ok(body.liveAgentActivity);
+    assert.equal(body.liveAgentActivity.title, 'Live Agent Activity');
+    assert.ok(Array.isArray(body.liveAgentActivity.items));
     assert.ok(body.subagents.counts);
     assert.equal(typeof body.subagents.counts.inProgressTasks, 'number');
     assert.ok(body.subagents.counts.inProgressTasks >= 1);
@@ -421,6 +424,41 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.ok(body.tokenUsage);
     assert.equal(typeof body.tokenUsage.quotaPct, 'number');
     assert.ok(Array.isArray(body.activity));
+  } finally {
+    await app.close();
+  }
+});
+
+test('live activity endpoint returns telemetry envelope with expected panel contract', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Live activity endpoint task',
+        description: 'Telemetry mapping fixture',
+        status: 'inProgress'
+      })
+    });
+    assert.equal(create.status, 200);
+
+    const res = await fetch(`${app.baseUrl}/api/live-activity`);
+    assert.equal(res.status, 200);
+    const body = await res.json();
+
+    assert.ok(body.generatedAt);
+    assert.equal(body.refreshSeconds, 15);
+    assert.ok(body.liveAgentActivity);
+    assert.equal(body.liveAgentActivity.title, 'Live Agent Activity');
+    assert.ok(Array.isArray(body.liveAgentActivity.items));
+    assert.ok(body.liveAgentActivity.counts);
+    assert.equal(typeof body.liveAgentActivity.counts.sessions, 'number');
+    assert.equal(typeof body.liveAgentActivity.counts.runs, 'number');
+    assert.equal(typeof body.liveAgentActivity.counts.mappedTasks, 'number');
+    assert.ok(body.liveAgentActivity.telemetry);
+    assert.equal(typeof body.liveAgentActivity.telemetry.sessionsCommandOk, 'boolean');
+    assert.equal(typeof body.liveAgentActivity.telemetry.runsCommandOk, 'boolean');
   } finally {
     await app.close();
   }

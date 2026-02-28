@@ -61,19 +61,23 @@ npm run lint:report-templates
 ## Endpoints
 
 - `GET /api/health` → health check
-- `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays; each in-progress task includes `id`, `task`, `description`, and `priority`; `subagents.diagnostics` reports sync drift/missing IDs between kanban and payload; `subagents.behaviorGap` includes proactive-loop passive-wait and blocker-protocol compliance KPI thresholds)
+- `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays; each in-progress task includes `id`, `task`, `description`, and `priority`; `subagents.diagnostics` reports sync drift/missing IDs between kanban and payload; `subagents.behaviorGap` includes proactive-loop passive-wait and blocker-protocol compliance KPI thresholds). Includes `liveAgentActivity` panel payload.
+- `GET /api/live-activity` → live OpenClaw telemetry projection for the **Live Agent Activity** UI panel (`agent`, `currentTaskSession`, `state`, `lastUpdate`) with task-mapping metadata.
 - `GET /api/kanban` → kanban board + activity log
 - `POST /api/kanban/task` → create task
 - `POST /api/kanban/move` → move task to another column
 
 ## Data sources
 
-OpsHub uses local artifacts and system commands where available:
+OpsHub uses local artifacts and OpenClaw/runtime commands where available:
 
-- `tasks.md` (task/status context)
+- OpenClaw CLI telemetry:
+  - `openclaw sessions --active 30 --json` (session list / recent activity)
+  - `openclaw runs --active --json` (active run state)
+  - Fallback path attempts `~/.openclaw/bin/openclaw ...` first, then `openclaw ...` on `PATH`
+- Kanban in-progress column (`data/kanban.json`) as the authoritative local task list for mapping active sessions to tasks
 - `memory/*.md` (session-like timeline via file updates)
 - git log (`git log`) for recent actions/sessions
-- process list (`ps`) for any subagent-like running processes
 
 ## QA hardening notes
 
@@ -119,6 +123,10 @@ node scripts/inprogress-stale-cleanup.js \
 
 See `docs/inprogress-stale-cleanup.md` for details.
 
+## Live Agent Activity telemetry
+
+See `docs/live-agent-activity.md` for architecture, endpoint contract, mapping logic, and data flow.
+
 ## Slack social mention ingestion bridge
 
 Use the social mention bridge to convert recent Slack social-channel traffic into queue entries + OpsHub task payloads for social-progress cron loops.
@@ -146,6 +154,6 @@ See `docs/social-mention-ingestion-bridge.md` for details.
 
 ## Limitations
 
-- No direct OpenClaw runtime API or `openclaw` CLI is available in this environment, so some sections are inferred from local files/processes.
+- Live agent telemetry depends on OpenClaw CLI availability (`openclaw sessions` + `openclaw runs`); when unavailable, endpoints return graceful empty telemetry with diagnostics.
 - Token usage/cost is approximate unless explicit usage artifacts are present.
 - Error log is text-pattern based (`error`, `failed`, `blocker`, etc.) and may include false positives.

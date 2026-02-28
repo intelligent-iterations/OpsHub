@@ -175,6 +175,12 @@ async function loadDashboard() {
 
   el('meta').textContent = `Last updated: ${ts(data.generatedAt)} • Auto-refresh: ${data.refreshSeconds}s`;
 
+  renderList('liveAgentActivity', data.liveAgentActivity?.items || [], (x) =>
+    `<strong>Agent:</strong> ${escapeHtml(x.agent)}<br/>
+     <strong>Current task/session:</strong> ${escapeHtml(x.currentTaskSession)}<br/>
+     <span class="muted"><strong>State:</strong> ${escapeHtml(x.state)} • <strong>Last update:</strong> ${ts(x.lastUpdate)}</span>`
+  );
+
   renderList('subagents', data.subagents.items, (x) =>
     `<strong>${escapeHtml(x.task)}</strong><br/><span class="muted">ID: ${escapeHtml(x.id)} • Status: ${escapeHtml(x.status)} • Source: ${escapeHtml(x.source)}</span>`
   );

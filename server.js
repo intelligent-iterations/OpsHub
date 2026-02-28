@@ -12,6 +12,7 @@ const {
 } = require('./scripts/manager-loop-guardrails');
 const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 const { evaluateBlockerProtocol, captureBlockerProofArtifact } = require('./lib/blocker-protocol');
+const { buildLiveAgentActivity } = require('./lib/openclaw-live-activity');
 
 const execAsync = util.promisify(exec);
 const PORT = Number(process.env.PORT) || 4180;
@@ -189,6 +190,47 @@ async function safeExec(command, cwd = WORKSPACE) {
   }
 }
 
+function parseJsonArray(stdout, key) {
+  if (!stdout || !stdout.trim()) return [];
+  try {
+    const parsed = JSON.parse(stdout);
+    const entries = Array.isArray(parsed?.[key]) ? parsed[key] : [];
+    return entries;
+  } catch {
+    return [];
+  }
+}
+
+async function runFirstOk(commands = []) {
+  for (const command of commands) {
+    const result = await safeExec(command);
+    if (result.ok) return { ...result, command };
+  }
+  return { ok: false, stdout: '', stderr: 'No command succeeded', command: null };
+}
+
+async function getOpenClawTelemetry() {
+  const sessionsResult = await runFirstOk([
+    '~/.openclaw/bin/openclaw sessions --active 30 --json',
+    'openclaw sessions --active 30 --json'
+  ]);
+  const runsResult = await runFirstOk([
+    '~/.openclaw/bin/openclaw runs --active --json',
+    'openclaw runs --active --json'
+  ]);
+
+  return {
+    sessions: parseJsonArray(sessionsResult.stdout, 'sessions'),
+    runs: parseJsonArray(runsResult.stdout, 'runs'),
+    diagnostics: {
+      sessionsSource: sessionsResult.command,
+      runsSource: runsResult.command,
+      sessionsCommandOk: Boolean(sessionsResult.ok),
+      runsCommandOk: Boolean(runsResult.ok)
+    }
+  };
+}
+
 function normalizeInProgressTask(task, index) {
   const rawId = cleanText(task?.id, 200);
   const hasStableId = Boolean(rawId);
@@ -322,27 +364,18 @@ async function getSubagentsData() {
   const inProgressTasks = rawInProgress.map((t, idx) => normalizeInProgressTask(t, idx));
 
   // 2) Runtime sub-agent sessions from OpenClaw session store (recently active only)
-  const sess = await safeExec('~/.openclaw/bin/openclaw sessions --active 30 --json');
-  let activeSubagents = [];
-
-  if (sess.ok && sess.stdout?.trim()) {
-    try {
-      const parsed = JSON.parse(sess.stdout);
-      const sessions = Array.isArray(parsed?.sessions) ? parsed.sessions : [];
-      activeSubagents = sessions
-        .filter((s) => typeof s?.key === 'string' && s.key.includes(':subagent:'))
-        .filter((s) => Number(s?.ageMs ?? Number.MAX_SAFE_INTEGER) <= 3 * 60 * 1000)
-        .filter((s) => !s?.abortedLastRun)
-        .map((s) => ({
-          id: s.key,
-          task: s.lastUserMessage || s.sessionId || s.key,
-          status: 'Active',
-          source: 'OpenClaw sessions (last 3m)'
-        }));
-    } catch {
-      activeSubagents = [];
-    }
-  }
+  const telemetry = await getOpenClawTelemetry();
+  const sessions = Array.isArray(telemetry.sessions) ? telemetry.sessions : [];
+  const activeSubagents = sessions
+    .filter((s) => typeof s?.key === 'string' && s.key.includes(':subagent:'))
+    .filter((s) => Number(s?.ageMs ?? Number.MAX_SAFE_INTEGER) <= 3 * 60 * 1000)
+    .filter((s) => !s?.abortedLastRun)
+    .map((s) => ({
+      id: s.key,
+      task: s.lastUserMessage || s.sessionId || s.key,
+      status: 'Active',
+      source: 'OpenClaw sessions (last 3m)'
+    }));
 
   const diagnostics = buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks);
   const behaviorGap = computeBehaviorGapMetrics(board);
@@ -393,6 +426,19 @@ async function getSubagentsData() {
       activeSubagents: activeSubagents.length,
       inProgressTasks: inProgressTasks.length
     }
+  };
+}
+
+async function getLiveAgentActivityData() {
+  const board = await loadKanban();
+  const telemetry = await getOpenClawTelemetry();
+  const live = buildLiveAgentActivity({ board, sessions: telemetry.sessions, runs: telemetry.runs, now: new Date() });
+
+  return {
+    title: 'Live Agent Activity',
+    items: live.items,
+    counts: live.counts,
+    telemetry: telemetry.diagnostics
   };
 }
 
@@ -542,8 +588,9 @@ function createApp() {
   app.get(
     '/api/dashboard',
     asyncHandler(async (_req, res) => {
-      const [subagents, sessions, errors, tokenUsage, activity] = await Promise.all([
+      const [subagents, liveAgentActivity, sessions, errors, tokenUsage, activity] = await Promise.all([
         getSubagentsData(),
+        getLiveAgentActivityData(),
         getSessionsData(),
         getErrorData(),
         getTokenUsageData(),
@@ -554,11 +601,20 @@ function createApp() {
         generatedAt: nowIso(),
         refreshSeconds: 60,
         subagents,
+        liveAgentActivity,
         sessions,
         errors,
         tokenUsage,
         activity
       });
+    })
+  );
+
+  app.get(
+    '/api/live-activity',
+    asyncHandler(async (_req, res) => {
+      const liveAgentActivity = await getLiveAgentActivityData();
+      res.json({ generatedAt: nowIso(), refreshSeconds: 15, liveAgentActivity });
     })
   );
 
@@ -863,5 +919,7 @@ module.exports = {
   saveKanban,
   normalizeInProgressTask,
   buildInProgressSyncDiagnostics,
-  computeBehaviorGapMetrics
+  computeBehaviorGapMetrics,
+  getOpenClawTelemetry,
+  getLiveAgentActivityData
 };
