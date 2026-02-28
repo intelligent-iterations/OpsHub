@@ -1093,29 +1093,6 @@
         "source": "manual"
       },
       {
-        "id": "0705908e-111e-49a0-8c04-bf735667a9a4",
-        "name": "[QDRIFT-01] Enforce execution start handshake to stop \"waiting for instruction\" stalls",
-        "description": "Root cause: agents enter passive mode when task intent is clear but no explicit kickoff token exists.\n\nAcceptance criteria:\n- Add deterministic start-handshake state machine for new tasks (ack -> plan -> first action within SLA).\n- Emit \"stalled-waiting\" diagnostic event when no first action in 90s.\n- Auto-recover by nudging active worker with explicit next step payload.\n- Add tests covering kickoff, stall detection, and recovery path.\n- Add GitHub evidence links in task completion details (PR/commit/test run).\n- On blocker detection, attempt self-resolution first, then auto-launch up to 2 parallel fallback tasks without waiting for user prompt.",
-        "priority": "critical",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T17:26:05.583Z",
-        "completedAt": null,
-        "source": "quality-diagnosis",
-        "updatedAt": "2026-02-28T17:27:11.270Z"
-      },
-      {
-        "id": "8a88952f-0074-4c1a-8b39-bd342312ecca",
-        "name": "[QDRIFT-03] Restore correction logging coverage and QA gate enforcement",
-        "description": "Root cause: correction loops run but misses are not consistently written to audit trail.\n\nAcceptance criteria:\n- Log every self-correction event with taskId, reason, and remediation action.\n- Fail QA gate when Done tasks lack correction/verification record where required.\n- Add daily integrity checker output artifact + summary stats.\n- Add tests for skipped logging and enforced rollback to In Progress.\n- Document operator playbook for correction triage.\n- Enforce correction-log-before-claim-done protocol: task cannot move to Done until correction log entry exists (when correction occurred).",
-        "priority": "high",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T17:26:05.583Z",
-        "completedAt": null,
-        "source": "quality-diagnosis",
-        "updatedAt": "2026-02-28T17:27:11.270Z",
-        "startedAt": "2026-02-28T17:26:47.405Z"
-      },
-      {
         "id": "48dea01c-02dd-452f-be3a-27c162bfdb58",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
@@ -1567,6 +1544,44 @@
       }
     ],
     "done": [
+      {
+        "id": "0705908e-111e-49a0-8c04-bf735667a9a4",
+        "name": "[QDRIFT-01] Enforce execution start handshake to stop \"waiting for instruction\" stalls",
+        "description": "Root cause: agents enter passive mode when task intent is clear but no explicit kickoff token exists.\n\nAcceptance criteria:\n- Add deterministic start-handshake state machine for new tasks (ack -> plan -> first action within SLA).\n- Emit \"stalled-waiting\" diagnostic event when no first action in 90s.\n- Auto-recover by nudging active worker with explicit next step payload.\n- Add tests covering kickoff, stall detection, and recovery path.\n- Add GitHub evidence links in task completion details (PR/commit/test run).\n- On blocker detection, attempt self-resolution first, then auto-launch up to 2 parallel fallback tasks without waiting for user prompt.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T17:26:05.583Z",
+        "completedAt": "2026-02-28T17:33:51.826Z",
+        "source": "quality-diagnosis",
+        "updatedAt": "2026-02-28T17:33:51.826Z",
+        "verification": {
+          "command": "npm test",
+          "result": "pass"
+        },
+        "completionDetails": "QDRIFT-01 complete. Evidence: https://github.com/intelligent-iterations/OpsHub/commit/9cac46f ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/scripts/inprogress-stale-cleanup.js ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/test/inprogress-stale-cleanup.test.js ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/artifacts/qdrift-01-recovery-proof.md ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/artifacts/qdrift-claude-code-usage.log ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/artifacts/qdrift-researcher-confirmation.md"
+      },
+      {
+        "id": "8a88952f-0074-4c1a-8b39-bd342312ecca",
+        "name": "[QDRIFT-03] Restore correction logging coverage and QA gate enforcement",
+        "description": "Root cause: correction loops run but misses are not consistently written to audit trail.\n\nAcceptance criteria:\n- Log every self-correction event with taskId, reason, and remediation action.\n- Fail QA gate when Done tasks lack correction/verification record where required.\n- Add daily integrity checker output artifact + summary stats.\n- Add tests for skipped logging and enforced rollback to In Progress.\n- Document operator playbook for correction triage.\n- Enforce correction-log-before-claim-done protocol: task cannot move to Done until correction log entry exists (when correction occurred).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T17:26:05.583Z",
+        "completedAt": "2026-02-28T17:33:51.825Z",
+        "source": "quality-diagnosis",
+        "updatedAt": "2026-02-28T17:33:51.825Z",
+        "startedAt": "2026-02-28T17:26:47.405Z",
+        "verification": {
+          "command": "npm test",
+          "result": "pass"
+        },
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "QA correction/verification gaps",
+          "remediation": "enforced correction-log-before-done + rollback checks"
+        },
+        "completionDetails": "QDRIFT-03 complete. Evidence: https://github.com/intelligent-iterations/OpsHub/commit/9cac46f ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/scripts/qa-evidence-integrity-checker.js ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/docs/qa-evidence-integrity-checker.md ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/artifacts/qdrift-03-rollback-proof.md ; https://github.com/intelligent-iterations/OpsHub/blob/9cac46f/artifacts/qdrift-researcher-confirmation.md"
+      },
       {
         "id": "d6210a93-b302-437b-98b6-f709aa3cb467",
         "name": "[QDRIFT-04] Rebalance PantryPal prioritization guardrails",
@@ -5117,6 +5132,24 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T17:33:51.826Z",
+      "type": "task_moved",
+      "taskId": "0705908e-111e-49a0-8c04-bf735667a9a4",
+      "taskName": "[QDRIFT-01] Enforce execution start handshake to stop \"waiting for instruction\" stalls",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "QDRIFT completion with evidence links"
+    },
+    {
+      "at": "2026-02-28T17:33:51.826Z",
+      "type": "task_moved",
+      "taskId": "8a88952f-0074-4c1a-8b39-bd342312ecca",
+      "taskName": "[QDRIFT-03] Restore correction logging coverage and QA gate enforcement",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "QDRIFT completion with evidence links"
+    },
     {
       "at": "2026-02-28T17:33:18.386Z",
       "type": "task_moved",
