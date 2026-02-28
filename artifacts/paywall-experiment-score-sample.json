@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-02-28T01:16:00.000Z",
+  "experimentId": "paywall-weekly-001",
+  "policy": {
+    "method": "wilson-lower-bound",
+    "confidenceLevel": 0.95,
+    "minVisitors": 500,
+    "confidenceFloor": 0.05,
+    "maxConversionRate": 0.5,
+    "srmThreshold": 0.01
+  },
+  "guardrails": {
+    "srm": {
+      "chiSquared": 5.1208,
+      "pValue": 0.161328,
+      "mismatch": false
+    },
+    "confidenceFloorApplied": true,
+    "anomalyCheckApplied": true
+  },
+  "rankedVariants": [
+    {
+      "id": "headline-value",
+      "visitors": 1030,
+      "conversions": 110,
+      "conversionRate": 0.106796,
+      "confidenceScore": 0.089374,
+      "eligible": true,
+      "anomalous": false,
+      "rank": 1
+    },
+    {
+      "id": "annual-discount",
+      "visitors": 1080,
+      "conversions": 97,
+      "conversionRate": 0.089815,
+      "confidenceScore": 0.074185,
+      "eligible": true,
+      "anomalous": false,
+      "rank": 2
+    },
+    {
+      "id": "control",
+      "visitors": 1050,
+      "conversions": 89,
+      "conversionRate": 0.084762,
+      "confidenceScore": 0.069391,
+      "eligible": true,
+      "anomalous": false,
+      "rank": 3
+    },
+    {
+      "id": "social-proof",
+      "visitors": 980,
+      "conversions": 83,
+      "conversionRate": 0.084694,
+      "confidenceScore": 0.068842,
+      "eligible": true,
+      "anomalous": false,
+      "rank": 4
+    }
+  ],
+  "winner": {
+    "id": "headline-value",
+    "rank": 1,
+    "confidenceScore": 0.089374,
+    "conversionRate": 0.106796,
+    "visitors": 1030,
+    "conversions": 110
+  }
+}
