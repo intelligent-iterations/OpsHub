@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Friday night rescue reminder with 20-minute cook filter",
+    "impact": 0.86,
+    "confidence": 0.73,
+    "ease": 0.7,
+    "pantryPalFit": 0.97,
+    "primaryMetric": "same-day rescue completion rate",
+    "targetLiftPct": 9,
+    "minimumSampleSize": 1500,
+    "experimentWindowDays": 10,
+    "guardrail": "notification opt-out rate stays below 1.6%",
+    "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
+  }
+]

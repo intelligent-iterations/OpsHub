@@ -1,0 +1,7 @@
+# PantryPal Growth Experiment Priority Queue
+
+| Rank | Experiment | Score | Ready | Readiness Gaps | Impact | Confidence | Ease | PantryPal Fit |
+|---:|---|---:|---:|---|---:|---:|---:|---:|
+| 1 | Expiry-risk push digest with one-tap rescue plan | 80.30 | yes | — | 0.86 | 0.72 | 0.66 | 0.95 |
+| 2 | Post-scan streak nudge after 24h inactivity | 75.75 | yes | — | 0.63 | 0.78 | 0.88 | 0.84 |
+| 3 | Household challenge mode: save $20/week from pantry-first meals | 68.45 | no | missing_hypothesis, missing_primary_metric, insufficient_acceptance_criteria | 0.80 | 0.58 | 0.51 | 0.90 |
