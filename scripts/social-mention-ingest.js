@@ -29,6 +29,95 @@ function normalizeMessage(message, idx, channel) {
   };
 }
 
+function normalizeProviderItems(items) {
+  if (Array.isArray(items)) return items;
+  if (Array.isArray(items?.messages)) return items.messages;
+  return [];
+}
+
+async function fetchFromProvider({ channel, limit, listMessages, logger = console }) {
+  if (typeof listMessages !== 'function') {
+    return {
+      attempted: false,
+      available: false,
+      source: 'provider',
+      channel,
+      fetchedCount: 0,
+      messages: [],
+      error: 'provider_not_configured',
+    };
+  }
+
+  try {
+    const items = await listMessages({ channel, limit });
+    const messages = normalizeProviderItems(items);
+    return {
+      attempted: true,
+      available: true,
+      source: 'provider',
+      channel,
+      fetchedCount: messages.length,
+      messages,
+      error: null,
+    };
+  } catch (err) {
+    logger.warn?.(`[social-mention-ingest] provider fetch failed (${err?.message || 'unknown error'})`);
+    return {
+      attempted: true,
+      available: false,
+      source: 'provider',
+      channel,
+      fetchedCount: 0,
+      messages: [],
+      error: err?.message || 'provider_fetch_failed',
+    };
+  }
+}
+
+function fetchFromFile({ channel, feedPath, logger = console }) {
+  if (!feedPath) {
+    return {
+      attempted: false,
+      available: false,
+      source: 'file',
+      channel,
+      fetchedCount: 0,
+      messages: [],
+      error: 'feed_path_not_configured',
+    };
+  }
+
+  try {
+    const raw = fs.readFileSync(feedPath, 'utf8');
+    const parsed = JSON.parse(raw);
+    const messages = Array.isArray(parsed)
+      ? parsed
+      : Array.isArray(parsed?.messages)
+        ? parsed.messages
+        : [];
+    return {
+      attempted: true,
+      available: true,
+      source: 'file',
+      channel,
+      fetchedCount: messages.length,
+      messages,
+      error: null,
+    };
+  } catch (err) {
+    logger.warn?.(`[social-mention-ingest] feed file unavailable (${err?.message || 'unknown error'})`);
+    return {
+      attempted: true,
+      available: false,
+      source: 'file',
+      channel,
+      fetchedCount: 0,
+      messages: [],
+      error: err?.message || 'feed_file_unavailable',
+    };
+  }
+}
+
 async function fetchSocialMessages({
   channel,
   limit = 50,
@@ -36,66 +125,34 @@ async function fetchSocialMessages({
   listMessages,
   logger = console,
 } = {}) {
-  if (typeof listMessages === 'function') {
-    try {
-      const items = await listMessages({ channel, limit });
-      const messages = Array.isArray(items) ? items : [];
-      return {
-        available: true,
-        source: 'provider',
-        channel,
-        fetchedCount: messages.length,
-        messages,
-      };
-    } catch (err) {
-      logger.warn?.(`[social-mention-ingest] provider fetch failed (${err?.message || 'unknown error'})`);
-      return {
-        available: false,
-        source: 'provider',
-        channel,
-        fetchedCount: 0,
-        messages: [],
-        error: err?.message || 'provider_fetch_failed',
-      };
-    }
+  const providerResult = await fetchFromProvider({ channel, limit, listMessages, logger });
+  if (providerResult.available) {
+    return {
+      ...providerResult,
+      attempts: [providerResult],
+    };
   }
 
-  if (feedPath) {
-    try {
-      const raw = fs.readFileSync(feedPath, 'utf8');
-      const parsed = JSON.parse(raw);
-      const messages = Array.isArray(parsed)
-        ? parsed
-        : Array.isArray(parsed?.messages)
-          ? parsed.messages
-          : [];
-      return {
-        available: true,
-        source: 'file',
-        channel,
-        fetchedCount: messages.length,
-        messages,
-      };
-    } catch (err) {
-      logger.warn?.(`[social-mention-ingest] feed file unavailable (${err?.message || 'unknown error'})`);
-      return {
-        available: false,
-        source: 'file',
-        channel,
-        fetchedCount: 0,
-        messages: [],
-        error: err?.message || 'feed_file_unavailable',
-      };
-    }
+  const fileResult = fetchFromFile({ channel, feedPath, logger });
+  if (fileResult.available) {
+    return {
+      ...fileResult,
+      attempts: [providerResult, fileResult].filter((attempt) => attempt.attempted),
+      fallbackFrom: providerResult.attempted ? 'provider' : null,
+    };
   }
 
+  const attempts = [providerResult, fileResult].filter((attempt) => attempt.attempted);
   return {
     available: false,
-    source: 'none',
+    source: attempts[0]?.source || 'none',
     channel,
     fetchedCount: 0,
     messages: [],
-    error: 'no_feed_source_configured',
+    attempts,
+    error: attempts.length
+      ? attempts.map((attempt) => `${attempt.source}:${attempt.error}`).join(';')
+      : 'no_feed_source_configured',
   };
 }
 
@@ -159,21 +216,43 @@ function buildStructuredQueue(messages, { channel } = {}) {
 }
 
 function mapQueueToTaskPayloads(queue) {
-  return (queue || [])
-    .filter((entry) => entry.actionable)
-    .map((entry) => ({
+  const seenMessageIds = new Set();
+  const duplicateMessageIds = [];
+
+  const taskPayloads = [];
+  for (const entry of queue || []) {
+    if (!entry?.actionable) continue;
+
+    const messageId = String(entry.id || '').trim() || `missing-id-${taskPayloads.length + 1}`;
+    if (seenMessageIds.has(messageId)) {
+      duplicateMessageIds.push(messageId);
+      continue;
+    }
+    seenMessageIds.add(messageId);
+
+    taskPayloads.push({
       title: extractTitle(entry.text),
       owner: extractOwner(entry.text, entry.mentions),
       acceptanceCriteria: extractAcceptanceCriteria(entry.text),
       priority: inferPriority(entry.text),
       source: {
         type: 'slack-social-mention',
-        messageId: entry.id,
+        messageId,
         channel: entry.channel,
         ts: entry.ts || null,
         mentionCount: entry.mentions.length,
       },
-    }));
+    });
+  }
+
+  return {
+    taskPayloads,
+    dedupe: {
+      uniqueMessageCount: seenMessageIds.size,
+      duplicateMessageIds: [...new Set(duplicateMessageIds)],
+      duplicateCount: duplicateMessageIds.length,
+    },
+  };
 }
 
 async function ingestSocialMentions(options = {}) {
@@ -190,7 +269,8 @@ async function ingestSocialMentions(options = {}) {
 
   const feed = await fetchSocialMessages({ channel, limit, feedPath, listMessages, logger });
   const queue = buildStructuredQueue(feed.messages, { channel });
-  const taskPayloads = mapQueueToTaskPayloads(queue);
+  const mapped = mapQueueToTaskPayloads(queue);
+  const taskPayloads = mapped.taskPayloads;
 
   const diagnostics = {
     ok: feed.available,
@@ -198,8 +278,19 @@ async function ingestSocialMentions(options = {}) {
     source: feed.source,
     fetchedCount: feed.fetchedCount,
     actionableCount: taskPayloads.length,
-    fallbackApplied: !feed.available,
+    dedupe: mapped.dedupe,
+    fallbackApplied: !feed.available || Boolean(feed.fallbackFrom),
+    fallbackFrom: feed.fallbackFrom || null,
     reason: feed.available ? 'feed_available' : (feed.error || 'feed_unavailable'),
+    fetchAttempts: Array.isArray(feed.attempts)
+      ? feed.attempts.map((attempt) => ({
+        source: attempt.source,
+        attempted: attempt.attempted,
+        available: attempt.available,
+        fetchedCount: attempt.fetchedCount,
+        error: attempt.error || null,
+      }))
+      : [],
     generatedAt: new Date().toISOString(),
   };
 
@@ -220,6 +311,23 @@ function parseArgs(argv) {
   return args;
 }
 
+function resolveListMessagesProvider({ providerModulePath, providerExport = 'listMessages', logger = console } = {}) {
+  if (!providerModulePath) return null;
+
+  try {
+    const fullPath = path.isAbsolute(providerModulePath)
+      ? providerModulePath
+      : path.resolve(process.cwd(), providerModulePath);
+    const loaded = require(fullPath);
+    if (typeof loaded === 'function') return loaded;
+    if (typeof loaded?.[providerExport] === 'function') return loaded[providerExport];
+    logger.warn?.(`[social-mention-ingest] provider module missing function export "${providerExport}" (${fullPath})`);
+  } catch (err) {
+    logger.warn?.(`[social-mention-ingest] failed to load provider module (${err?.message || 'unknown error'})`);
+  }
+  return null;
+}
+
 async function runCli() {
   const args = parseArgs(process.argv);
   const root = path.resolve(__dirname, '..');
@@ -228,6 +336,10 @@ async function runCli() {
   const tasksOut = args['tasks-out'] || path.join(root, 'artifacts', 'social-mention-task-payloads.json');
   const diagnosticsOut = args['diagnostics-out'] || path.join(root, 'artifacts', 'social-mention-diagnostics.json');
 
+  const providerModulePath = args['provider-module'] || process.env.OPSHUB_SOCIAL_PROVIDER_MODULE;
+  const providerExport = args['provider-export'] || process.env.OPSHUB_SOCIAL_PROVIDER_EXPORT || 'listMessages';
+  const listMessages = resolveListMessagesProvider({ providerModulePath, providerExport });
+
   const result = await ingestSocialMentions({
     channel: args.channel || 'social-progress',
     limit: Number.parseInt(args.limit || '50', 10),
@@ -235,6 +347,7 @@ async function runCli() {
     queueOut,
     tasksOut,
     diagnosticsOut,
+    listMessages,
   });
 
   console.log(JSON.stringify({
@@ -264,4 +377,5 @@ module.exports = {
   extractOwner,
   extractTitle,
   inferPriority,
+  resolveListMessagesProvider,
 };

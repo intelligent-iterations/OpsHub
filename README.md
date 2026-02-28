@@ -86,6 +86,12 @@ See `docs/inprogress-stale-cleanup.md` for details.
 Use the social mention bridge to convert recent Slack social-channel traffic into queue entries + OpsHub task payloads for social-progress cron loops.
 
 ```bash
+# live provider path (preferred)
+node scripts/social-mention-ingest.js \
+  --channel=social-progress \
+  --provider-module=./scripts/providers/slack-runtime-provider.js
+
+# deterministic fallback/testing path
 node scripts/social-mention-ingest.js \
   --channel=social-progress \
   --feed-path=artifacts/social-mention-feed-sample.json
@@ -93,8 +99,8 @@ node scripts/social-mention-ingest.js \
 
 Outputs:
 - `artifacts/social-mention-queue.json`
-- `artifacts/social-mention-task-payloads.json`
-- `artifacts/social-mention-diagnostics.json`
+- `artifacts/social-mention-task-payloads.json` (deduped by `source.messageId`)
+- `artifacts/social-mention-diagnostics.json` (fetch attempts + fallback + dedupe stats)
 
 See `docs/social-mention-ingestion-bridge.md` for details.
 

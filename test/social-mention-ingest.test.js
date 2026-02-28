@@ -9,6 +9,7 @@ const {
   buildStructuredQueue,
   mapQueueToTaskPayloads,
   ingestSocialMentions,
+  resolveListMessagesProvider,
 } = require('../scripts/social-mention-ingest');
 
 test('fetchSocialMessages returns fallback diagnostics when no source is configured', async () => {
@@ -16,6 +17,42 @@ test('fetchSocialMessages returns fallback diagnostics when no source is configu
   assert.equal(result.available, false);
   assert.equal(result.error, 'no_feed_source_configured');
   assert.equal(result.messages.length, 0);
+});
+
+test('fetchSocialMessages prefers live provider and records source', async () => {
+  const result = await fetchSocialMessages({
+    channel: 'social-progress',
+    listMessages: async () => ([{ id: 'p1', text: '@claw implement bridge' }]),
+  });
+
+  assert.equal(result.available, true);
+  assert.equal(result.source, 'provider');
+  assert.equal(result.messages.length, 1);
+});
+
+test('fetchSocialMessages falls back to file when provider fails', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-ingest-provider-fallback-'));
+  const feedPath = join(dir, 'feed.json');
+
+  try {
+    await writeFile(feedPath, JSON.stringify({ messages: [{ id: 'f1', text: 'Task: from file' }] }), 'utf8');
+
+    const result = await fetchSocialMessages({
+      channel: 'social-progress',
+      feedPath,
+      listMessages: async () => {
+        throw new Error('provider offline');
+      },
+    });
+
+    assert.equal(result.available, true);
+    assert.equal(result.source, 'file');
+    assert.equal(result.fallbackFrom, 'provider');
+    assert.equal(result.messages.length, 1);
+    assert.equal(result.attempts.length, 2);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
 
 test('buildStructuredQueue normalizes mentions and marks actionable content', () => {
@@ -40,8 +77,8 @@ test('buildStructuredQueue normalizes mentions and marks actionable content', ()
   assert.equal(queue[1].actionable, false);
 });
 
-test('mapQueueToTaskPayloads extracts title/owner/acceptance criteria/priority', () => {
-  const payloads = mapQueueToTaskPayloads([
+test('mapQueueToTaskPayloads extracts fields and dedupes by source message id', () => {
+  const mapped = mapQueueToTaskPayloads([
     {
       id: 'm1',
       ts: '1700000000.111',
@@ -50,48 +87,61 @@ test('mapQueueToTaskPayloads extracts title/owner/acceptance criteria/priority',
       mentions: ['claw'],
       actionable: true,
     },
+    {
+      id: 'm1',
+      ts: '1700000000.111',
+      channel: 'social-progress',
+      text: 'Task: duplicate should be ignored',
+      mentions: ['claw'],
+      actionable: true,
+    },
   ]);
 
-  assert.equal(payloads.length, 1);
-  assert.equal(payloads[0].title, 'Build Slack bridge for social cron');
-  assert.equal(payloads[0].owner, 'claw');
-  assert.deepEqual(payloads[0].acceptanceCriteria, [
+  assert.equal(mapped.taskPayloads.length, 1);
+  assert.equal(mapped.taskPayloads[0].title, 'Build Slack bridge for social cron');
+  assert.equal(mapped.taskPayloads[0].owner, 'claw');
+  assert.deepEqual(mapped.taskPayloads[0].acceptanceCriteria, [
     'read social channel mentions',
     'emit OpsHub task payload',
   ]);
-  assert.equal(payloads[0].priority, 'high');
+  assert.equal(mapped.taskPayloads[0].priority, 'high');
+  assert.equal(mapped.dedupe.duplicateCount, 1);
+  assert.deepEqual(mapped.dedupe.duplicateMessageIds, ['m1']);
 });
 
-test('ingestSocialMentions writes queue/tasks/diagnostics artifacts and supports feed file', async () => {
+test('ingestSocialMentions writes queue/tasks/diagnostics artifacts and supports provider path', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'social-mention-ingest-'));
-  const feedPath = join(dir, 'feed.json');
   const queueOut = join(dir, 'queue.json');
   const tasksOut = join(dir, 'tasks.json');
   const diagnosticsOut = join(dir, 'diag.json');
 
   try {
-    await writeFile(feedPath, JSON.stringify({
-      messages: [
+    const result = await ingestSocialMentions({
+      channel: 'social-progress',
+      listMessages: async () => ([
         {
           id: 's1',
           user: 'analyst',
           text: '@claw fix social feed fallback\nAcceptance Criteria:\n- add diagnostics',
           channel: 'social-progress',
         },
-      ],
-    }), 'utf8');
-
-    const result = await ingestSocialMentions({
-      channel: 'social-progress',
-      feedPath,
+        {
+          id: 's1',
+          user: 'analyst',
+          text: '@claw duplicate message id',
+          channel: 'social-progress',
+        },
+      ]),
       queueOut,
       tasksOut,
       diagnosticsOut,
     });
 
     assert.equal(result.diagnostics.ok, true);
+    assert.equal(result.diagnostics.source, 'provider');
     assert.equal(result.diagnostics.fallbackApplied, false);
     assert.equal(result.taskPayloads.length, 1);
+    assert.equal(result.diagnostics.dedupe.duplicateCount, 1);
 
     const queueArtifact = JSON.parse(await readFile(queueOut, 'utf8'));
     const taskArtifact = JSON.parse(await readFile(tasksOut, 'utf8'));
@@ -100,6 +150,27 @@ test('ingestSocialMentions writes queue/tasks/diagnostics artifacts and supports
     assert.equal(Array.isArray(queueArtifact.queue), true);
     assert.equal(Array.isArray(taskArtifact.taskPayloads), true);
     assert.equal(diagnosticsArtifact.ok, true);
+    assert.equal(diagnosticsArtifact.source, 'provider');
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('resolveListMessagesProvider loads exported function from module path', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-provider-module-'));
+  const providerPath = join(dir, 'provider.js');
+  try {
+    await writeFile(
+      providerPath,
+      'module.exports = { listMessages: async () => ([{ id: "m-provider", text: "Task: hello" }]) };\n',
+      'utf8'
+    );
+
+    const listMessages = resolveListMessagesProvider({ providerModulePath: providerPath });
+    assert.equal(typeof listMessages, 'function');
+    const messages = await listMessages({ channel: 'social-progress', limit: 1 });
+    assert.equal(Array.isArray(messages), true);
+    assert.equal(messages[0].id, 'm-provider');
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
