@@ -1488,7 +1488,7 @@
       {
         "id": "af26a684-3a30-4ecd-90c2-8959356d82ec",
         "name": "[P13] Design weekly auto-rescue planner balancing waste-risk, effort, and household calendar",
-        "description": "Completed P13 weekly auto-rescue planner design + verification. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/p13-weekly-auto-rescue-planner-verification.md ; Design doc: https://github.com/larryclaw/pantrypal/blob/56882d8e145ec8f89989e89e414f83074491a8cd/docs/p13_weekly_auto_rescue_planner.md",
+        "description": "Completed P13 weekly auto-rescue planner design + verification. Evidence: https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/p13-weekly-auto-rescue-planner-verification.md ; Design doc: https://github.com/larryclaw/pantrypal/blob/56882d8e145ec8f89989e89e414f83074491a8cd/docs/p13_weekly_auto_rescue_planner.md",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-27T14:53:13.393Z",

@@ -20,4 +20,4 @@
 - PantryPal planner design doc:
   - https://github.com/larryclaw/pantrypal/blob/56882d8e145ec8f89989e89e414f83074491a8cd/docs/p13_weekly_auto_rescue_planner.md
 - OpsHub closure/verification artifact (this file):
-  - https://github.com/larryclaw/OpsHub/blob/main/artifacts/p13-weekly-auto-rescue-planner-verification.md
+  - https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/p13-weekly-auto-rescue-planner-verification.md
