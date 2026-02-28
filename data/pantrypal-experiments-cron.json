@@ -37,5 +37,31 @@
     "experimentWindowDays": 14,
     "guardrail": "recipe dismiss rate stays below 18%",
     "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
+  },
+  {
+    "name": "Low-stock protein rescue cards in 3-tap meal builder",
+    "impact": 0.88,
+    "confidence": 0.74,
+    "ease": 0.67,
+    "pantryPalFit": 0.99,
+    "primaryMetric": "protein-category rescue completion rate",
+    "targetLiftPct": 10,
+    "minimumSampleSize": 1650,
+    "experimentWindowDays": 12,
+    "guardrail": "meal-builder exit rate does not increase by >1.1%",
+    "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
+  },
+  {
+    "name": "Family-size adaptive leftovers remix suggestions",
+    "impact": 0.85,
+    "confidence": 0.71,
+    "ease": 0.72,
+    "pantryPalFit": 0.96,
+    "primaryMetric": "leftovers remixed within 48h",
+    "targetLiftPct": 8,
+    "minimumSampleSize": 1550,
+    "experimentWindowDays": 14,
+    "guardrail": "recipe save-to-dismiss ratio remains above 1.9",
+    "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js"
   }
 ]
