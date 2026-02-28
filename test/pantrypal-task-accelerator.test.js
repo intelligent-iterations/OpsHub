@@ -592,6 +592,27 @@ test('pickImmediateExecution can require executable PantryPal validation command
   assert.equal(plan.validationCommand, 'npm test -- test/pantrypal-task-accelerator.test.js');
 });
 
+test('pickImmediateExecution requires GitHub links when --require-github-links is set', () => {
+  const plan = pickImmediateExecution([
+    {
+      id: 'PP-GROWTH-001-ready',
+      title: 'Ready with links missing',
+      isReady: true,
+      blockedReasons: [],
+      acceptanceCriteria: ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'],
+      validationCommand: 'npm test -- test/pantrypal-task-accelerator.test.js'
+    }
+  ], {
+    requireGithubLinks: true,
+    githubLinks: []
+  });
+
+  assert.equal(plan.blockedQueue, true);
+  assert.equal(plan.taskId, null);
+  assert.equal(plan.blockedReasons.length, 1);
+  assert.match(plan.blockedReasons[0], /GitHub links required/);
+});
+
 
 test('runValidationCommand returns PASS with output snippet', () => {
   const result = runValidationCommand('npm test -- smoke', {
@@ -695,7 +716,7 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
       ownerLoad: [{ owner: 'growth', total: 1, ready: 1, blocked: 0, avgScore: 91.23 }],
       readyToBlockedRatio: Number.POSITIVE_INFINITY,
       launchRisk: 'low',
-      nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
+      nextAction: 'Execute top ready PantryPal experiment now without waiting for extra instruction when changes are clear and reversible; monitor first-hour guardrail.'
     }
   );
 
@@ -739,7 +760,7 @@ test('formatTaskJson emits seeded metadata and validation payload', () => {
       readinessPct: 100,
       isLight: true,
       threshold: 2,
-      nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
+      nextAction: 'Execute top ready PantryPal experiment now without waiting for extra instruction when changes are clear and reversible; monitor first-hour guardrail.'
     }
   );
 
@@ -814,6 +835,12 @@ test('parseCliOptions captures require-executable-validation flag', () => {
   const options = parseCliOptions(['--require-executable-validation']);
 
   assert.equal(options.requireExecutableValidation, true);
+});
+
+test('parseCliOptions captures require-github-links flag', () => {
+  const options = parseCliOptions(['--require-github-links']);
+
+  assert.equal(options.requireGithubLinks, true);
 });
 test('parseCliOptions accepts experiment file, owner, and validation command overrides', () => {
   const options = parseCliOptions([
@@ -920,6 +947,44 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
   assert.match(content, /all good/);
 });
 
+test('writeExecutionBrief notes missing GitHub links when required', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-brief-'));
+  const briefPath = path.join(tempDir, 'execution-brief-missing.md');
+
+  writeExecutionBrief(briefPath, {
+    taskId: null,
+    validationCommand: 'npm test',
+    executionNow: [],
+    acceptanceChecklist: []
+  }, {
+    status: 'NOT_RUN'
+  }, {
+    queueSize: 1,
+    readyTasks: 0,
+    blockedTasks: 1,
+    readinessPct: 0,
+    topBlockedReasons: ['blocked'],
+    scoreAverage: 80,
+    scoreMedian: 80,
+    scoreMin: 80,
+    scoreMax: 80,
+    scoreReadyAverage: 0,
+    scoreBlockedAverage: 80,
+    tasksMeetingMinimum: 0,
+    minimumCriteria: 6,
+    averageCriteriaCount: 6,
+    tasksBelowCriteriaThreshold: ['PP-GROWTH-001'],
+    ownerLoad: [{ owner: 'growth-oncall', total: 1, ready: 0, blocked: 1, avgScore: 80 }]
+  }, {
+    generatedAt: '2026-02-28T04:00:00.000Z',
+    requireGithubLinks: true
+  });
+
+  const content = fs.readFileSync(briefPath, 'utf8');
+  assert.match(content, /GitHub links required\s*\(--require-github-links\) but none were provided/);
+  assert.match(content, /NONE_PROVIDED/);
+});
+
 
 test('writeDecisionLog persists a launch decision artifact with rollback trigger', () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-decision-log-'));
@@ -948,6 +1013,29 @@ test('writeDecisionLog persists a launch decision artifact with rollback trigger
   assert.match(content, /Rollback trigger:/);
   assert.match(content, /Correction log:/);
   assert.match(content, /https:\/\/github.com\/larryclaw\/OpsHub\/pull\/99/);
+});
+
+test('writeDecisionLog highlights missing GitHub links when required', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-decision-log-'));
+  const logPath = path.join(tempDir, 'decision-log-missing.md');
+
+  const result = writeDecisionLog(logPath, {
+    taskId: 'PP-GROWTH-010-missing-links',
+    title: 'Missing links'
+  }, {
+    status: 'NOT_RUN'
+  }, {
+    readinessPct: 0
+  }, {
+    generatedAt: '2026-02-28T04:05:00.000Z',
+    owner: 'growth-oncall',
+    requireGithubLinks: true
+  });
+
+  const content = fs.readFileSync(logPath, 'utf8');
+  assert.equal(result.taskId, 'PP-GROWTH-010-missing-links');
+  assert.match(content, /Missing required launch inputs:/);
+  assert.match(content, /NONE_PROVIDED/);
 });
 
 test('loadExperimentsFromFile loads a valid JSON experiment array', () => {

@@ -448,6 +448,8 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
   const readyLightThreshold = options.readyLightThreshold ?? 1;
+  const requireGithubLinks = options.requireGithubLinks === true;
+  const githubLinks = normalizeGithubLinks(options.githubLinks);
   const ranked = rankExperiments(experiments);
   const aboveMinimum = typeof minimumScore === 'number'
     ? ranked.filter((experiment) => experiment.score >= minimumScore)
@@ -476,12 +478,15 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   });
   const isLight = isQueueLight(queue, threshold);
   const isReadyCapacityLight = isExecutionCapacityLight(queue, readyLightThreshold);
-  const executionPriority = classifyExecutionPriority({
-    launchRisk,
-    isLight,
-    isReadyCapacityLight,
-    readyTasks
-  });
+  const missingRequiredLinks = requireGithubLinks && githubLinks.length === 0;
+  const executionPriority = missingRequiredLinks
+    ? 'stabilize'
+    : classifyExecutionPriority({
+      launchRisk,
+      isLight,
+      isReadyCapacityLight,
+      readyTasks
+    });
 
   return {
     incomingExperiments: experiments.length,
@@ -505,8 +510,8 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     threshold,
     readyLightThreshold,
     minimumScore: typeof minimumScore === 'number' ? minimumScore : null,
-    averageCriteriaCount: acceptanceAudit.averageCriteriaCount,
     minimumCriteria: acceptanceAudit.minimumCriteria,
+    averageCriteriaCount: acceptanceAudit.averageCriteriaCount,
     tasksMeetingMinimum: acceptanceAudit.tasksMeetingMinimum,
     tasksBelowCriteriaThreshold: acceptanceAudit.tasksBelowMinimum,
     tasksWithValidation: validationCoverage.tasksWithValidation,
@@ -516,11 +521,15 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     ownerLoad,
     readyToBlockedRatio,
     launchRisk,
-    nextAction: executionPriority === 'stabilize'
-      ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
-      : executionPriority === 'seed-and-launch'
-        ? 'Backfill queue depth while launching top ready PantryPal experiment this cycle.'
-        : 'Execute top ready PantryPal experiment now without waiting for extra instruction when changes are clear and reversible; monitor first-hour guardrail.'
+    requireGithubLinks,
+    githubLinksProvided: githubLinks.length,
+    nextAction: missingRequiredLinks
+      ? 'Supply at least one --github-link (GitHub URL) to enable immediate execution while --require-github-links is set.'
+      : executionPriority === 'stabilize'
+        ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
+        : executionPriority === 'seed-and-launch'
+          ? 'Backfill queue depth while launching top ready PantryPal experiment this cycle.'
+          : 'Execute top ready PantryPal experiment now without waiting for extra instruction when changes are clear and reversible; monitor first-hour guardrail.'
   };
 }
 
@@ -561,7 +570,23 @@ function pickImmediateExecution(taskQueue, options = {}) {
     ? Math.floor(options.minimumCriteria)
     : 0;
   const requireExecutableValidation = options.requireExecutableValidation === true;
+  const requireGithubLinks = options.requireGithubLinks === true;
+  const githubLinks = normalizeGithubLinks(options.githubLinks);
   const readyTasks = taskQueue.filter((task) => task && task.isReady !== false);
+
+  if (requireGithubLinks && githubLinks.length === 0) {
+    return {
+      taskId: null,
+      title: null,
+      validationCommand: null,
+      acceptanceChecklist: [],
+      executionNow: [],
+      blockedQueue: true,
+      blockedReasons: ['GitHub links required (--require-github-links) but none provided via --github-link.'],
+      experimentSpecTemplate: null
+    };
+  }
+
   const top = readyTasks.find((task) => {
     const criteriaCount = Array.isArray(task.acceptanceCriteria) ? task.acceptanceCriteria.length : 0;
     if (criteriaCount < minimumCriteria) return false;
@@ -826,6 +851,10 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
 
   const githubLinks = normalizeGithubLinks(metadata.githubLinks);
+  if (!githubLinks.length && metadata.requireGithubLinks) {
+    lines.push('- GitHub links required (--require-github-links) but none were provided');
+  }
+
   lines.push('', '## Reporting links (GitHub only)');
   if (!githubLinks.length) {
     lines.push('- NONE_PROVIDED (supply --github-link for commit/PR/artifact URLs)');
@@ -871,7 +900,9 @@ function writeDecisionLog(filePath, executionPlan, validationResult, health, met
     `- Validation status: ${validationResult?.status ?? 'NOT_RUN'}`,
     `- Readiness: ${health?.readinessPct ?? 'n/a'}%`,
     `- Rollback trigger: ${rollbackTrigger}`,
-    '- Correction log: Added automated remediation guardrails for PantryPal-first execution, GitHub-links-only reporting, and no-wait launch behavior when changes are clear/reversible.',
+    metadata.requireGithubLinks && !githubLinks.length
+      ? '- Missing required launch inputs: GitHub links were requested (--require-github-links) but none provided via --github-link.'
+      : '- Correction log: Added automated remediation guardrails for PantryPal-first execution, GitHub-links-only reporting, and no-wait launch behavior when changes are clear/reversible.',
     `- GitHub links: ${githubLinks.length ? githubLinks.join(', ') : 'NONE_PROVIDED'}`,
     ''
   ];
@@ -895,6 +926,7 @@ function parseCliOptions(argv = []) {
     readyLightThreshold: 1,
     minimumCriteria: 6,
     requireExecutableValidation: false,
+    requireGithubLinks: false,
     validate: !argv.includes('--no-validate'),
     validationTimeoutMs: null,
     experimentsFile: null,
@@ -986,6 +1018,10 @@ function parseCliOptions(argv = []) {
 
     if (rawFlag === '--require-executable-validation') {
       options.requireExecutableValidation = true;
+    }
+
+    if (rawFlag === '--require-github-links') {
+      options.requireGithubLinks = true;
     }
   }
 
@@ -1193,6 +1229,8 @@ if (require.main === module) {
   const executionPlan = pickImmediateExecution(queue, {
     minimumCriteria: cliOptions.minimumCriteria,
     requireExecutableValidation: cliOptions.requireExecutableValidation,
+    requireGithubLinks: cliOptions.requireGithubLinks,
+    githubLinks: cliOptions.githubLinks,
     generatedAt
   });
   const validationResult = cliOptions.validate
@@ -1210,8 +1248,16 @@ if (require.main === module) {
     minimumScore: cliOptions.minimumScore,
     lightThreshold: cliOptions.lightThreshold,
     readyLightThreshold: cliOptions.readyLightThreshold,
-    minimumCriteria: cliOptions.minimumCriteria
+    minimumCriteria: cliOptions.minimumCriteria,
+    requireGithubLinks: cliOptions.requireGithubLinks,
+    githubLinks: cliOptions.githubLinks
   });
+
+  const executionMetadata = {
+    generatedAt,
+    githubLinks: cliOptions.githubLinks,
+    requireGithubLinks: cliOptions.requireGithubLinks
+  };
 
   const syncResult = cliOptions.syncKanban
     ? syncQueueToKanban(queue, {
@@ -1223,19 +1269,15 @@ if (require.main === module) {
     : { synced: false, inserted: 0, reason: 'Sync disabled.' };
 
   const executionBrief = cliOptions.executionBriefOut
-    ? writeExecutionBrief(cliOptions.executionBriefOut, executionPlan, validationResult, health, {
-      generatedAt,
-      githubLinks: cliOptions.githubLinks
-    })
+    ? writeExecutionBrief(cliOptions.executionBriefOut, executionPlan, validationResult, health, executionMetadata)
     : null;
   const experimentSpec = cliOptions.experimentSpecOut
     ? writeExperimentSpec(cliOptions.experimentSpecOut, executionPlan, { generatedAt })
     : null;
   const decisionLog = cliOptions.decisionLogOut
     ? writeDecisionLog(cliOptions.decisionLogOut, executionPlan, validationResult, health, {
-      generatedAt,
-      owner: executionPlan?.experimentSpecTemplate?.owner ?? executionPlan?.owner ?? cliOptions.defaultOwner,
-      githubLinks: cliOptions.githubLinks
+      ...executionMetadata,
+      owner: executionPlan?.experimentSpecTemplate?.owner ?? executionPlan?.owner ?? cliOptions.defaultOwner
     })
     : null;
 
