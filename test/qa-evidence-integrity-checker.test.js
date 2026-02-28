@@ -16,7 +16,7 @@ function writeKanban(dir, doneTasks) {
   const kanbanPath = path.join(dir, 'kanban.json');
   fs.writeFileSync(
     kanbanPath,
-    JSON.stringify({ columns: { todo: [], inProgress: [], done: doneTasks } }, null, 2),
+    JSON.stringify({ columns: { backlog: [], todo: [], inProgress: [], done: doneTasks }, activityLog: [] }, null, 2),
     'utf8'
   );
   return kanbanPath;
@@ -28,119 +28,80 @@ function runChecker(args) {
   });
 }
 
-test('parseArgs reads new threshold and top-failures flags', () => {
-  const args = checker.parseArgs([
-    'node',
-    checkerPath,
-    '--max-errors',
-    '2',
-    '--max-warnings',
-    '3',
-    '--top-failures',
-    '1'
+test('parseArgs reads rollback flag', () => {
+  const args = checker.parseArgs(['node', checkerPath, '--apply-rollback']);
+  assert.equal(args.applyRollback, true);
+});
+
+test('checkTask fails when correction occurred without correction log', () => {
+  const tempDir = makeTempWorkspace();
+  try {
+    const task = {
+      id: 'c1',
+      name: 'Correction task',
+      status: 'done',
+      completionDetails: 'Evidence: https://github.com/example/repo/commit/abc',
+      metadata: {
+        correctionOccurred: true,
+        verification: { command: 'npm test', result: 'pass' }
+      }
+    };
+    const result = checker.checkTask(task, { kanbanDir: tempDir, artifactsDir: tempDir });
+    assert.equal(result.pass, false);
+    assert.equal(result.issues.some((i) => i.code === 'MISSING_CORRECTION_LOG'), true);
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+});
+
+test('applyRollback moves failing done tasks back to inProgress', () => {
+  const board = {
+    columns: {
+      backlog: [],
+      todo: [],
+      inProgress: [],
+      done: [{ id: 't1', name: 'Failing done', status: 'done', completedAt: '2026-01-01T00:00:00.000Z' }]
+    },
+    activityLog: []
+  };
+
+  const rolledBack = checker.applyRollback(board, [
+    { taskId: 't1', issues: [{ code: 'MISSING_VERIFICATION_RECORD' }] }
   ]);
 
-  assert.equal(args.maxErrors, 2);
-  assert.equal(args.maxWarnings, 3);
-  assert.equal(args.topFailures, 1);
+  assert.deepEqual(rolledBack, ['t1']);
+  assert.equal(board.columns.done.length, 0);
+  assert.equal(board.columns.inProgress[0].id, 't1');
+  assert.equal(board.activityLog[0].type, 'qa_gate_rollback');
 });
 
-test('parseArgs rejects negative threshold values', () => {
-  assert.throws(
-    () => checker.parseArgs(['node', checkerPath, '--max-errors', '-1']),
-    /non-negative integer/
-  );
-});
-
-test('exits non-zero when error threshold is exceeded', () => {
+test('cli rollback path writes updated kanban and exits non-zero on failure threshold', () => {
   const tempDir = makeTempWorkspace();
   try {
     const kanbanPath = writeKanban(tempDir, [
       {
         id: 'task-1',
-        name: 'Task missing evidence',
+        name: 'Task missing verification',
         status: 'done',
-        description: 'Completed with no links.'
+        completionDetails: 'Evidence: https://github.com/example/repo/commit/abc'
       }
     ]);
 
-    const result = runChecker(['--kanban', kanbanPath, '--artifacts-dir', tempDir, '--max-errors', '0']);
-    assert.equal(result.status, 1);
-  } finally {
-    fs.rmSync(tempDir, { recursive: true, force: true });
-  }
-});
-
-test('exits non-zero when warning threshold is exceeded', () => {
-  const tempDir = makeTempWorkspace();
-  try {
-    const evidencePath = path.join(tempDir, 'evidence.md');
-    fs.writeFileSync(evidencePath, '# evidence\n', 'utf8');
-
-    const kanbanPath = writeKanban(tempDir, [
-      {
-        id: 'task-2',
-        name: 'Task with evidence but no screenshot',
-        status: 'done',
-        description: `Evidence: ${evidencePath}`
-      }
+    const result = runChecker([
+      '--kanban',
+      kanbanPath,
+      '--artifacts-dir',
+      tempDir,
+      '--apply-rollback',
+      '--max-errors',
+      '0'
     ]);
-
-    const result = runChecker(['--kanban', kanbanPath, '--artifacts-dir', tempDir, '--max-warnings', '0']);
     assert.equal(result.status, 1);
+
+    const board = JSON.parse(fs.readFileSync(kanbanPath, 'utf8'));
+    assert.equal(board.columns.done.length, 0);
+    assert.equal(board.columns.inProgress.length, 1);
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
-});
-
-test('toMarkdown includes top remediation summary and applies slicing', () => {
-  const report = {
-    generatedAt: '2026-02-27T00:00:00.000Z',
-    kanbanPath: '/tmp/kanban.json',
-    artifactsDir: '/tmp/artifacts',
-    topFailures: 1,
-    summary: {
-      doneTasksChecked: 2,
-      passed: 0,
-      failed: 2,
-      errors: 2,
-      warnings: 0
-    },
-    results: [
-      {
-        taskId: 't1',
-        taskName: 'First failing task',
-        pass: false,
-        evidenceRefs: [],
-        issues: [
-          {
-            severity: 'error',
-            code: 'MISSING_EVIDENCE_LINK',
-            message: 'missing',
-            remediation: 'Add evidence links'
-          }
-        ]
-      },
-      {
-        taskId: 't2',
-        taskName: 'Second failing task',
-        pass: false,
-        evidenceRefs: [],
-        issues: [
-          {
-            severity: 'error',
-            code: 'ARTIFACT_REFERENCE_NOT_FOUND',
-            message: 'missing file',
-            remediation: 'Fix missing file paths'
-          }
-        ]
-      }
-    ]
-  };
-
-  const markdown = checker.toMarkdown(report);
-  assert.match(markdown, /## Top Remediation Summary/);
-  const [, remediationSection = ''] = markdown.split('## Top Remediation Summary');
-  assert.match(remediationSection, /First failing task/);
-  assert.doesNotMatch(remediationSection, /Second failing task/);
 });

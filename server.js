@@ -4,6 +4,8 @@ const path = require('path');
 const { exec } = require('child_process');
 const util = require('util');
 const crypto = require('crypto');
+const { computePantryPalWipMetrics, prioritizeWithGuardrails } = require('./scripts/pantrypal-priority-guardrails');
+const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 
 const execAsync = util.promisify(exec);
 const PORT = Number(process.env.PORT) || 4180;
@@ -20,6 +22,27 @@ const VALID_PRIORITIES = ['high', 'medium', 'low'];
 
 function nowIso() {
   return new Date().toISOString();
+}
+
+function didCorrectionOccur(task, payload = {}) {
+  return Boolean(
+    payload.correctionOccurred ||
+      task?.correctionOccurred ||
+      task?.correctionRequired ||
+      task?.metadata?.correctionOccurred ||
+      task?.metadata?.correctionRequired ||
+      (Number(task?.metadata?.correctionCount) || 0) > 0
+  );
+}
+
+function hasCorrectionLogRecord(task, payload = {}) {
+  const inbound = payload.correctionLog || payload?.metadata?.correctionLog;
+  return Boolean(inbound || task?.correctionLog || task?.metadata?.correctionLog);
+}
+
+function hasVerificationRecord(task, payload = {}) {
+  const inbound = payload.verification || payload?.metadata?.verification || payload.verifiedAt;
+  return Boolean(inbound || task?.verification || task?.metadata?.verification || task?.verifiedAt || task?.metadata?.verifiedAt);
 }
 
 function cleanText(value, maxLen = 3000) {
@@ -196,6 +219,9 @@ async function getSubagentsData() {
   }
 
   const diagnostics = buildInProgressSyncDiagnostics(rawInProgress, inProgressTasks);
+  const pantryPalWip = computePantryPalWipMetrics(board, { threshold: 0.6, minActiveWip: 3 });
+  const todoCards = Array.isArray(board?.columns?.todo) ? board.columns.todo : [];
+  const guardrailedTodo = prioritizeWithGuardrails(todoCards, { syntheticCap: 2 });
 
   return {
     // Backward-compatible merged list used by current UI
@@ -204,6 +230,17 @@ async function getSubagentsData() {
     activeSubagents,
     inProgressTasks: inProgressTasks.map(({ _kanbanId, ...task }) => task),
     diagnostics,
+    pantryPalWip,
+    recommendedTodoOrder: guardrailedTodo.prioritized.map((task) => ({
+      id: task.id,
+      name: task.name,
+      priority: VALID_PRIORITIES.includes(task?.priority) ? task.priority : 'medium'
+    })),
+    quarantinedTodoCandidates: guardrailedTodo.quarantined.map((task) => ({
+      id: task.id,
+      name: task.name,
+      priority: VALID_PRIORITIES.includes(task?.priority) ? task.priority : 'medium'
+    })),
     reason: diagnostics.syncOk ? null : 'kanban inProgress and dashboard payload require reconciliation',
     counts: {
       activeSubagents: activeSubagents.length,
@@ -389,15 +426,43 @@ function createApp() {
   app.post(
     '/api/kanban/task',
     asyncHandler(async (req, res) => {
-      const { name, description, priority, status = 'backlog', source = 'manual' } = req.body || {};
+      const { name, description, priority, status = 'backlog', source = 'manual', correctionOccurred, correctionLog, verification } = req.body || {};
       const cleanedName = cleanText(name, 200);
       if (!cleanedName) return res.status(400).json({ error: 'name is required' });
 
-      const board = await loadKanban();
-      const task = newTask({ name: cleanedName, description, priority, source });
       const target = VALID_COLUMNS.includes(status) ? status : 'backlog';
+      const cleanedDescription = cleanText(description, 2000);
+      if (target === 'done') {
+        const gate = validateHumanFacingUpdate({ text: cleanedDescription, requireGitHubEvidence: true });
+        if (!gate.pass) {
+          return res.status(400).json({
+            error: 'done task description failed human-facing output policy gate',
+            issues: gate.issues
+          });
+        }
+        if (!hasVerificationRecord({}, { verification })) {
+          return res.status(422).json({
+            error: 'done transition requires verification record',
+            code: 'MISSING_VERIFICATION_RECORD'
+          });
+        }
+        if (Boolean(correctionOccurred) && !hasCorrectionLogRecord({}, { correctionLog })) {
+          return res.status(422).json({
+            error: 'done transition requires correction log when correction occurred',
+            code: 'MISSING_CORRECTION_LOG'
+          });
+        }
+      }
+
+      const board = await loadKanban();
+      const task = newTask({ name: cleanedName, description: cleanedDescription, priority, source });
       task.status = target;
-      if (target === 'done') task.completedAt = nowIso();
+      if (target === 'done') {
+        task.completedAt = nowIso();
+        task.verification = verification || null;
+        task.correctionOccurred = Boolean(correctionOccurred);
+        task.correctionLog = correctionLog || null;
+      }
 
       board.columns[target].unshift(task);
       pushActivity(board, {
@@ -416,7 +481,7 @@ function createApp() {
   app.post(
     '/api/kanban/move',
     asyncHandler(async (req, res) => {
-      const { taskId, to, summary = '' } = req.body || {};
+      const { taskId, to, summary = '', completionDetails = '', correctionOccurred, correctionLog, verification } = req.body || {};
       if (!taskId || !to) return res.status(400).json({ error: 'taskId and to are required' });
       if (!VALID_COLUMNS.includes(to)) return res.status(400).json({ error: 'invalid target column' });
 
@@ -426,6 +491,43 @@ function createApp() {
 
       const [task] = board.columns[found.col].splice(found.idx, 1);
       const from = found.col;
+
+      const cleanedSummary = cleanText(summary, 500);
+      const cleanedCompletionDetails = cleanText(completionDetails, 2000);
+      if (to === 'done') {
+        const completionText = cleanedCompletionDetails || cleanedSummary || task.completionDetails || task.description;
+        const gate = validateHumanFacingUpdate({ text: completionText, requireGitHubEvidence: true });
+        if (!gate.pass) {
+          board.columns[found.col].splice(found.idx, 0, task);
+          return res.status(400).json({
+            error: 'done transition failed human-facing output policy gate',
+            issues: gate.issues
+          });
+        }
+
+        if (!hasVerificationRecord(task, { verification })) {
+          board.columns[found.col].splice(found.idx, 0, task);
+          return res.status(422).json({
+            error: 'done transition requires verification record',
+            code: 'MISSING_VERIFICATION_RECORD'
+          });
+        }
+
+        const correctionOccurredFlag = didCorrectionOccur(task, { correctionOccurred });
+        if (correctionOccurredFlag && !hasCorrectionLogRecord(task, { correctionLog })) {
+          board.columns[found.col].splice(found.idx, 0, task);
+          return res.status(422).json({
+            error: 'done transition requires correction log when correction occurred',
+            code: 'MISSING_CORRECTION_LOG'
+          });
+        }
+
+        task.completionDetails = completionText;
+        task.correctionOccurred = correctionOccurredFlag;
+        if (correctionLog) task.correctionLog = correctionLog;
+        if (verification) task.verification = verification;
+      }
+
       task.status = to;
       if (to === 'done' && !task.completedAt) task.completedAt = nowIso();
       if (to !== 'done') task.completedAt = null;
@@ -437,7 +539,7 @@ function createApp() {
         taskName: task.name,
         from,
         to,
-        detail: cleanText(summary, 500)
+        detail: cleanedSummary
       });
 
       await saveKanban(board);

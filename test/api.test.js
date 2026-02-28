@@ -25,7 +25,7 @@ async function makeServer() {
   };
 }
 
-test('health endpoint returns ok', async () => {
+test('health endpoint returns ok', { concurrency: false }, async () => {
   const app = await makeServer();
   try {
     const res = await fetch(`${app.baseUrl}/api/health`);
@@ -38,7 +38,7 @@ test('health endpoint returns ok', async () => {
   }
 });
 
-test('kanban create + move flow works and validates bad input', async () => {
+test('kanban create + move flow works and validates bad input', { concurrency: false }, async () => {
   const app = await makeServer();
   try {
     const badCreate = await fetch(`${app.baseUrl}/api/kanban/task`, {
@@ -68,7 +68,14 @@ test('kanban create + move flow works and validates bad input', async () => {
     const move = await fetch(`${app.baseUrl}/api/kanban/move`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ taskId, to: 'done', summary: 'finished' })
+      body: JSON.stringify({
+        taskId,
+        to: 'done',
+        summary: 'finished',
+        verification: 'unit tests passed',
+        completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123',
+        verification: { command: 'npm test', result: 'pass', verifiedAt: new Date().toISOString() }
+      })
     });
     assert.equal(move.status, 200);
     const moveBody = await move.json();
@@ -79,13 +86,18 @@ test('kanban create + move flow works and validates bad input', async () => {
   }
 });
 
-test('kanban lifecycle preserves completedAt semantics when reopened', async () => {
+test('kanban lifecycle preserves completedAt semantics when reopened', { concurrency: false }, async () => {
   const app = await makeServer();
   try {
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Lifecycle task', status: 'done' })
+      body: JSON.stringify({
+        name: 'Lifecycle task',
+        status: 'done',
+        verification: 'smoke checks passed',
+        description: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123'
+      })
     });
     assert.equal(create.status, 200);
     const created = await create.json();
@@ -106,7 +118,13 @@ test('kanban lifecycle preserves completedAt semantics when reopened', async () 
     const reclose = await fetch(`${app.baseUrl}/api/kanban/move`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ taskId, to: 'done', summary: 'finally done' })
+      body: JSON.stringify({
+        taskId,
+        to: 'done',
+        summary: 'finally done',
+        verification: 'regression checks complete',
+        completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123'
+      })
     });
     assert.equal(reclose.status, 200);
     const reclosed = await reclose.json();
@@ -117,7 +135,120 @@ test('kanban lifecycle preserves completedAt semantics when reopened', async () 
   }
 });
 
-test('dashboard endpoint returns integrated payload and reflects kanban inProgress tasks', async () => {
+test('done task creation is rejected when description leaks local path evidence', async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Bad done evidence',
+        status: 'done',
+        description: 'Evidence: /Users/claw/.openclaw/workspace/OpsHub/artifacts/report.md'
+      })
+    });
+
+    assert.equal(create.status, 400);
+    const body = await create.json();
+    assert.match(body.error, /human-facing output policy gate/);
+  } finally {
+    await app.close();
+  }
+});
+
+test('done transition requires GitHub evidence in completion details', async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Move target', status: 'todo' })
+    });
+    const created = await create.json();
+
+    const badMove = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'done',
+        completionDetails: 'Evidence: artifacts/local.md',
+        verification: { command: 'npm test', result: 'pass', verifiedAt: new Date().toISOString() }
+      })
+    });
+    assert.equal(badMove.status, 400);
+
+    const goodMove = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'done',
+        completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123',
+        verification: 'qa-evidence-check passed'
+      })
+    });
+    assert.equal(goodMove.status, 200);
+    const done = await goodMove.json();
+    assert.match(done.task.completionDetails, /https:\/\/github\.com/);
+  } finally {
+    await app.close();
+  }
+});
+
+test('done transition enforces correction-log-before-claim-done protocol', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Needs correction', status: 'inProgress' })
+    });
+    const created = await create.json();
+
+    const missingVerification = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'done',
+        completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123'
+      })
+    });
+    assert.equal(missingVerification.status, 422);
+
+    const missingCorrectionLog = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'done',
+        correctionOccurred: true,
+        completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123',
+        verification: { command: 'npm test', result: 'pass', verifiedAt: new Date().toISOString() }
+      })
+    });
+    assert.equal(missingCorrectionLog.status, 422);
+
+    const success = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'done',
+        correctionOccurred: true,
+        correctionLog: { reason: 'fixed failed assertion', remediation: 'updated guard path' },
+        completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123',
+        verification: { command: 'npm test', result: 'pass', verifiedAt: new Date().toISOString() }
+      })
+    });
+    assert.equal(success.status, 200);
+  } finally {
+    await app.close();
+  }
+});
+
+test('dashboard endpoint returns integrated payload and reflects kanban inProgress tasks', { concurrency: false }, async () => {
   const app = await makeServer();
   try {
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
@@ -159,6 +290,40 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.ok(body.tokenUsage);
     assert.equal(typeof body.tokenUsage.quotaPct, 'number');
     assert.ok(Array.isArray(body.activity));
+  } finally {
+    await app.close();
+  }
+});
+
+test('dashboard exposes PantryPal WIP share metric with drift alert when share drops below threshold', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const tasks = [
+      { name: 'Integration dashboard task', status: 'inProgress' },
+      { name: 'Smoke lifecycle replay', status: 'inProgress' },
+      { name: 'Generic QA pass', status: 'inProgress' },
+      { name: 'PantryPal rescue planner tune-up', status: 'inProgress' }
+    ];
+
+    for (const task of tasks) {
+      const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task)
+      });
+      assert.equal(create.status, 200);
+    }
+
+    const dashboard = await fetch(`${app.baseUrl}/api/dashboard`);
+    assert.equal(dashboard.status, 200);
+    const body = await dashboard.json();
+
+    assert.ok(body.subagents.pantryPalWip);
+    assert.ok(body.subagents.pantryPalWip.activeWipCount >= 4);
+    assert.ok(body.subagents.pantryPalWip.pantryPalWipCount >= 1);
+    assert.ok(body.subagents.pantryPalWip.pantryPalWipShare <= 1);
+    assert.equal(body.subagents.pantryPalWip.threshold, 0.6);
+    assert.equal(typeof body.subagents.pantryPalWip.driftAlert, 'boolean');
   } finally {
     await app.close();
   }

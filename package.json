@@ -7,6 +7,7 @@
     "start": "node server.js",
     "test": "node --test",
     "qa:evidence-check": "node scripts/qa-evidence-integrity-checker.js",
+    "lint:report-templates": "node scripts/report-template-lint.js",
     "paywall:sequential-check": "node scripts/paywall-sequential-check.js",
     "cleanup:inprogress-stale": "node scripts/inprogress-stale-cleanup.js"
   },

@@ -31,6 +31,33 @@ npm test
 
 Includes a lightweight API smoke suite for health checks + kanban flows.
 
+## Human-facing deliverable policy gate
+
+Done/completion updates now enforce:
+
+- No local filesystem path leakage (`/Users/...`, `/tmp/...`, or relative local refs like `artifacts/...`)
+- At least one evidence URL matching `https://github.com/...`
+
+Compliant example:
+
+```text
+CompletionDetails: Verification complete.
+Evidence: https://github.com/larryclaw/OpsHub/commit/<sha>
+```
+
+Non-compliant examples:
+
+```text
+Evidence: /Users/claw/.openclaw/workspace/OpsHub/artifacts/report.md
+Evidence: artifacts/report.md
+```
+
+Template lint:
+
+```bash
+npm run lint:report-templates
+```
+
 ## Endpoints
 
 - `GET /api/health` → health check
@@ -61,14 +88,25 @@ OpsHub uses local artifacts and system commands where available:
 - `OPS_HUB_TOKEN_QUOTA` (default `1000000`)
 - `OPSHUB_DATA_DIR` (override kanban storage path; useful for tests)
 
+## PantryPal-first prioritization guardrails
+
+QDRIFT-04 introduces PantryPal-first weighted prioritization + synthetic churn quarantine/cap in automation loops.
+
+- Core module: `scripts/pantrypal-priority-guardrails.js`
+- Dashboard metric: `subagents.pantryPalWip` (share + drift alert)
+- Automation integration: `scripts/social-mention-ingest.js` applies guardrails before enqueue
+
+See `docs/pantrypal-prioritization-guardrails.md` for policy, thresholds, and test traceability.
+
 ## In-Progress stale cleanup utility
 
 Use the safe cleanup script to detect stale `inProgress` tasks with no active sub-agent match and generate remediation reports.
 
 - Dry-run by default (no board changes)
 - Optional `--apply` moves stale tasks back to `todo`
+- Autonomous recovery (default) detects stalled/waiting workers, attempts self-recovery, and auto-dispatches up to 2 fallback tasks
 - Optional `--task-id <id>` scopes remediation/reporting to specific stuck cards
-- Adds `activityLog` entries for every auto-reassigned task
+- Adds `activityLog` entries for reassignment + self-recovery attempts
 
 ```bash
 node scripts/inprogress-stale-cleanup.js \
