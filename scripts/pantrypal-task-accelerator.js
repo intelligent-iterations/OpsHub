@@ -245,6 +245,51 @@ function createTaskAcceptanceAudit(taskQueue, minimumCriteria = 6) {
   };
 }
 
+function summarizeQueueScores(taskQueue = []) {
+  const scores = taskQueue
+    .map((task) => Number(task?.score))
+    .filter((score) => Number.isFinite(score));
+
+  if (!scores.length) {
+    return {
+      average: 0,
+      median: 0,
+      min: 0,
+      max: 0,
+      readyAverage: 0,
+      blockedAverage: 0
+    };
+  }
+
+  const sortedScores = [...scores].sort((a, b) => a - b);
+  const midpoint = Math.floor(sortedScores.length / 2);
+  const median = sortedScores.length % 2 === 0
+    ? (sortedScores[midpoint - 1] + sortedScores[midpoint]) / 2
+    : sortedScores[midpoint];
+
+  const readyScores = taskQueue
+    .filter((task) => task && task.isReady !== false)
+    .map((task) => Number(task.score))
+    .filter((score) => Number.isFinite(score));
+  const blockedScores = taskQueue
+    .filter((task) => task && task.isReady === false)
+    .map((task) => Number(task.score))
+    .filter((score) => Number.isFinite(score));
+
+  const toAverage = (values) => values.length
+    ? Number((values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(2))
+    : 0;
+
+  return {
+    average: toAverage(scores),
+    median: Number(median.toFixed(2)),
+    min: Number(sortedScores[0].toFixed(2)),
+    max: Number(sortedScores[sortedScores.length - 1].toFixed(2)),
+    readyAverage: toAverage(readyScores),
+    blockedAverage: toAverage(blockedScores)
+  };
+}
+
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
@@ -258,6 +303,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const readinessPct = queue.length ? Math.round((readyTasks / queue.length) * 100) : 0;
   const topBlockedReasons = summarizeBlockedReasons(queue);
   const acceptanceAudit = createTaskAcceptanceAudit(queue, options.minimumCriteria);
+  const scoreSummary = summarizeQueueScores(queue);
 
   return {
     incomingExperiments: experiments.length,
@@ -267,6 +313,12 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     blockedTasks,
     readinessPct,
     topBlockedReasons,
+    scoreAverage: scoreSummary.average,
+    scoreMedian: scoreSummary.median,
+    scoreMin: scoreSummary.min,
+    scoreMax: scoreSummary.max,
+    scoreReadyAverage: scoreSummary.readyAverage,
+    scoreBlockedAverage: scoreSummary.blockedAverage,
     isLight: isQueueLight(queue, threshold),
     isReadyCapacityLight: isExecutionCapacityLight(queue, readyLightThreshold),
     threshold,
@@ -400,6 +452,8 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Blocked tasks: ${health.blockedTasks ?? 'n/a'}`,
       `Readiness: ${health.readinessPct ?? 'n/a'}%`,
       `Top blockers: ${(health.topBlockedReasons || []).length ? health.topBlockedReasons.map((entry) => `${entry.reason} (${entry.count})`).join('; ') : 'none'}`,
+      `Score summary: avg ${health.scoreAverage ?? 'n/a'}, median ${health.scoreMedian ?? 'n/a'}, min ${health.scoreMin ?? 'n/a'}, max ${health.scoreMax ?? 'n/a'}`,
+      `Score by readiness: ready avg ${health.scoreReadyAverage ?? 'n/a'}, blocked avg ${health.scoreBlockedAverage ?? 'n/a'}`,
       `Acceptance criteria coverage: ${health.tasksMeetingMinimum ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks meet minimum ${health.minimumCriteria ?? 'n/a'} checks`,
       `Average criteria per task: ${health.averageCriteriaCount ?? 'n/a'}`,
       `Tasks below criteria threshold: ${(health.tasksBelowCriteriaThreshold || []).length}`,
@@ -487,6 +541,8 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Blocked tasks: ${health?.blockedTasks ?? 'n/a'}`);
   lines.push(`Readiness: ${health?.readinessPct ?? 'n/a'}%`);
   lines.push(`Top blockers: ${(health?.topBlockedReasons || []).length ? health.topBlockedReasons.map((entry) => `${entry.reason} (${entry.count})`).join('; ') : 'none'}`);
+  lines.push(`Score summary: avg ${health?.scoreAverage ?? 'n/a'}, median ${health?.scoreMedian ?? 'n/a'}, min ${health?.scoreMin ?? 'n/a'}, max ${health?.scoreMax ?? 'n/a'}`);
+  lines.push(`Score by readiness: ready avg ${health?.scoreReadyAverage ?? 'n/a'}, blocked avg ${health?.scoreBlockedAverage ?? 'n/a'}`);
   lines.push(`Acceptance criteria coverage: ${health?.tasksMeetingMinimum ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks meet minimum ${health?.minimumCriteria ?? 'n/a'} checks`);
   lines.push(`Average criteria per task: ${health?.averageCriteriaCount ?? 'n/a'}`);
   lines.push(`Tasks below criteria threshold: ${(health?.tasksBelowCriteriaThreshold || []).length}`);
@@ -794,6 +850,7 @@ module.exports = {
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
   summarizeBlockedReasons,
+  summarizeQueueScores,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,

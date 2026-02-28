@@ -16,6 +16,7 @@ const {
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
   summarizeBlockedReasons,
+  summarizeQueueScores,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
@@ -205,6 +206,22 @@ test('summarizeBlockedReasons returns frequency-ranked blocker reasons', () => {
 });
 
 
+test('summarizeQueueScores reports central tendency and readiness split', () => {
+  const summary = summarizeQueueScores([
+    { score: 90, isReady: true },
+    { score: 80, isReady: false },
+    { score: 70, isReady: true },
+    { score: 60, isReady: false }
+  ]);
+
+  assert.equal(summary.average, 75);
+  assert.equal(summary.median, 75);
+  assert.equal(summary.min, 60);
+  assert.equal(summary.max, 90);
+  assert.equal(summary.readyAverage, 80);
+  assert.equal(summary.blockedAverage, 70);
+});
+
 test('createTaskAcceptanceAudit reports average criteria coverage and below-threshold tasks', () => {
   const audit = createTaskAcceptanceAudit([
     { id: 'PP-GROWTH-001', acceptanceCriteria: ['a', 'b', 'c', 'd', 'e', 'f'] },
@@ -233,6 +250,12 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.readinessPct, 0);
   assert.equal(health.topBlockedReasons.length, 1);
   assert.match(health.topBlockedReasons[0].reason, /legal sign-off/);
+  assert.equal(health.scoreAverage, queue[0].score);
+  assert.equal(health.scoreMedian, queue[0].score);
+  assert.equal(health.scoreMin, queue[0].score);
+  assert.equal(health.scoreMax, queue[0].score);
+  assert.equal(health.scoreReadyAverage, 0);
+  assert.equal(health.scoreBlockedAverage, queue[0].score);
   assert.equal(health.isLight, true);
   assert.equal(health.isReadyCapacityLight, true);
   assert.equal(health.threshold, 2);
@@ -370,6 +393,12 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
       readyTasks: 1,
       blockedTasks: 0,
       readinessPct: 100,
+      scoreAverage: 91.23,
+      scoreMedian: 91.23,
+      scoreMin: 91.23,
+      scoreMax: 91.23,
+      scoreReadyAverage: 91.23,
+      scoreBlockedAverage: 0,
       isLight: true,
       threshold: 2,
       minimumCriteria: 6,
@@ -387,6 +416,8 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Blocked tasks: 0/);
   assert.match(markdown, /Readiness: 100%/);
   assert.match(markdown, /Top blockers: none/);
+  assert.match(markdown, /Score summary: avg 91.23, median 91.23, min 91.23, max 91.23/);
+  assert.match(markdown, /Score by readiness: ready avg 91.23, blocked avg 0/);
   assert.match(markdown, /Acceptance criteria coverage: 1\/1 tasks meet minimum 6 checks/);
   assert.match(markdown, /Average criteria per task: 6.5/);
   assert.match(markdown, /Tasks below criteria threshold: 0/);
@@ -501,6 +532,12 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
     blockedTasks: 0,
     readinessPct: 100,
     topBlockedReasons: [],
+    scoreAverage: 88.1,
+    scoreMedian: 88.1,
+    scoreMin: 82.2,
+    scoreMax: 93.7,
+    scoreReadyAverage: 88.1,
+    scoreBlockedAverage: 0,
     tasksMeetingMinimum: 3,
     minimumCriteria: 6,
     averageCriteriaCount: 6.67,
@@ -517,6 +554,8 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
   assert.match(content, /Top task: PP-GROWTH-001-fast-rescue/);
   assert.match(content, /- \[ \] criterion 1/);
   assert.match(content, /Top blockers: none/);
+  assert.match(content, /Score summary: avg 88.1, median 88.1, min 82.2, max 93.7/);
+  assert.match(content, /Score by readiness: ready avg 88.1, blocked avg 0/);
   assert.match(content, /Acceptance criteria coverage: 3\/3 tasks meet minimum 6 checks/);
   assert.match(content, /Average criteria per task: 6.67/);
   assert.match(content, /Tasks below criteria threshold: 0/);
