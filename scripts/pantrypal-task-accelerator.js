@@ -634,6 +634,7 @@ function parseCliOptions(argv = []) {
     syncKanban: false,
     kanbanFile: null,
     readyOnlySync: false,
+    bootstrapKanban: false,
     seedMaxTasks: null,
     autoSeed: true
   };
@@ -690,6 +691,10 @@ function parseCliOptions(argv = []) {
 
     if (rawFlag === '--ready-only-sync') {
       options.readyOnlySync = true;
+    }
+
+    if (rawFlag === '--bootstrap-kanban') {
+      options.bootstrapKanban = true;
     }
 
     if (rawFlag === '--no-auto-seed') {
@@ -792,15 +797,33 @@ function syncQueueToKanban(taskQueue, options = {}) {
   const skippedBlocked = Math.max(0, taskQueue.length - sourceQueue.length);
 
   const resolvedPath = path.resolve(process.cwd(), options.kanbanFile);
-  const raw = fs.readFileSync(resolvedPath, 'utf8');
-  const kanban = JSON.parse(raw);
+  const bootstrapTemplate = {
+    columns: {
+      todo: [],
+      inProgress: [],
+      done: []
+    },
+    activityLog: []
+  };
+
+  let kanban;
+  if (!fs.existsSync(resolvedPath)) {
+    if (!options.bootstrapKanban) {
+      throw new Error(`Kanban file not found at ${resolvedPath}. Re-run with --bootstrap-kanban to create it.`);
+    }
+    kanban = bootstrapTemplate;
+  } else {
+    const raw = fs.readFileSync(resolvedPath, 'utf8');
+    kanban = JSON.parse(raw);
+  }
 
   const result = upsertQueueIntoKanban(sourceQueue, kanban, {
     source: options.source,
     now: options.now
   });
 
-  if (result.inserted > 0) {
+  const bootstrapped = !fs.existsSync(resolvedPath);
+  if (result.inserted > 0 || bootstrapped) {
     fs.writeFileSync(resolvedPath, `${JSON.stringify(result.kanban, null, 2)}\n`, 'utf8');
   }
 
@@ -810,6 +833,7 @@ function syncQueueToKanban(taskQueue, options = {}) {
     attempted: sourceQueue.length,
     skippedBlocked,
     readyOnly,
+    bootstrapped,
     kanbanFile: options.kanbanFile
   };
 }
@@ -883,7 +907,8 @@ if (require.main === module) {
     ? syncQueueToKanban(queue, {
       kanbanFile: cliOptions.kanbanFile,
       source: 'pantrypal-task-accelerator',
-      readyOnly: cliOptions.readyOnlySync
+      readyOnly: cliOptions.readyOnlySync,
+      bootstrapKanban: cliOptions.bootstrapKanban
     })
     : { synced: false, inserted: 0, reason: 'Sync disabled.' };
 

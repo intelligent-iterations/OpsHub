@@ -754,6 +754,12 @@ test('parseCliOptions captures ready-only-sync flag', () => {
   assert.equal(options.readyOnlySync, true);
 });
 
+test('parseCliOptions captures bootstrap-kanban flag', () => {
+  const options = parseCliOptions(['--sync-kanban', '--kanban-file', 'data/kanban.json', '--bootstrap-kanban']);
+  assert.equal(options.syncKanban, true);
+  assert.equal(options.bootstrapKanban, true);
+});
+
 test('syncQueueToKanban can skip blocked tasks in ready-only mode', () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-kanban-ready-only-'));
   const kanbanFile = path.join(tempDir, 'kanban.json');
@@ -795,4 +801,32 @@ test('syncQueueToKanban can skip blocked tasks in ready-only mode', () => {
   assert.equal(result.inserted, 1);
   assert.equal(persisted.columns.todo.length, 1);
   assert.equal(persisted.columns.todo[0].id, 'PP-GROWTH-010-ready');
+});
+
+test('syncQueueToKanban bootstraps a missing kanban file when enabled', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-kanban-bootstrap-'));
+  const kanbanFile = path.join(tempDir, 'kanban.json');
+
+  const result = syncQueueToKanban([{
+    id: 'PP-GROWTH-012-bootstrap',
+    title: 'Bootstrap task',
+    score: 81,
+    owner: 'growth-oncall',
+    validationCommand: 'npm test',
+    acceptanceCriteria: ['c1'],
+    blockedReasons: []
+  }], {
+    kanbanFile,
+    source: 'unit-test',
+    now: '2026-02-28T03:40:00.000Z',
+    bootstrapKanban: true
+  });
+
+  const persisted = JSON.parse(fs.readFileSync(kanbanFile, 'utf8'));
+  assert.equal(result.synced, true);
+  assert.equal(result.bootstrapped, true);
+  assert.equal(result.inserted, 1);
+  assert.ok(Array.isArray(persisted.columns.inProgress));
+  assert.ok(Array.isArray(persisted.columns.done));
+  assert.equal(persisted.columns.todo[0].id, 'PP-GROWTH-012-bootstrap');
 });
