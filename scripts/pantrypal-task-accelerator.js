@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const { execSync } = require('node:child_process');
 const { rankExperiments } = require('./pantrypal-growth-experiment-prioritizer');
 
 function toSlug(name) {
@@ -54,7 +55,7 @@ function createLightQueueSeedTasks(options = {}) {
       primaryMetric: 'week-2 rescue completion rate',
       targetLiftPct: 10,
       guardrail: 'notification opt-out rate stays below 1.5%',
-      validationCommand: options.validationCommand ?? 'npm test -- pantrypal-growth-experiment-prioritizer.test.js'
+      validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-growth-experiment-prioritizer.test.js'
     },
     {
       name: 'Smart defrost reminder timing tuned by prep-time tier',
@@ -65,7 +66,7 @@ function createLightQueueSeedTasks(options = {}) {
       primaryMetric: 'same-day rescue completion rate',
       targetLiftPct: 7,
       guardrail: 'push dismiss rate does not increase by >2%',
-      validationCommand: options.validationCommand ?? 'npm test -- pantrypal-task-accelerator.test.js'
+      validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-task-accelerator.test.js'
     }
   ];
 }
@@ -77,6 +78,7 @@ function pickImmediateExecution(taskQueue) {
   return {
     taskId: top.id,
     title: top.title,
+    validationCommand: top.validationCommand,
     executionNow: [
       'Draft experiment brief in tracker with owner + rollout window.',
       'Prepare treatment/control variants and QA events in staging.',
@@ -86,7 +88,49 @@ function pickImmediateExecution(taskQueue) {
   };
 }
 
-function formatTaskMarkdown(taskQueue, executionPlan) {
+function runValidationCommand(command, options = {}) {
+  if (!command) {
+    return {
+      status: 'NOT_RUN',
+      command: null,
+      exitCode: null,
+      durationMs: 0,
+      outputSnippet: 'No validation command configured.'
+    };
+  }
+
+  const run = options.runner ?? ((cmd) => execSync(cmd, {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    timeout: options.timeoutMs ?? 120000,
+    maxBuffer: options.maxBuffer ?? 1024 * 1024
+  }));
+
+  const startedAt = Date.now();
+
+  try {
+    const output = run(command);
+    return {
+      status: 'PASS',
+      command,
+      exitCode: 0,
+      durationMs: Date.now() - startedAt,
+      outputSnippet: String(output ?? '').trim().split('\n').slice(-8).join('\n') || 'Validation completed with no output.'
+    };
+  } catch (error) {
+    const combinedOutput = [error.stdout, error.stderr].filter(Boolean).join('\n').trim();
+
+    return {
+      status: 'FAIL',
+      command,
+      exitCode: Number.isInteger(error.status) ? error.status : 1,
+      durationMs: Date.now() - startedAt,
+      outputSnippet: combinedOutput.split('\n').slice(-8).join('\n') || String(error.message)
+    };
+  }
+}
+
+function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null) {
   const taskLines = taskQueue.map((task) => {
     const criteria = task.acceptanceCriteria.map((line) => `    - [ ] ${line}`).join('\n');
     return `- [ ] ${task.id} — ${task.title} (score: ${task.score.toFixed(2)}, owner: ${task.owner})\n  - Acceptance criteria:\n${criteria}`;
@@ -96,6 +140,19 @@ function formatTaskMarkdown(taskQueue, executionPlan) {
     ? executionPlan.executionNow.map((step, idx) => `${idx + 1}. ${step}`).join('\n')
     : '1. No tasks available';
 
+  const validationLines = validationResult
+    ? [
+      `Status: ${validationResult.status}`,
+      `Command: ${validationResult.command ?? 'n/a'}`,
+      `Exit code: ${validationResult.exitCode ?? 'n/a'}`,
+      `Duration: ${validationResult.durationMs}ms`,
+      'Recent output:',
+      '```',
+      validationResult.outputSnippet || 'n/a',
+      '```'
+    ].join('\n')
+    : 'Status: NOT_RUN';
+
   return [
     '# PantryPal Task Queue (Auto-generated)',
     '',
@@ -104,6 +161,9 @@ function formatTaskMarkdown(taskQueue, executionPlan) {
     '## Execute Immediately',
     executionPlan ? `Top task: ${executionPlan.taskId} — ${executionPlan.title}` : 'Top task: none',
     executionLines,
+    '',
+    '## Validation Result',
+    validationLines,
     ''
   ].join('\n');
 }
@@ -119,7 +179,7 @@ if (require.main === module) {
       primaryMetric: 'weekly meal-plan saves',
       targetLiftPct: 12,
       guardrail: 'recipe dismiss rate stays below 20%',
-      validationCommand: 'npm test -- pantrypal-task-accelerator.test.js'
+      validationCommand: 'npm test -- test/pantrypal-task-accelerator.test.js'
     },
     {
       name: 'Referral booster after first successful pantry save',
@@ -127,7 +187,7 @@ if (require.main === module) {
       confidence: 0.66,
       ease: 0.85,
       pantryPalFit: 0.8,
-      validationCommand: 'npm test -- pantrypal-growth-experiment-prioritizer.test.js'
+      validationCommand: 'npm test -- test/pantrypal-growth-experiment-prioritizer.test.js'
     },
     {
       name: 'Household challenge leaderboard for waste reduction streaks',
@@ -135,7 +195,7 @@ if (require.main === module) {
       confidence: 0.58,
       ease: 0.54,
       pantryPalFit: 0.9,
-      validationCommand: 'npm test -- pantrypal-task-accelerator.test.js'
+      validationCommand: 'npm test -- test/pantrypal-task-accelerator.test.js'
     }
   ];
 
@@ -147,7 +207,8 @@ if (require.main === module) {
   }
 
   const executionPlan = pickImmediateExecution(queue);
-  process.stdout.write(formatTaskMarkdown(queue, executionPlan));
+  const validationResult = runValidationCommand(executionPlan?.validationCommand);
+  process.stdout.write(formatTaskMarkdown(queue, executionPlan, validationResult));
 }
 
 module.exports = {
@@ -157,5 +218,6 @@ module.exports = {
   isQueueLight,
   createLightQueueSeedTasks,
   pickImmediateExecution,
+  runValidationCommand,
   formatTaskMarkdown
 };

@@ -8,6 +8,7 @@ const {
   isQueueLight,
   createLightQueueSeedTasks,
   pickImmediateExecution,
+  runValidationCommand,
   formatTaskMarkdown
 } = require('../scripts/pantrypal-task-accelerator');
 
@@ -58,16 +59,48 @@ test('pickImmediateExecution chooses top queue item and includes validation step
   const plan = pickImmediateExecution([{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 90, acceptanceCriteria: [], validationCommand: 'npm test -- foo' }]);
   assert.equal(plan.taskId, 'PP-GROWTH-001-foo');
   assert.equal(plan.executionNow.length, 4);
+  assert.equal(plan.validationCommand, 'npm test -- foo');
   assert.match(plan.executionNow[2], /npm test -- foo/);
 });
 
-test('formatTaskMarkdown renders queue and execution section', () => {
+test('runValidationCommand returns PASS with output snippet', () => {
+  const result = runValidationCommand('npm test -- smoke', {
+    runner: () => 'line1\nline2\nline3'
+  });
+
+  assert.equal(result.status, 'PASS');
+  assert.equal(result.exitCode, 0);
+  assert.equal(result.command, 'npm test -- smoke');
+  assert.match(result.outputSnippet, /line3/);
+});
+
+test('runValidationCommand returns FAIL when runner throws', () => {
+  const error = new Error('boom');
+  error.status = 2;
+  error.stdout = 'stdout-line';
+  error.stderr = 'stderr-line';
+
+  const result = runValidationCommand('npm test -- fail', {
+    runner: () => {
+      throw error;
+    }
+  });
+
+  assert.equal(result.status, 'FAIL');
+  assert.equal(result.exitCode, 2);
+  assert.match(result.outputSnippet, /stderr-line/);
+});
+
+test('formatTaskMarkdown renders queue execution and validation section', () => {
   const markdown = formatTaskMarkdown(
     [{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 91.23, owner: 'growth', acceptanceCriteria: ['a', 'b'] }],
-    { taskId: 'PP-GROWTH-001-foo', title: 'Foo', executionNow: ['step1'] }
+    { taskId: 'PP-GROWTH-001-foo', title: 'Foo', executionNow: ['step1'] },
+    { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 1234, outputSnippet: 'ok' }
   );
 
   assert.match(markdown, /PantryPal Task Queue/);
   assert.match(markdown, /PP-GROWTH-001-foo/);
   assert.match(markdown, /Execute Immediately/);
+  assert.match(markdown, /Validation Result/);
+  assert.match(markdown, /Status: PASS/);
 });
