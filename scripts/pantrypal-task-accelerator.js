@@ -421,6 +421,64 @@ function formatTaskJson(taskQueue, executionPlan, validationResult = null, metad
   }, null, 2);
 }
 
+function writeExecutionBrief(filePath, executionPlan, validationResult, health, metadata = {}) {
+  if (!filePath) return null;
+
+  const resolvedPath = path.resolve(process.cwd(), filePath);
+  const generatedAt = metadata.generatedAt ?? new Date().toISOString();
+
+  const lines = [
+    '# PantryPal Immediate Execution Brief',
+    '',
+    `Generated at: ${generatedAt}`,
+    '',
+    `Top task: ${executionPlan?.taskId ?? 'none'}${executionPlan?.title ? ` — ${executionPlan.title}` : ''}`,
+    `Validation command: ${executionPlan?.validationCommand ?? 'n/a'}`,
+    '',
+    '## Critical acceptance checklist'
+  ];
+
+  const checklist = executionPlan?.acceptanceChecklist ?? [];
+  if (!checklist.length) {
+    lines.push('- No acceptance checklist available');
+  } else {
+    for (const criterion of checklist) {
+      lines.push(`- [ ] ${criterion}`);
+    }
+  }
+
+  lines.push('', '## First-hour launch steps');
+  const launchSteps = executionPlan?.executionNow ?? [];
+  if (!launchSteps.length) {
+    lines.push('1. No launch steps available');
+  } else {
+    launchSteps.forEach((step, index) => {
+      lines.push(`${index + 1}. ${step}`);
+    });
+  }
+
+  lines.push('', '## Queue health');
+  lines.push(`Ready tasks: ${health?.readyTasks ?? 'n/a'}`);
+  lines.push(`Blocked tasks: ${health?.blockedTasks ?? 'n/a'}`);
+  lines.push(`Readiness: ${health?.readinessPct ?? 'n/a'}%`);
+  lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
+
+  lines.push('', '## Validation result');
+  lines.push(`Status: ${validationResult?.status ?? 'NOT_RUN'}`);
+  lines.push(`Exit code: ${validationResult?.exitCode ?? 'n/a'}`);
+  lines.push('```');
+  lines.push(validationResult?.outputSnippet ?? 'n/a');
+  lines.push('```', '');
+
+  fs.writeFileSync(resolvedPath, `${lines.join('\n')}\n`, 'utf8');
+
+  return {
+    filePath,
+    generatedAt,
+    taskId: executionPlan?.taskId ?? null
+  };
+}
+
 function parseCliOptions(argv = []) {
   const options = {
     outputFormat: argv.includes('--json') ? 'json' : 'markdown',
@@ -432,6 +490,7 @@ function parseCliOptions(argv = []) {
     experimentsFile: null,
     defaultOwner: 'growth-oncall',
     validationCommand: null,
+    executionBriefOut: null,
     syncKanban: false,
     kanbanFile: null,
     readyOnlySync: false
@@ -464,6 +523,7 @@ function parseCliOptions(argv = []) {
       '--experiments-file': 'experimentsFile',
       '--default-owner': 'defaultOwner',
       '--validation-command': 'validationCommand',
+      '--execution-brief-out': 'executionBriefOut',
       '--kanban-file': 'kanbanFile'
     };
 
@@ -667,8 +727,12 @@ if (require.main === module) {
     })
     : { synced: false, inserted: 0, reason: 'Sync disabled.' };
 
+  const executionBrief = cliOptions.executionBriefOut
+    ? writeExecutionBrief(cliOptions.executionBriefOut, executionPlan, validationResult, health)
+    : null;
+
   const output = cliOptions.outputFormat === 'json'
-    ? formatTaskJson(queue, executionPlan, validationResult, { seeded, sync: syncResult }, health)
+    ? formatTaskJson(queue, executionPlan, validationResult, { seeded, sync: syncResult, executionBrief }, health)
     : formatTaskMarkdown(queue, executionPlan, validationResult, health);
 
   process.stdout.write(output);
@@ -690,6 +754,7 @@ module.exports = {
   runValidationCommand,
   formatTaskMarkdown,
   formatTaskJson,
+  writeExecutionBrief,
   parseCliOptions,
   loadExperimentsFromFile,
   upsertQueueIntoKanban,

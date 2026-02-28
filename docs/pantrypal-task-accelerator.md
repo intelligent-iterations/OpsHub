@@ -28,6 +28,7 @@ node scripts/pantrypal-task-accelerator.js --json
 - `--experiments-file <path>` load experiment candidates from JSON array
 - `--default-owner <owner>` owner attached to generated queue cards
 - `--validation-command <cmd>` override validation command applied to seeded tasks
+- `--execution-brief-out <path>` write a focused immediate-execution launch brief (checklist + first-hour steps + validation)
 
 ## Input file schema
 

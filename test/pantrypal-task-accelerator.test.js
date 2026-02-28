@@ -20,6 +20,7 @@ const {
   runValidationCommand,
   formatTaskMarkdown,
   formatTaskJson,
+  writeExecutionBrief,
   parseCliOptions,
   loadExperimentsFromFile,
   upsertQueueIntoKanban,
@@ -401,12 +402,47 @@ test('parseCliOptions accepts experiment file, owner, and validation command ove
   const options = parseCliOptions([
     '--experiments-file', 'data/pantrypal-experiments.json',
     '--default-owner=growth-night-shift',
-    '--validation-command', 'npm test -- test/pantrypal-task-accelerator.test.js'
+    '--validation-command', 'npm test -- test/pantrypal-task-accelerator.test.js',
+    '--execution-brief-out', 'artifacts/pantrypal-execution-brief.md'
   ]);
 
   assert.equal(options.experimentsFile, 'data/pantrypal-experiments.json');
   assert.equal(options.defaultOwner, 'growth-night-shift');
   assert.equal(options.validationCommand, 'npm test -- test/pantrypal-task-accelerator.test.js');
+  assert.equal(options.executionBriefOut, 'artifacts/pantrypal-execution-brief.md');
+});
+
+test('writeExecutionBrief persists a markdown launch brief with checklist and validation output', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-brief-'));
+  const briefPath = path.join(tempDir, 'execution-brief.md');
+
+  const result = writeExecutionBrief(briefPath, {
+    taskId: 'PP-GROWTH-001-fast-rescue',
+    title: 'Fast rescue',
+    validationCommand: 'npm test -- test/pantrypal-task-accelerator.test.js',
+    acceptanceChecklist: ['criterion 1', 'criterion 2'],
+    executionNow: ['step 1', 'step 2']
+  }, {
+    status: 'PASS',
+    exitCode: 0,
+    outputSnippet: 'all good'
+  }, {
+    readyTasks: 3,
+    blockedTasks: 0,
+    readinessPct: 100,
+    nextAction: 'Launch now.'
+  }, {
+    generatedAt: '2026-02-28T03:30:00.000Z'
+  });
+
+  const content = fs.readFileSync(briefPath, 'utf8');
+  assert.equal(result.taskId, 'PP-GROWTH-001-fast-rescue');
+  assert.equal(result.generatedAt, '2026-02-28T03:30:00.000Z');
+  assert.match(content, /PantryPal Immediate Execution Brief/);
+  assert.match(content, /Top task: PP-GROWTH-001-fast-rescue/);
+  assert.match(content, /- \[ \] criterion 1/);
+  assert.match(content, /Status: PASS/);
+  assert.match(content, /all good/);
 });
 
 test('loadExperimentsFromFile loads a valid JSON experiment array', () => {
