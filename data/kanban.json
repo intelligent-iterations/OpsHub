@@ -1,8 +1,77 @@
 {
   "columns": {
     "backlog": [],
-    "todo": [],
+    "todo": [
+      {
+        "id": "PP-GROWTH-001-personalized-rescue-recipes-from-expiring-inventory",
+        "name": "[PantryPal] Personalized rescue recipes from expiring inventory",
+        "description": "Score: 80.20\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-task-accelerator.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (weekly meal-plan saves).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 12%.\n3. Sample-size gate is defined: at least 1200 qualified households over 14 days.\n4. Guardrail is monitored and passes: recipe dismiss rate stays below 20%.\n5. Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T02:55:01.399Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 80.2,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+          "isReady": true
+        }
+      },
+      {
+        "id": "PP-GROWTH-002-rescue-streak-comeback-experiment-for-lapsed-households",
+        "name": "[PantryPal] Rescue streak comeback experiment for lapsed households",
+        "description": "Score: 78.95\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (week-2 rescue completion rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 10%.\n3. Sample-size gate is defined: at least 1600 qualified households over 14 days.\n4. Guardrail is monitored and passes: notification opt-out rate stays below 1.5%.\n5. Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T02:55:01.399Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 78.95,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
+          "isReady": true
+        }
+      },
+      {
+        "id": "PP-GROWTH-003-smart-defrost-reminder-timing-tuned-by-prep-time-tier",
+        "name": "[PantryPal] Smart defrost reminder timing tuned by prep-time tier",
+        "description": "Score: 76.45\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-task-accelerator.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 7%.\n3. Sample-size gate is defined: at least 1400 qualified households over 10 days.\n4. Guardrail is monitored and passes: push dismiss rate does not increase by >2%.\n5. Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T02:55:01.399Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 76.45,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+          "isReady": true
+        }
+      }
+    ],
     "inProgress": [
+      {
+        "id": "b07af96b-9465-4187-b03a-3cc199ffee20",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T02:22:50.310Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
+        "id": "4b04f156-64cf-466c-ba74-a25fd562c6d9",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T01:39:53.460Z",
+        "completedAt": null,
+        "source": "manual"
+      },
       {
         "id": "d21285c7-25c0-4f02-b9df-7c911bc69625",
         "name": "Integration dashboard task",
@@ -107,6 +176,46 @@
       }
     ],
     "done": [
+      {
+        "id": "22a1d9df-ea3e-46ef-8030-282386884422",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T02:22:50.295Z",
+        "completedAt": "2026-02-28T02:22:50.304Z",
+        "source": "manual"
+      },
+      {
+        "id": "caed6661-75a0-4acf-a086-85a1577c158e",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T02:22:50.280Z",
+        "completedAt": "2026-02-28T02:22:50.287Z",
+        "source": "manual"
+      },
+      {
+        "id": "1a376e4d-7d1e-4536-8dc3-35f1c6ad0c9f",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T01:39:53.442Z",
+        "completedAt": "2026-02-28T01:39:53.454Z",
+        "source": "manual"
+      },
+      {
+        "id": "d7dea03d-97c4-46de-93e5-9917d9ca89ac",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T01:39:53.425Z",
+        "completedAt": "2026-02-28T01:39:53.433Z",
+        "source": "manual"
+      },
       {
         "id": "b1ae8f8e-c954-452a-8051-ac632bac58c1",
         "name": "Lifecycle task",
@@ -2105,6 +2214,132 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T02:55:01.399Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-003-smart-defrost-reminder-timing-tuned-by-prep-time-tier",
+      "taskName": "[PantryPal] Smart defrost reminder timing tuned by prep-time tier",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T02:55:01.399Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-002-rescue-streak-comeback-experiment-for-lapsed-households",
+      "taskName": "[PantryPal] Rescue streak comeback experiment for lapsed households",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T02:55:01.399Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-001-personalized-rescue-recipes-from-expiring-inventory",
+      "taskName": "[PantryPal] Personalized rescue recipes from expiring inventory",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T02:22:50.310Z",
+      "type": "task_added",
+      "taskId": "b07af96b-9465-4187-b03a-3cc199ffee20",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T02:22:50.304Z",
+      "type": "task_moved",
+      "taskId": "22a1d9df-ea3e-46ef-8030-282386884422",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T02:22:50.299Z",
+      "type": "task_moved",
+      "taskId": "22a1d9df-ea3e-46ef-8030-282386884422",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T02:22:50.295Z",
+      "type": "task_added",
+      "taskId": "22a1d9df-ea3e-46ef-8030-282386884422",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T02:22:50.287Z",
+      "type": "task_moved",
+      "taskId": "caed6661-75a0-4acf-a086-85a1577c158e",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T02:22:50.280Z",
+      "type": "task_added",
+      "taskId": "caed6661-75a0-4acf-a086-85a1577c158e",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:39:53.460Z",
+      "type": "task_added",
+      "taskId": "4b04f156-64cf-466c-ba74-a25fd562c6d9",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:39:53.454Z",
+      "type": "task_moved",
+      "taskId": "1a376e4d-7d1e-4536-8dc3-35f1c6ad0c9f",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T01:39:53.448Z",
+      "type": "task_moved",
+      "taskId": "1a376e4d-7d1e-4536-8dc3-35f1c6ad0c9f",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T01:39:53.442Z",
+      "type": "task_added",
+      "taskId": "1a376e4d-7d1e-4536-8dc3-35f1c6ad0c9f",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:39:53.433Z",
+      "type": "task_moved",
+      "taskId": "d7dea03d-97c4-46de-93e5-9917d9ca89ac",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T01:39:53.425Z",
+      "type": "task_added",
+      "taskId": "d7dea03d-97c4-46de-93e5-9917d9ca89ac",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
     {
       "at": "2026-02-28T00:16:21.649Z",
       "type": "task_added",
@@ -6312,102 +6547,6 @@
       "taskId": "09429660-b121-47d2-845f-bf3baa3be6d5",
       "taskName": "[P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
       "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.035Z",
-      "type": "task_added",
-      "taskId": "c39330d0-bc74-413f-956e-12adb8ebc865",
-      "taskName": "[P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.030Z",
-      "type": "task_added",
-      "taskId": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
-      "taskName": "[P5] Launch checklist + app store assets + rollout plan",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.024Z",
-      "type": "task_added",
-      "taskId": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
-      "taskName": "[P5] Accessibility + localization readiness",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.019Z",
-      "type": "task_added",
-      "taskId": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
-      "taskName": "[P5] QA plan + test matrix (unit/widget/integration)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.013Z",
-      "type": "task_added",
-      "taskId": "93d240f5-d619-4509-836f-497fb5b0c643",
-      "taskName": "[P5] Performance pass (startup, list rendering, sync)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.007Z",
-      "type": "task_added",
-      "taskId": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
-      "taskName": "[P5] Add analytics instrumentation (funnel + retention events)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.002Z",
-      "type": "task_added",
-      "taskId": "20bb91f3-6263-4fca-9768-7f77ab351d41",
-      "taskName": "[P5] Add onboarding flow + permission education",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.996Z",
-      "type": "task_added",
-      "taskId": "5702ea57-c198-40d6-a165-7f1e274cf96b",
-      "taskName": "[P4] Add re-engagement messaging strategy (push + in-app)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.990Z",
-      "type": "task_added",
-      "taskId": "5f65417e-c225-4069-a1c2-000638727a61",
-      "taskName": "[P4] Build challenge/quest system (use expiring foods this week)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.985Z",
-      "type": "task_added",
-      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
-      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.979Z",
-      "type": "task_added",
-      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
-      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.973Z",
-      "type": "task_added",
-      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
-      "taskName": "[P4] Implement expiry reminders and urgency tiers",
-      "to": "todo",
       "detail": "Added task from migration"
     }
   ]

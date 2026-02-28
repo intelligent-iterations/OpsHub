@@ -413,6 +413,7 @@ function formatTaskJson(taskQueue, executionPlan, validationResult = null, metad
   return JSON.stringify({
     generatedAt: metadata.generatedAt ?? new Date().toISOString(),
     seeded: Boolean(metadata.seeded),
+    sync: metadata.sync ?? null,
     health,
     queue: taskQueue,
     immediateExecution: executionPlan,
@@ -429,7 +430,9 @@ function parseCliOptions(argv = []) {
     validate: !argv.includes('--no-validate'),
     experimentsFile: null,
     defaultOwner: 'growth-oncall',
-    validationCommand: null
+    validationCommand: null,
+    syncKanban: false,
+    kanbanFile: null
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -457,12 +460,17 @@ function parseCliOptions(argv = []) {
     const stringFlagMap = {
       '--experiments-file': 'experimentsFile',
       '--default-owner': 'defaultOwner',
-      '--validation-command': 'validationCommand'
+      '--validation-command': 'validationCommand',
+      '--kanban-file': 'kanbanFile'
     };
 
     if (rawFlag in stringFlagMap && typeof value === 'string' && value.trim()) {
       options[stringFlagMap[rawFlag]] = value.trim();
       if (rawValue === undefined) index += 1;
+    }
+
+    if (rawFlag === '--sync-kanban') {
+      options.syncKanban = true;
     }
   }
 
@@ -479,6 +487,99 @@ function loadExperimentsFromFile(filePath) {
   }
 
   return parsed;
+}
+
+function upsertQueueIntoKanban(taskQueue, kanban, options = {}) {
+  const normalized = kanban && typeof kanban === 'object' ? { ...kanban } : {};
+  const columns = normalized.columns && typeof normalized.columns === 'object' ? normalized.columns : {};
+  const todo = Array.isArray(columns.todo) ? [...columns.todo] : [];
+  const activityLog = Array.isArray(normalized.activityLog) ? [...normalized.activityLog] : [];
+  const source = options.source ?? 'pantrypal-task-accelerator';
+  const now = options.now ?? new Date().toISOString();
+
+  const existingTaskIds = new Set(todo.map((task) => task && task.id).filter(Boolean));
+  let inserted = 0;
+
+  for (const queueTask of taskQueue) {
+    if (!queueTask || !queueTask.id || existingTaskIds.has(queueTask.id)) continue;
+    const descriptionLines = [
+      `Score: ${Number(queueTask.score).toFixed(2)}`,
+      `Owner: ${queueTask.owner}`,
+      `Validation: ${queueTask.validationCommand}`,
+      '',
+      'Acceptance criteria:',
+      ...(queueTask.acceptanceCriteria || []).map((criterion, index) => `${index + 1}. ${criterion}`)
+    ];
+
+    if (Array.isArray(queueTask.blockedReasons) && queueTask.blockedReasons.length) {
+      descriptionLines.push('', 'Blocked reasons:', ...queueTask.blockedReasons.map((reason) => `- ${reason}`));
+    }
+
+    todo.push({
+      id: queueTask.id,
+      name: `[PantryPal] ${queueTask.title}`,
+      description: descriptionLines.join('\n'),
+      priority: queueTask.score >= 85 ? 'high' : queueTask.score >= 75 ? 'medium' : 'low',
+      status: 'todo',
+      createdAt: now,
+      completedAt: null,
+      source,
+      metadata: {
+        score: queueTask.score,
+        owner: queueTask.owner,
+        validationCommand: queueTask.validationCommand,
+        isReady: queueTask.isReady !== false
+      }
+    });
+    existingTaskIds.add(queueTask.id);
+    inserted += 1;
+
+    activityLog.unshift({
+      at: now,
+      type: 'task_added',
+      taskId: queueTask.id,
+      taskName: `[PantryPal] ${queueTask.title}`,
+      to: 'todo',
+      detail: `Added task from ${source}`
+    });
+  }
+
+  return {
+    inserted,
+    kanban: {
+      ...normalized,
+      columns: {
+        ...columns,
+        todo
+      },
+      activityLog
+    }
+  };
+}
+
+function syncQueueToKanban(taskQueue, options = {}) {
+  if (!options.kanbanFile) {
+    return { synced: false, inserted: 0, reason: 'No kanban file configured.' };
+  }
+
+  const resolvedPath = path.resolve(process.cwd(), options.kanbanFile);
+  const raw = fs.readFileSync(resolvedPath, 'utf8');
+  const kanban = JSON.parse(raw);
+
+  const result = upsertQueueIntoKanban(taskQueue, kanban, {
+    source: options.source,
+    now: options.now
+  });
+
+  if (result.inserted > 0) {
+    fs.writeFileSync(resolvedPath, `${JSON.stringify(result.kanban, null, 2)}\n`, 'utf8');
+  }
+
+  return {
+    synced: true,
+    inserted: result.inserted,
+    kanbanFile: options.kanbanFile
+  };
 }
 
 if (require.main === module) {
@@ -541,8 +642,15 @@ if (require.main === module) {
     lightThreshold: cliOptions.lightThreshold
   });
 
+  const syncResult = cliOptions.syncKanban
+    ? syncQueueToKanban(queue, {
+      kanbanFile: cliOptions.kanbanFile,
+      source: 'pantrypal-task-accelerator'
+    })
+    : { synced: false, inserted: 0, reason: 'Sync disabled.' };
+
   const output = cliOptions.outputFormat === 'json'
-    ? formatTaskJson(queue, executionPlan, validationResult, { seeded }, health)
+    ? formatTaskJson(queue, executionPlan, validationResult, { seeded, sync: syncResult }, health)
     : formatTaskMarkdown(queue, executionPlan, validationResult, health);
 
   process.stdout.write(output);
@@ -565,5 +673,7 @@ module.exports = {
   formatTaskMarkdown,
   formatTaskJson,
   parseCliOptions,
-  loadExperimentsFromFile
+  loadExperimentsFromFile,
+  upsertQueueIntoKanban,
+  syncQueueToKanban
 };

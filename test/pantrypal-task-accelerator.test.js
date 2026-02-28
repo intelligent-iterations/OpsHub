@@ -21,7 +21,9 @@ const {
   formatTaskMarkdown,
   formatTaskJson,
   parseCliOptions,
-  loadExperimentsFromFile
+  loadExperimentsFromFile,
+  upsertQueueIntoKanban,
+  syncQueueToKanban
 } = require('../scripts/pantrypal-task-accelerator');
 
 test('toSlug normalizes experiment names', () => {
@@ -323,7 +325,7 @@ test('formatTaskJson emits seeded metadata and validation payload', () => {
     [{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 91.23, owner: 'growth', acceptanceCriteria: [] }],
     { taskId: 'PP-GROWTH-001-foo', title: 'Foo', acceptanceChecklist: ['c1'], executionNow: ['step1'] },
     { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 20, outputSnippet: 'ok' },
-    { seeded: true, generatedAt: '2026-02-28T01:56:00.000Z' },
+    { seeded: true, generatedAt: '2026-02-28T01:56:00.000Z', sync: { synced: true, inserted: 3, kanbanFile: 'data/kanban.json' } },
     {
       incomingExperiments: 4,
       eligibleExperiments: 3,
@@ -340,6 +342,8 @@ test('formatTaskJson emits seeded metadata and validation payload', () => {
   const parsed = JSON.parse(json);
   assert.equal(parsed.seeded, true);
   assert.equal(parsed.generatedAt, '2026-02-28T01:56:00.000Z');
+  assert.equal(parsed.sync.synced, true);
+  assert.equal(parsed.sync.inserted, 3);
   assert.equal(parsed.health.eligibleExperiments, 3);
   assert.equal(parsed.health.readinessPct, 100);
   assert.match(parsed.health.nextAction, /Execute top ready PantryPal experiment now/);
@@ -397,4 +401,81 @@ test('loadExperimentsFromFile throws when payload is not an array', () => {
   fs.writeFileSync(file, JSON.stringify({ name: 'not-an-array' }), 'utf8');
 
   assert.throws(() => loadExperimentsFromFile(file), /Expected an array of experiments/);
+});
+
+
+test('upsertQueueIntoKanban inserts new PantryPal todo tasks with acceptance criteria metadata', () => {
+  const seedKanban = { columns: { todo: [] }, activityLog: [] };
+  const queue = [{
+    id: 'PP-GROWTH-001-fast-rescue',
+    title: 'Fast rescue trial',
+    score: 88.2,
+    owner: 'growth-oncall',
+    validationCommand: 'npm test -- growth',
+    acceptanceCriteria: ['c1', 'c2'],
+    blockedReasons: []
+  }];
+
+  const { inserted, kanban } = upsertQueueIntoKanban(queue, seedKanban, {
+    source: 'unit-test',
+    now: '2026-02-28T03:00:00.000Z'
+  });
+
+  assert.equal(inserted, 1);
+  assert.equal(kanban.columns.todo.length, 1);
+  assert.equal(kanban.columns.todo[0].name, '[PantryPal] Fast rescue trial');
+  assert.match(kanban.columns.todo[0].description, /Acceptance criteria:/);
+  assert.equal(kanban.columns.todo[0].priority, 'high');
+  assert.equal(kanban.activityLog[0].taskId, 'PP-GROWTH-001-fast-rescue');
+});
+
+test('upsertQueueIntoKanban avoids duplicate task ids already in todo', () => {
+  const seedKanban = {
+    columns: {
+      todo: [{ id: 'PP-GROWTH-001-fast-rescue', name: '[PantryPal] Fast rescue trial' }]
+    },
+    activityLog: []
+  };
+
+  const queue = [{
+    id: 'PP-GROWTH-001-fast-rescue',
+    title: 'Fast rescue trial',
+    score: 88.2,
+    owner: 'growth-oncall',
+    validationCommand: 'npm test -- growth',
+    acceptanceCriteria: ['c1'],
+    blockedReasons: []
+  }];
+
+  const { inserted, kanban } = upsertQueueIntoKanban(queue, seedKanban);
+  assert.equal(inserted, 0);
+  assert.equal(kanban.columns.todo.length, 1);
+});
+
+test('syncQueueToKanban writes inserted queue tasks to provided file path', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-kanban-'));
+  const kanbanFile = path.join(tempDir, 'kanban.json');
+  fs.writeFileSync(kanbanFile, JSON.stringify({ columns: { todo: [] }, activityLog: [] }), 'utf8');
+
+  const result = syncQueueToKanban([{
+    id: 'PP-GROWTH-003-sync',
+    title: 'Sync me',
+    score: 79,
+    owner: 'growth-oncall',
+    validationCommand: 'npm test',
+    acceptanceCriteria: ['c1'],
+    blockedReasons: []
+  }], { kanbanFile, source: 'unit-test', now: '2026-02-28T03:10:00.000Z' });
+
+  const persisted = JSON.parse(fs.readFileSync(kanbanFile, 'utf8'));
+  assert.equal(result.synced, true);
+  assert.equal(result.inserted, 1);
+  assert.equal(persisted.columns.todo.length, 1);
+  assert.equal(persisted.columns.todo[0].id, 'PP-GROWTH-003-sync');
+});
+
+test('parseCliOptions captures sync-kanban and kanban-file flags', () => {
+  const options = parseCliOptions(['--sync-kanban', '--kanban-file', 'data/kanban.json']);
+  assert.equal(options.syncKanban, true);
+  assert.equal(options.kanbanFile, 'data/kanban.json');
 });
