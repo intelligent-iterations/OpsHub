@@ -31,9 +31,13 @@ function createAcceptanceCriteria(experiment) {
 
 function buildTaskQueue(experiments, options = {}) {
   const limit = options.limit ?? 3;
+  const minimumScore = options.minimumScore;
   const ranked = rankExperiments(experiments);
+  const eligible = typeof minimumScore === 'number'
+    ? ranked.filter((experiment) => experiment.score >= minimumScore)
+    : ranked;
 
-  return ranked.slice(0, limit).map((experiment, index) => ({
+  return eligible.slice(0, limit).map((experiment, index) => ({
     id: `PP-GROWTH-${String(index + 1).padStart(3, '0')}-${toSlug(experiment.name)}`,
     title: experiment.name,
     score: experiment.score,
@@ -76,6 +80,32 @@ function createLightQueueSeedTasks(options = {}) {
       validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-task-accelerator.test.js'
     }
   ];
+}
+
+function buildQueueWithAutoSeed(experiments, options = {}) {
+  const buildOptions = {
+    defaultOwner: options.defaultOwner,
+    limit: options.limit,
+    minimumScore: options.minimumScore
+  };
+
+  let seeded = false;
+  let queue = buildTaskQueue(experiments, buildOptions);
+
+  if (isQueueLight(queue, options.lightThreshold)) {
+    seeded = true;
+    const seeds = createLightQueueSeedTasks({ validationCommand: options.validationCommand });
+    queue = buildTaskQueue(experiments.concat(seeds), buildOptions);
+  }
+
+  if (!queue.length && typeof options.minimumScore === 'number') {
+    queue = buildTaskQueue(experiments, {
+      defaultOwner: options.defaultOwner,
+      limit: options.limit
+    });
+  }
+
+  return { queue, seeded };
 }
 
 function pickImmediateExecution(taskQueue) {
@@ -206,12 +236,12 @@ if (require.main === module) {
     }
   ];
 
-  let queue = buildTaskQueue(experiments, { defaultOwner: 'growth-oncall', limit: 3 });
-
-  if (isQueueLight(queue)) {
-    experiments = experiments.concat(createLightQueueSeedTasks());
-    queue = buildTaskQueue(experiments, { defaultOwner: 'growth-oncall', limit: 3 });
-  }
+  const { queue } = buildQueueWithAutoSeed(experiments, {
+    defaultOwner: 'growth-oncall',
+    limit: 3,
+    minimumScore: 75,
+    lightThreshold: 2
+  });
 
   const executionPlan = pickImmediateExecution(queue);
   const validationResult = runValidationCommand(executionPlan?.validationCommand);
@@ -224,6 +254,7 @@ module.exports = {
   buildTaskQueue,
   isQueueLight,
   createLightQueueSeedTasks,
+  buildQueueWithAutoSeed,
   pickImmediateExecution,
   runValidationCommand,
   formatTaskMarkdown

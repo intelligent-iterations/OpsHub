@@ -7,6 +7,7 @@ const {
   buildTaskQueue,
   isQueueLight,
   createLightQueueSeedTasks,
+  buildQueueWithAutoSeed,
   pickImmediateExecution,
   runValidationCommand,
   formatTaskMarkdown
@@ -47,10 +48,21 @@ test('buildTaskQueue ranks experiments and emits stable ids', () => {
   assert.equal(queue[0].validationCommand, 'npm test');
 });
 
+test('buildTaskQueue supports minimumScore filtering', () => {
+  const queue = buildTaskQueue([
+    { name: 'Low score', impact: 0.5, confidence: 0.5, ease: 0.5, pantryPalFit: 0.5 },
+    { name: 'High score', impact: 0.95, confidence: 0.9, ease: 0.8, pantryPalFit: 0.9 }
+  ], { minimumScore: 80, limit: 3 });
+
+  assert.equal(queue.length, 1);
+  assert.match(queue[0].title, /High score/);
+});
+
 test('isQueueLight applies default threshold', () => {
   assert.equal(isQueueLight([{ id: 'one' }, { id: 'two' }]), true);
   assert.equal(isQueueLight([{ id: 'one' }, { id: 'two' }, { id: 'three' }]), false);
 });
+
 
 test('createLightQueueSeedTasks returns pantrypal-ready tasks with acceptance inputs', () => {
   const seeds = createLightQueueSeedTasks({ validationCommand: 'npm test -- pantrypal' });
@@ -59,6 +71,22 @@ test('createLightQueueSeedTasks returns pantrypal-ready tasks with acceptance in
   assert.equal(seeds[0].minimumSampleSize, 1600);
   assert.equal(seeds[0].experimentWindowDays, 14);
   assert.equal(seeds[0].validationCommand, 'npm test -- pantrypal');
+});
+
+test('buildQueueWithAutoSeed seeds when minimumScore leaves queue light', () => {
+  const experiments = [
+    { name: 'Okay', impact: 0.7, confidence: 0.65, ease: 0.6, pantryPalFit: 0.8 }
+  ];
+
+  const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
+    minimumScore: 85,
+    limit: 3,
+    lightThreshold: 2,
+    defaultOwner: 'growth-oncall'
+  });
+
+  assert.equal(seeded, true);
+  assert.ok(queue.length >= 1);
 });
 
 test('pickImmediateExecution chooses top queue item and includes validation step', () => {
