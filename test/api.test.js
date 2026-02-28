@@ -6,6 +6,11 @@ const path = require('path');
 
 const { startServer } = require('../server');
 
+function inProgressFields() {
+  const now = new Date().toISOString();
+  return { claimedBy: 'test-agent', startedAt: now, updatedAt: now };
+}
+
 async function makeServer() {
   const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'opshub-test-'));
   process.env.OPSHUB_DATA_DIR = tempDir;
@@ -51,12 +56,12 @@ test('kanban create + move flow works and validates bad input', { concurrency: f
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Smoke task', description: 'verify kanban', priority: 'high' })
+      body: JSON.stringify({ name: 'Delivery task', description: 'verify kanban', priority: 'high' })
     });
     assert.equal(create.status, 200);
     const createBody = await create.json();
     assert.equal(createBody.ok, true);
-    assert.equal(createBody.task.ttlMinutes, 60);
+    assert.equal(createBody.task.priority, 'high');
     const taskId = createBody.task.id;
 
     const badMove = await fetch(`${app.baseUrl}/api/kanban/move`, {
@@ -73,7 +78,6 @@ test('kanban create + move flow works and validates bad input', { concurrency: f
         taskId,
         to: 'done',
         summary: 'finished',
-        verification: 'unit tests passed',
         completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123',
         verification: { command: 'npm test', result: 'pass', verifiedAt: new Date().toISOString() }
       })
@@ -87,6 +91,89 @@ test('kanban create + move flow works and validates bad input', { concurrency: f
   }
 });
 
+test('task admission validator blocks synthetic placeholder titles in production mode', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Integration dashboard task', description: 'real work item details', status: 'todo' })
+    });
+
+    assert.equal(create.status, 422);
+    const body = await create.json();
+    assert.equal(body.code, 'TASK_ADMISSION_SYNTHETIC_DENIED');
+  } finally {
+    await app.close();
+  }
+});
+
+test('task admission validator blocks duplicate active cards', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const payload = {
+      name: 'Implement telemetry collector',
+      description: 'Wire active sessions and runs into dashboard payload',
+      status: 'todo'
+    };
+
+    const first = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    assert.equal(first.status, 200);
+
+    const second = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    assert.equal(second.status, 409);
+    const body = await second.json();
+    assert.equal(body.code, 'TASK_ADMISSION_DUPLICATE_ACTIVE');
+  } finally {
+    await app.close();
+  }
+});
+
+test('WIP cap blocks non-critical intake into inProgress', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    for (let idx = 0; idx < 5; idx++) {
+      const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `Active delivery ${idx + 1}`,
+          description: `Delivery task ${idx + 1}`,
+          status: 'inProgress',
+          ...inProgressFields()
+        })
+      });
+      assert.equal(create.status, 200);
+    }
+
+    const capped = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Active delivery overflow',
+        description: 'Should be blocked by WIP cap',
+        status: 'inProgress',
+        priority: 'high',
+        ...inProgressFields()
+      })
+    });
+
+    assert.equal(capped.status, 422);
+    const body = await capped.json();
+    assert.equal(body.code, 'WIP_LIMIT_EXCEEDED');
+  } finally {
+    await app.close();
+  }
+});
+
 test('kanban lifecycle preserves completedAt semantics when reopened', { concurrency: false }, async () => {
   const app = await makeServer();
   try {
@@ -94,9 +181,9 @@ test('kanban lifecycle preserves completedAt semantics when reopened', { concurr
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: 'Lifecycle task',
+        name: 'Release lifecycle work',
         status: 'done',
-        verification: 'smoke checks passed',
+        verification: { command: 'npm run qa:evidence-check', result: 'pass', verifiedAt: new Date().toISOString() },
         description: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123'
       })
     });
@@ -123,7 +210,7 @@ test('kanban lifecycle preserves completedAt semantics when reopened', { concurr
         taskId,
         to: 'done',
         summary: 'finally done',
-        verification: 'regression checks complete',
+        verification: { command: 'npm test', result: 'pass', verifiedAt: new Date().toISOString() },
         completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123'
       })
     });
@@ -163,7 +250,7 @@ test('done transition requires GitHub evidence in completion details', async () 
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Move target', status: 'todo' })
+      body: JSON.stringify({ name: 'Move target', status: 'todo', description: 'move target description' })
     });
     const created = await create.json();
 
@@ -179,6 +266,18 @@ test('done transition requires GitHub evidence in completion details', async () 
     });
     assert.equal(badMove.status, 400);
 
+    const badVerificationMove = await fetch(`${app.baseUrl}/api/kanban/move`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        taskId: created.task.id,
+        to: 'done',
+        completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123',
+        verification: { command: 'npm test', result: 'fail', verifiedAt: new Date().toISOString() }
+      })
+    });
+    assert.equal(badVerificationMove.status, 422);
+
     const goodMove = await fetch(`${app.baseUrl}/api/kanban/move`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -186,7 +285,7 @@ test('done transition requires GitHub evidence in completion details', async () 
         taskId: created.task.id,
         to: 'done',
         completionDetails: 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123',
-        verification: 'qa-evidence-check passed'
+        verification: { command: 'npm run qa:evidence-check', result: 'pass', verifiedAt: new Date().toISOString() }
       })
     });
     assert.equal(goodMove.status, 200);
@@ -203,7 +302,7 @@ test('done transition enforces correction-log-before-claim-done protocol', { con
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Needs correction', status: 'inProgress' })
+      body: JSON.stringify({ name: 'Needs correction', description: 'task requiring correction flow', status: 'inProgress', claimedBy: 'qa-agent', startedAt: new Date().toISOString(), updatedAt: new Date().toISOString() })
     });
     const created = await create.json();
 
@@ -257,7 +356,9 @@ test('blocker detection auto-spawns blocker-handler and stores blocker protocol 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: 'Blocker card',
+        description: 'blocked by auth token issue',
         status: 'inProgress',
+        ...inProgressFields(),
         blockerProtocol: {
           detected: true,
           summary: 'auth token issue',
@@ -288,7 +389,7 @@ test('blocker escalation is rejected when fewer than exactly 2 Claude Code attem
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Escalation gate task', status: 'inProgress' })
+      body: JSON.stringify({ name: 'Escalation gate task', description: 'escalation scenario task', status: 'inProgress', ...inProgressFields() })
     });
     const created = await create.json();
 
@@ -328,7 +429,7 @@ test('blocker escalation is allowed only with exactly 2 Claude Code attempts + a
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Compliant escalation task', status: 'inProgress' })
+      body: JSON.stringify({ name: 'Compliant escalation task', description: 'compliant escalation scenario', status: 'inProgress', ...inProgressFields() })
     });
     const created = await create.json();
 
@@ -378,9 +479,10 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: 'Integration dashboard task',
+        name: 'Integration telemetry task',
         description: 'should appear in subagents.inProgressTasks',
-        status: 'inProgress'
+        status: 'inProgress',
+        ...inProgressFields()
       })
     });
     assert.equal(create.status, 200);
@@ -401,7 +503,7 @@ test('dashboard endpoint returns integrated payload and reflects kanban inProgre
     assert.ok(body.subagents.counts.inProgressTasks >= 1);
 
     assert.ok(Array.isArray(body.subagents.inProgressTasks));
-    const integrationTask = body.subagents.inProgressTasks.find((item) => item.id && item.task === 'Integration dashboard task');
+    const integrationTask = body.subagents.inProgressTasks.find((item) => item.id && item.task === 'Integration telemetry task');
     assert.ok(integrationTask);
     assert.equal(integrationTask.description, 'should appear in subagents.inProgressTasks');
     assert.equal(integrationTask.priority, 'medium');
@@ -438,7 +540,8 @@ test('live activity endpoint returns telemetry envelope with expected panel cont
       body: JSON.stringify({
         name: 'Live activity endpoint task',
         description: 'Telemetry mapping fixture',
-        status: 'inProgress'
+        status: 'inProgress',
+        ...inProgressFields()
       })
     });
     assert.equal(create.status, 200);
@@ -473,7 +576,8 @@ test('dashboard auto-next-action scheduler dispatches queued work when passive w
       body: JSON.stringify({
         name: 'Worker waiting task',
         description: 'waiting for instruction',
-        status: 'inProgress'
+        status: 'inProgress',
+        ...inProgressFields()
       })
     });
     assert.equal(staleInProgress.status, 200);
@@ -521,10 +625,10 @@ test('dashboard exposes PantryPal WIP share metric with drift alert when share d
   const app = await makeServer();
   try {
     const tasks = [
-      { name: 'Integration dashboard task', status: 'inProgress' },
-      { name: 'Smoke lifecycle replay', status: 'inProgress' },
-      { name: 'Generic QA pass', status: 'inProgress' },
-      { name: 'PantryPal rescue planner tune-up', status: 'inProgress' }
+      { name: 'Integration telemetry replay', status: 'inProgress', ...inProgressFields() },
+      { name: 'Lifecycle replay hardening', status: 'inProgress', ...inProgressFields() },
+      { name: 'Generic QA pass', status: 'inProgress', ...inProgressFields() },
+      { name: 'PantryPal rescue planner tune-up', status: 'inProgress', ...inProgressFields() }
     ];
 
     for (const task of tasks) {
@@ -583,7 +687,7 @@ test('moving complex task to inProgress enforces delegation trigger metadata', {
     const move = await fetch(`${app.baseUrl}/api/kanban/move`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ taskId: created.task.id, to: 'inProgress', summary: 'delegating now' })
+      body: JSON.stringify({ taskId: created.task.id, to: 'inProgress', summary: 'delegating now', ...inProgressFields() })
     });
     assert.equal(move.status, 200);
     const body = await move.json();
@@ -604,7 +708,7 @@ test('failed done transition logs closeout contract reminder activity', { concur
     const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Closeout reminder target', status: 'inProgress' })
+      body: JSON.stringify({ name: 'Closeout policy target', description: 'done-policy test target', status: 'inProgress', ...inProgressFields() })
     });
     const created = await create.json();
 

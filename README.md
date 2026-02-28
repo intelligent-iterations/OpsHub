@@ -85,12 +85,49 @@ OpsHub uses local artifacts and OpenClaw/runtime commands where available:
 - API routes now use centralized async error handling and return stable JSON errors on failure.
 - Kanban writes are saved atomically (`kanban.json.tmp` rename) to reduce corruption risk on interrupted writes.
 - Input payloads are normalized/truncated to reduce malformed/unbounded data issues.
+- Phase 1 Kanban integrity guards are enforced in API layer:
+  - **Task admission validator** (production-mode synthetic denylist + placeholder description rejection + active duplicate guard)
+  - **Done transition hard contract** (`completionDetails` GitHub evidence + strict verification object: `command`, `result=pass`, `verifiedAt`)
+  - **WIP cap enforcement** for `inProgress` admissions/moves.
+
+## Kanban policy gates (Phase 1)
+
+Server-side API now enforces hard workflow contracts in `POST /api/kanban/task` and `POST /api/kanban/move`:
+
+- **Task admission (production mode default):**
+  - Denies synthetic/placeholder patterns (e.g., smoke/lifecycle/integration dashboard/closeout reminder placeholders)
+  - Denies placeholder descriptions unless source is `intelligent-iteration` **and** acceptance criteria are present
+  - Denies duplicates across active columns (`backlog`, `todo`, `inProgress`) based on normalized `name + description`
+- **Done transition hard contract:**
+  - Requires GitHub evidence in completion text (`https://github.com/...`)
+  - Requires `verification.command`, `verification.result = pass`, and `verification.verifiedAt`
+- **In Progress gate:**
+  - Requires `claimedBy`, `startedAt`, and `updatedAt`
+  - Enforces WIP caps before admission to `inProgress`
+
+Error semantics:
+- `TASK_ADMISSION_SYNTHETIC_DENIED` (422)
+- `TASK_ADMISSION_PLACEHOLDER_DESCRIPTION` (422)
+- `TASK_ADMISSION_DUPLICATE_ACTIVE` (409)
+- `MISSING_REQUIRED_DONE_VERIFICATION` (422)
+- `INPROGRESS_REQUIRED_FIELDS_MISSING` (422)
+- `WIP_LIMIT_EXCEEDED` (422)
 
 ## Optional config
 
 - `PORT` (default `4180`)
 - `OPS_HUB_TOKEN_QUOTA` (default `1000000`)
 - `OPSHUB_DATA_DIR` (override kanban storage path; useful for tests)
+- `OPSHUB_BOARD_MODE` (`production` default, `diagnostic` to relax synthetic admission gate)
+- `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_HIGH` (default `3`)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_MEDIUM` (default `3`)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_LOW` (default `2`)
+- `OPSHUB_BOARD_MODE` (`production` default, `diagnostic` optional)
+  - `production`: blocks synthetic/placeholder task admissions via API
+  - `diagnostic`: allows synthetic patterns for controlled QA/experimentation
+- `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`)
+  - hard cap for non-critical `inProgress` cards
 
 ## PantryPal-first prioritization guardrails
 

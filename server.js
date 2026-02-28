@@ -19,14 +19,26 @@ const PORT = Number(process.env.PORT) || 4180;
 const WORKSPACE = path.resolve(__dirname, '..');
 const MEMORY_DIR = path.join(WORKSPACE, 'memory');
 const OPSHUB_DIR = __dirname;
-const DATA_DIR = process.env.OPSHUB_DATA_DIR
-  ? path.resolve(process.env.OPSHUB_DATA_DIR)
-  : path.join(OPSHUB_DIR, 'data');
-const KANBAN_PATH = path.join(DATA_DIR, 'kanban.json');
+function getDataDir() {
+  return process.env.OPSHUB_DATA_DIR ? path.resolve(process.env.OPSHUB_DATA_DIR) : path.join(OPSHUB_DIR, 'data');
+}
+
+function getKanbanPath() {
+  return path.join(getDataDir(), 'kanban.json');
+}
+
 const BLOCKER_PROOF_DIR = path.join(OPSHUB_DIR, 'artifacts', 'blocker-proofs');
 
 const VALID_COLUMNS = ['backlog', 'todo', 'inProgress', 'done'];
-const VALID_PRIORITIES = ['high', 'medium', 'low'];
+const ACTIVE_COLUMNS = ['backlog', 'todo', 'inProgress'];
+const VALID_PRIORITIES = ['critical', 'high', 'medium', 'low'];
+const BOARD_MODE = String(process.env.OPSHUB_BOARD_MODE || 'production').toLowerCase() === 'diagnostic' ? 'diagnostic' : 'production';
+const IN_PROGRESS_WIP_LIMIT = Number(process.env.OPSHUB_INPROGRESS_WIP_LIMIT || 5);
+const IN_PROGRESS_WIP_LIMIT_BY_PRIORITY = {
+  high: Number(process.env.OPSHUB_INPROGRESS_WIP_LIMIT_HIGH || IN_PROGRESS_WIP_LIMIT),
+  medium: Number(process.env.OPSHUB_INPROGRESS_WIP_LIMIT_MEDIUM || IN_PROGRESS_WIP_LIMIT),
+  low: Number(process.env.OPSHUB_INPROGRESS_WIP_LIMIT_LOW || IN_PROGRESS_WIP_LIMIT)
+};
 
 function nowIso() {
   return new Date().toISOString();
@@ -48,12 +60,119 @@ function hasCorrectionLogRecord(task, payload = {}) {
   return Boolean(inbound || task?.correctionLog || task?.metadata?.correctionLog);
 }
 
-function hasVerificationRecord(task, payload = {}) {
-  const inbound = payload.verification || payload?.metadata?.verification || payload.verifiedAt;
-  return Boolean(inbound || task?.verification || task?.metadata?.verification || task?.verifiedAt || task?.metadata?.verifiedAt);
+function getVerificationRecord(task, payload = {}) {
+  const inbound = payload.verification || payload?.metadata?.verification;
+  if (inbound && typeof inbound === 'object') return inbound;
+  if (task?.verification && typeof task.verification === 'object') return task.verification;
+  if (task?.metadata?.verification && typeof task.metadata.verification === 'object') return task.metadata.verification;
+  return null;
 }
 
+function hasRequiredDoneVerification(task, payload = {}) {
+  const verification = getVerificationRecord(task, payload);
+  if (!verification) return false;
+  const command = cleanText(verification.command, 300);
+  const result = cleanText(verification.result, 20).toLowerCase();
+  const verifiedAt = cleanText(verification.verifiedAt || payload.verifiedAt || task?.verifiedAt, 100);
+  return Boolean(command && verifiedAt && result === 'pass' && !Number.isNaN(new Date(verifiedAt).getTime()));
+}
 
+function normalizeForDuplicate(value = '') {
+  return cleanText(value, 2000).toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function isPlaceholderDescription(description = '') {
+  const normalized = normalizeForDuplicate(description);
+  if (!normalized) return true;
+  return /^(tbd|todo|placeholder|n\/?a|none|lorem ipsum|coming soon|test|temp|wip|pending)\.?$/.test(normalized);
+}
+
+function isDeniedSyntheticPattern(name = '', description = '') {
+  const loweredName = normalizeForDuplicate(name);
+  const loweredDesc = normalizeForDuplicate(description);
+  return /(smoke task|lifecycle task|integration dashboard task|closeout reminder|placeholder)/.test(`${loweredName} ${loweredDesc}`);
+}
+
+function hasAcceptanceCriteria(description = '') {
+  const normalized = cleanText(description, 4000).toLowerCase();
+  return /acceptance criteria|\n\s*[-*]\s+/.test(normalized);
+}
+
+function findDuplicateActiveTask(board, { name, description, excludingTaskId = null }) {
+  const keyName = normalizeForDuplicate(name);
+  const keyDesc = normalizeForDuplicate(description);
+  for (const col of ACTIVE_COLUMNS) {
+    for (const task of board.columns[col] || []) {
+      if (excludingTaskId && task.id === excludingTaskId) continue;
+      const sameName = normalizeForDuplicate(task.name) === keyName;
+      const sameDescription = normalizeForDuplicate(task.description) === keyDesc;
+      if (sameName && sameDescription) return task;
+    }
+  }
+  return null;
+}
+
+function validateTaskAdmission({ board, name, description, source, targetColumn = 'backlog', mode = BOARD_MODE, excludingTaskId = null }) {
+  const cleanedSource = cleanText(source, 100).toLowerCase();
+
+  if (mode === 'production' && isDeniedSyntheticPattern(name, description)) {
+    return {
+      ok: false,
+      status: 422,
+      error: 'task admission denied in production mode for synthetic/placeholder pattern',
+      code: 'TASK_ADMISSION_SYNTHETIC_DENIED'
+    };
+  }
+
+  if (targetColumn === 'inProgress' && isPlaceholderDescription(description)) {
+    const allowManual = cleanedSource === 'manual' || cleanedSource === 'ui';
+    const allowIntelligentIteration = cleanedSource === 'intelligent-iteration' && hasAcceptanceCriteria(description);
+    if (!allowManual && !allowIntelligentIteration) {
+      return {
+        ok: false,
+        status: 422,
+        error: 'task admission requires substantive description (placeholder content denied)',
+        code: 'TASK_ADMISSION_PLACEHOLDER_DESCRIPTION'
+      };
+    }
+  }
+
+  const duplicate = findDuplicateActiveTask(board, { name, description, excludingTaskId });
+  if (duplicate) {
+    return {
+      ok: false,
+      status: 409,
+      error: 'task admission denied: duplicate active task',
+      code: 'TASK_ADMISSION_DUPLICATE_ACTIVE',
+      duplicateTaskId: duplicate.id
+    };
+  }
+
+  return { ok: true };
+}
+
+function enforceInProgressWipLimit(board, taskPriority = 'medium') {
+  const currentInProgress = Array.isArray(board?.columns?.inProgress) ? board.columns.inProgress : [];
+  const normalizedPriority = VALID_PRIORITIES.includes(taskPriority) ? taskPriority : 'medium';
+  if (normalizedPriority === 'critical') return { ok: true };
+
+  const globalLimitHit = Number.isFinite(IN_PROGRESS_WIP_LIMIT) && IN_PROGRESS_WIP_LIMIT > 0 && currentInProgress.length >= IN_PROGRESS_WIP_LIMIT;
+  const priorityLimit = IN_PROGRESS_WIP_LIMIT_BY_PRIORITY[normalizedPriority];
+  const samePriorityCount = currentInProgress.filter((task) => (VALID_PRIORITIES.includes(task?.priority) ? task.priority : 'medium') === normalizedPriority).length;
+  const priorityLimitHit = Number.isFinite(priorityLimit) && priorityLimit > 0 && samePriorityCount >= priorityLimit;
+
+  if (!globalLimitHit && !priorityLimitHit) return { ok: true };
+  return {
+    ok: false,
+    status: 422,
+    error: 'inProgress WIP limit exceeded',
+    code: 'WIP_LIMIT_EXCEEDED',
+    limits: {
+      global: { limit: IN_PROGRESS_WIP_LIMIT, current: currentInProgress.length },
+      byPriority: { priority: normalizedPriority, limit: priorityLimit, current: samePriorityCount }
+    }
+  };
+}
 
 function requiresDelegationTrigger(task = {}) {
   const name = cleanText(task?.name || '', 400).toLowerCase();
@@ -82,7 +201,7 @@ function cleanText(value, maxLen = 3000) {
 }
 
 async function ensureDataDir() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.mkdir(getDataDir(), { recursive: true });
 }
 
 function defaultKanban() {
@@ -139,7 +258,7 @@ function normalizeBoard(parsed) {
 async function loadKanban() {
   await ensureDataDir();
   try {
-    const content = await fs.readFile(KANBAN_PATH, 'utf8');
+    const content = await fs.readFile(getKanbanPath(), 'utf8');
     return normalizeBoard(JSON.parse(content));
   } catch {
     const initial = defaultKanban();
@@ -150,9 +269,10 @@ async function loadKanban() {
 
 async function saveKanban(board) {
   await ensureDataDir();
-  const tmpPath = `${KANBAN_PATH}.${process.pid}.${crypto.randomUUID()}.tmp`;
+  const kanbanPath = getKanbanPath();
+  const tmpPath = `${kanbanPath}.${process.pid}.${crypto.randomUUID()}.tmp`;
   await fs.writeFile(tmpPath, JSON.stringify(board, null, 2), 'utf8');
-  await fs.rename(tmpPath, KANBAN_PATH);
+  await fs.rename(tmpPath, kanbanPath);
 }
 
 function pushActivity(board, entry) {
@@ -482,7 +602,7 @@ async function getSessionsData() {
 }
 
 async function getErrorData() {
-  const sources = [path.join(WORKSPACE, 'HEARTBEAT.md'), KANBAN_PATH];
+  const sources = [path.join(WORKSPACE, 'HEARTBEAT.md'), getKanbanPath()];
 
   try {
     const memFiles = await fs.readdir(MEMORY_DIR);
@@ -519,7 +639,7 @@ async function getErrorData() {
 }
 
 async function getTokenUsageData() {
-  const filesToScan = [KANBAN_PATH];
+  const filesToScan = [getKanbanPath()];
   const totals = { promptTokens: 0, completionTokens: 0, estimatedCostUsd: 0 };
 
   for (const file of filesToScan) {
@@ -637,6 +757,7 @@ function createApp() {
         source = 'manual',
         correctionOccurred,
         correctionLog,
+        completionDetails,
         verification,
         blockerProtocol,
         blocker
@@ -646,18 +767,36 @@ function createApp() {
 
       const target = VALID_COLUMNS.includes(status) ? status : 'backlog';
       const cleanedDescription = cleanText(description, 2000);
+      const cleanedCompletionDetails = cleanText(completionDetails, 2000);
+      const board = await loadKanban();
+
+      if (ACTIVE_COLUMNS.includes(target)) {
+        const admission = validateTaskAdmission({ board, name: cleanedName, description: cleanedDescription, source, targetColumn: target });
+        if (!admission.ok) {
+          return res.status(admission.status).json({ error: admission.error, code: admission.code, duplicateTaskId: admission.duplicateTaskId || null });
+        }
+      }
+
+      if (target === 'inProgress') {
+        const wipGate = enforceInProgressWipLimit(board, priority);
+        if (!wipGate.ok) {
+          return res.status(wipGate.status).json({ error: wipGate.error, code: wipGate.code, limits: wipGate.limits });
+        }
+      }
+
       if (target === 'done') {
-        const gate = validateHumanFacingUpdate({ text: cleanedDescription, requireGitHubEvidence: true });
+        const completionText = cleanedCompletionDetails || cleanedDescription;
+        const gate = validateHumanFacingUpdate({ text: completionText, requireGitHubEvidence: true });
         if (!gate.pass) {
           return res.status(400).json({
             error: 'done task description failed human-facing output policy gate',
             issues: gate.issues
           });
         }
-        if (!hasVerificationRecord({}, { verification })) {
+        if (!hasRequiredDoneVerification({}, { verification })) {
           return res.status(422).json({
-            error: 'done transition requires verification record',
-            code: 'MISSING_VERIFICATION_RECORD'
+            error: 'done transition requires verification.command + verification.result=pass + verification.verifiedAt',
+            code: 'MISSING_REQUIRED_DONE_VERIFICATION'
           });
         }
         if (Boolean(correctionOccurred) && !hasCorrectionLogRecord({}, { correctionLog })) {
@@ -667,12 +806,11 @@ function createApp() {
           });
         }
       }
-
-      const board = await loadKanban();
       const task = newTask({ name: cleanedName, description: cleanedDescription, priority, source });
       task.status = target;
       if (target === 'done') {
         task.completedAt = nowIso();
+        task.completionDetails = cleanedCompletionDetails || cleanedDescription;
         task.verification = verification || null;
         task.correctionOccurred = Boolean(correctionOccurred);
         task.correctionLog = correctionLog || null;
@@ -774,6 +912,29 @@ function createApp() {
       const cleanedSummary = cleanText(summary, 500);
       const cleanedCompletionDetails = cleanText(completionDetails, 2000);
       let blockerProofPath = null;
+
+      if (ACTIVE_COLUMNS.includes(to)) {
+        const admission = validateTaskAdmission({
+          board,
+          name: task.name,
+          description: task.description,
+          source: task.source,
+          targetColumn: to,
+          excludingTaskId: task.id
+        });
+        if (!admission.ok) {
+          board.columns[found.col].splice(found.idx, 0, task);
+          return res.status(admission.status).json({ error: admission.error, code: admission.code, duplicateTaskId: admission.duplicateTaskId || null });
+        }
+      }
+
+      if (to === 'inProgress') {
+        const wipGate = enforceInProgressWipLimit(board, task?.priority);
+        if (!wipGate.ok && from !== 'inProgress') {
+          board.columns[found.col].splice(found.idx, 0, task);
+          return res.status(wipGate.status).json({ error: wipGate.error, code: wipGate.code, limits: wipGate.limits });
+        }
+      }
       if (blockerEval.blockerDetected) {
         task.blockerProtocol = {
           ...(task.blockerProtocol || {}),
@@ -798,13 +959,13 @@ function createApp() {
           });
         }
 
-        if (!hasVerificationRecord(task, { verification })) {
+        if (!hasRequiredDoneVerification(task, { verification })) {
           board.columns[found.col].splice(found.idx, 0, task);
-          upsertCloseoutReminder(board, task, ['MISSING_VERIFICATION_RECORD']);
+          upsertCloseoutReminder(board, task, ['MISSING_REQUIRED_DONE_VERIFICATION']);
           await saveKanban(board);
           return res.status(422).json({
-            error: 'done transition requires verification record',
-            code: 'MISSING_VERIFICATION_RECORD'
+            error: 'done transition requires verification.command + verification.result=pass + verification.verifiedAt',
+            code: 'MISSING_REQUIRED_DONE_VERIFICATION'
           });
         }
 
