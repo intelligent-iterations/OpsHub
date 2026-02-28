@@ -3,29 +3,29 @@
     "backlog": [],
     "todo": [
       {
-        "id": "cfbcf6bb-a533-4e8c-9cc8-0a424b0da912",
+        "id": "4acc9af4-f0c4-4685-a80b-9081f7479ed1",
         "name": "Auto-dispatch candidate",
         "description": "ready for next action",
         "priority": "medium",
         "status": "todo",
-        "createdAt": "2026-02-28T18:55:44.948Z",
+        "createdAt": "2026-02-28T19:11:02.110Z",
         "completedAt": null,
         "source": "manual",
         "ttlMinutes": null
       },
       {
-        "id": "58ee60b2-4aab-4e0d-bf6d-d975c9a6932f",
+        "id": "ee2332b2-fb06-46ec-9ab3-ea14e2a6f0bc",
         "name": "Compliant escalation task",
         "description": "",
         "priority": "medium",
         "status": "todo",
-        "createdAt": "2026-02-28T18:55:44.214Z",
+        "createdAt": "2026-02-28T19:11:00.916Z",
         "completedAt": null,
         "source": "manual",
         "ttlMinutes": null,
         "blockerProtocol": {
           "autoSpawned": true,
-          "autoSpawnedAt": "2026-02-28T18:55:44.221Z",
+          "autoSpawnedAt": "2026-02-28T19:11:00.921Z",
           "assignedAgent": "blocker-handler",
           "attempts": [
             {
@@ -33,14 +33,14 @@
               "input": "attempt fix #1",
               "output": "still blocked",
               "outcome": "failed",
-              "timestamp": "2026-02-28T18:55:44.219Z"
+              "timestamp": "2026-02-28T19:11:00.920Z"
             },
             {
               "agent": "claude code",
               "input": "attempt fix #2",
               "output": "still blocked",
               "outcome": "failed",
-              "timestamp": "2026-02-28T18:55:44.219Z"
+              "timestamp": "2026-02-28T19:11:00.920Z"
             }
           ],
           "escalation": {
@@ -51,12 +51,156 @@
         }
       },
       {
-        "id": "00be7ef3-a282-4d82-8dc8-646992de81eb",
+        "id": "8684fa59-117b-48ed-b5f4-86fc49c9339a",
         "name": "Auto-dispatch candidate",
         "description": "ready for next action",
         "priority": "medium",
         "status": "todo",
-        "createdAt": "2026-02-28T18:55:43.251Z",
+        "createdAt": "2026-02-28T19:10:34.627Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "52121ad6-3bee-43b7-82bf-acd812732d29",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T19:10:27.421Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "58a57d02-6076-4223-8e0d-8f959a31e225",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T19:07:47.716Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:07:47.720Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:47.719Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:47.719Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        }
+      },
+      {
+        "id": "ab364241-4422-415c-b188-8d2a1910cc52",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T19:07:32.219Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "3439cc60-f259-4981-b3c3-099d1ee638f1",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T19:07:31.281Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:07:31.285Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:31.284Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:31.284Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        }
+      },
+      {
+        "id": "44bb5c22-1046-4b3f-8ee7-73e4ea1a2da2",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T19:04:43.444Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:04:43.448Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:04:43.447Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:04:43.447Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        }
+      },
+      {
+        "id": "dd1bfc52-14f6-4b90-a74b-427a0c9263d0",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T19:04:29.052Z",
         "completedAt": null,
         "source": "manual",
         "ttlMinutes": null
@@ -137,6 +281,1139 @@
       }
     ],
     "inProgress": [
+      {
+        "id": "f9becc6f-30e1-4ea3-8549-5605d70ab4cd",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:03.502Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "f8ca1dda-eb14-4af8-ab6b-d22dfaea1282",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:03.484Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:11:03.489Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "6a89e91c-0b72-4830-b180-4966e8efd9da",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:02.819Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "aa347120-965f-4cbb-a5cf-5bca19582159",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:02.815Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a07491e9-b42b-474f-b951-f98236d437b6",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:02.810Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "f66b1ae0-4fba-4fa8-9851-895b0ce0d53b",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:02.806Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "4b5ce926-2e90-41a1-a217-c853ce0ab458",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:02.107Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "e1754c3b-d013-416d-a5ef-c8bd2394a0ce",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:00.928Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "594ad630-ed84-4cb7-ab39-b818b57256b5",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:00.908Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "95046753-8d84-49f3-989c-1ada14b9d4fd",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:11:00.902Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:11:00.902Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:11:00.901Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
+      {
+        "id": "6dd1e41f-4c7c-434d-91c6-8d9e4ff55b42",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:34.615Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "74811528-c560-4a5f-85ac-12a3ac8d9714",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:28.908Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "dcdbb033-6c09-458e-9fee-9b037bdfbe7c",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:28.895Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:10:28.899Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "87af4040-7895-44c8-b0aa-b0c1e6c9874d",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:28.140Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "43ab4e18-c997-4219-9cea-74792bf0b36c",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:28.136Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "05529b89-7b1e-4d31-8a7f-9aeab5045c99",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:28.133Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "334b52b3-a82a-4635-a81b-aef4f7d0b9e8",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:28.129Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "89369c69-6d54-456b-a07c-f17b68ea78b2",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:27.417Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "c64c0bab-3738-4e12-8dc5-ae9740a63573",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:26.732Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:10:26.737Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:10:26.735Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:10:26.735Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        },
+        "startedAt": "2026-02-28T19:10:26.749Z",
+        "updatedAt": "2026-02-28T19:10:26.749Z",
+        "nextActionScheduledAt": "2026-02-28T19:10:26.749Z",
+        "nextActionDispatchBy": "2026-02-28T19:13:26.749Z"
+      },
+      {
+        "id": "52822dad-e08c-4adf-8ad2-7b9563980291",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:26.742Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "be4112a2-431b-4615-bd0a-7ad3e181d47e",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:26.725Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "b6f474da-e00a-47b9-82ab-2632f2c9cd7e",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:10:26.718Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:10:26.718Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:10:26.716Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
+      {
+        "id": "5df11375-4e31-4428-8da9-6cf8fc148e3f",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:08:00.219Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "49d6b8e0-5258-4eb4-9f9a-d77e57728843",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:08:00.205Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:08:00.210Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "e3826f57-6b80-49a0-bd4a-511948166b9a",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:59.521Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "165d8d6d-fd8f-446a-8589-15fa83f9025c",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:59.518Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "95d378d2-ece0-4ea0-9fbd-f2da0725d8a6",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:59.513Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "6af9daf1-1d44-4569-ae83-680c14093aa8",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:59.510Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "dc353dea-3444-40bf-9e12-549b7eb3bab6",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:58.818Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "6cc2eeb4-91a5-467f-8905-d06764d1941b",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:58.142Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "92238857-9099-4958-8888-252212b70631",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:58.125Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "7a8bce3f-91f0-43a2-b6b1-dc45a0537000",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:58.119Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:07:58.119Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:58.117Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
+      {
+        "id": "e095b4db-6cb7-4f18-b5b6-b9a3b95eeae6",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:49.763Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "20b8287e-b354-4a08-b49b-d8ad6c5d2521",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:49.750Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:07:49.755Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "88a01d4d-9980-436f-8f89-1ca8b7a4805d",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:49.091Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "d6ed6383-8814-45d4-8111-5941b5f244fd",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:49.087Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "614c2f04-4ebb-4ce6-a066-1299389eaa02",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:49.084Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "ced1d9e0-5d07-4e59-984a-5d8566ffb26f",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:49.080Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "ed658ea4-8716-4f1a-9fed-4c4da0ebb22c",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:48.397Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "432688df-5527-46d3-9a73-4283f0bd6bd1",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:47.725Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "f57818c3-a777-4cf7-afa5-96e9aa9c47bd",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:47.709Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "936e48f8-0f73-45d7-a0ba-b09a2cc26018",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:47.704Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:07:47.704Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:47.703Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
+      {
+        "id": "f083ca39-60e9-4e81-92ad-4970dbe91193",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:33.652Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "60af0c97-3f14-4333-93a4-f2cbc02fd611",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:33.640Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:07:33.645Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "d78bafcc-7196-4eed-94cd-813c45188487",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:32.940Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "c579835c-c99b-4ffb-9b70-c0df53999a8c",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:32.937Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "2dbc548d-f5ea-4610-aa3d-83f60fcb639d",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:32.934Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "0657d71b-b2ab-4d73-afe9-70bd940b3ba3",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:32.930Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "5b954ea7-df23-48b1-80d3-59ed588c3baa",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:32.215Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "4ee52550-3360-4392-be8d-616ab10b2603",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:31.291Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "25a7a046-df35-44ea-90e3-0b8b0c119d38",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:31.273Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "19847c4b-e7e5-4969-9e1c-b8a1e036d6f7",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:07:31.266Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:07:31.266Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:31.264Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
+      {
+        "id": "2e236aaf-b8ea-4e42-bc24-0ca42152a97f",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:37.574Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a2315cea-8067-43d7-8f37-2b9bdcc89440",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:37.562Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:05:37.565Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "5929d6d1-e6dc-4e43-9bc6-c6b10f7be295",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:36.910Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "c79de815-c4b8-4640-8630-52264ebd6432",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:36.906Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "dc2b2511-fb23-47ae-9a28-957336511f66",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:36.903Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "ac569f85-3449-45a2-9c3e-793a87457673",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:36.899Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "b6d64b95-0146-46e8-97b9-71194b1f77aa",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:36.187Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a48ddb23-f300-4cbe-adc3-04b4d15d5ae0",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:35.527Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "0ac7538f-2f1f-42e0-9da4-b9e3400e1d1e",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:35.512Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "b0e3c417-581f-4001-ae3d-ecb57448985c",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:05:35.508Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:05:35.508Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:05:35.506Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
+      {
+        "id": "a9ef5116-071b-4be2-89fa-a365b4f4801f",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:46.097Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "32c37d39-f3f6-47a1-876c-3d7625ed255f",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:46.084Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:04:46.088Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "a4f9aa99-6aff-48cc-9ea2-d1859f0d5730",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:45.395Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "cd193e88-6cc9-4e8f-8034-50275df59d82",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:45.392Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "cf04c52e-d760-40ad-a98c-5b256b10a133",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:45.388Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "ac087803-384b-437d-9b38-c7cd7548b273",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:45.385Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "0ba01ba3-be17-428e-bb63-018dbce9d041",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:44.661Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "418a118d-1d2f-47a4-a481-e6aacfc1167d",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:43.454Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "7f0d406a-958d-477a-af17-e07f8a32ee94",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:43.437Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a226512b-b02c-4274-b435-463307b26540",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:43.432Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:04:43.432Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:04:43.430Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
+      {
+        "id": "6c0a6ccd-75dc-4787-8694-16183b359cb8",
+        "name": "Closeout reminder target",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:30.499Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a5f87c06-ed1a-4177-b3d2-e8d96b47316a",
+        "name": "Complex MGAP task",
+        "description": "Acceptance criteria: - step one - step two - step three",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:30.487Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "delegation": {
+          "required": true,
+          "triggeredAt": "2026-02-28T19:04:30.491Z",
+          "trigger": "complexity/context threshold exceeded"
+        }
+      },
+      {
+        "id": "61676ba3-a244-40df-a506-a8dde15faaab",
+        "name": "PantryPal rescue planner tune-up",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:29.788Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "269139a8-b8a1-4d27-9f86-bfee30401da5",
+        "name": "Generic QA pass",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:29.784Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "223a5a19-d844-49b1-9dbe-10f3c857e373",
+        "name": "Smoke lifecycle replay",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:29.779Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "480013b5-340f-490f-add3-1013e4667ac6",
+        "name": "Integration dashboard task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:29.776Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "c86d2978-e4da-46d3-8904-928b9455341b",
+        "name": "Worker waiting task",
+        "description": "waiting for instruction",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:29.049Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "4e0dcf58-fc22-48b0-8319-23eab154062b",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:27.599Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:04:27.603Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:04:27.602Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:04:27.602Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        },
+        "startedAt": "2026-02-28T19:04:27.613Z",
+        "updatedAt": "2026-02-28T19:04:27.613Z",
+        "nextActionScheduledAt": "2026-02-28T19:04:27.613Z",
+        "nextActionDispatchBy": "2026-02-28T19:07:27.613Z"
+      },
+      {
+        "id": "bf260399-cad0-4d21-b251-18ba628fac45",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:27.607Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": 60
+      },
+      {
+        "id": "c811ef88-da34-44f4-9ad8-f7dd4f8611d8",
+        "name": "Escalation gate task",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:27.594Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "69a7be6f-f05f-4772-b175-3c62512dc669",
+        "name": "Blocker card",
+        "description": "",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T19:04:27.588Z",
+        "completedAt": null,
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:04:27.588Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "retry login flow",
+              "output": "still failing",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:04:27.586Z"
+            }
+          ],
+          "escalation": null
+        }
+      },
       {
         "id": "850c5f74-69f6-4c7e-9e64-59bdbd651353",
         "name": "Closeout reminder target",
@@ -544,6 +1821,721 @@
       }
     ],
     "done": [
+      {
+        "id": "4337bc7f-21b5-4a5a-972b-d160cfc4b46d",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:48.401Z",
+        "completedAt": "2026-02-28T19:11:05.051Z",
+        "source": "manual",
+        "ttlMinutes": null
+      },
+      {
+        "id": "a9ad7fbb-41b4-4555-9c9e-7333229c09f9",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:11:00.885Z",
+        "completedAt": "2026-02-28T19:11:00.896Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:11:00.895Z"
+        }
+      },
+      {
+        "id": "ab9b833f-19c2-4f85-a4ea-cb0977e45ae2",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:11:00.869Z",
+        "completedAt": "2026-02-28T19:11:00.878Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "2d3eb596-87b4-49ce-b859-4dffd0a1ca9c",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:11:00.841Z",
+        "completedAt": "2026-02-28T19:11:00.855Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "e8f26dcb-3818-4c2c-9635-f1a3b50832d3",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:11:00.816Z",
+        "completedAt": "2026-02-28T19:11:00.830Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:11:00.827Z"
+        }
+      },
+      {
+        "id": "8a36aafb-09be-4128-8214-13af9abdce73",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:10:26.701Z",
+        "completedAt": "2026-02-28T19:10:26.713Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:10:26.712Z"
+        }
+      },
+      {
+        "id": "63cab24e-b037-46c3-ba61-17f898b255df",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:10:26.686Z",
+        "completedAt": "2026-02-28T19:10:26.694Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "1f011022-9e54-46fa-9cae-345a93e1725d",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:10:26.660Z",
+        "completedAt": "2026-02-28T19:10:26.674Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "d756f585-10e7-4504-906b-ba7ef801d307",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:10:26.640Z",
+        "completedAt": "2026-02-28T19:10:26.650Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:10:26.647Z"
+        }
+      },
+      {
+        "id": "131f5298-49f9-41e4-935e-0b8b294e587e",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:44.664Z",
+        "completedAt": "2026-02-28T19:08:18Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Verified auto-dispatch implementation/tests and closed this task with GitHub-backed evidence. Verification run (2026-02-28): npm test (103/103 passing), including dashboard auto-next-action scheduler coverage. Evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/test/manager-behavior-gap-metrics.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
+      },
+      {
+        "id": "a01c083b-10a8-4b4f-b7f2-36c087059c69",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:05:36.190Z",
+        "completedAt": "2026-02-28T19:08:09.699Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Implementation: https://github.com/larryclaw/OpsHub/blob/main/scripts/manager-loop-guardrails.js ; API integration: https://github.com/larryclaw/OpsHub/blob/main/server.js ; Auto-dispatch coverage: https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js",
+        "verification": {
+          "type": "test-run",
+          "command": "npm test",
+          "result": "pass",
+          "passed": 103,
+          "ranAt": "2026-02-28T19:08:37.065908Z"
+        }
+      },
+      {
+        "id": "12f9d3d3-35a9-4cfb-90b8-b47d996dfcae",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:05:35.518Z",
+        "completedAt": "2026-02-28T19:08:04.905Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:05:35.522Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:05:35.521Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:05:35.521Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        },
+        "completionDetails": "Closed with verified blocker-escalation compliance and regression coverage. Evidence: - https://github.com/larryclaw/OpsHub/blob/main/server.js#L625-L819 - https://github.com/larryclaw/OpsHub/blob/main/lib/blocker-protocol.js#L41-L123 - https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js#L285-L370 - https://github.com/larryclaw/OpsHub/blob/main/test/manager-loop-guardrails.test.js - https://github.com/larryclaw/OpsHub/blob/main/test/manager-behavior-gap-metrics.test.js - https://github.com/larryclaw/OpsHub/blob/main/artifacts/12f9d3d3-escalation-closure-evidence.md",
+        "correctionOccurred": false,
+        "verification": {
+          "method": "node --test",
+          "status": "pass",
+          "details": "node --test test/api.test.js test/manager-loop-guardrails.test.js test/manager-behavior-gap-metrics.test.js",
+          "passed": 19,
+          "failed": 0,
+          "executedAt": "2026-02-28T19:08:04.880Z"
+        }
+      },
+      {
+        "id": "d9c6aca0-896b-4d3a-b5b7-ec7e60bb7f5b",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:58.102Z",
+        "completedAt": "2026-02-28T19:07:58.114Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:07:58.113Z"
+        }
+      },
+      {
+        "id": "5bf7b0ed-5ece-4040-80ea-0eab5a732d82",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:58.088Z",
+        "completedAt": "2026-02-28T19:07:58.096Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "ee5562d2-3713-470d-a0e9-541290823d3a",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:58.059Z",
+        "completedAt": "2026-02-28T19:07:58.074Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "108deb2b-29ff-45db-9546-6c3d982ae711",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:58.038Z",
+        "completedAt": "2026-02-28T19:07:58.048Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:07:58.046Z"
+        }
+      },
+      {
+        "id": "31b2c8b8-8f03-44ef-90da-29d04a868208",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:47.691Z",
+        "completedAt": "2026-02-28T19:07:47.700Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:07:47.699Z"
+        }
+      },
+      {
+        "id": "e14a9913-b08e-4013-ac03-878edf6fa073",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:47.678Z",
+        "completedAt": "2026-02-28T19:07:47.685Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "0cab5d58-eae6-44a6-837f-17ac41ae771e",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:47.660Z",
+        "completedAt": "2026-02-28T19:07:47.670Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "c2d1df71-a0ca-4981-ba4c-13df72df3de0",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:47.647Z",
+        "completedAt": "2026-02-28T19:07:47.653Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:07:47.652Z"
+        }
+      },
+      {
+        "id": "ecb4a9b3-4770-46a9-a5ef-021e49673451",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:31.248Z",
+        "completedAt": "2026-02-28T19:07:31.261Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:07:31.260Z"
+        }
+      },
+      {
+        "id": "93bead7c-f5ba-4e18-8dfc-a8ad5c747242",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:31.233Z",
+        "completedAt": "2026-02-28T19:07:31.242Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "29551450-deaf-41b7-88c4-dc8dbfe6c6cf",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:31.208Z",
+        "completedAt": "2026-02-28T19:07:31.221Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "9d293b80-ed4d-4745-be43-03459697285a",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:31.181Z",
+        "completedAt": "2026-02-28T19:07:31.192Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:07:31.189Z"
+        }
+      },
+      {
+        "id": "00be7ef3-a282-4d82-8dc8-646992de81eb",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T18:55:43.251Z",
+        "completedAt": "2026-02-28T19:05:57.810Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Verification complete. Commit: https://github.com/larryclaw/OpsHub/commit/607356891207d9259c99a2b8b4d30dadeb5b25d2 | Implementation: https://github.com/larryclaw/OpsHub/blob/607356891207d9259c99a2b8b4d30dadeb5b25d2/scripts/manager-loop-guardrails.js#L69-L131 | API integration: https://github.com/larryclaw/OpsHub/blob/607356891207d9259c99a2b8b4d30dadeb5b25d2/server.js#L314-L391 | Test coverage: https://github.com/larryclaw/OpsHub/blob/607356891207d9259c99a2b8b4d30dadeb5b25d2/test/api.test.js#L430-L487 and https://github.com/larryclaw/OpsHub/blob/607356891207d9259c99a2b8b4d30dadeb5b25d2/test/manager-loop-guardrails.test.js#L24-L106",
+        "verification": {
+          "command": "node --test test/api.test.js && node --test test/manager-loop-guardrails.test.js",
+          "result": "pass (18/18)",
+          "verifiedAt": "2026-02-28T19:08:30.000Z"
+        }
+      },
+      {
+        "id": "f37886ef-fd69-4fd4-9052-626d98b1c534",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:05:35.495Z",
+        "completedAt": "2026-02-28T19:05:35.504Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:05:35.502Z"
+        }
+      },
+      {
+        "id": "32dc81b1-54b2-4cf0-8e46-c616f85ffcb7",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:05:35.484Z",
+        "completedAt": "2026-02-28T19:05:35.490Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "7433b2b6-4a82-4431-a87e-dadae1972315",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:05:35.467Z",
+        "completedAt": "2026-02-28T19:05:35.475Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "b2a0d2e8-6084-44c5-8ea7-75ad394e9757",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:05:35.455Z",
+        "completedAt": "2026-02-28T19:05:35.460Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:05:35.459Z"
+        }
+      },
+      {
+        "id": "58ee60b2-4aab-4e0d-bf6d-d975c9a6932f",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T18:55:44.214Z",
+        "completedAt": "2026-02-28T19:05:30Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T18:55:44.221Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T18:55:44.219Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T18:55:44.219Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        },
+        "completionDetails": "Verified compliant escalation implementation/tests and closed this task with GitHub-backed evidence. Verification run (2026-02-28): npm test (103/103 passing), including blocker escalation protocol coverage requiring exactly two Claude Code attempts plus allowlisted escalation category. Evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
+      },
+      {
+        "id": "cfbcf6bb-a533-4e8c-9cc8-0a424b0da912",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T18:55:44.948Z",
+        "completedAt": "2026-02-28T19:05:20.886Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "updatedAt": "2026-02-28T19:05:20.886Z",
+        "summary": "Verified auto-next-action scheduler dispatch path and regression coverage.",
+        "verification": {
+          "command": "node --test test/api.test.js",
+          "result": "pass (14/14)",
+          "verifiedAt": "2026-02-28T19:05:20.886Z"
+        },
+        "completionDetails": "Verification complete. Commit: https://github.com/larryclaw/OpsHub/commit/607356891207d9259c99a2b8b4d30dadeb5b25d2 | Implementation: https://github.com/larryclaw/OpsHub/blob/607356891207d9259c99a2b8b4d30dadeb5b25d2/scripts/manager-loop-guardrails.js#L69-L131 | API integration: https://github.com/larryclaw/OpsHub/blob/607356891207d9259c99a2b8b4d30dadeb5b25d2/server.js#L314-L391 | Test coverage: https://github.com/larryclaw/OpsHub/blob/607356891207d9259c99a2b8b4d30dadeb5b25d2/test/api.test.js#L430-L487"
+      },
+      {
+        "id": "4e108901-7835-4152-bbc1-6c21f8655784",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:43.415Z",
+        "completedAt": "2026-02-28T19:04:43.426Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:04:43.425Z"
+        }
+      },
+      {
+        "id": "c98eb9a8-f385-43c4-8dc4-2dbbb25af912",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:43.400Z",
+        "completedAt": "2026-02-28T19:04:43.409Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "63e6750f-bba1-429f-9c49-02c5bc0d52a4",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:43.375Z",
+        "completedAt": "2026-02-28T19:04:43.388Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "cc399fd1-4fb5-41da-8c6e-200716d78335",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:43.351Z",
+        "completedAt": "2026-02-28T19:04:43.363Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:04:43.361Z"
+        }
+      },
+      {
+        "id": "23e0e080-e88e-4573-ac80-af94f91fb312",
+        "name": "Needs correction",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:27.574Z",
+        "completedAt": "2026-02-28T19:04:27.584Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": true,
+        "correctionLog": {
+          "reason": "fixed failed assertion",
+          "remediation": "updated guard path"
+        },
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:04:27.583Z"
+        }
+      },
+      {
+        "id": "8f34d9f3-a5d5-46d6-87eb-ad70e414fa71",
+        "name": "Move target",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:27.563Z",
+        "completedAt": "2026-02-28T19:04:27.569Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": "qa-evidence-check passed"
+      },
+      {
+        "id": "b37b5485-be95-4cd1-865b-613795d397ae",
+        "name": "Lifecycle task",
+        "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:27.545Z",
+        "completedAt": "2026-02-28T19:04:27.554Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "verification": "regression checks complete",
+        "correctionOccurred": false,
+        "correctionLog": null,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123"
+      },
+      {
+        "id": "a9346232-2768-4617-908f-da72119e58b6",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T19:04:27.533Z",
+        "completedAt": "2026-02-28T19:04:27.539Z",
+        "source": "manual",
+        "ttlMinutes": 60,
+        "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
+        "correctionOccurred": false,
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T19:04:27.538Z"
+        }
+      },
       {
         "id": "c24d8d6f-1a0f-4f1f-8c73-3f2c8bb6e2af",
         "name": "[P31][Growth] Build dormant-user segment builder + holdout calculator for win-back experiments",
@@ -2965,10 +4957,2330 @@
         "updatedAt": "2026-02-28T16:31:46Z",
         "completedAt": "2026-02-28T16:31:46Z",
         "completionDetails": "Closed with PantryPal widget contract + golden baseline verification and GitHub-backed evidence. Evidence: https://github.com/larryclaw/pantrypal/commit/257df277234d0cda96b14df46eb0972ad0c702e9 ; https://github.com/larryclaw/pantrypal/blob/257df277234d0cda96b14df46eb0972ad0c702e9/test/presentation/widgets/pet_timeline_history_view_golden_test.dart ; https://github.com/larryclaw/pantrypal/commit/492f2f32b8a53d2d4a3c4904f8d244739d443072 ; https://github.com/larryclaw/pantrypal/blob/492f2f32b8a53d2d4a3c4904f8d244739d443072/test/goldens/pantry_crud_ui.png ; https://github.com/larryclaw/pantrypal/commit/77ded39328ef2761d59e7a95b2d6264c844273a2 ; https://github.com/larryclaw/pantrypal/blob/77ded39328ef2761d59e7a95b2d6264c844273a2/artifacts/integration-health-2026-02-27.txt"
+      },
+      {
+        "id": "a52ad488-cc6f-4fbe-9f57-7ab8af7eb295",
+        "name": "Compliant escalation task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:58.132Z",
+        "completedAt": "2026-02-28T19:10:48.096Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T19:07:58.136Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:58.135Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T19:07:58.135Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        },
+        "completionDetails": "Closed with verified blocker-escalation compliance and regression coverage. Evidence: - https://github.com/larryclaw/OpsHub/blob/main/server.js#L625-L819 - https://github.com/larryclaw/OpsHub/blob/main/lib/blocker-protocol.js#L41-L123 - https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js#L285-L370 - https://github.com/larryclaw/OpsHub/blob/main/test/manager-loop-guardrails.test.js - https://github.com/larryclaw/OpsHub/blob/main/test/manager-behavior-gap-metrics.test.js - https://github.com/larryclaw/OpsHub/blob/main/artifacts/a52ad488-escalation-closure-evidence.md",
+        "correctionOccurred": false,
+        "verification": {
+          "method": "node --test",
+          "status": "pass",
+          "details": "npm test",
+          "passed": 103,
+          "failed": 0,
+          "executedAt": "2026-02-28T19:10:48.096Z"
+        }
+      },
+      {
+        "id": "13aefc6c-0df4-4b3d-849d-bf4376795312",
+        "name": "Auto-dispatch candidate",
+        "description": "ready for next action",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T19:07:58.821Z",
+        "completedAt": "2026-02-28T19:11:17Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "completionDetails": "Verified auto-dispatch implementation/tests and closed this task with GitHub-backed evidence. Verification run (2026-02-28): npm test (103/103 passing), including dashboard auto-next-action scheduler coverage. Evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/test/manager-behavior-gap-metrics.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
       }
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T19:11:27.492Z",
+      "type": "task_moved",
+      "taskId": "4337bc7f-21b5-4a5a-972b-d160cfc4b46d",
+      "taskName": "Auto-dispatch candidate",
+      "from": "done",
+      "to": "done",
+      "detail": "Verified auto-next-action dispatch behavior and test coverage."
+    },
+    {
+      "at": "2026-02-28T19:11:05.051Z",
+      "type": "task_moved",
+      "taskId": "4337bc7f-21b5-4a5a-972b-d160cfc4b46d",
+      "taskName": "Auto-dispatch candidate",
+      "from": "todo",
+      "to": "done",
+      "detail": "Verified auto-next-action dispatch behavior and test coverage."
+    },
+    {
+      "at": "2026-02-28T19:11:03.506Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "f9becc6f-30e1-4ea3-8549-5605d70ab4cd",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:11:03.502Z",
+      "type": "task_added",
+      "taskId": "f9becc6f-30e1-4ea3-8549-5605d70ab4cd",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:03.489Z",
+      "type": "delegation_triggered",
+      "taskId": "f8ca1dda-eb14-4af8-ab6b-d22dfaea1282",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:11:03.489Z",
+      "type": "task_moved",
+      "taskId": "f8ca1dda-eb14-4af8-ab6b-d22dfaea1282",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:11:03.484Z",
+      "type": "task_added",
+      "taskId": "f8ca1dda-eb14-4af8-ab6b-d22dfaea1282",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:02.819Z",
+      "type": "task_added",
+      "taskId": "6a89e91c-0b72-4830-b180-4966e8efd9da",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:02.815Z",
+      "type": "task_added",
+      "taskId": "aa347120-965f-4cbb-a5cf-5bca19582159",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:02.810Z",
+      "type": "task_added",
+      "taskId": "a07491e9-b42b-474f-b951-f98236d437b6",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:02.806Z",
+      "type": "task_added",
+      "taskId": "f66b1ae0-4fba-4fa8-9851-895b0ce0d53b",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:02.110Z",
+      "type": "task_added",
+      "taskId": "4acc9af4-f0c4-4685-a80b-9081f7479ed1",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:02.107Z",
+      "type": "task_added",
+      "taskId": "4b5ce926-2e90-41a1-a217-c853ce0ab458",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.928Z",
+      "type": "task_added",
+      "taskId": "e1754c3b-d013-416d-a5ef-c8bd2394a0ce",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.922Z",
+      "type": "blocker_proof_captured",
+      "taskId": "ee2332b2-fb06-46ec-9ab3-ea14e2a6f0bc",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/ee2332b2-fb06-46ec-9ab3-ea14e2a6f0bc-2026-02-28T19-11-00-921Z.json"
+    },
+    {
+      "at": "2026-02-28T19:11:00.921Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "ee2332b2-fb06-46ec-9ab3-ea14e2a6f0bc",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:11:00.921Z",
+      "type": "task_moved",
+      "taskId": "ee2332b2-fb06-46ec-9ab3-ea14e2a6f0bc",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:11:00.916Z",
+      "type": "task_added",
+      "taskId": "ee2332b2-fb06-46ec-9ab3-ea14e2a6f0bc",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.908Z",
+      "type": "task_added",
+      "taskId": "594ad630-ed84-4cb7-ab39-b818b57256b5",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.903Z",
+      "type": "blocker_proof_captured",
+      "taskId": "95046753-8d84-49f3-989c-1ada14b9d4fd",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/95046753-8d84-49f3-989c-1ada14b9d4fd-2026-02-28T19-11-00-902Z.json"
+    },
+    {
+      "at": "2026-02-28T19:11:00.903Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "95046753-8d84-49f3-989c-1ada14b9d4fd",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:11:00.903Z",
+      "type": "task_added",
+      "taskId": "95046753-8d84-49f3-989c-1ada14b9d4fd",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.896Z",
+      "type": "task_moved",
+      "taskId": "a9ad7fbb-41b4-4555-9c9e-7333229c09f9",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:11:00.894Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "a9ad7fbb-41b4-4555-9c9e-7333229c09f9",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:11:00.891Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "a9ad7fbb-41b4-4555-9c9e-7333229c09f9",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:11:00.885Z",
+      "type": "task_added",
+      "taskId": "a9ad7fbb-41b4-4555-9c9e-7333229c09f9",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.878Z",
+      "type": "task_moved",
+      "taskId": "ab9b833f-19c2-4f85-a4ea-cb0977e45ae2",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:11:00.875Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "ab9b833f-19c2-4f85-a4ea-cb0977e45ae2",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:11:00.869Z",
+      "type": "task_added",
+      "taskId": "ab9b833f-19c2-4f85-a4ea-cb0977e45ae2",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.855Z",
+      "type": "task_moved",
+      "taskId": "2d3eb596-87b4-49ce-b859-4dffd0a1ca9c",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:11:00.850Z",
+      "type": "task_moved",
+      "taskId": "2d3eb596-87b4-49ce-b859-4dffd0a1ca9c",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:11:00.841Z",
+      "type": "task_added",
+      "taskId": "2d3eb596-87b4-49ce-b859-4dffd0a1ca9c",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:11:00.830Z",
+      "type": "task_moved",
+      "taskId": "e8f26dcb-3818-4c2c-9635-f1a3b50832d3",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:11:00.816Z",
+      "type": "task_added",
+      "taskId": "e8f26dcb-3818-4c2c-9635-f1a3b50832d3",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:34.627Z",
+      "type": "task_added",
+      "taskId": "8684fa59-117b-48ed-b5f4-86fc49c9339a",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:34.617Z",
+      "type": "task_added",
+      "taskId": "6dd1e41f-4c7c-434d-91c6-8d9e4ff55b42",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:28.913Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "74811528-c560-4a5f-85ac-12a3ac8d9714",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:10:28.908Z",
+      "type": "task_added",
+      "taskId": "74811528-c560-4a5f-85ac-12a3ac8d9714",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:28.899Z",
+      "type": "delegation_triggered",
+      "taskId": "dcdbb033-6c09-458e-9fee-9b037bdfbe7c",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:10:28.899Z",
+      "type": "task_moved",
+      "taskId": "dcdbb033-6c09-458e-9fee-9b037bdfbe7c",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:10:28.895Z",
+      "type": "task_added",
+      "taskId": "dcdbb033-6c09-458e-9fee-9b037bdfbe7c",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:28.140Z",
+      "type": "task_added",
+      "taskId": "87af4040-7895-44c8-b0aa-b0c1e6c9874d",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:28.136Z",
+      "type": "task_added",
+      "taskId": "43ab4e18-c997-4219-9cea-74792bf0b36c",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:28.133Z",
+      "type": "task_added",
+      "taskId": "05529b89-7b1e-4d31-8a7f-9aeab5045c99",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:28.129Z",
+      "type": "task_added",
+      "taskId": "334b52b3-a82a-4635-a81b-aef4f7d0b9e8",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:27.421Z",
+      "type": "task_added",
+      "taskId": "52121ad6-3bee-43b7-82bf-acd812732d29",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:27.417Z",
+      "type": "task_added",
+      "taskId": "89369c69-6d54-456b-a07c-f17b68ea78b2",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.749Z",
+      "type": "next_action_scheduled",
+      "taskId": "c64c0bab-3738-4e12-8dc5-ae9740a63573",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Scheduler dispatched next action with 5m cooldown."
+    },
+    {
+      "at": "2026-02-28T19:10:26.749Z",
+      "type": "task_moved",
+      "taskId": "c64c0bab-3738-4e12-8dc5-ae9740a63573",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Auto-next-action dispatch due to passive wait (9 stalled worker(s)); SLA 3m."
+    },
+    {
+      "at": "2026-02-28T19:10:26.742Z",
+      "type": "task_added",
+      "taskId": "52822dad-e08c-4adf-8ad2-7b9563980291",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.737Z",
+      "type": "blocker_proof_captured",
+      "taskId": "c64c0bab-3738-4e12-8dc5-ae9740a63573",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/c64c0bab-3738-4e12-8dc5-ae9740a63573-2026-02-28T19-10-26-737Z.json"
+    },
+    {
+      "at": "2026-02-28T19:10:26.737Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "c64c0bab-3738-4e12-8dc5-ae9740a63573",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:10:26.737Z",
+      "type": "task_moved",
+      "taskId": "c64c0bab-3738-4e12-8dc5-ae9740a63573",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:10:26.732Z",
+      "type": "task_added",
+      "taskId": "c64c0bab-3738-4e12-8dc5-ae9740a63573",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.725Z",
+      "type": "task_added",
+      "taskId": "be4112a2-431b-4615-bd0a-7ad3e181d47e",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.718Z",
+      "type": "blocker_proof_captured",
+      "taskId": "b6f474da-e00a-47b9-82ab-2632f2c9cd7e",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/b6f474da-e00a-47b9-82ab-2632f2c9cd7e-2026-02-28T19-10-26-718Z.json"
+    },
+    {
+      "at": "2026-02-28T19:10:26.718Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "b6f474da-e00a-47b9-82ab-2632f2c9cd7e",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:10:26.718Z",
+      "type": "task_added",
+      "taskId": "b6f474da-e00a-47b9-82ab-2632f2c9cd7e",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.713Z",
+      "type": "task_moved",
+      "taskId": "8a36aafb-09be-4128-8214-13af9abdce73",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:10:26.710Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "8a36aafb-09be-4128-8214-13af9abdce73",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:10:26.707Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "8a36aafb-09be-4128-8214-13af9abdce73",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:10:26.701Z",
+      "type": "task_added",
+      "taskId": "8a36aafb-09be-4128-8214-13af9abdce73",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.694Z",
+      "type": "task_moved",
+      "taskId": "63cab24e-b037-46c3-ba61-17f898b255df",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:10:26.691Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "63cab24e-b037-46c3-ba61-17f898b255df",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:10:26.686Z",
+      "type": "task_added",
+      "taskId": "63cab24e-b037-46c3-ba61-17f898b255df",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.674Z",
+      "type": "task_moved",
+      "taskId": "1f011022-9e54-46fa-9cae-345a93e1725d",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:10:26.669Z",
+      "type": "task_moved",
+      "taskId": "1f011022-9e54-46fa-9cae-345a93e1725d",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:10:26.660Z",
+      "type": "task_added",
+      "taskId": "1f011022-9e54-46fa-9cae-345a93e1725d",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:10:26.650Z",
+      "type": "task_moved",
+      "taskId": "d756f585-10e7-4504-906b-ba7ef801d307",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:10:26.640Z",
+      "type": "task_added",
+      "taskId": "d756f585-10e7-4504-906b-ba7ef801d307",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:08:37.066030Z",
+      "type": "task_completed",
+      "taskId": "a01c083b-10a8-4b4f-b7f2-36c087059c69",
+      "taskName": "Auto-dispatch candidate",
+      "from": "todo",
+      "to": "done",
+      "detail": "Verified implementation/tests and closed with GitHub-backed evidence links."
+    },
+    {
+      "at": "2026-02-28T19:08:18Z",
+      "type": "task_moved",
+      "taskId": "131f5298-49f9-41e4-935e-0b8b294e587e",
+      "taskName": "Auto-dispatch candidate",
+      "from": "todo",
+      "to": "done",
+      "detail": "Verified auto-dispatch implementation/tests and closed this task with GitHub-backed evidence. Verification run (2026-02-28): npm test (103/103 passing), including dashboard auto-next-action scheduler coverage. Evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/test/manager-behavior-gap-metrics.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
+    },
+    {
+      "at": "2026-02-28T19:08:09.699Z",
+      "type": "task_moved",
+      "taskId": "a01c083b-10a8-4b4f-b7f2-36c087059c69",
+      "taskName": "Auto-dispatch candidate",
+      "from": "todo",
+      "to": "done",
+      "detail": "Validated auto-next-action scheduler and test coverage"
+    },
+    {
+      "at": "2026-02-28T19:08:04.905Z",
+      "type": "task_moved",
+      "taskId": "12f9d3d3-35a9-4cfb-90b8-b47d996dfcae",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "done",
+      "detail": "Escalation compliance verified; tests passing; task closed."
+    },
+    {
+      "at": "2026-02-28T19:08:00.223Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "5df11375-4e31-4428-8da9-6cf8fc148e3f",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:08:00.219Z",
+      "type": "task_added",
+      "taskId": "5df11375-4e31-4428-8da9-6cf8fc148e3f",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:08:00.210Z",
+      "type": "delegation_triggered",
+      "taskId": "49d6b8e0-5258-4eb4-9f9a-d77e57728843",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:08:00.210Z",
+      "type": "task_moved",
+      "taskId": "49d6b8e0-5258-4eb4-9f9a-d77e57728843",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:08:00.205Z",
+      "type": "task_added",
+      "taskId": "49d6b8e0-5258-4eb4-9f9a-d77e57728843",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:59.521Z",
+      "type": "task_added",
+      "taskId": "e3826f57-6b80-49a0-bd4a-511948166b9a",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:59.518Z",
+      "type": "task_added",
+      "taskId": "165d8d6d-fd8f-446a-8589-15fa83f9025c",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:59.513Z",
+      "type": "task_added",
+      "taskId": "95d378d2-ece0-4ea0-9fbd-f2da0725d8a6",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:59.510Z",
+      "type": "task_added",
+      "taskId": "6af9daf1-1d44-4569-ae83-680c14093aa8",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.821Z",
+      "type": "task_added",
+      "taskId": "13aefc6c-0df4-4b3d-849d-bf4376795312",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.818Z",
+      "type": "task_added",
+      "taskId": "dc353dea-3444-40bf-9e12-549b7eb3bab6",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.142Z",
+      "type": "task_added",
+      "taskId": "6cc2eeb4-91a5-467f-8905-d06764d1941b",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.136Z",
+      "type": "blocker_proof_captured",
+      "taskId": "a52ad488-cc6f-4fbe-9f57-7ab8af7eb295",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/a52ad488-cc6f-4fbe-9f57-7ab8af7eb295-2026-02-28T19-07-58-136Z.json"
+    },
+    {
+      "at": "2026-02-28T19:07:58.136Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "a52ad488-cc6f-4fbe-9f57-7ab8af7eb295",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:07:58.136Z",
+      "type": "task_moved",
+      "taskId": "a52ad488-cc6f-4fbe-9f57-7ab8af7eb295",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:58.132Z",
+      "type": "task_added",
+      "taskId": "a52ad488-cc6f-4fbe-9f57-7ab8af7eb295",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.125Z",
+      "type": "task_added",
+      "taskId": "92238857-9099-4958-8888-252212b70631",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.119Z",
+      "type": "blocker_proof_captured",
+      "taskId": "7a8bce3f-91f0-43a2-b6b1-dc45a0537000",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/7a8bce3f-91f0-43a2-b6b1-dc45a0537000-2026-02-28T19-07-58-119Z.json"
+    },
+    {
+      "at": "2026-02-28T19:07:58.119Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "7a8bce3f-91f0-43a2-b6b1-dc45a0537000",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:07:58.119Z",
+      "type": "task_added",
+      "taskId": "7a8bce3f-91f0-43a2-b6b1-dc45a0537000",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.114Z",
+      "type": "task_moved",
+      "taskId": "d9c6aca0-896b-4d3a-b5b7-ec7e60bb7f5b",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:58.112Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "d9c6aca0-896b-4d3a-b5b7-ec7e60bb7f5b",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:07:58.109Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "d9c6aca0-896b-4d3a-b5b7-ec7e60bb7f5b",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:07:58.102Z",
+      "type": "task_added",
+      "taskId": "d9c6aca0-896b-4d3a-b5b7-ec7e60bb7f5b",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.096Z",
+      "type": "task_moved",
+      "taskId": "5bf7b0ed-5ece-4040-80ea-0eab5a732d82",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:58.093Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "5bf7b0ed-5ece-4040-80ea-0eab5a732d82",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:07:58.088Z",
+      "type": "task_added",
+      "taskId": "5bf7b0ed-5ece-4040-80ea-0eab5a732d82",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.074Z",
+      "type": "task_moved",
+      "taskId": "ee5562d2-3713-470d-a0e9-541290823d3a",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:07:58.067Z",
+      "type": "task_moved",
+      "taskId": "ee5562d2-3713-470d-a0e9-541290823d3a",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:07:58.059Z",
+      "type": "task_added",
+      "taskId": "ee5562d2-3713-470d-a0e9-541290823d3a",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:58.048Z",
+      "type": "task_moved",
+      "taskId": "108deb2b-29ff-45db-9546-6c3d982ae711",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:07:58.038Z",
+      "type": "task_added",
+      "taskId": "108deb2b-29ff-45db-9546-6c3d982ae711",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:49.767Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "e095b4db-6cb7-4f18-b5b6-b9a3b95eeae6",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:07:49.763Z",
+      "type": "task_added",
+      "taskId": "e095b4db-6cb7-4f18-b5b6-b9a3b95eeae6",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:49.755Z",
+      "type": "delegation_triggered",
+      "taskId": "20b8287e-b354-4a08-b49b-d8ad6c5d2521",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:07:49.755Z",
+      "type": "task_moved",
+      "taskId": "20b8287e-b354-4a08-b49b-d8ad6c5d2521",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:07:49.750Z",
+      "type": "task_added",
+      "taskId": "20b8287e-b354-4a08-b49b-d8ad6c5d2521",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:49.091Z",
+      "type": "task_added",
+      "taskId": "88a01d4d-9980-436f-8f89-1ca8b7a4805d",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:49.087Z",
+      "type": "task_added",
+      "taskId": "d6ed6383-8814-45d4-8111-5941b5f244fd",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:49.084Z",
+      "type": "task_added",
+      "taskId": "614c2f04-4ebb-4ce6-a066-1299389eaa02",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:49.080Z",
+      "type": "task_added",
+      "taskId": "ced1d9e0-5d07-4e59-984a-5d8566ffb26f",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:48.401Z",
+      "type": "task_added",
+      "taskId": "4337bc7f-21b5-4a5a-972b-d160cfc4b46d",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:48.397Z",
+      "type": "task_added",
+      "taskId": "ed658ea4-8716-4f1a-9fed-4c4da0ebb22c",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.725Z",
+      "type": "task_added",
+      "taskId": "432688df-5527-46d3-9a73-4283f0bd6bd1",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.720Z",
+      "type": "blocker_proof_captured",
+      "taskId": "58a57d02-6076-4223-8e0d-8f959a31e225",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/58a57d02-6076-4223-8e0d-8f959a31e225-2026-02-28T19-07-47-720Z.json"
+    },
+    {
+      "at": "2026-02-28T19:07:47.720Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "58a57d02-6076-4223-8e0d-8f959a31e225",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:07:47.720Z",
+      "type": "task_moved",
+      "taskId": "58a57d02-6076-4223-8e0d-8f959a31e225",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:47.716Z",
+      "type": "task_added",
+      "taskId": "58a57d02-6076-4223-8e0d-8f959a31e225",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.709Z",
+      "type": "task_added",
+      "taskId": "f57818c3-a777-4cf7-afa5-96e9aa9c47bd",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.704Z",
+      "type": "blocker_proof_captured",
+      "taskId": "936e48f8-0f73-45d7-a0ba-b09a2cc26018",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/936e48f8-0f73-45d7-a0ba-b09a2cc26018-2026-02-28T19-07-47-704Z.json"
+    },
+    {
+      "at": "2026-02-28T19:07:47.704Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "936e48f8-0f73-45d7-a0ba-b09a2cc26018",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:07:47.704Z",
+      "type": "task_added",
+      "taskId": "936e48f8-0f73-45d7-a0ba-b09a2cc26018",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.700Z",
+      "type": "task_moved",
+      "taskId": "31b2c8b8-8f03-44ef-90da-29d04a868208",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:47.698Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "31b2c8b8-8f03-44ef-90da-29d04a868208",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:07:47.695Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "31b2c8b8-8f03-44ef-90da-29d04a868208",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:07:47.691Z",
+      "type": "task_added",
+      "taskId": "31b2c8b8-8f03-44ef-90da-29d04a868208",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.685Z",
+      "type": "task_moved",
+      "taskId": "e14a9913-b08e-4013-ac03-878edf6fa073",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:47.683Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "e14a9913-b08e-4013-ac03-878edf6fa073",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:07:47.678Z",
+      "type": "task_added",
+      "taskId": "e14a9913-b08e-4013-ac03-878edf6fa073",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.670Z",
+      "type": "task_moved",
+      "taskId": "0cab5d58-eae6-44a6-837f-17ac41ae771e",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:07:47.665Z",
+      "type": "task_moved",
+      "taskId": "0cab5d58-eae6-44a6-837f-17ac41ae771e",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:07:47.660Z",
+      "type": "task_added",
+      "taskId": "0cab5d58-eae6-44a6-837f-17ac41ae771e",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:47.653Z",
+      "type": "task_moved",
+      "taskId": "c2d1df71-a0ca-4981-ba4c-13df72df3de0",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:07:47.647Z",
+      "type": "task_added",
+      "taskId": "c2d1df71-a0ca-4981-ba4c-13df72df3de0",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:33.656Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "f083ca39-60e9-4e81-92ad-4970dbe91193",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:07:33.652Z",
+      "type": "task_added",
+      "taskId": "f083ca39-60e9-4e81-92ad-4970dbe91193",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:33.645Z",
+      "type": "delegation_triggered",
+      "taskId": "60af0c97-3f14-4333-93a4-f2cbc02fd611",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:07:33.645Z",
+      "type": "task_moved",
+      "taskId": "60af0c97-3f14-4333-93a4-f2cbc02fd611",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:07:33.640Z",
+      "type": "task_added",
+      "taskId": "60af0c97-3f14-4333-93a4-f2cbc02fd611",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:32.940Z",
+      "type": "task_added",
+      "taskId": "d78bafcc-7196-4eed-94cd-813c45188487",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:32.937Z",
+      "type": "task_added",
+      "taskId": "c579835c-c99b-4ffb-9b70-c0df53999a8c",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:32.934Z",
+      "type": "task_added",
+      "taskId": "2dbc548d-f5ea-4610-aa3d-83f60fcb639d",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:32.930Z",
+      "type": "task_added",
+      "taskId": "0657d71b-b2ab-4d73-afe9-70bd940b3ba3",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:32.219Z",
+      "type": "task_added",
+      "taskId": "ab364241-4422-415c-b188-8d2a1910cc52",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:32.215Z",
+      "type": "task_added",
+      "taskId": "5b954ea7-df23-48b1-80d3-59ed588c3baa",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.291Z",
+      "type": "task_added",
+      "taskId": "4ee52550-3360-4392-be8d-616ab10b2603",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.286Z",
+      "type": "blocker_proof_captured",
+      "taskId": "3439cc60-f259-4981-b3c3-099d1ee638f1",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/3439cc60-f259-4981-b3c3-099d1ee638f1-2026-02-28T19-07-31-285Z.json"
+    },
+    {
+      "at": "2026-02-28T19:07:31.285Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "3439cc60-f259-4981-b3c3-099d1ee638f1",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:07:31.285Z",
+      "type": "task_moved",
+      "taskId": "3439cc60-f259-4981-b3c3-099d1ee638f1",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:31.281Z",
+      "type": "task_added",
+      "taskId": "3439cc60-f259-4981-b3c3-099d1ee638f1",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.273Z",
+      "type": "task_added",
+      "taskId": "25a7a046-df35-44ea-90e3-0b8b0c119d38",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.267Z",
+      "type": "blocker_proof_captured",
+      "taskId": "19847c4b-e7e5-4969-9e1c-b8a1e036d6f7",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/19847c4b-e7e5-4969-9e1c-b8a1e036d6f7-2026-02-28T19-07-31-267Z.json"
+    },
+    {
+      "at": "2026-02-28T19:07:31.267Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "19847c4b-e7e5-4969-9e1c-b8a1e036d6f7",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:07:31.267Z",
+      "type": "task_added",
+      "taskId": "19847c4b-e7e5-4969-9e1c-b8a1e036d6f7",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.261Z",
+      "type": "task_moved",
+      "taskId": "ecb4a9b3-4770-46a9-a5ef-021e49673451",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:31.259Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "ecb4a9b3-4770-46a9-a5ef-021e49673451",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:07:31.254Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "ecb4a9b3-4770-46a9-a5ef-021e49673451",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:07:31.249Z",
+      "type": "task_added",
+      "taskId": "ecb4a9b3-4770-46a9-a5ef-021e49673451",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.242Z",
+      "type": "task_moved",
+      "taskId": "93bead7c-f5ba-4e18-8dfc-a8ad5c747242",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:07:31.239Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "93bead7c-f5ba-4e18-8dfc-a8ad5c747242",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:07:31.233Z",
+      "type": "task_added",
+      "taskId": "93bead7c-f5ba-4e18-8dfc-a8ad5c747242",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.221Z",
+      "type": "task_moved",
+      "taskId": "29551450-deaf-41b7-88c4-dc8dbfe6c6cf",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:07:31.215Z",
+      "type": "task_moved",
+      "taskId": "29551450-deaf-41b7-88c4-dc8dbfe6c6cf",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:07:31.208Z",
+      "type": "task_added",
+      "taskId": "29551450-deaf-41b7-88c4-dc8dbfe6c6cf",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:07:31.192Z",
+      "type": "task_moved",
+      "taskId": "9d293b80-ed4d-4745-be43-03459697285a",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:07:31.181Z",
+      "type": "task_added",
+      "taskId": "9d293b80-ed4d-4745-be43-03459697285a",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:57.810Z",
+      "type": "task_moved",
+      "taskId": "00be7ef3-a282-4d82-8dc8-646992de81eb",
+      "taskName": "Auto-dispatch candidate",
+      "from": "todo",
+      "to": "done",
+      "detail": "Verified auto-next-action scheduler implementation + regression coverage; closing with GitHub evidence."
+    },
+    {
+      "at": "2026-02-28T19:05:37.578Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "2e236aaf-b8ea-4e42-bc24-0ca42152a97f",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:05:37.574Z",
+      "type": "task_added",
+      "taskId": "2e236aaf-b8ea-4e42-bc24-0ca42152a97f",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:37.566Z",
+      "type": "delegation_triggered",
+      "taskId": "a2315cea-8067-43d7-8f37-2b9bdcc89440",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:05:37.566Z",
+      "type": "task_moved",
+      "taskId": "a2315cea-8067-43d7-8f37-2b9bdcc89440",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:05:37.562Z",
+      "type": "task_added",
+      "taskId": "a2315cea-8067-43d7-8f37-2b9bdcc89440",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:36.910Z",
+      "type": "task_added",
+      "taskId": "5929d6d1-e6dc-4e43-9bc6-c6b10f7be295",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:36.906Z",
+      "type": "task_added",
+      "taskId": "c79de815-c4b8-4640-8630-52264ebd6432",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:36.903Z",
+      "type": "task_added",
+      "taskId": "dc2b2511-fb23-47ae-9a28-957336511f66",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:36.899Z",
+      "type": "task_added",
+      "taskId": "ac569f85-3449-45a2-9c3e-793a87457673",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:36.190Z",
+      "type": "task_added",
+      "taskId": "a01c083b-10a8-4b4f-b7f2-36c087059c69",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:36.187Z",
+      "type": "task_added",
+      "taskId": "b6d64b95-0146-46e8-97b9-71194b1f77aa",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.527Z",
+      "type": "task_added",
+      "taskId": "a48ddb23-f300-4cbe-adc3-04b4d15d5ae0",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.522Z",
+      "type": "blocker_proof_captured",
+      "taskId": "12f9d3d3-35a9-4cfb-90b8-b47d996dfcae",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/12f9d3d3-35a9-4cfb-90b8-b47d996dfcae-2026-02-28T19-05-35-522Z.json"
+    },
+    {
+      "at": "2026-02-28T19:05:35.522Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "12f9d3d3-35a9-4cfb-90b8-b47d996dfcae",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:05:35.522Z",
+      "type": "task_moved",
+      "taskId": "12f9d3d3-35a9-4cfb-90b8-b47d996dfcae",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:05:35.518Z",
+      "type": "task_added",
+      "taskId": "12f9d3d3-35a9-4cfb-90b8-b47d996dfcae",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.512Z",
+      "type": "task_added",
+      "taskId": "0ac7538f-2f1f-42e0-9da4-b9e3400e1d1e",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.508Z",
+      "type": "blocker_proof_captured",
+      "taskId": "b0e3c417-581f-4001-ae3d-ecb57448985c",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/b0e3c417-581f-4001-ae3d-ecb57448985c-2026-02-28T19-05-35-508Z.json"
+    },
+    {
+      "at": "2026-02-28T19:05:35.508Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "b0e3c417-581f-4001-ae3d-ecb57448985c",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:05:35.508Z",
+      "type": "task_added",
+      "taskId": "b0e3c417-581f-4001-ae3d-ecb57448985c",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.504Z",
+      "type": "task_moved",
+      "taskId": "f37886ef-fd69-4fd4-9052-626d98b1c534",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:05:35.501Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "f37886ef-fd69-4fd4-9052-626d98b1c534",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:05:35.499Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "f37886ef-fd69-4fd4-9052-626d98b1c534",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:05:35.495Z",
+      "type": "task_added",
+      "taskId": "f37886ef-fd69-4fd4-9052-626d98b1c534",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.490Z",
+      "type": "task_moved",
+      "taskId": "32dc81b1-54b2-4cf0-8e46-c616f85ffcb7",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:05:35.488Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "32dc81b1-54b2-4cf0-8e46-c616f85ffcb7",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:05:35.484Z",
+      "type": "task_added",
+      "taskId": "32dc81b1-54b2-4cf0-8e46-c616f85ffcb7",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.475Z",
+      "type": "task_moved",
+      "taskId": "7433b2b6-4a82-4431-a87e-dadae1972315",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:05:35.471Z",
+      "type": "task_moved",
+      "taskId": "7433b2b6-4a82-4431-a87e-dadae1972315",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:05:35.467Z",
+      "type": "task_added",
+      "taskId": "7433b2b6-4a82-4431-a87e-dadae1972315",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:35.460Z",
+      "type": "task_moved",
+      "taskId": "b2a0d2e8-6084-44c5-8ea7-75ad394e9757",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:05:35.455Z",
+      "type": "task_added",
+      "taskId": "b2a0d2e8-6084-44c5-8ea7-75ad394e9757",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:05:30Z",
+      "type": "task_completed",
+      "taskId": "58ee60b2-4aab-4e0d-bf6d-d975c9a6932f",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "done",
+      "detail": "Verified compliant escalation implementation/tests and closed this task with GitHub-backed evidence. Verification run (2026-02-28): npm test (103/103 passing), including blocker escalation protocol coverage requiring exactly two Claude Code attempts plus allowlisted escalation category. Evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
+    },
+    {
+      "at": "2026-02-28T19:05:20.886Z",
+      "type": "task_moved",
+      "taskId": "cfbcf6bb-a533-4e8c-9cc8-0a424b0da912",
+      "taskName": "Auto-dispatch candidate",
+      "from": "todo",
+      "to": "done",
+      "detail": "Closed after implementation/test verification with GitHub evidence links."
+    },
+    {
+      "at": "2026-02-28T19:04:46.100Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "a9ef5116-071b-4be2-89fa-a365b4f4801f",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:04:46.097Z",
+      "type": "task_added",
+      "taskId": "a9ef5116-071b-4be2-89fa-a365b4f4801f",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:46.088Z",
+      "type": "delegation_triggered",
+      "taskId": "32c37d39-f3f6-47a1-876c-3d7625ed255f",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:04:46.088Z",
+      "type": "task_moved",
+      "taskId": "32c37d39-f3f6-47a1-876c-3d7625ed255f",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:04:46.084Z",
+      "type": "task_added",
+      "taskId": "32c37d39-f3f6-47a1-876c-3d7625ed255f",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:45.395Z",
+      "type": "task_added",
+      "taskId": "a4f9aa99-6aff-48cc-9ea2-d1859f0d5730",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:45.392Z",
+      "type": "task_added",
+      "taskId": "cd193e88-6cc9-4e8f-8034-50275df59d82",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:45.388Z",
+      "type": "task_added",
+      "taskId": "cf04c52e-d760-40ad-a98c-5b256b10a133",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:45.385Z",
+      "type": "task_added",
+      "taskId": "ac087803-384b-437d-9b38-c7cd7548b273",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:44.664Z",
+      "type": "task_added",
+      "taskId": "131f5298-49f9-41e4-935e-0b8b294e587e",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:44.661Z",
+      "type": "task_added",
+      "taskId": "0ba01ba3-be17-428e-bb63-018dbce9d041",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.454Z",
+      "type": "task_added",
+      "taskId": "418a118d-1d2f-47a4-a481-e6aacfc1167d",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.448Z",
+      "type": "blocker_proof_captured",
+      "taskId": "44bb5c22-1046-4b3f-8ee7-73e4ea1a2da2",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/44bb5c22-1046-4b3f-8ee7-73e4ea1a2da2-2026-02-28T19-04-43-448Z.json"
+    },
+    {
+      "at": "2026-02-28T19:04:43.448Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "44bb5c22-1046-4b3f-8ee7-73e4ea1a2da2",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:04:43.448Z",
+      "type": "task_moved",
+      "taskId": "44bb5c22-1046-4b3f-8ee7-73e4ea1a2da2",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:04:43.444Z",
+      "type": "task_added",
+      "taskId": "44bb5c22-1046-4b3f-8ee7-73e4ea1a2da2",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.437Z",
+      "type": "task_added",
+      "taskId": "7f0d406a-958d-477a-af17-e07f8a32ee94",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.432Z",
+      "type": "blocker_proof_captured",
+      "taskId": "a226512b-b02c-4274-b435-463307b26540",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/a226512b-b02c-4274-b435-463307b26540-2026-02-28T19-04-43-432Z.json"
+    },
+    {
+      "at": "2026-02-28T19:04:43.432Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "a226512b-b02c-4274-b435-463307b26540",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:04:43.432Z",
+      "type": "task_added",
+      "taskId": "a226512b-b02c-4274-b435-463307b26540",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.426Z",
+      "type": "task_moved",
+      "taskId": "4e108901-7835-4152-bbc1-6c21f8655784",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:04:43.424Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "4e108901-7835-4152-bbc1-6c21f8655784",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:04:43.420Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "4e108901-7835-4152-bbc1-6c21f8655784",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:04:43.416Z",
+      "type": "task_added",
+      "taskId": "4e108901-7835-4152-bbc1-6c21f8655784",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.409Z",
+      "type": "task_moved",
+      "taskId": "c98eb9a8-f385-43c4-8dc4-2dbbb25af912",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:04:43.406Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "c98eb9a8-f385-43c4-8dc4-2dbbb25af912",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:04:43.400Z",
+      "type": "task_added",
+      "taskId": "c98eb9a8-f385-43c4-8dc4-2dbbb25af912",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.388Z",
+      "type": "task_moved",
+      "taskId": "63e6750f-bba1-429f-9c49-02c5bc0d52a4",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:04:43.381Z",
+      "type": "task_moved",
+      "taskId": "63e6750f-bba1-429f-9c49-02c5bc0d52a4",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:04:43.375Z",
+      "type": "task_added",
+      "taskId": "63e6750f-bba1-429f-9c49-02c5bc0d52a4",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:43.363Z",
+      "type": "task_moved",
+      "taskId": "cc399fd1-4fb5-41da-8c6e-200716d78335",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:04:43.352Z",
+      "type": "task_added",
+      "taskId": "cc399fd1-4fb5-41da-8c6e-200716d78335",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:30.502Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "6c0a6ccd-75dc-4787-8694-16183b359cb8",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:04:30.499Z",
+      "type": "task_added",
+      "taskId": "6c0a6ccd-75dc-4787-8694-16183b359cb8",
+      "taskName": "Closeout reminder target",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:30.491Z",
+      "type": "delegation_triggered",
+      "taskId": "a5f87c06-ed1a-4177-b3d2-e8d96b47316a",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Delegation trigger enforced: complexity/context threshold exceeded"
+    },
+    {
+      "at": "2026-02-28T19:04:30.491Z",
+      "type": "task_moved",
+      "taskId": "a5f87c06-ed1a-4177-b3d2-e8d96b47316a",
+      "taskName": "Complex MGAP task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "delegating now"
+    },
+    {
+      "at": "2026-02-28T19:04:30.487Z",
+      "type": "task_added",
+      "taskId": "a5f87c06-ed1a-4177-b3d2-e8d96b47316a",
+      "taskName": "Complex MGAP task",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:29.788Z",
+      "type": "task_added",
+      "taskId": "61676ba3-a244-40df-a506-a8dde15faaab",
+      "taskName": "PantryPal rescue planner tune-up",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:29.784Z",
+      "type": "task_added",
+      "taskId": "269139a8-b8a1-4d27-9f86-bfee30401da5",
+      "taskName": "Generic QA pass",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:29.779Z",
+      "type": "task_added",
+      "taskId": "223a5a19-d844-49b1-9dbe-10f3c857e373",
+      "taskName": "Smoke lifecycle replay",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:29.776Z",
+      "type": "task_added",
+      "taskId": "480013b5-340f-490f-add3-1013e4667ac6",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:29.052Z",
+      "type": "task_added",
+      "taskId": "dd1bfc52-14f6-4b90-a74b-427a0c9263d0",
+      "taskName": "Auto-dispatch candidate",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:29.049Z",
+      "type": "task_added",
+      "taskId": "c86d2978-e4da-46d3-8904-928b9455341b",
+      "taskName": "Worker waiting task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.613Z",
+      "type": "next_action_scheduled",
+      "taskId": "4e0dcf58-fc22-48b0-8319-23eab154062b",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Scheduler dispatched next action with 5m cooldown."
+    },
+    {
+      "at": "2026-02-28T19:04:27.613Z",
+      "type": "task_moved",
+      "taskId": "4e0dcf58-fc22-48b0-8319-23eab154062b",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Auto-next-action dispatch due to passive wait (3 stalled worker(s)); SLA 3m."
+    },
+    {
+      "at": "2026-02-28T19:04:27.607Z",
+      "type": "task_added",
+      "taskId": "bf260399-cad0-4d21-b251-18ba628fac45",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.603Z",
+      "type": "blocker_proof_captured",
+      "taskId": "4e0dcf58-fc22-48b0-8319-23eab154062b",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/4e0dcf58-fc22-48b0-8319-23eab154062b-2026-02-28T19-04-27-603Z.json"
+    },
+    {
+      "at": "2026-02-28T19:04:27.603Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "4e0dcf58-fc22-48b0-8319-23eab154062b",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:04:27.603Z",
+      "type": "task_moved",
+      "taskId": "4e0dcf58-fc22-48b0-8319-23eab154062b",
+      "taskName": "Compliant escalation task",
+      "from": "inProgress",
+      "to": "todo",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:04:27.600Z",
+      "type": "task_added",
+      "taskId": "4e0dcf58-fc22-48b0-8319-23eab154062b",
+      "taskName": "Compliant escalation task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.594Z",
+      "type": "task_added",
+      "taskId": "c811ef88-da34-44f4-9ad8-f7dd4f8611d8",
+      "taskName": "Escalation gate task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.588Z",
+      "type": "blocker_proof_captured",
+      "taskId": "69a7be6f-f05f-4772-b175-3c62512dc669",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/blocker-proofs/69a7be6f-f05f-4772-b175-3c62512dc669-2026-02-28T19-04-27-588Z.json"
+    },
+    {
+      "at": "2026-02-28T19:04:27.588Z",
+      "type": "blocker_handler_spawned",
+      "taskId": "69a7be6f-f05f-4772-b175-3c62512dc669",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Auto-spawned blocker-handler due to blocker detection"
+    },
+    {
+      "at": "2026-02-28T19:04:27.588Z",
+      "type": "task_added",
+      "taskId": "69a7be6f-f05f-4772-b175-3c62512dc669",
+      "taskName": "Blocker card",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.584Z",
+      "type": "task_moved",
+      "taskId": "23e0e080-e88e-4573-ac80-af94f91fb312",
+      "taskName": "Needs correction",
+      "from": "inProgress",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:04:27.581Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "23e0e080-e88e-4573-ac80-af94f91fb312",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_CORRECTION_LOG"
+    },
+    {
+      "at": "2026-02-28T19:04:27.579Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "23e0e080-e88e-4573-ac80-af94f91fb312",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Closeout contract reminder: MISSING_VERIFICATION_RECORD"
+    },
+    {
+      "at": "2026-02-28T19:04:27.575Z",
+      "type": "task_added",
+      "taskId": "23e0e080-e88e-4573-ac80-af94f91fb312",
+      "taskName": "Needs correction",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.569Z",
+      "type": "task_moved",
+      "taskId": "8f34d9f3-a5d5-46d6-87eb-ad70e414fa71",
+      "taskName": "Move target",
+      "from": "todo",
+      "to": "done",
+      "detail": ""
+    },
+    {
+      "at": "2026-02-28T19:04:27.567Z",
+      "type": "closeout_contract_reminder",
+      "taskId": "8f34d9f3-a5d5-46d6-87eb-ad70e414fa71",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Closeout contract reminder: LOCAL_PATH_LEAK; MISSING_GITHUB_EVIDENCE"
+    },
+    {
+      "at": "2026-02-28T19:04:27.563Z",
+      "type": "task_added",
+      "taskId": "8f34d9f3-a5d5-46d6-87eb-ad70e414fa71",
+      "taskName": "Move target",
+      "to": "todo",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.554Z",
+      "type": "task_moved",
+      "taskId": "b37b5485-be95-4cd1-865b-613795d397ae",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T19:04:27.551Z",
+      "type": "task_moved",
+      "taskId": "b37b5485-be95-4cd1-865b-613795d397ae",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T19:04:27.545Z",
+      "type": "task_added",
+      "taskId": "b37b5485-be95-4cd1-865b-613795d397ae",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T19:04:27.539Z",
+      "type": "task_moved",
+      "taskId": "a9346232-2768-4617-908f-da72119e58b6",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T19:04:27.533Z",
+      "type": "task_added",
+      "taskId": "a9346232-2768-4617-908f-da72119e58b6",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
     {
       "at": "2026-02-28T18:55:46.312Z",
       "type": "closeout_contract_reminder",
@@ -3840,17 +8152,25 @@
       "from": "todo",
       "to": "done",
       "detail": "Verified implementation/tests and closed task with GitHub-backed evidence links."
-    }
-  ],
-  "activity": [
+    },
     {
-      "at": "2026-02-28T18:55:38.000Z",
+      "at": "2026-02-28T19:10:48.096Z",
       "type": "task_completed",
-      "taskId": "cc607f30-7779-4c6d-8343-0f0789b8916c",
-      "taskName": "[P25][OpenClaw] Implement Slack update target resolver + fallback routing for heartbeat posts",
+      "taskId": "a52ad488-cc6f-4fbe-9f57-7ab8af7eb295",
+      "taskName": "Compliant escalation task",
       "from": "todo",
       "to": "done",
-      "detail": "Closed with GitHub-backed resolver/test evidence links and fresh npm test verification."
+      "detail": "Verified implementation/tests and closed task with GitHub-backed evidence links."
+    },
+    {
+      "id": "activity-13aefc6c-close",
+      "type": "task.completed",
+      "taskId": "13aefc6c-0df4-4b3d-849d-bf4376795312",
+      "taskName": "Auto-dispatch candidate",
+      "from": "todo",
+      "to": "done",
+      "at": "2026-02-28T19:11:17Z",
+      "detail": "Verified auto-dispatch implementation/tests and closed this task with GitHub-backed evidence. Verification run (2026-02-28): npm test (103/103 passing), including dashboard auto-next-action scheduler coverage. Evidence: https://github.com/larryclaw/OpsHub/blob/main/server.js ; https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js ; https://github.com/larryclaw/OpsHub/blob/main/test/manager-behavior-gap-metrics.test.js ; https://github.com/larryclaw/OpsHub/blob/main/data/kanban.json"
     }
   ]
 }
