@@ -128,7 +128,7 @@ async function getSubagentsData() {
   const board = await loadKanban();
 
   // 1) Ground truth for current tasks = kanban In Progress
-  const taskItems = (board.columns.inProgress || []).map((t) => ({
+  const inProgressTasks = (board.columns.inProgress || []).map((t) => ({
     id: t.id,
     task: t.name,
     status: 'In Progress',
@@ -137,13 +137,13 @@ async function getSubagentsData() {
 
   // 2) Runtime sub-agent sessions from OpenClaw session store (recently active only)
   const sess = await safeExec('~/.openclaw/bin/openclaw sessions --active 30 --json');
-  let runtimeItems = [];
+  let activeSubagents = [];
 
   if (sess.ok && sess.stdout?.trim()) {
     try {
       const parsed = JSON.parse(sess.stdout);
       const sessions = Array.isArray(parsed?.sessions) ? parsed.sessions : [];
-      runtimeItems = sessions
+      activeSubagents = sessions
         .filter((s) => typeof s?.key === 'string' && s.key.includes(':subagent:'))
         .filter((s) => Number(s?.ageMs ?? Number.MAX_SAFE_INTEGER) <= 3 * 60 * 1000)
         .filter((s) => !s?.abortedLastRun)
@@ -154,16 +154,20 @@ async function getSubagentsData() {
           source: 'OpenClaw sessions (last 3m)'
         }));
     } catch {
-      runtimeItems = [];
+      activeSubagents = [];
     }
   }
 
   return {
-    items: [...runtimeItems, ...taskItems],
+    // Backward-compatible merged list used by current UI
+    items: [...activeSubagents, ...inProgressTasks],
+    // Explicit contract fields for integrations
+    activeSubagents,
+    inProgressTasks,
     reason: null,
     counts: {
-      activeSubagents: runtimeItems.length,
-      inProgressTasks: taskItems.length
+      activeSubagents: activeSubagents.length,
+      inProgressTasks: inProgressTasks.length
     }
   };
 }

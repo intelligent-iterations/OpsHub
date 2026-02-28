@@ -34,7 +34,7 @@ Includes a lightweight API smoke suite for health checks + kanban flows.
 ## Endpoints
 
 - `GET /api/health` → health check
-- `GET /api/dashboard` → JSON payload for all dashboard sections
+- `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays)
 - `GET /api/kanban` → kanban board + activity log
 - `POST /api/kanban/task` → create task
 - `POST /api/kanban/move` → move task to another column
