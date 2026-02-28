@@ -5,6 +5,8 @@ const {
   toSlug,
   createAcceptanceCriteria,
   buildTaskQueue,
+  isQueueLight,
+  createLightQueueSeedTasks,
   pickImmediateExecution,
   formatTaskMarkdown
 } = require('../scripts/pantrypal-task-accelerator');
@@ -13,17 +15,19 @@ test('toSlug normalizes experiment names', () => {
   assert.equal(toSlug('Expiry-risk push digest!'), 'expiry-risk-push-digest');
 });
 
-test('createAcceptanceCriteria includes metric and target lift', () => {
+test('createAcceptanceCriteria includes metric, target lift, and validation command', () => {
   const criteria = createAcceptanceCriteria({
     primaryMetric: 'activation rate',
     targetLiftPct: 10,
-    guardrail: 'crash-free sessions remain >=99.5%'
+    guardrail: 'crash-free sessions remain >=99.5%',
+    validationCommand: 'npm test -- growth'
   });
 
-  assert.equal(criteria.length, 4);
+  assert.equal(criteria.length, 5);
   assert.match(criteria[0], /activation rate/);
   assert.match(criteria[1], /10%/);
   assert.match(criteria[2], /99.5%/);
+  assert.match(criteria[3], /npm test -- growth/);
 });
 
 test('buildTaskQueue ranks experiments and emits stable ids', () => {
@@ -35,12 +39,26 @@ test('buildTaskQueue ranks experiments and emits stable ids', () => {
   assert.equal(queue.length, 1);
   assert.equal(queue[0].owner, 'qa-owner');
   assert.match(queue[0].id, /^PP-GROWTH-001-higher-score$/);
+  assert.equal(queue[0].validationCommand, 'npm test');
 });
 
-test('pickImmediateExecution chooses top queue item', () => {
-  const plan = pickImmediateExecution([{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 90, acceptanceCriteria: [] }]);
+test('isQueueLight applies default threshold', () => {
+  assert.equal(isQueueLight([{ id: 'one' }, { id: 'two' }]), true);
+  assert.equal(isQueueLight([{ id: 'one' }, { id: 'two' }, { id: 'three' }]), false);
+});
+
+test('createLightQueueSeedTasks returns pantrypal-ready tasks with acceptance inputs', () => {
+  const seeds = createLightQueueSeedTasks({ validationCommand: 'npm test -- pantrypal' });
+  assert.equal(seeds.length, 2);
+  assert.match(seeds[0].name, /lapsed households/i);
+  assert.equal(seeds[0].validationCommand, 'npm test -- pantrypal');
+});
+
+test('pickImmediateExecution chooses top queue item and includes validation step', () => {
+  const plan = pickImmediateExecution([{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 90, acceptanceCriteria: [], validationCommand: 'npm test -- foo' }]);
   assert.equal(plan.taskId, 'PP-GROWTH-001-foo');
-  assert.equal(plan.executionNow.length, 3);
+  assert.equal(plan.executionNow.length, 4);
+  assert.match(plan.executionNow[2], /npm test -- foo/);
 });
 
 test('formatTaskMarkdown renders queue and execution section', () => {
