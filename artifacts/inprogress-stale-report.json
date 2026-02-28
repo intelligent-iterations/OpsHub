@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-02-28T00:20:31.953Z",
+  "applyMode": true,
+  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+  "thresholds": {
+    "staleMinutes": 20,
+    "activeWindowMinutes": 5
+  },
+  "summary": {
+    "inProgressChecked": 6,
+    "activeSubagents": 0,
+    "staleCandidates": 0,
+    "reassignedCount": 0
+  },
+  "rootCause": {
+    "staleCount": 0,
+    "genericIntegrationTaskCount": 0,
+    "manualSourceCount": 0,
+    "likelyCause": "Some in-progress cards do not carry session/label linkage and exceed stale threshold with no active sub-agent match."
+  },
+  "staleCandidates": [],
+  "movedTaskIds": []
+}
