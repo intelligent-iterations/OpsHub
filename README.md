@@ -61,6 +61,25 @@ OpsHub uses local artifacts and system commands where available:
 - `OPS_HUB_TOKEN_QUOTA` (default `1000000`)
 - `OPSHUB_DATA_DIR` (override kanban storage path; useful for tests)
 
+## In-Progress stale cleanup utility
+
+Use the safe cleanup script to detect stale `inProgress` tasks with no active sub-agent match and generate remediation reports.
+
+- Dry-run by default (no board changes)
+- Optional `--apply` moves stale tasks back to `todo`
+- Adds `activityLog` entries for every auto-reassigned task
+
+```bash
+node scripts/inprogress-stale-cleanup.js \
+  --kanban data/kanban.json \
+  --stale-minutes 20 \
+  --active-window-minutes 3 \
+  --report-json-out artifacts/inprogress-stale-report.json \
+  --report-md-out artifacts/inprogress-stale-report.md
+```
+
+See `docs/inprogress-stale-cleanup.md` for details.
+
 ## Limitations
 
 - No direct OpenClaw runtime API or `openclaw` CLI is available in this environment, so some sections are inferred from local files/processes.
