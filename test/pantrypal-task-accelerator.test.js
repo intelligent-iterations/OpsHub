@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const {
   toSlug,
   createAcceptanceCriteria,
+  deriveBlockedReasons,
   buildTaskQueue,
   isQueueLight,
   createLightQueueSeedTasks,
@@ -37,6 +38,14 @@ test('createAcceptanceCriteria includes metric, target lift, sample gate, and va
   assert.match(criteria[2], /21 days/);
   assert.match(criteria[3], /99.5%/);
   assert.match(criteria[4], /npm test -- growth/);
+});
+
+test('deriveBlockedReasons maps external dependencies', () => {
+  const reasons = deriveBlockedReasons({ externalDependency: ['data pipeline approval', 'legal copy sign-off'] });
+  assert.deepEqual(reasons, [
+    'External dependency: data pipeline approval',
+    'External dependency: legal copy sign-off'
+  ]);
 });
 
 test('buildTaskQueue ranks experiments and emits stable ids', () => {
@@ -155,6 +164,30 @@ test('pickImmediateExecution chooses top queue item and includes acceptance chec
   assert.match(plan.executionNow[3], /npm test -- foo/);
 });
 
+test('pickImmediateExecution skips blocked tasks', () => {
+  const plan = pickImmediateExecution([
+    {
+      id: 'PP-GROWTH-001-blocked',
+      title: 'Blocked',
+      isReady: false,
+      blockedReasons: ['External dependency: legal sign-off'],
+      acceptanceCriteria: ['c1'],
+      validationCommand: 'npm test -- blocked'
+    },
+    {
+      id: 'PP-GROWTH-002-ready',
+      title: 'Ready',
+      isReady: true,
+      blockedReasons: [],
+      acceptanceCriteria: ['c1', 'c2', 'c3'],
+      validationCommand: 'npm test -- ready'
+    }
+  ]);
+
+  assert.equal(plan.taskId, 'PP-GROWTH-002-ready');
+  assert.equal(plan.validationCommand, 'npm test -- ready');
+});
+
 test('runValidationCommand returns PASS with output snippet', () => {
   const result = runValidationCommand('npm test -- smoke', {
     runner: () => 'line1\nline2\nline3'
@@ -181,6 +214,23 @@ test('runValidationCommand returns FAIL when runner throws', () => {
   assert.equal(result.status, 'FAIL');
   assert.equal(result.exitCode, 2);
   assert.match(result.outputSnippet, /stderr-line/);
+});
+
+test('pickImmediateExecution returns blocked queue summary when no ready tasks', () => {
+  const plan = pickImmediateExecution([
+    {
+      id: 'PP-GROWTH-001-blocked',
+      title: 'Blocked',
+      isReady: false,
+      blockedReasons: ['External dependency: legal sign-off'],
+      acceptanceCriteria: ['c1'],
+      validationCommand: 'npm test -- blocked'
+    }
+  ]);
+
+  assert.equal(plan.blockedQueue, true);
+  assert.equal(plan.taskId, null);
+  assert.match(plan.blockedReasons[0], /legal sign-off/);
 });
 
 test('formatTaskMarkdown renders queue execution and validation section', () => {

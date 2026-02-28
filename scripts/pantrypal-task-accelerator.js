@@ -29,6 +29,23 @@ function createAcceptanceCriteria(experiment) {
   ];
 }
 
+function deriveBlockedReasons(experiment) {
+  if (!experiment.externalDependency) return [];
+
+  if (typeof experiment.externalDependency === 'string') {
+    return [`External dependency: ${experiment.externalDependency}`];
+  }
+
+  if (Array.isArray(experiment.externalDependency)) {
+    return experiment.externalDependency
+      .map((item) => String(item).trim())
+      .filter(Boolean)
+      .map((item) => `External dependency: ${item}`);
+  }
+
+  return ['External dependency must be cleared before launch'];
+}
+
 function buildTaskQueue(experiments, options = {}) {
   const limit = options.limit ?? 3;
   const minimumScore = options.minimumScore;
@@ -37,14 +54,19 @@ function buildTaskQueue(experiments, options = {}) {
     ? ranked.filter((experiment) => experiment.score >= minimumScore)
     : ranked;
 
-  return eligible.slice(0, limit).map((experiment, index) => ({
-    id: `PP-GROWTH-${String(index + 1).padStart(3, '0')}-${toSlug(experiment.name)}`,
-    title: experiment.name,
-    score: experiment.score,
-    owner: options.defaultOwner ?? 'growth-oncall',
-    validationCommand: experiment.validationCommand ?? 'npm test',
-    acceptanceCriteria: createAcceptanceCriteria(experiment)
-  }));
+  return eligible.slice(0, limit).map((experiment, index) => {
+    const blockedReasons = deriveBlockedReasons(experiment);
+    return {
+      id: `PP-GROWTH-${String(index + 1).padStart(3, '0')}-${toSlug(experiment.name)}`,
+      title: experiment.name,
+      score: experiment.score,
+      owner: options.defaultOwner ?? 'growth-oncall',
+      validationCommand: experiment.validationCommand ?? 'npm test',
+      acceptanceCriteria: createAcceptanceCriteria(experiment),
+      blockedReasons,
+      isReady: blockedReasons.length === 0
+    };
+  });
 }
 
 function isQueueLight(taskQueue, threshold = 2) {
@@ -181,7 +203,19 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
 function pickImmediateExecution(taskQueue) {
   if (!taskQueue.length) return null;
 
-  const [top] = taskQueue;
+  const top = taskQueue.find((task) => task.isReady !== false);
+  if (!top) {
+    return {
+      taskId: null,
+      title: null,
+      validationCommand: null,
+      acceptanceChecklist: [],
+      executionNow: [],
+      blockedQueue: true,
+      blockedReasons: taskQueue.flatMap((task) => task.blockedReasons || [])
+    };
+  }
+
   const acceptanceChecklist = (top.acceptanceCriteria || []).slice(0, 3);
 
   return {
@@ -251,9 +285,15 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
     ? executionPlan.acceptanceChecklist.map((line, idx) => `${idx + 1}. ${line}`).join('\n')
     : '1. No critical checklist available';
 
-  const executionLines = executionPlan
+  const executionLines = executionPlan?.executionNow?.length
     ? executionPlan.executionNow.map((step, idx) => `${idx + 1}. ${step}`).join('\n')
     : '1. No tasks available';
+
+  const blockedLines = executionPlan?.blockedQueue
+    ? (executionPlan.blockedReasons.length
+      ? executionPlan.blockedReasons.map((reason, index) => `${index + 1}. ${reason}`).join('\n')
+      : '1. Queue is blocked but no reason was provided')
+    : null;
 
   const validationLines = validationResult
     ? [
@@ -292,11 +332,14 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
     '',
     '### Launch Steps',
     executionLines,
+    blockedLines ? '' : null,
+    blockedLines ? '### Blockers' : null,
+    blockedLines || null,
     '',
     '## Validation Result',
     validationLines,
     ''
-  ].join('\n');
+  ].filter((line) => line !== null).join('\n');
 }
 
 function formatTaskJson(taskQueue, executionPlan, validationResult = null, metadata = {}, health = null) {
@@ -367,6 +410,7 @@ if (require.main === module) {
 module.exports = {
   toSlug,
   createAcceptanceCriteria,
+  deriveBlockedReasons,
   buildTaskQueue,
   isQueueLight,
   createLightQueueSeedTasks,
