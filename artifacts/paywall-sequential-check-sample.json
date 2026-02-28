@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-02-27T00:00:00.000Z",
+  "experimentId": "paywall-sequential-001",
+  "policy": {
+    "alphaBudget": 0.05,
+    "minLookIntervalHours": 24,
+    "maxLooksPerWeek": 7,
+    "minCumulativeVisitors": 200
+  },
+  "observed": {
+    "lookCount": 5,
+    "analysisWindowDays": 7
+  },
+  "summary": {
+    "status": "pass",
+    "errors": 0,
+    "warnings": 0
+  },
+  "findings": []
+}
