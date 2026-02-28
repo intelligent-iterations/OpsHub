@@ -160,6 +160,24 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
   return { queue, seeded };
 }
 
+function createQueueHealthSnapshot(experiments, queue, options = {}) {
+  const minimumScore = options.minimumScore;
+  const threshold = options.lightThreshold ?? 2;
+  const ranked = rankExperiments(experiments);
+  const aboveMinimum = typeof minimumScore === 'number'
+    ? ranked.filter((experiment) => experiment.score >= minimumScore)
+    : ranked;
+
+  return {
+    incomingExperiments: experiments.length,
+    eligibleExperiments: aboveMinimum.length,
+    queueSize: queue.length,
+    isLight: isQueueLight(queue, threshold),
+    threshold,
+    minimumScore: typeof minimumScore === 'number' ? minimumScore : null
+  };
+}
+
 function pickImmediateExecution(taskQueue) {
   if (!taskQueue.length) return null;
 
@@ -219,7 +237,7 @@ function runValidationCommand(command, options = {}) {
   }
 }
 
-function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null) {
+function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, health = null) {
   const taskLines = taskQueue.map((task) => {
     const criteria = task.acceptanceCriteria.map((line) => `    - [ ] ${line}`).join('\n');
     return `- [ ] ${task.id} — ${task.title} (score: ${task.score.toFixed(2)}, owner: ${task.owner})\n  - Acceptance criteria:\n${criteria}`;
@@ -242,10 +260,22 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null) {
     ].join('\n')
     : 'Status: NOT_RUN';
 
+  const healthLines = health
+    ? [
+      `Incoming experiments: ${health.incomingExperiments}`,
+      `Eligible experiments (minimum score): ${health.eligibleExperiments}`,
+      `Queue size: ${health.queueSize}`,
+      `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`
+    ].join('\n')
+    : 'Queue health unavailable';
+
   return [
     '# PantryPal Task Queue (Auto-generated)',
     '',
     taskLines,
+    '',
+    '## Queue Health',
+    healthLines,
     '',
     '## Execute Immediately',
     executionPlan ? `Top task: ${executionPlan.taskId} — ${executionPlan.title}` : 'Top task: none',
@@ -257,10 +287,11 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null) {
   ].join('\n');
 }
 
-function formatTaskJson(taskQueue, executionPlan, validationResult = null, metadata = {}) {
+function formatTaskJson(taskQueue, executionPlan, validationResult = null, metadata = {}, health = null) {
   return JSON.stringify({
     generatedAt: metadata.generatedAt ?? new Date().toISOString(),
     seeded: Boolean(metadata.seeded),
+    health,
     queue: taskQueue,
     immediateExecution: executionPlan,
     validation: validationResult
@@ -309,10 +340,14 @@ if (require.main === module) {
 
   const executionPlan = pickImmediateExecution(queue);
   const validationResult = runValidationCommand(executionPlan?.validationCommand);
+  const health = createQueueHealthSnapshot(experiments, queue, {
+    minimumScore: 75,
+    lightThreshold: 2
+  });
 
   const output = outputFormat === 'json'
-    ? formatTaskJson(queue, executionPlan, validationResult, { seeded })
-    : formatTaskMarkdown(queue, executionPlan, validationResult);
+    ? formatTaskJson(queue, executionPlan, validationResult, { seeded }, health)
+    : formatTaskMarkdown(queue, executionPlan, validationResult, health);
 
   process.stdout.write(output);
 }
@@ -325,6 +360,7 @@ module.exports = {
   createLightQueueSeedTasks,
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
+  createQueueHealthSnapshot,
   pickImmediateExecution,
   runValidationCommand,
   formatTaskMarkdown,
