@@ -1,24 +1,34 @@
 {
-  "generatedAt": "2026-02-28T04:33:40.595Z",
+  "generatedAt": "2026-02-28T05:46:15.484Z",
   "seeded": false,
   "sync": {
-    "synced": false,
-    "inserted": 0,
-    "reason": "Sync disabled."
+    "synced": true,
+    "inserted": 4,
+    "attempted": 4,
+    "skippedBlocked": 0,
+    "readyOnly": true,
+    "bootstrapped": false,
+    "kanbanFile": "data/kanban.json"
   },
   "health": {
-    "incomingExperiments": 3,
-    "eligibleExperiments": 3,
-    "queueSize": 3,
-    "readyTasks": 3,
+    "incomingExperiments": 5,
+    "eligibleExperiments": 5,
+    "queueSize": 4,
+    "readyTasks": 4,
     "blockedTasks": 0,
     "readinessPct": 100,
+    "topReadyTaskIds": [
+      "PP-GROWTH-001-low-stock-protein-rescue-cards-in-3-tap-meal-builder",
+      "PP-GROWTH-002-friday-night-rescue-reminder-with-20-minute-cook-filter",
+      "PP-GROWTH-003-post-checkout-pantry-scan-nudge-for-first-week-households"
+    ],
+    "topReadyScore": 82.55,
     "topBlockedReasons": [],
-    "scoreAverage": 81.4,
-    "scoreMedian": 81.45,
-    "scoreMin": 80.85,
-    "scoreMax": 81.9,
-    "scoreReadyAverage": 81.4,
+    "scoreAverage": 81.8,
+    "scoreMedian": 81.68,
+    "scoreMin": 81.3,
+    "scoreMax": 82.55,
+    "scoreReadyAverage": 81.8,
     "scoreBlockedAverage": 0,
     "isLight": false,
     "isReadyCapacityLight": false,
@@ -27,20 +37,48 @@
     "minimumScore": 75,
     "averageCriteriaCount": 6,
     "minimumCriteria": 6,
-    "tasksMeetingMinimum": 3,
+    "tasksMeetingMinimum": 4,
     "tasksBelowCriteriaThreshold": [],
-    "tasksWithValidation": 3,
-    "executableValidations": 3,
+    "tasksWithValidation": 4,
+    "executableValidations": 4,
     "validationCoveragePct": 100,
     "executableValidationPct": 100,
+    "ownerLoad": [
+      {
+        "owner": "growth-oncall",
+        "total": 4,
+        "ready": 4,
+        "blocked": 0,
+        "avgScore": 81.8
+      }
+    ],
+    "readyToBlockedRatio": null,
+    "launchRisk": "low",
     "nextAction": "Execute top ready PantryPal experiment now and monitor first-hour guardrail."
   },
   "queue": [
     {
-      "id": "PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter",
+      "id": "PP-GROWTH-001-low-stock-protein-rescue-cards-in-3-tap-meal-builder",
+      "title": "Low-stock protein rescue cards in 3-tap meal builder",
+      "score": 82.55,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+      "acceptanceCriteria": [
+        "Experiment spec includes hypothesis, segment, channel, and success metric (protein-category rescue completion rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 10%.",
+        "Sample-size gate is defined: at least 1650 qualified households over 12 days.",
+        "Guardrail is monitored and passes: meal-builder exit rate does not increase by >1.1%.",
+        "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
+        "Decision log is updated with launch date, owner, and rollback trigger."
+      ],
+      "blockedReasons": [],
+      "isReady": true
+    },
+    {
+      "id": "PP-GROWTH-002-friday-night-rescue-reminder-with-20-minute-cook-filter",
       "title": "Friday night rescue reminder with 20-minute cook filter",
       "score": 81.9,
-      "owner": "growth-cron",
+      "owner": "growth-oncall",
       "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
       "acceptanceCriteria": [
         "Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).",
@@ -54,10 +92,10 @@
       "isReady": true
     },
     {
-      "id": "PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households",
+      "id": "PP-GROWTH-003-post-checkout-pantry-scan-nudge-for-first-week-households",
       "title": "Post-checkout pantry scan nudge for first-week households",
       "score": 81.45,
-      "owner": "growth-cron",
+      "owner": "growth-oncall",
       "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
       "acceptanceCriteria": [
         "Experiment spec includes hypothesis, segment, channel, and success metric (week-1 pantry scan completion rate).",
@@ -71,17 +109,17 @@
       "isReady": true
     },
     {
-      "id": "PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill",
-      "title": "Sunday prep planner with expiring-ingredient auto-fill",
-      "score": 80.85,
-      "owner": "growth-cron",
-      "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+      "id": "PP-GROWTH-004-family-size-adaptive-leftovers-remix-suggestions",
+      "title": "Family-size adaptive leftovers remix suggestions",
+      "score": 81.3,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
       "acceptanceCriteria": [
-        "Experiment spec includes hypothesis, segment, channel, and success metric (weekly rescue plan creation rate).",
-        "A/B test is configured with event instrumentation and minimum detectable lift target of 11%.",
-        "Sample-size gate is defined: at least 1800 qualified households over 14 days.",
-        "Guardrail is monitored and passes: recipe dismiss rate stays below 18%.",
-        "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
+        "Experiment spec includes hypothesis, segment, channel, and success metric (leftovers remixed within 48h).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 8%.",
+        "Sample-size gate is defined: at least 1550 qualified households over 14 days.",
+        "Guardrail is monitored and passes: recipe save-to-dismiss ratio remains above 1.9.",
+        "Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.",
         "Decision log is updated with launch date, owner, and rollback trigger."
       ],
       "blockedReasons": [],
@@ -89,13 +127,13 @@
     }
   ],
   "immediateExecution": {
-    "taskId": "PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter",
-    "title": "Friday night rescue reminder with 20-minute cook filter",
+    "taskId": "PP-GROWTH-001-low-stock-protein-rescue-cards-in-3-tap-meal-builder",
+    "title": "Low-stock protein rescue cards in 3-tap meal builder",
     "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
     "acceptanceChecklist": [
-      "Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).",
-      "A/B test is configured with event instrumentation and minimum detectable lift target of 9%.",
-      "Sample-size gate is defined: at least 1500 qualified households over 10 days."
+      "Experiment spec includes hypothesis, segment, channel, and success metric (protein-category rescue completion rate).",
+      "A/B test is configured with event instrumentation and minimum detectable lift target of 10%.",
+      "Sample-size gate is defined: at least 1650 qualified households over 12 days."
     ],
     "executionNow": [
       "Draft experiment brief in tracker with owner + rollout window.",
@@ -103,13 +141,47 @@
       "Gate launch against acceptance checklist (3 critical checks).",
       "Run validation: npm test -- test/pantrypal-task-accelerator.test.js.",
       "Launch to 10% holdout split and monitor first-hour guardrail."
-    ]
+    ],
+    "experimentSpecTemplate": {
+      "experimentId": "PP-GROWTH-001-low-stock-protein-rescue-cards-in-3-tap-meal-builder",
+      "title": "Low-stock protein rescue cards in 3-tap meal builder",
+      "owner": "growth-oncall",
+      "generatedAt": "2026-02-28T05:46:15.484Z",
+      "hypothesis": "If we run \"Low-stock protein rescue cards in 3-tap meal builder\" for qualified PantryPal households, then low-stock protein rescue cards in 3-tap meal builder should improve its primary success metric while keeping guardrails healthy.",
+      "segment": "Qualified PantryPal households active in the past 14 days",
+      "channel": "In-app + push",
+      "rolloutPlan": {
+        "holdoutPercent": 10,
+        "treatmentPercent": 90,
+        "rampMilestones": [
+          "10% validation cohort",
+          "50% monitored ramp",
+          "100% launch after guardrail pass"
+        ]
+      },
+      "instrumentation": {
+        "requiredEvents": [
+          "rescue_experiment_exposed",
+          "rescue_experiment_converted",
+          "rescue_experiment_guardrail_checkpoint"
+        ],
+        "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
+      },
+      "acceptanceCriteria": [
+        "Experiment spec includes hypothesis, segment, channel, and success metric (protein-category rescue completion rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 10%.",
+        "Sample-size gate is defined: at least 1650 qualified households over 12 days.",
+        "Guardrail is monitored and passes: meal-builder exit rate does not increase by >1.1%.",
+        "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
+        "Decision log is updated with launch date, owner, and rollback trigger."
+      ]
+    }
   },
   "validation": {
     "status": "PASS",
     "command": "npm test -- test/pantrypal-task-accelerator.test.js",
     "exitCode": 0,
-    "durationMs": 190,
-    "outputSnippet": "# tests 46\n# suites 0\n# pass 46\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 66.651833"
+    "durationMs": 194,
+    "outputSnippet": "# tests 54\n# suites 0\n# pass 54\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 68.203167"
   }
 }

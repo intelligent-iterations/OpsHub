@@ -32,6 +32,7 @@ node scripts/pantrypal-task-accelerator.js --json
 - `--validation-command <cmd>` override validation command applied to seeded tasks
 - `--validation-timeout-ms <ms>` override validation command timeout (default: `120000`)
 - `--execution-brief-out <path>` write a focused immediate-execution launch brief (checklist + first-hour steps + validation)
+- `--experiment-spec-out <path>` write a structured JSON experiment spec for the immediate execution task (hypothesis, rollout, instrumentation, acceptance criteria)
 
 ## Input file schema
 
@@ -47,5 +48,7 @@ A typical cron loop writes:
 
 - markdown execution plan (`artifacts/pantrypal-cron-queue.md`)
 - json payload (`artifacts/pantrypal-cron-queue.json`)
+- immediate execution brief (`artifacts/pantrypal-cron-brief.md`)
+- immediate experiment spec (`artifacts/pantrypal-cron-experiment-spec.json`)
 
-Both include queue health, immediate execution steps, and validation status.
+Together these include queue health, immediate execution steps, validation status, and launch-ready experiment scaffolding.

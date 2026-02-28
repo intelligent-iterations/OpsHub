@@ -22,10 +22,12 @@ const {
   classifyLaunchRisk,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
+  buildExperimentSpecTemplate,
   pickImmediateExecution,
   runValidationCommand,
   formatTaskMarkdown,
   formatTaskJson,
+  writeExperimentSpec,
   writeExecutionBrief,
   parseCliOptions,
   loadExperimentsFromFile,
@@ -451,6 +453,24 @@ test('createQueueHealthSnapshot exposes top ready tasks sorted by score', () => 
   assert.equal(health.topReadyScore, 92);
 });
 
+test('buildExperimentSpecTemplate emits PantryPal-ready hypothesis and instrumentation scaffold', () => {
+  const spec = buildExperimentSpecTemplate({
+    id: 'PP-GROWTH-001-foo',
+    title: 'Foo rescue boost',
+    owner: 'growth-night',
+    validationCommand: 'npm test -- foo',
+    acceptanceCriteria: ['a', 'b']
+  }, { generatedAt: '2026-02-28T05:10:00.000Z' });
+
+  assert.equal(spec.experimentId, 'PP-GROWTH-001-foo');
+  assert.equal(spec.owner, 'growth-night');
+  assert.match(spec.hypothesis, /foo rescue boost/i);
+  assert.equal(spec.rolloutPlan.holdoutPercent, 10);
+  assert.equal(spec.instrumentation.validationCommand, 'npm test -- foo');
+  assert.equal(spec.acceptanceCriteria.length, 2);
+  assert.equal(spec.generatedAt, '2026-02-28T05:10:00.000Z');
+});
+
 test('pickImmediateExecution chooses top queue item and includes acceptance checklist gating + validation step', () => {
   const plan = pickImmediateExecution([{
     id: 'PP-GROWTH-001-foo',
@@ -458,7 +478,7 @@ test('pickImmediateExecution chooses top queue item and includes acceptance chec
     score: 90,
     acceptanceCriteria: ['criterion 1', 'criterion 2', 'criterion 3', 'criterion 4'],
     validationCommand: 'npm test -- foo'
-  }]);
+  }], { generatedAt: '2026-02-28T05:11:00.000Z' });
 
   assert.equal(plan.taskId, 'PP-GROWTH-001-foo');
   assert.equal(plan.acceptanceChecklist.length, 3);
@@ -466,6 +486,7 @@ test('pickImmediateExecution chooses top queue item and includes acceptance chec
   assert.equal(plan.validationCommand, 'npm test -- foo');
   assert.match(plan.executionNow[2], /critical checks/);
   assert.match(plan.executionNow[3], /npm test -- foo/);
+  assert.equal(plan.experimentSpecTemplate.generatedAt, '2026-02-28T05:11:00.000Z');
 });
 
 test('pickImmediateExecution skips blocked tasks', () => {
@@ -707,13 +728,35 @@ test('parseCliOptions accepts experiment file, owner, and validation command ove
     '--experiments-file', 'data/pantrypal-experiments.json',
     '--default-owner=growth-night-shift',
     '--validation-command', 'npm test -- test/pantrypal-task-accelerator.test.js',
-    '--execution-brief-out', 'artifacts/pantrypal-execution-brief.md'
+    '--execution-brief-out', 'artifacts/pantrypal-execution-brief.md',
+    '--experiment-spec-out', 'artifacts/pantrypal-experiment-spec.json'
   ]);
 
   assert.equal(options.experimentsFile, 'data/pantrypal-experiments.json');
   assert.equal(options.defaultOwner, 'growth-night-shift');
   assert.equal(options.validationCommand, 'npm test -- test/pantrypal-task-accelerator.test.js');
   assert.equal(options.executionBriefOut, 'artifacts/pantrypal-execution-brief.md');
+  assert.equal(options.experimentSpecOut, 'artifacts/pantrypal-experiment-spec.json');
+});
+
+test('writeExperimentSpec persists immediate execution spec as JSON artifact', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-spec-'));
+  const specPath = path.join(tempDir, 'experiment-spec.json');
+
+  const result = writeExperimentSpec(specPath, {
+    experimentSpecTemplate: {
+      experimentId: 'PP-GROWTH-001-fast-rescue',
+      title: 'Fast rescue',
+      owner: 'growth-oncall'
+    }
+  }, {
+    generatedAt: '2026-02-28T03:25:00.000Z'
+  });
+
+  const content = JSON.parse(fs.readFileSync(specPath, 'utf8'));
+  assert.equal(result.experimentId, 'PP-GROWTH-001-fast-rescue');
+  assert.equal(content.generatedAt, '2026-02-28T03:25:00.000Z');
+  assert.equal(content.owner, 'growth-oncall');
 });
 
 test('writeExecutionBrief persists a markdown launch brief with checklist and validation output', () => {

@@ -97,6 +97,70 @@
           "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
           "isReady": true
         }
+      },
+      {
+        "id": "PP-GROWTH-001-low-stock-protein-rescue-cards-in-3-tap-meal-builder",
+        "name": "[PantryPal] Low-stock protein rescue cards in 3-tap meal builder",
+        "description": "Score: 82.55\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-task-accelerator.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (protein-category rescue completion rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 10%.\n3. Sample-size gate is defined: at least 1650 qualified households over 12 days.\n4. Guardrail is monitored and passes: meal-builder exit rate does not increase by >1.1%.\n5. Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T05:46:15.681Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 82.55,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+          "isReady": true
+        }
+      },
+      {
+        "id": "PP-GROWTH-002-friday-night-rescue-reminder-with-20-minute-cook-filter",
+        "name": "[PantryPal] Friday night rescue reminder with 20-minute cook filter",
+        "description": "Score: 81.90\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-task-accelerator.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 9%.\n3. Sample-size gate is defined: at least 1500 qualified households over 10 days.\n4. Guardrail is monitored and passes: notification opt-out rate stays below 1.6%.\n5. Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T05:46:15.681Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 81.9,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+          "isReady": true
+        }
+      },
+      {
+        "id": "PP-GROWTH-003-post-checkout-pantry-scan-nudge-for-first-week-households",
+        "name": "[PantryPal] Post-checkout pantry scan nudge for first-week households",
+        "description": "Score: 81.45\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (week-1 pantry scan completion rate).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 8%.\n3. Sample-size gate is defined: at least 1700 qualified households over 14 days.\n4. Guardrail is monitored and passes: session abandonment does not increase by >1.2%.\n5. Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T05:46:15.681Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 81.45,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
+          "isReady": true
+        }
+      },
+      {
+        "id": "PP-GROWTH-004-family-size-adaptive-leftovers-remix-suggestions",
+        "name": "[PantryPal] Family-size adaptive leftovers remix suggestions",
+        "description": "Score: 81.30\nOwner: growth-oncall\nValidation: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js\n\nAcceptance criteria:\n1. Experiment spec includes hypothesis, segment, channel, and success metric (leftovers remixed within 48h).\n2. A/B test is configured with event instrumentation and minimum detectable lift target of 8%.\n3. Sample-size gate is defined: at least 1550 qualified households over 14 days.\n4. Guardrail is monitored and passes: recipe save-to-dismiss ratio remains above 1.9.\n5. Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.\n6. Decision log is updated with launch date, owner, and rollback trigger.",
+        "priority": "medium",
+        "status": "todo",
+        "createdAt": "2026-02-28T05:46:15.681Z",
+        "completedAt": null,
+        "source": "pantrypal-task-accelerator",
+        "metadata": {
+          "score": 81.3,
+          "owner": "growth-oncall",
+          "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
+          "isReady": true
+        }
       }
     ],
     "inProgress": [
@@ -2292,6 +2356,38 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T05:46:15.681Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-004-family-size-adaptive-leftovers-remix-suggestions",
+      "taskName": "[PantryPal] Family-size adaptive leftovers remix suggestions",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T05:46:15.681Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-003-post-checkout-pantry-scan-nudge-for-first-week-households",
+      "taskName": "[PantryPal] Post-checkout pantry scan nudge for first-week households",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T05:46:15.681Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-002-friday-night-rescue-reminder-with-20-minute-cook-filter",
+      "taskName": "[PantryPal] Friday night rescue reminder with 20-minute cook filter",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
+    {
+      "at": "2026-02-28T05:46:15.681Z",
+      "type": "task_added",
+      "taskId": "PP-GROWTH-001-low-stock-protein-rescue-cards-in-3-tap-meal-builder",
+      "taskName": "[PantryPal] Low-stock protein rescue cards in 3-tap meal builder",
+      "to": "todo",
+      "detail": "Added task from pantrypal-task-accelerator"
+    },
     {
       "at": "2026-02-28T03:52:16.952Z",
       "type": "task_added",

@@ -484,6 +484,36 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   };
 }
 
+function buildExperimentSpecTemplate(task = {}, options = {}) {
+  if (!task || !task.id) return null;
+
+  const generatedAt = options.generatedAt ?? new Date().toISOString();
+
+  return {
+    experimentId: task.id,
+    title: task.title,
+    owner: task.owner ?? 'growth-oncall',
+    generatedAt,
+    hypothesis: `If we run \"${task.title}\" for qualified PantryPal households, then ${task.title.toLowerCase()} should improve its primary success metric while keeping guardrails healthy.`,
+    segment: 'Qualified PantryPal households active in the past 14 days',
+    channel: 'In-app + push',
+    rolloutPlan: {
+      holdoutPercent: 10,
+      treatmentPercent: 90,
+      rampMilestones: ['10% validation cohort', '50% monitored ramp', '100% launch after guardrail pass']
+    },
+    instrumentation: {
+      requiredEvents: [
+        'rescue_experiment_exposed',
+        'rescue_experiment_converted',
+        'rescue_experiment_guardrail_checkpoint'
+      ],
+      validationCommand: task.validationCommand ?? 'npm test'
+    },
+    acceptanceCriteria: Array.isArray(task.acceptanceCriteria) ? [...task.acceptanceCriteria] : []
+  };
+}
+
 function pickImmediateExecution(taskQueue, options = {}) {
   if (!taskQueue.length) return null;
 
@@ -509,7 +539,8 @@ function pickImmediateExecution(taskQueue, options = {}) {
       acceptanceChecklist: [],
       executionNow: [],
       blockedQueue: true,
-      blockedReasons
+      blockedReasons,
+      experimentSpecTemplate: null
     };
   }
 
@@ -526,7 +557,8 @@ function pickImmediateExecution(taskQueue, options = {}) {
       `Gate launch against acceptance checklist (${acceptanceChecklist.length} critical checks).`,
       `Run validation: ${top.validationCommand}.`,
       'Launch to 10% holdout split and monitor first-hour guardrail.'
-    ]
+    ],
+    experimentSpecTemplate: buildExperimentSpecTemplate(top, options)
   };
 }
 
@@ -667,6 +699,25 @@ function formatTaskJson(taskQueue, executionPlan, validationResult = null, metad
   }, null, 2);
 }
 
+function writeExperimentSpec(filePath, executionPlan, metadata = {}) {
+  if (!filePath || !executionPlan?.experimentSpecTemplate) return null;
+
+  const resolvedPath = path.resolve(process.cwd(), filePath);
+  const generatedAt = metadata.generatedAt ?? new Date().toISOString();
+  const spec = {
+    ...executionPlan.experimentSpecTemplate,
+    generatedAt
+  };
+
+  fs.writeFileSync(resolvedPath, `${JSON.stringify(spec, null, 2)}\n`, 'utf8');
+
+  return {
+    filePath,
+    generatedAt,
+    experimentId: spec.experimentId
+  };
+}
+
 function writeExecutionBrief(filePath, executionPlan, validationResult, health, metadata = {}) {
   if (!filePath) return null;
 
@@ -750,6 +801,7 @@ function parseCliOptions(argv = []) {
     defaultOwner: 'growth-oncall',
     validationCommand: null,
     executionBriefOut: null,
+    experimentSpecOut: null,
     syncKanban: false,
     kanbanFile: null,
     readyOnlySync: false,
@@ -797,6 +849,7 @@ function parseCliOptions(argv = []) {
       '--default-owner': 'defaultOwner',
       '--validation-command': 'validationCommand',
       '--execution-brief-out': 'executionBriefOut',
+      '--experiment-spec-out': 'experimentSpecOut',
       '--kanban-file': 'kanbanFile'
     };
 
@@ -1006,8 +1059,10 @@ if (require.main === module) {
     autoSeed: cliOptions.autoSeed
   });
 
+  const generatedAt = new Date().toISOString();
   const executionPlan = pickImmediateExecution(queue, {
-    minimumCriteria: cliOptions.minimumCriteria
+    minimumCriteria: cliOptions.minimumCriteria,
+    generatedAt
   });
   const validationResult = cliOptions.validate
     ? runValidationCommand(executionPlan?.validationCommand, {
@@ -1037,11 +1092,14 @@ if (require.main === module) {
     : { synced: false, inserted: 0, reason: 'Sync disabled.' };
 
   const executionBrief = cliOptions.executionBriefOut
-    ? writeExecutionBrief(cliOptions.executionBriefOut, executionPlan, validationResult, health)
+    ? writeExecutionBrief(cliOptions.executionBriefOut, executionPlan, validationResult, health, { generatedAt })
+    : null;
+  const experimentSpec = cliOptions.experimentSpecOut
+    ? writeExperimentSpec(cliOptions.experimentSpecOut, executionPlan, { generatedAt })
     : null;
 
   const output = cliOptions.outputFormat === 'json'
-    ? formatTaskJson(queue, executionPlan, validationResult, { seeded, sync: syncResult, executionBrief }, health)
+    ? formatTaskJson(queue, executionPlan, validationResult, { seeded, generatedAt, sync: syncResult, executionBrief, experimentSpec }, health)
     : formatTaskMarkdown(queue, executionPlan, validationResult, health);
 
   process.stdout.write(output);
@@ -1065,10 +1123,12 @@ module.exports = {
   classifyLaunchRisk,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
+  buildExperimentSpecTemplate,
   pickImmediateExecution,
   runValidationCommand,
   formatTaskMarkdown,
   formatTaskJson,
+  writeExperimentSpec,
   writeExecutionBrief,
   parseCliOptions,
   loadExperimentsFromFile,
