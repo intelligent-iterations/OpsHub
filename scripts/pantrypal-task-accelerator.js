@@ -21,7 +21,7 @@ function createAcceptanceCriteria(experiment) {
 
   return [
     `Experiment spec includes hypothesis, segment, channel, and success metric (${metric}).`,
-    `A/B test is configured with event instrumentation and minimum detectable lift target of ${targetLift}% .`,
+    `A/B test is configured with event instrumentation and minimum detectable lift target of ${targetLift}%.`,
     `Sample-size gate is defined: at least ${minimumSampleSize} qualified households over ${experimentWindowDays} days.`,
     `Guardrail is monitored and passes: ${guardrail}.`,
     `Validation completed with command: ${validationCommand}.`,

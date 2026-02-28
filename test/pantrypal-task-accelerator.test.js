@@ -30,7 +30,7 @@ test('createAcceptanceCriteria includes metric, target lift, sample gate, and va
 
   assert.equal(criteria.length, 6);
   assert.match(criteria[0], /activation rate/);
-  assert.match(criteria[1], /10%/);
+  assert.equal(criteria[1], 'A/B test is configured with event instrumentation and minimum detectable lift target of 10%.');
   assert.match(criteria[2], /2000 qualified households/);
   assert.match(criteria[2], /21 days/);
   assert.match(criteria[3], /99.5%/);
