@@ -309,15 +309,18 @@ function summarizeQueueScores(taskQueue = []) {
   };
 }
 
+function isExecutablePantryPalValidationCommand(command) {
+  if (typeof command !== 'string') return false;
+
+  const normalized = command.trim().toLowerCase();
+  if (!normalized.includes('pantrypal')) return false;
+
+  return /\b(node\s+--test|npm\s+test|npm\s+run\s+test[:\w-]*|pnpm\s+test|pnpm\s+run\s+test[:\w-]*|yarn\s+test|yarn\s+run\s+test[:\w-]*|bun\s+test|npx\s+vitest(?:\s+run)?)\b/.test(normalized);
+}
+
 function summarizeValidationCoverage(taskQueue = []) {
   const tasksWithValidation = taskQueue.filter((task) => typeof task?.validationCommand === 'string' && task.validationCommand.trim().length > 0);
-  const executableValidations = tasksWithValidation.filter((task) => {
-    const command = task.validationCommand.trim().toLowerCase();
-    const invokesTestRunner = /\b(node\s+--test|npm\s+test|pnpm\s+test|yarn\s+test)\b/.test(command);
-    const targetsPantryPal = command.includes('pantrypal');
-
-    return invokesTestRunner && targetsPantryPal;
-  });
+  const executableValidations = tasksWithValidation.filter((task) => isExecutablePantryPalValidationCommand(task.validationCommand));
 
   const queueSize = taskQueue.length;
   const validationCoveragePct = queueSize

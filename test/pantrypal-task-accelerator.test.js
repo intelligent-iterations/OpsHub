@@ -275,13 +275,16 @@ test('summarizeValidationCoverage counts PantryPal tests without test/ path and 
     { id: 'PP-1', validationCommand: 'npm test -- pantrypal-task-accelerator.test.js' },
     { id: 'PP-2', validationCommand: 'NODE --TEST test/pantrypal-growth-experiment-prioritizer.test.js' },
     { id: 'PP-3', validationCommand: 'npm run pantrypal:tasks' },
-    { id: 'PP-4', validationCommand: 'pnpm test -- test/not-related.test.js' }
+    { id: 'PP-4', validationCommand: 'pnpm test -- test/not-related.test.js' },
+    { id: 'PP-5', validationCommand: 'npm run test:pantrypal' },
+    { id: 'PP-6', validationCommand: 'bun test test/pantrypal-guardrail.test.ts' },
+    { id: 'PP-7', validationCommand: 'npx vitest run test/pantrypal-ui.test.ts' }
   ]);
 
-  assert.equal(summary.tasksWithValidation, 4);
-  assert.equal(summary.executableValidations, 2);
+  assert.equal(summary.tasksWithValidation, 7);
+  assert.equal(summary.executableValidations, 5);
   assert.equal(summary.validationCoveragePct, 100);
-  assert.equal(summary.executableValidationPct, 50);
+  assert.equal(summary.executableValidationPct, 71);
 });
 
 test('summarizeOwnerLoad reports per-owner ready/blocked totals and average score', () => {
