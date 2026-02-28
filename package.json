@@ -8,7 +8,8 @@
     "test": "node --test",
     "qa:evidence-check": "node scripts/qa-evidence-integrity-checker.js",
     "paywall:sequential-check": "node scripts/paywall-sequential-check.js",
-    "cleanup:inprogress-stale": "node scripts/inprogress-stale-cleanup.js"
+    "cleanup:inprogress-stale": "node scripts/inprogress-stale-cleanup.js",
+    "pantrypal:tasks": "node scripts/pantrypal-task-accelerator.js"
   },
   "dependencies": {
     "express": "^4.21.2"
