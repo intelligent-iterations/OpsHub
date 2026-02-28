@@ -1,0 +1,24 @@
+{
+  "queue": [
+    {
+      "id": "live-1001",
+      "ts": "1772259500.1001",
+      "channel": "social-progress",
+      "user": "growth-ops",
+      "threadTs": null,
+      "text": "@claw Task: Ingest #social mentions into OpsHub queue\nOwner: @claw\nAcceptance Criteria:\n- ingest actionable mentions from provider\n- map title owner acceptance criteria priority\n- enqueue deduped tasks into todo\nPriority: urgent",
+      "mentions": [
+        "claw"
+      ],
+      "raw": {
+        "id": "live-1001",
+        "ts": "1772259500.1001",
+        "channel": "social-progress",
+        "user": "growth-ops",
+        "text": "@claw Task: Ingest #social mentions into OpsHub queue\nOwner: @claw\nAcceptance Criteria:\n- ingest actionable mentions from provider\n- map title owner acceptance criteria priority\n- enqueue deduped tasks into todo\nPriority: urgent"
+      },
+      "actionable": true,
+      "ingestionReason": "actionable_signal_detected"
+    }
+  ]
+}

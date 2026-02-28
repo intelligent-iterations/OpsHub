@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "channel": "social-progress",
+  "source": "provider",
+  "fetchedCount": 1,
+  "actionableCount": 1,
+  "dedupe": {
+    "uniqueMessageCount": 1,
+    "duplicateMessageIds": [],
+    "duplicateCount": 0
+  },
+  "fallbackApplied": false,
+  "fallbackFrom": null,
+  "reason": "feed_available",
+  "fetchAttempts": [
+    {
+      "source": "provider",
+      "attempted": true,
+      "available": true,
+      "fetchedCount": 1,
+      "error": null
+    }
+  ],
+  "enqueue": {
+    "attempted": true,
+    "addedCount": 1,
+    "skippedDuplicateCount": 0,
+    "addedTaskIds": [
+      "social-live-1001"
+    ],
+    "reason": null
+  },
+  "generatedAt": "2026-02-28T03:34:44.465Z"
+}

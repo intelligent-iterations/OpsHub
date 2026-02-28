@@ -10,6 +10,7 @@ const {
   mapQueueToTaskPayloads,
   ingestSocialMentions,
   resolveListMessagesProvider,
+  enqueueTaskPayloadsToKanban,
 } = require('../scripts/social-mention-ingest');
 
 test('fetchSocialMessages returns fallback diagnostics when no source is configured', async () => {
@@ -171,6 +172,47 @@ test('resolveListMessagesProvider loads exported function from module path', asy
     const messages = await listMessages({ channel: 'social-progress', limit: 1 });
     assert.equal(Array.isArray(messages), true);
     assert.equal(messages[0].id, 'm-provider');
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('enqueueTaskPayloadsToKanban adds todo cards and skips existing source message ids', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-enqueue-'));
+  const kanbanPath = join(dir, 'kanban.json');
+  try {
+    await writeFile(kanbanPath, JSON.stringify({ columns: { backlog: [], todo: [], inProgress: [], done: [] }, activityLog: [] }, null, 2), 'utf8');
+
+    const first = enqueueTaskPayloadsToKanban({
+      kanbanPath,
+      taskPayloads: [{
+        title: 'Build social queue bridge',
+        owner: 'claw',
+        acceptanceCriteria: ['read mentions', 'queue task'],
+        priority: 'high',
+        source: { messageId: 'm-1' },
+      }],
+      logger: { info: () => {} },
+    });
+    assert.equal(first.addedCount, 1);
+
+    const second = enqueueTaskPayloadsToKanban({
+      kanbanPath,
+      taskPayloads: [{
+        title: 'Duplicate should skip',
+        owner: 'claw',
+        acceptanceCriteria: ['noop'],
+        priority: 'medium',
+        source: { messageId: 'm-1' },
+      }],
+      logger: { info: () => {} },
+    });
+    assert.equal(second.addedCount, 0);
+    assert.equal(second.skippedDuplicateCount, 1);
+
+    const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
+    assert.equal(board.columns.todo.length, 1);
+    assert.equal(board.columns.todo[0].sourceMessageId, 'm-1');
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

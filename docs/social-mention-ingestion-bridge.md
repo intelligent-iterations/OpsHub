@@ -12,7 +12,8 @@ This bridge enables `social-progress` cron loops to convert recent Slack social-
    - `acceptanceCriteria[]`
    - `priority`
 4. Dedupes actionable task payloads by source message id (`source.messageId`).
-5. Emits diagnostics + fallback metadata when provider/file fetch is unavailable.
+5. Optionally enqueues deduped payloads directly into OpsHub kanban `todo` (`--enqueue-to-kanban`).
+6. Emits diagnostics + fallback metadata when provider/file fetch is unavailable.
 
 ## Script
 
@@ -25,6 +26,8 @@ This bridge enables `social-progress` cron loops to convert recent Slack social-
 node scripts/social-mention-ingest.js \
   --channel=social-progress \
   --provider-module=./scripts/providers/slack-runtime-provider.js \
+  --enqueue-to-kanban \
+  --kanban-path=data/kanban.json \
   --queue-out=artifacts/social-mention-queue.json \
   --tasks-out=artifacts/social-mention-task-payloads.json \
   --diagnostics-out=artifacts/social-mention-diagnostics.json
@@ -53,6 +56,7 @@ If provider/file sources are unavailable, the script still succeeds with:
 - `diagnostics.reason` describing blockers
 - `diagnostics.fetchAttempts[]` with per-source attempt status/errors
 - `diagnostics.dedupe` stats (`duplicateCount`, `duplicateMessageIds`)
+- `diagnostics.enqueue` with kanban queue-write stats (`addedCount`, `skippedDuplicateCount`, `addedTaskIds`)
 
 ## Output artifacts
 

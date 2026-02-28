@@ -45,6 +45,19 @@
     ],
     "todo": [
       {
+        "id": "social-live-1001",
+        "name": "Ingest #social mentions into OpsHub queue",
+        "description": "Owner: claw\nSource message: live-1001\nAcceptance Criteria:\n- ingest actionable mentions from provider\n- map title owner acceptance criteria priority\n- enqueue deduped tasks into todo",
+        "priority": "high",
+        "status": "todo",
+        "source": "slack-social-mention",
+        "sourceMessageId": "live-1001",
+        "createdAt": "2026-02-28T03:34:44.459Z",
+        "updatedAt": "2026-02-28T03:34:44.459Z",
+        "completedAt": null,
+        "startedAt": null
+      },
+      {
         "id": "95880994-b1f1-4093-a708-b8c97485fff7",
         "name": "[Rework QA] [P8] Build personalized pantry health scorecard with weekly trend explanations",
         "description": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing.",
@@ -137,7 +150,7 @@
       },
       {
         "id": "8fe524f4-663b-42e2-a243-220e7377240c",
-        "name": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
+        "name": "[P14] Implement weekly “save vs waste” simulation preview before grocery trip",
         "description": "Create pre-trip simulation that forecasts waste reduction and savings from planned purchases/meal plan adjustments.",
         "priority": "medium",
         "status": "toDo",
@@ -149,7 +162,7 @@
       {
         "id": "eb153f2a-488c-4e45-ba47-c8eca2ac93a5",
         "name": "[P14] Build pantry confidence explainer cards that justify each recommendation",
-        "description": "Generate plain-language \u201cwhy this suggestion\u201d cards (expiry risk, budget impact, nutrition trade-off) for each pantry action.",
+        "description": "Generate plain-language “why this suggestion” cards (expiry risk, budget impact, nutrition trade-off) for each pantry action.",
         "priority": "medium",
         "status": "toDo",
         "createdAt": "2026-02-27T15:28:02.002Z",
@@ -160,7 +173,7 @@
       },
       {
         "id": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-        "name": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+        "name": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
         "description": "Propose meal batching bundles that prioritize soon-to-expire items while respecting user prep-time tiers and weekday constraints.",
         "priority": "medium",
         "status": "toDo",
@@ -172,7 +185,7 @@
       },
       {
         "id": "01f1208a-170b-402f-bcf9-256127fc716c",
-        "name": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+        "name": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
         "description": "Design and implement a planner that turns expiring items into one base cook with 3 derived meals across the week, respecting prep-time and dietary constraints.",
         "priority": "medium",
         "status": "toDo",
@@ -435,6 +448,18 @@
         "completedAt": null,
         "source": "manual",
         "updatedAt": "2026-02-28T03:29:59.234Z"
+      },
+      {
+        "id": "df4c65e6-7430-4677-9802-52067421cc49",
+        "name": "[P30][OpsHub] Ingest live social Slack mentions into OpsHub task queue",
+        "description": "Owner: claw\nAcceptance Criteria:\n1) Pull recent social-channel messages/mentions from live provider (not sample file).\n2) Convert actionable messages into OpsHub task payloads (title, owner, acceptance criteria, priority) with dedupe by message id.\n3) Persist diagnostics for fetch count, actionable count, and feed errors with fallback behavior.\n4) Add tests + docs updates and keep npm test green.",
+        "priority": "high",
+        "status": "todo",
+        "source": "slack-social-mention",
+        "createdAt": "2026-02-28T00:52:41.277Z",
+        "updatedAt": "2026-02-28T03:29:59.234Z",
+        "completedAt": null,
+        "startedAt": "2026-02-28T00:52:41.277Z"
       },
       {
         "id": "527de277-4e06-4698-8aa5-772789d9e40e",
@@ -1418,19 +1443,6 @@
     ],
     "done": [
       {
-        "id": "df4c65e6-7430-4677-9802-52067421cc49",
-        "name": "[P30][OpsHub] Ingest live social Slack mentions into OpsHub task queue",
-        "description": "Owner: claw\nAcceptance Criteria:\n1) Pull recent social-channel messages/mentions from live provider (not sample file).\n2) Convert actionable messages into OpsHub task payloads (title, owner, acceptance criteria, priority) with dedupe by message id.\n3) Persist diagnostics for fetch count, actionable count, and feed errors with fallback behavior.\n4) Add tests + docs updates and keep npm test green.",
-        "priority": "high",
-        "status": "done",
-        "source": "slack-social-mention",
-        "createdAt": "2026-02-28T00:52:41.277Z",
-        "updatedAt": "2026-02-28T03:34:52Z",
-        "completedAt": "2026-02-28T03:34:52Z",
-        "startedAt": "2026-02-28T00:52:41.277Z",
-        "completionDetails": "Implemented live-provider Slack mention ingestion with actionable mapping, source-message dedupe, diagnostics, and optional kanban enqueue. Evidence: artifacts/p30-social-mention-diagnostics.json, artifacts/p30-social-mention-task-payloads.json, test/social-mention-ingest.test.js."
-      },
-      {
         "id": "099dc96d-9b6c-4c14-a656-5f196359dce1",
         "name": "Lifecycle task",
         "description": "",
@@ -1532,8 +1544,8 @@
       },
       {
         "id": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
-        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan\u2192plan\u2192cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).\n\nCompletion: Delivered P25 rescue friction telemetry map with implementable schema (events/properties/funnel/sample payloads/KPIs), benchmark-informed rationale via delegated Claude research notes, instrumentation readiness checklist, and schema lint script. Artifacts: docs/p25_rescue_friction_telemetry_map.md; data/p25_rescue_friction_telemetry_schema.json; docs/p25_instrumentation_readiness_checklist.md; scripts/p25-telemetry-spec-lint.js; artifacts/p25-claude-research-notes.md. Validation: node scripts/p25-telemetry-spec-lint.js (pass), npm test (12/12 pass).",
+        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
+        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan→plan→cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).\n\nCompletion: Delivered P25 rescue friction telemetry map with implementable schema (events/properties/funnel/sample payloads/KPIs), benchmark-informed rationale via delegated Claude research notes, instrumentation readiness checklist, and schema lint script. Artifacts: docs/p25_rescue_friction_telemetry_map.md; data/p25_rescue_friction_telemetry_schema.json; docs/p25_instrumentation_readiness_checklist.md; scripts/p25-telemetry-spec-lint.js; artifacts/p25-claude-research-notes.md. Validation: node scripts/p25-telemetry-spec-lint.js (pass), npm test (12/12 pass).",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-28T00:08:53.965Z",
@@ -1580,7 +1592,7 @@
       {
         "id": "7ba6ea3f-94ea-4fdc-8835-f7505e201e46",
         "name": "[P17] Add leftover transformation suggestions to meal detail cards",
-        "description": "Surface 2-3 \u201cnext meal from leftovers\u201d suggestions in meal detail UX using branch plans and pantry availability. Implemented leftover transformation suggestions on weekly meal detail assignments with pantry-aware ranking/cap (<=3), added tests and evidence note. Evidence: pantrypal/artifacts/p17-leftover-transformation-suggestions-meal-detail-evidence.md. Test: flutter test test/weekly_meal_prep_optimizer_test.dart (6/6 pass).",
+        "description": "Surface 2-3 “next meal from leftovers” suggestions in meal detail UX using branch plans and pantry availability. Implemented leftover transformation suggestions on weekly meal detail assignments with pantry-aware ranking/cap (<=3), added tests and evidence note. Evidence: pantrypal/artifacts/p17-leftover-transformation-suggestions-meal-detail-evidence.md. Test: flutter test test/weekly_meal_prep_optimizer_test.dart (6/6 pass).",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-27T16:44:36.903Z",
@@ -1604,7 +1616,7 @@
       {
         "id": "67802eac-d2f5-476a-a141-5f7df97908a8",
         "name": "[P16] Implement confidence-aware inventory decay model using user correction feedback",
-        "description": "Add adaptive spoilage/quality decay adjustments that learn from user \u201cstill good / already bad\u201d corrections and surface confidence bands. Completed P16 confidence-aware decay model with EMA correction learning, confidence bands, docs/tests/evidence. Evidence: artifacts/p16-confidence-aware-decay-evidence.md; commit fc2a582; tests: flutter test test/domain/services/confidence_aware_inventory_decay_service_test.dart (4/4 pass).",
+        "description": "Add adaptive spoilage/quality decay adjustments that learn from user “still good / already bad” corrections and surface confidence bands. Completed P16 confidence-aware decay model with EMA correction learning, confidence bands, docs/tests/evidence. Evidence: artifacts/p16-confidence-aware-decay-evidence.md; commit fc2a582; tests: flutter test test/domain/services/confidence_aware_inventory_decay_service_test.dart (4/4 pass).",
         "priority": "medium",
         "status": "done",
         "createdAt": "2026-02-27T16:33:03.772Z",
@@ -1627,7 +1639,7 @@
       },
       {
         "id": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-        "name": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
+        "name": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
         "description": "Completed P15 rescue streak freeze design + bounded service/test scaffold. Evidence: artifacts/p15-household-rescue-streak-freeze-evidence.md; doc: pantrypal/docs/p15_household_rescue_streak_freeze.md; note: local flutter test run blocked by host Xcode license (code 69).",
         "priority": "medium",
         "status": "done",
@@ -1918,7 +1930,7 @@
       {
         "id": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
         "name": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
-        "description": "Rework QA PASS: implemented nutrition delta \u2192 pet stat mapping service with deterministic deadband/spike/cap logic and added focused coverage (10/10 passing). Evidence: artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md",
+        "description": "Rework QA PASS: implemented nutrition delta → pet stat mapping service with deterministic deadband/spike/cap logic and added focused coverage (10/10 passing). Evidence: artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-26T22:39:17.359Z",
@@ -2870,7 +2882,7 @@
       {
         "id": "064f20cc-6634-4dc6-9529-f35dec6118cf",
         "name": "[Rework QA] [P7] Add adaptive notification quiet-hours + urgency escalation",
-        "description": "Rework QA PASS: fixed wrapping quiet-hours morning defer calculation in AdaptiveNotificationPolicyService (prevented next-day over-defer for 22\u219207 windows), added regression tests for adaptive policy + reengagement quiet-hours morning behavior, and verified targeted suites. Evidence: artifacts/rework-qa-p7-adaptive-notification-quiet-hours-evidence.md. Verification: flutter test test/application/services/adaptive_notification_policy_service_test.dart test/application/services/reengagement_decision_service_test.dart (20/20 passing).",
+        "description": "Rework QA PASS: fixed wrapping quiet-hours morning defer calculation in AdaptiveNotificationPolicyService (prevented next-day over-defer for 22→07 windows), added regression tests for adaptive policy + reengagement quiet-hours morning behavior, and verified targeted suites. Evidence: artifacts/rework-qa-p7-adaptive-notification-quiet-hours-evidence.md. Verification: flutter test test/application/services/adaptive_notification_policy_service_test.dart test/application/services/reengagement_decision_service_test.dart (20/20 passing).",
         "priority": "high",
         "status": "done",
         "createdAt": "2026-02-26T22:39:17.334Z",
@@ -2947,13 +2959,13 @@
   },
   "activityLog": [
     {
-      "id": "activity-df4c65e6-7430-4677-9802-52067421cc49-done",
-      "taskId": "df4c65e6-7430-4677-9802-52067421cc49",
-      "type": "task_moved",
-      "from": "todo",
-      "to": "done",
-      "summary": "Completed P30 social mention ingestion bridge end-to-end",
-      "at": "2026-02-28T03:34:52Z"
+      "id": "activity-social-live-1001",
+      "taskId": "social-live-1001",
+      "type": "task_created",
+      "from": null,
+      "to": "todo",
+      "summary": "Queued from Slack social mention (live-1001)",
+      "at": "2026-02-28T03:34:44.459Z"
     },
     {
       "at": "2026-02-28T03:34:28.932Z",
@@ -5581,7 +5593,7 @@
       "at": "2026-02-28T00:14:51.954Z",
       "type": "task_moved",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "from": "done",
       "to": "done",
       "detail": "Completed P25 telemetry spec + schema + checklist + lint tooling; validated via schema lint and npm test."
@@ -5701,7 +5713,7 @@
       "at": "2026-02-28T00:12:18.115Z",
       "type": "task_moved",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed by sub-agent sp15-p25-rescue-telemetry; added telemetry model/service+CSV, tests/docs/evidence; flutter test passed."
@@ -5745,7 +5757,7 @@
       "at": "2026-02-28T00:09:14.200Z",
       "type": "task_moved",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "from": "todo",
       "to": "inProgress",
       "detail": ""
@@ -5771,7 +5783,7 @@
       "at": "2026-02-28T00:08:53.965Z",
       "type": "task_added",
       "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan\u2192plan\u2192cook journey",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
       "to": "todo",
       "detail": "Added task from intelligent-iteration"
     },
@@ -6821,7 +6833,7 @@
       "at": "2026-02-27T16:44:25.216Z",
       "type": "task_moved",
       "taskId": "01f1208a-170b-402f-bcf9-256127fc716c",
-      "taskName": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+      "taskName": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed directly in main agent: implemented leftovers branching in smart batch cook planner (base + 2 derived meals), added model updates + test coverage; flutter test test/smart_batch_cook_planner_service_test.dart passed (6/6)."
@@ -6866,7 +6878,7 @@
       "at": "2026-02-27T16:33:03.772Z",
       "type": "task_moved",
       "taskId": "01f1208a-170b-402f-bcf9-256127fc716c",
-      "taskName": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+      "taskName": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
       "from": "todo",
       "to": "inProgress",
       "detail": "Started directly in main agent (social-progress-15min cron)"
@@ -6891,7 +6903,7 @@
       "at": "2026-02-27T16:33:03.772Z",
       "type": "task_added",
       "taskId": "01f1208a-170b-402f-bcf9-256127fc716c",
-      "taskName": "[P16] Build pantry-first \u201cbatch cook once, eat thrice\u201d planner with leftovers branching",
+      "taskName": "[P16] Build pantry-first “batch cook once, eat thrice” planner with leftovers branching",
       "to": "todo",
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },
@@ -6899,7 +6911,7 @@
       "at": "2026-02-27T16:14:51.765Z",
       "type": "task_moved",
       "taskId": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-      "taskName": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+      "taskName": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed P15 use-it-first meal batching with prep-time tiers. Added PrepTimeTier caps (quick/standard/extended), stronger expiring-first scoring, new tests (5/5 pass), docs + evidence at pantrypal/docs/p15_use_it_first_meal_batching.md and artifacts/p15-use-it-first-meal-batching-evidence.md."
@@ -6908,7 +6920,7 @@
       "at": "2026-02-27T16:05:42Z",
       "type": "task_moved",
       "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-      "taskName": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
+      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed P15 rescue streak freeze design+service/tests. Evidence: artifacts/p15-household-rescue-streak-freeze-evidence.md (flutter test blocked on host Xcode license)."
@@ -6917,7 +6929,7 @@
       "at": "2026-02-27T16:03:00.717Z",
       "type": "task_moved",
       "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-      "taskName": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
+      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
       "from": "todo",
       "to": "inProgress",
       "detail": "Assigned for parallel sub-agent execution (social-progress-15min cron)"
@@ -6935,7 +6947,7 @@
       "at": "2026-02-27T15:58:19.707Z",
       "type": "task_moved",
       "taskId": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-      "taskName": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+      "taskName": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
       "from": "todo",
       "to": "inProgress",
       "detail": "Started directly in main agent (social-progress-15min cron)"
@@ -6944,7 +6956,7 @@
       "at": "2026-02-27T15:58:19.707Z",
       "type": "task_added",
       "taskId": "a675cbdf-3c57-4681-9745-8f0b2fd9c827",
-      "taskName": "[P15] Design household \u201crescue streak freeze\u201d mechanic for vacation/low-activity weeks",
+      "taskName": "[P15] Design household “rescue streak freeze” mechanic for vacation/low-activity weeks",
       "to": "todo",
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },
@@ -6960,7 +6972,7 @@
       "at": "2026-02-27T15:58:19.707Z",
       "type": "task_added",
       "taskId": "dac150a3-5338-45b1-b58b-2ee01c5dd672",
-      "taskName": "[P15] Add pantry \u201cuse-it-first\u201d meal batching recommendations with prep-time tiers",
+      "taskName": "[P15] Add pantry “use-it-first” meal batching recommendations with prep-time tiers",
       "to": "todo",
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },
@@ -6977,7 +6989,7 @@
       "at": "2026-02-27T15:42:00.000Z",
       "type": "task_moved",
       "taskId": "8fe524f4-663b-42e2-a243-220e7377240c",
-      "taskName": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
+      "taskName": "[P14] Implement weekly “save vs waste” simulation preview before grocery trip",
       "from": "inProgress",
       "to": "done",
       "detail": "Completed P14 weekly save-vs-waste simulation preview spec + domain model/service/tests. Evidence: pantrypal/docs/p14_weekly_save_vs_waste_simulation_preview.md (commit/test run blocked by Xcode license on host)."
@@ -7004,7 +7016,7 @@
       "at": "2026-02-27T15:33:13.488Z",
       "type": "task_moved",
       "taskId": "8fe524f4-663b-42e2-a243-220e7377240c",
-      "taskName": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
+      "taskName": "[P14] Implement weekly “save vs waste” simulation preview before grocery trip",
       "from": "todo",
       "to": "inProgress",
       "detail": ""
@@ -7022,7 +7034,7 @@
       "at": "2026-02-27T15:28:02.002Z",
       "type": "task_added",
       "taskId": "8fe524f4-663b-42e2-a243-220e7377240c",
-      "taskName": "[P14] Implement weekly \u201csave vs waste\u201d simulation preview before grocery trip",
+      "taskName": "[P14] Implement weekly “save vs waste” simulation preview before grocery trip",
       "to": "todo",
       "detail": "Added intelligent iteration seed task (social-progress-15min cron)"
     },

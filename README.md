@@ -89,7 +89,9 @@ Use the social mention bridge to convert recent Slack social-channel traffic int
 # live provider path (preferred)
 node scripts/social-mention-ingest.js \
   --channel=social-progress \
-  --provider-module=./scripts/providers/slack-runtime-provider.js
+  --provider-module=./scripts/providers/slack-runtime-provider.js \
+  --enqueue-to-kanban \
+  --kanban-path=data/kanban.json
 
 # deterministic fallback/testing path
 node scripts/social-mention-ingest.js \

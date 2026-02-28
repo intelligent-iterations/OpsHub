@@ -255,6 +255,94 @@ function mapQueueToTaskPayloads(queue) {
   };
 }
 
+function readKanbanBoard(kanbanPath) {
+  const parsed = JSON.parse(fs.readFileSync(kanbanPath, 'utf8'));
+  return {
+    ...parsed,
+    columns: {
+      backlog: Array.isArray(parsed?.columns?.backlog) ? parsed.columns.backlog : [],
+      todo: Array.isArray(parsed?.columns?.todo) ? parsed.columns.todo : [],
+      inProgress: Array.isArray(parsed?.columns?.inProgress) ? parsed.columns.inProgress : [],
+      done: Array.isArray(parsed?.columns?.done) ? parsed.columns.done : [],
+    },
+    activityLog: Array.isArray(parsed?.activityLog) ? parsed.activityLog : [],
+  };
+}
+
+function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = console }) {
+  if (!kanbanPath) {
+    return { attempted: false, addedCount: 0, skippedDuplicateCount: 0, addedTaskIds: [], reason: 'kanban_path_not_configured' };
+  }
+
+  const board = readKanbanBoard(kanbanPath);
+  const existingMessageIds = new Set();
+  for (const col of ['backlog', 'todo', 'inProgress', 'done']) {
+    for (const card of board.columns[col]) {
+      const id = String(card?.sourceMessageId || '').trim();
+      if (id) existingMessageIds.add(id);
+    }
+  }
+
+  const now = new Date().toISOString();
+  const addedTaskIds = [];
+  let skippedDuplicateCount = 0;
+
+  for (const payload of taskPayloads || []) {
+    const messageId = String(payload?.source?.messageId || '').trim();
+    if (messageId && existingMessageIds.has(messageId)) {
+      skippedDuplicateCount += 1;
+      continue;
+    }
+
+    const taskId = `social-${messageId || Date.now().toString(36)}`;
+    const criteria = Array.isArray(payload?.acceptanceCriteria) ? payload.acceptanceCriteria : [];
+    const descriptionLines = [
+      `Owner: ${payload?.owner || 'unassigned'}`,
+      `Source message: ${messageId || 'unknown'}`,
+      'Acceptance Criteria:',
+      ...(criteria.length ? criteria.map((line) => `- ${line}`) : ['- follow up in Slack thread']),
+    ];
+
+    board.columns.todo.unshift({
+      id: taskId,
+      name: payload?.title || 'Slack follow-up task',
+      description: descriptionLines.join('\n'),
+      priority: payload?.priority || 'medium',
+      status: 'todo',
+      source: 'slack-social-mention',
+      sourceMessageId: messageId || null,
+      createdAt: now,
+      updatedAt: now,
+      completedAt: null,
+      startedAt: null,
+    });
+
+    board.activityLog.unshift({
+      id: `activity-${taskId}`,
+      taskId,
+      type: 'task_created',
+      from: null,
+      to: 'todo',
+      summary: `Queued from Slack social mention${messageId ? ` (${messageId})` : ''}`,
+      at: now,
+    });
+
+    addedTaskIds.push(taskId);
+    if (messageId) existingMessageIds.add(messageId);
+  }
+
+  fs.writeFileSync(kanbanPath, `${JSON.stringify(board, null, 2)}\n`);
+  logger.info?.(`[social-mention-ingest] enqueued ${addedTaskIds.length} task(s) to kanban`);
+
+  return {
+    attempted: true,
+    addedCount: addedTaskIds.length,
+    skippedDuplicateCount,
+    addedTaskIds,
+    reason: null,
+  };
+}
+
 async function ingestSocialMentions(options = {}) {
   const {
     channel = 'social',
@@ -264,6 +352,8 @@ async function ingestSocialMentions(options = {}) {
     tasksOut,
     diagnosticsOut,
     listMessages,
+    enqueueToKanban = false,
+    kanbanPath,
     logger = console,
   } = options;
 
@@ -271,6 +361,9 @@ async function ingestSocialMentions(options = {}) {
   const queue = buildStructuredQueue(feed.messages, { channel });
   const mapped = mapQueueToTaskPayloads(queue);
   const taskPayloads = mapped.taskPayloads;
+  const enqueueResult = enqueueToKanban
+    ? enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger })
+    : { attempted: false, addedCount: 0, skippedDuplicateCount: 0, addedTaskIds: [], reason: 'enqueue_disabled' };
 
   const diagnostics = {
     ok: feed.available,
@@ -291,6 +384,7 @@ async function ingestSocialMentions(options = {}) {
         error: attempt.error || null,
       }))
       : [],
+    enqueue: enqueueResult,
     generatedAt: new Date().toISOString(),
   };
 
@@ -298,7 +392,7 @@ async function ingestSocialMentions(options = {}) {
   if (tasksOut) fs.writeFileSync(tasksOut, `${JSON.stringify({ taskPayloads }, null, 2)}\n`);
   if (diagnosticsOut) fs.writeFileSync(diagnosticsOut, `${JSON.stringify(diagnostics, null, 2)}\n`);
 
-  return { diagnostics, queue, taskPayloads };
+  return { diagnostics, queue, taskPayloads, enqueueResult };
 }
 
 function parseArgs(argv) {
@@ -348,6 +442,8 @@ async function runCli() {
     tasksOut,
     diagnosticsOut,
     listMessages,
+    enqueueToKanban: Boolean(args['enqueue-to-kanban']),
+    kanbanPath: args['kanban-path'] || path.join(root, 'data', 'kanban.json'),
   });
 
   console.log(JSON.stringify({
@@ -378,4 +474,5 @@ module.exports = {
   extractTitle,
   inferPriority,
   resolveListMessagesProvider,
+  enqueueTaskPayloadsToKanban,
 };

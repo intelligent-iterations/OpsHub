@@ -1,0 +1,21 @@
+{
+  "taskPayloads": [
+    {
+      "title": "Ingest #social mentions into OpsHub queue",
+      "owner": "claw",
+      "acceptanceCriteria": [
+        "ingest actionable mentions from provider",
+        "map title owner acceptance criteria priority",
+        "enqueue deduped tasks into todo"
+      ],
+      "priority": "high",
+      "source": {
+        "type": "slack-social-mention",
+        "messageId": "live-1001",
+        "channel": "social-progress",
+        "ts": "1772259500.1001",
+        "mentionCount": 1
+      }
+    }
+  ]
+}
