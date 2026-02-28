@@ -4,6 +4,16 @@
     "todo": [],
     "inProgress": [
       {
+        "id": "5b453af5-1cc5-4507-bc76-28ac94311724",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T00:14:41.306Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
         "id": "f8005135-e64b-4478-a08a-de2d5d3fca0b",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
@@ -98,6 +108,37 @@
     ],
     "done": [
       {
+        "id": "1ec24829-29d7-42a0-8a44-2488aea1407a",
+        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
+        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan→plan→cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).\n\nCompletion: Delivered P25 rescue friction telemetry map with implementable schema (events/properties/funnel/sample payloads/KPIs), benchmark-informed rationale via delegated Claude research notes, instrumentation readiness checklist, and schema lint script. Artifacts: docs/p25_rescue_friction_telemetry_map.md; data/p25_rescue_friction_telemetry_schema.json; docs/p25_instrumentation_readiness_checklist.md; scripts/p25-telemetry-spec-lint.js; artifacts/p25-claude-research-notes.md. Validation: node scripts/p25-telemetry-spec-lint.js (pass), npm test (12/12 pass).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:08:53.965Z",
+        "completedAt": "2026-02-28T00:14:51.954Z",
+        "source": "intelligent-iteration",
+        "updatedAt": "2026-02-28T00:14:51.954Z"
+      },
+      {
+        "id": "9f69add6-1557-4881-aae1-a86b1e5b3c3d",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:14:41.290Z",
+        "completedAt": "2026-02-28T00:14:41.300Z",
+        "source": "manual"
+      },
+      {
+        "id": "c94954e9-43ef-4afe-8989-ebfe2e988c56",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:14:41.278Z",
+        "completedAt": "2026-02-28T00:14:41.284Z",
+        "source": "manual"
+      },
+      {
         "id": "cc607f30-7779-4c6d-8343-0f0789b8916c",
         "name": "[P25][OpenClaw] Implement Slack update target resolver + fallback routing for heartbeat posts",
         "description": "Ensure cron status updates always resolve a valid Slack channel/thread target or produce actionable fallback guidance. Completed 2026-02-28T00:13:18.803Z: added scripts/slack-target-resolver.js with configured channel id + channel-name fallback resolution and safe no-op routing/logging for heartbeat posts; added tests covering success/fallback/failure cases; verified via npm test.",
@@ -126,17 +167,6 @@
         "createdAt": "2026-02-28T00:13:11.346Z",
         "completedAt": "2026-02-28T00:13:11.352Z",
         "source": "manual"
-      },
-      {
-        "id": "1ec24829-29d7-42a0-8a44-2488aea1407a",
-        "name": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
-        "description": "Instrument drop-off points, reasons, and latency across rescue funnel; include segmentation by household size and prep-time tier.\n\nCompleted: implemented rescue friction telemetry map across scan→plan→cook with domain model/service, CSV export, tests, docs, and evidence artifact. Verified via flutter test test/domain/services/rescue_friction_telemetry_service_test.dart (pass).",
-        "priority": "high",
-        "status": "done",
-        "createdAt": "2026-02-28T00:08:53.965Z",
-        "completedAt": "2026-02-28T00:12:18.115Z",
-        "source": "intelligent-iteration",
-        "updatedAt": "2026-02-28T00:12:18.115Z"
       },
       {
         "id": "6e557770-4d5e-4346-9b6f-4aad136276c0",
@@ -2044,6 +2074,66 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T00:14:51.954Z",
+      "type": "task_moved",
+      "taskId": "1ec24829-29d7-42a0-8a44-2488aea1407a",
+      "taskName": "[P25][PantryPal] Build rescue friction telemetry map across scan→plan→cook journey",
+      "from": "done",
+      "to": "done",
+      "detail": "Completed P25 telemetry spec + schema + checklist + lint tooling; validated via schema lint and npm test."
+    },
+    {
+      "at": "2026-02-28T00:14:41.306Z",
+      "type": "task_added",
+      "taskId": "5b453af5-1cc5-4507-bc76-28ac94311724",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:14:41.300Z",
+      "type": "task_moved",
+      "taskId": "9f69add6-1557-4881-aae1-a86b1e5b3c3d",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:14:41.295Z",
+      "type": "task_moved",
+      "taskId": "9f69add6-1557-4881-aae1-a86b1e5b3c3d",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:14:41.290Z",
+      "type": "task_added",
+      "taskId": "9f69add6-1557-4881-aae1-a86b1e5b3c3d",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:14:41.284Z",
+      "type": "task_moved",
+      "taskId": "c94954e9-43ef-4afe-8989-ebfe2e988c56",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:14:41.278Z",
+      "type": "task_added",
+      "taskId": "c94954e9-43ef-4afe-8989-ebfe2e988c56",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
     {
       "at": "2026-02-28T00:13:18.803Z",
       "type": "task_moved",
@@ -6290,54 +6380,6 @@
       "type": "task_added",
       "taskId": "44df43d6-ff02-464f-909e-a5cb68719a6a",
       "taskName": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.923Z",
-      "type": "task_added",
-      "taskId": "78ecd0ea-6c59-4342-8cd1-93f02c27ce49",
-      "taskName": "[P2] Build pantry summary dashboard (healthy/unhealthy balance)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.917Z",
-      "type": "task_added",
-      "taskId": "26b38058-9cb8-4e12-8a72-adc0314f966a",
-      "taskName": "[P2] Add confidence scoring + fallback for unknown items",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.911Z",
-      "type": "task_added",
-      "taskId": "9ebcec19-b972-4fe3-ae6f-6b9067161131",
-      "taskName": "[P2] Build food classification engine (category + nutrition quality score)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.906Z",
-      "type": "task_added",
-      "taskId": "5c90333a-91fc-41fe-8b16-b9d1d9a15aa9",
-      "taskName": "[P2] Normalize food names and units (dedupe + parsing)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.900Z",
-      "type": "task_added",
-      "taskId": "77b79633-56a9-48b2-8211-82239082dc53",
-      "taskName": "[P2] Implement photo-to-food item capture flow",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.894Z",
-      "type": "task_added",
-      "taskId": "86dc02f7-c52b-4e97-949c-fc075a40a288",
-      "taskName": "[P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
       "to": "todo",
       "detail": "Added task from migration"
     }

@@ -1,0 +1,179 @@
+{
+  "version": "1.0.0",
+  "owner": "PantryPal Product + Data",
+  "journey": "scan_plan_cook",
+  "northStar": "end_to_end_rescue_rate",
+  "funnelStages": [
+    {
+      "id": "scan",
+      "entryEvent": "rescue_scan_started",
+      "successEvent": "rescue_scan_completed",
+      "abandonEvent": "rescue_scan_abandoned"
+    },
+    {
+      "id": "plan",
+      "entryEvent": "rescue_plan_started",
+      "successEvent": "rescue_plan_accepted",
+      "abandonEvent": "rescue_plan_abandoned"
+    },
+    {
+      "id": "cook",
+      "entryEvent": "rescue_cook_started",
+      "successEvent": "rescue_cook_completed",
+      "abandonEvent": "rescue_cook_abandoned"
+    }
+  ],
+  "requiredGlobalProperties": [
+    "event_name",
+    "event_version",
+    "occurred_at",
+    "user_id",
+    "household_id",
+    "journey_id",
+    "session_id",
+    "stage",
+    "platform",
+    "app_version",
+    "entry_point",
+    "household_size_bucket",
+    "prep_time_tier"
+  ],
+  "events": [
+    {
+      "name": "rescue_scan_started",
+      "stage": "scan",
+      "type": "entry",
+      "requiredProperties": ["scan_method", "trigger_source"],
+      "optionalProperties": ["camera_permission_state", "network_state"]
+    },
+    {
+      "name": "rescue_scan_completed",
+      "stage": "scan",
+      "type": "success",
+      "requiredProperties": ["scan_method", "item_count", "scan_duration_ms"],
+      "optionalProperties": ["ocr_confidence_avg", "at_risk_item_count"]
+    },
+    {
+      "name": "rescue_scan_failed",
+      "stage": "scan",
+      "type": "failure",
+      "requiredProperties": ["scan_method", "failure_code", "attempt_index"],
+      "optionalProperties": ["failure_detail"]
+    },
+    {
+      "name": "rescue_scan_abandoned",
+      "stage": "scan",
+      "type": "abandon",
+      "requiredProperties": ["abandon_reason", "time_in_stage_ms"],
+      "optionalProperties": ["last_ui_surface"]
+    },
+    {
+      "name": "rescue_plan_started",
+      "stage": "plan",
+      "type": "entry",
+      "requiredProperties": ["candidate_recipe_count", "at_risk_item_count"],
+      "optionalProperties": ["planner_mode"]
+    },
+    {
+      "name": "rescue_plan_generated",
+      "stage": "plan",
+      "type": "milestone",
+      "requiredProperties": ["generation_duration_ms", "candidate_recipe_count", "avg_match_score"],
+      "optionalProperties": ["recommendation_model_version"]
+    },
+    {
+      "name": "rescue_plan_accepted",
+      "stage": "plan",
+      "type": "success",
+      "requiredProperties": ["selected_recipe_id", "selected_recipe_rank", "estimated_prep_minutes"],
+      "optionalProperties": ["swap_count", "estimated_rescue_value_usd"]
+    },
+    {
+      "name": "rescue_plan_abandoned",
+      "stage": "plan",
+      "type": "abandon",
+      "requiredProperties": ["abandon_reason", "time_in_stage_ms"],
+      "optionalProperties": ["last_filter_state"]
+    },
+    {
+      "name": "rescue_cook_started",
+      "stage": "cook",
+      "type": "entry",
+      "requiredProperties": ["selected_recipe_id", "steps_total"],
+      "optionalProperties": ["timer_enabled", "guided_mode"]
+    },
+    {
+      "name": "rescue_cook_step_completed",
+      "stage": "cook",
+      "type": "progress",
+      "requiredProperties": ["selected_recipe_id", "step_index", "step_duration_ms"],
+      "optionalProperties": ["pause_count"]
+    },
+    {
+      "name": "rescue_cook_completed",
+      "stage": "cook",
+      "type": "success",
+      "requiredProperties": ["selected_recipe_id", "cook_duration_ms", "rescue_item_count"],
+      "optionalProperties": ["leftover_servings", "self_reported_effort"]
+    },
+    {
+      "name": "rescue_cook_abandoned",
+      "stage": "cook",
+      "type": "abandon",
+      "requiredProperties": ["abandon_reason", "last_step_index", "time_in_stage_ms"],
+      "optionalProperties": ["friction_tag"]
+    }
+  ],
+  "kpis": [
+    {
+      "id": "end_to_end_rescue_rate",
+      "formula": "count(rescue_cook_completed journeys) / count(rescue_scan_started journeys)",
+      "primaryStage": "all"
+    },
+    {
+      "id": "scan_success_rate",
+      "formula": "count(rescue_scan_completed) / count(rescue_scan_started)",
+      "primaryStage": "scan"
+    },
+    {
+      "id": "scan_to_plan_conversion",
+      "formula": "count(journeys with rescue_plan_started) / count(journeys with rescue_scan_completed)",
+      "primaryStage": "scan"
+    },
+    {
+      "id": "plan_acceptance_rate",
+      "formula": "count(rescue_plan_accepted) / count(rescue_plan_started)",
+      "primaryStage": "plan"
+    },
+    {
+      "id": "plan_to_cook_start_rate",
+      "formula": "count(rescue_cook_started) / count(rescue_plan_accepted)",
+      "primaryStage": "plan"
+    },
+    {
+      "id": "cook_completion_rate",
+      "formula": "count(rescue_cook_completed) / count(rescue_cook_started)",
+      "primaryStage": "cook"
+    },
+    {
+      "id": "p90_scan_latency_ms",
+      "formula": "p90(scan_duration_ms on rescue_scan_completed)",
+      "primaryStage": "scan"
+    },
+    {
+      "id": "p90_plan_generation_ms",
+      "formula": "p90(generation_duration_ms on rescue_plan_generated)",
+      "primaryStage": "plan"
+    },
+    {
+      "id": "median_cook_duration_ms",
+      "formula": "p50(cook_duration_ms on rescue_cook_completed)",
+      "primaryStage": "cook"
+    },
+    {
+      "id": "stage_abandon_rate",
+      "formula": "count(*_abandoned) / count(stage_started)",
+      "primaryStage": "all"
+    }
+  ]
+}
