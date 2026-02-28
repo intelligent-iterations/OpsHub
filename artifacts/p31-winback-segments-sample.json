@@ -1,0 +1,212 @@
+{
+  "generatedAt": "2026-02-28T03:28:35.716Z",
+  "weekKey": "2026-02-23",
+  "holdoutRate": 0.1,
+  "eligibilityRule": "pushEnabled=true AND recentOptOut=false AND inPaidFunnelExperiment=false",
+  "dormancyWindows": [
+    {
+      "key": "7-14d",
+      "minDays": 7,
+      "maxDays": 14
+    },
+    {
+      "key": "15-30d",
+      "minDays": 15,
+      "maxDays": 30
+    },
+    {
+      "key": "31-60d",
+      "minDays": 31,
+      "maxDays": 60
+    }
+  ],
+  "segmentSummaries": [
+    {
+      "segment": "7-14d",
+      "totalEligible": 23,
+      "holdoutUsers": 2,
+      "targetUsers": 21,
+      "holdoutRateActual": 0.087,
+      "holdoutUserIds": [
+        "user-062",
+        "user-087"
+      ],
+      "targetUserIds": [
+        "user-001",
+        "user-002",
+        "user-003",
+        "user-014",
+        "user-015",
+        "user-025",
+        "user-027",
+        "user-037",
+        "user-038",
+        "user-049",
+        "user-050",
+        "user-061",
+        "user-063",
+        "user-073",
+        "user-074",
+        "user-075",
+        "user-086",
+        "user-097",
+        "user-098",
+        "user-109",
+        "user-111"
+      ]
+    },
+    {
+      "segment": "15-30d",
+      "totalEligible": 30,
+      "holdoutUsers": 1,
+      "targetUsers": 29,
+      "holdoutRateActual": 0.0333,
+      "holdoutUserIds": [
+        "user-101"
+      ],
+      "targetUserIds": [
+        "user-004",
+        "user-005",
+        "user-006",
+        "user-007",
+        "user-016",
+        "user-018",
+        "user-019",
+        "user-028",
+        "user-029",
+        "user-030",
+        "user-031",
+        "user-040",
+        "user-041",
+        "user-042",
+        "user-043",
+        "user-053",
+        "user-054",
+        "user-064",
+        "user-067",
+        "user-076",
+        "user-079",
+        "user-089",
+        "user-090",
+        "user-100",
+        "user-103",
+        "user-112",
+        "user-113",
+        "user-114",
+        "user-115"
+      ]
+    },
+    {
+      "segment": "31-60d",
+      "totalEligible": 23,
+      "holdoutUsers": 3,
+      "targetUsers": 20,
+      "holdoutRateActual": 0.1304,
+      "holdoutUserIds": [
+        "user-081",
+        "user-105",
+        "user-106"
+      ],
+      "targetUserIds": [
+        "user-008",
+        "user-009",
+        "user-010",
+        "user-020",
+        "user-021",
+        "user-032",
+        "user-045",
+        "user-046",
+        "user-056",
+        "user-057",
+        "user-058",
+        "user-069",
+        "user-070",
+        "user-080",
+        "user-082",
+        "user-092",
+        "user-093",
+        "user-094",
+        "user-116",
+        "user-118"
+      ]
+    }
+  ],
+  "totals": {
+    "totalEligible": 76,
+    "holdoutUsers": 6,
+    "targetUsers": 70,
+    "holdoutRateActual": 0.0789,
+    "holdoutSizingExpected": {
+      "totalEligible": 76,
+      "holdoutRate": 0.1,
+      "holdoutUsers": 8,
+      "targetUsers": 68
+    }
+  },
+  "mdeBaselines": {
+    "activation": 0.1,
+    "d7Retention": 0.22
+  },
+  "mdeTable": [
+    {
+      "segment": "7-14d",
+      "sample": {
+        "treatment": 21,
+        "holdout": 2,
+        "total": 23
+      },
+      "activation": {
+        "baselineRate": 0.1,
+        "mdeAbsolute": 0.6216,
+        "mdeAbsolutePctPoints": 62.16,
+        "mdeRelativePct": 621.61
+      },
+      "d7Retention": {
+        "baselineRate": 0.22,
+        "mdeAbsolute": 0.8583,
+        "mdeAbsolutePctPoints": 85.83,
+        "mdeRelativePct": 390.15
+      }
+    },
+    {
+      "segment": "15-30d",
+      "sample": {
+        "treatment": 29,
+        "holdout": 1,
+        "total": 30
+      },
+      "activation": {
+        "baselineRate": 0.1,
+        "mdeAbsolute": 0.8544,
+        "mdeAbsolutePctPoints": 85.44,
+        "mdeRelativePct": 854.36
+      },
+      "d7Retention": {
+        "baselineRate": 0.22,
+        "mdeAbsolute": 1.1797,
+        "mdeAbsolutePctPoints": 117.97,
+        "mdeRelativePct": 536.24
+      }
+    },
+    {
+      "segment": "31-60d",
+      "sample": {
+        "treatment": 20,
+        "holdout": 3,
+        "total": 23
+      },
+      "activation": {
+        "baselineRate": 0.1,
+        "mdeAbsolute": 0.5201,
+        "mdeAbsolutePctPoints": 52.01,
+        "mdeRelativePct": 520.08
+      },
+      "d7Retention": {
+        "baselineRate": 0.22,
+        "mdeAbsolute": 0.7181,
+        "mdeAbsolutePctPoints": 71.81,
+        "mdeRelativePct": 326.42
+      }
+    }
+  ]
+}
