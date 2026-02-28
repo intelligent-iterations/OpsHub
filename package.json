@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "qa:evidence-check": "node scripts/qa-evidence-integrity-checker.js"
   },
   "dependencies": {
     "express": "^4.21.2"
