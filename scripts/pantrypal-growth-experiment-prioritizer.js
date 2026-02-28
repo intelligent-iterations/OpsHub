@@ -53,7 +53,11 @@ function rankExperiments(experiments) {
         return a.readiness.ready ? -1 : 1;
       }
 
-      return b.score - a.score;
+      if (a.score !== b.score) {
+        return b.score - a.score;
+      }
+
+      return String(a.name ?? '').localeCompare(String(b.name ?? ''), undefined, { sensitivity: 'base' });
     });
 }
 
