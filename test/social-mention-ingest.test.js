@@ -20,6 +20,24 @@ test('fetchSocialMessages returns fallback diagnostics when no source is configu
   assert.equal(result.messages.length, 0);
 });
 
+test('ingestSocialMentions emits fallback diagnostics when provider and file are unavailable', async () => {
+  const result = await ingestSocialMentions({
+    channel: 'social-progress',
+    listMessages: async () => {
+      throw new Error('slack api unavailable');
+    },
+    feedPath: '/tmp/does-not-exist-social-feed.json',
+  });
+
+  assert.equal(result.diagnostics.ok, false);
+  assert.equal(result.diagnostics.fallbackApplied, true);
+  assert.equal(result.diagnostics.actionableCount, 0);
+  assert.equal(result.taskPayloads.length, 0);
+  assert.equal(result.diagnostics.fetchAttempts.length, 2);
+  assert.equal(result.diagnostics.fetchAttempts[0].source, 'provider');
+  assert.equal(result.diagnostics.fetchAttempts[1].source, 'file');
+});
+
 test('fetchSocialMessages prefers live provider and records source', async () => {
   const result = await fetchSocialMessages({
     channel: 'social-progress',

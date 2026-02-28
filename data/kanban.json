@@ -45,19 +45,6 @@
     ],
     "todo": [
       {
-        "id": "social-sm-1001",
-        "name": "Build social mention ingestion bridge for Slack",
-        "description": "Owner: claw\nSource message: sm-1001\nAcceptance Criteria:\n- fetch social channel mentions into queue\n- map actionable mentions into OpsHub payload\n- provide diagnostics fallback when feed unavailable",
-        "priority": "medium",
-        "status": "todo",
-        "source": "slack-social-mention",
-        "sourceMessageId": "sm-1001",
-        "createdAt": "2026-02-28T05:43:49.057Z",
-        "updatedAt": "2026-02-28T05:43:49.057Z",
-        "completedAt": null,
-        "startedAt": null
-      },
-      {
         "id": "9b6a1867-3e6d-43b6-aada-bc08737c04a1",
         "name": "[Rework QA] [P3] Define pet attributes (mood/energy/health/hunger/evolution)",
         "description": "Rework QA PASS: defined canonical pet attributes for mood/energy/health/hunger/evolution with updated model bounds, schema contract, and tests. Evidence: artifacts/rework-qa-p3-pet-attributes-evidence.md",
@@ -1766,6 +1753,16 @@
     ],
     "inProgress": [
       {
+        "id": "9adadf33-1da8-4d37-ba32-7e2634f379d2",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T13:09:24.019Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
         "id": "2eb1b356-7504-47fe-a4f9-cde08999358e",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
@@ -1817,6 +1814,40 @@
       }
     ],
     "done": [
+      {
+        "id": "562591be-5003-4b4c-acf6-e760210e7afd",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T13:09:24.001Z",
+        "completedAt": "2026-02-28T13:09:24.012Z",
+        "source": "manual"
+      },
+      {
+        "id": "c07ba846-f952-489c-a1d8-935bbcd36a19",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T13:09:23.986Z",
+        "completedAt": "2026-02-28T13:09:23.993Z",
+        "source": "manual"
+      },
+      {
+        "id": "social-sm-1001",
+        "name": "Build social mention ingestion bridge for Slack",
+        "description": "Owner: claw\nSource message: sm-1001\nAcceptance Criteria:\n- fetch social channel mentions into queue\n- map actionable mentions into OpsHub payload\n- provide diagnostics fallback when feed unavailable",
+        "priority": "medium",
+        "status": "done",
+        "source": "slack-social-mention",
+        "sourceMessageId": "sm-1001",
+        "createdAt": "2026-02-28T05:43:49.057Z",
+        "updatedAt": "2026-02-28T13:09:20.994Z",
+        "completedAt": "2026-02-28T13:09:20.994Z",
+        "startedAt": "2026-02-28T13:09:20.994Z",
+        "completionDetails": "Completed social mention ingestion bridge for Slack: provider/file fallback ingestion, actionable mapping to OpsHub payload template, kanban enqueue with source-message dedupe, diagnostics output, docs update, and test coverage (including unavailable-feed fallback diagnostics)."
+      },
       {
         "id": "p35-pantrypal-next-feature-slice",
         "name": "[P35][PantryPal] Execute next PantryPal feature slice after boilerplate cleanup",
@@ -2972,6 +3003,67 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T13:09:24.019Z",
+      "type": "task_added",
+      "taskId": "9adadf33-1da8-4d37-ba32-7e2634f379d2",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T13:09:24.012Z",
+      "type": "task_moved",
+      "taskId": "562591be-5003-4b4c-acf6-e760210e7afd",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T13:09:24.007Z",
+      "type": "task_moved",
+      "taskId": "562591be-5003-4b4c-acf6-e760210e7afd",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T13:09:24.001Z",
+      "type": "task_added",
+      "taskId": "562591be-5003-4b4c-acf6-e760210e7afd",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T13:09:23.993Z",
+      "type": "task_moved",
+      "taskId": "c07ba846-f952-489c-a1d8-935bbcd36a19",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T13:09:23.986Z",
+      "type": "task_added",
+      "taskId": "c07ba846-f952-489c-a1d8-935bbcd36a19",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "id": "activity-social-sm-1001-completed-1772284160995",
+      "taskId": "social-sm-1001",
+      "type": "task_completed",
+      "from": "todo",
+      "to": "done",
+      "summary": "Completed social mention ingestion bridge for Slack",
+      "detail": "Completed social mention ingestion bridge for Slack: provider/file fallback ingestion, actionable mapping to OpsHub payload template, kanban enqueue with source-message dedupe, diagnostics output, docs update, and test coverage (including unavailable-feed fallback diagnostics).",
+      "at": "2026-02-28T13:09:20.994Z"
+    },
     {
       "id": "activity-social-sm-1001",
       "taskId": "social-sm-1001",
@@ -7238,145 +7330,6 @@
       "taskName": "[P13] Add leftover safety timeline with reheating quality decay recommendations",
       "to": "todo",
       "detail": "Added task from intelligent-iteration"
-    },
-    {
-      "at": "2026-02-27T14:53:13.373Z",
-      "type": "task_added",
-      "taskId": "16992628-525c-447a-823e-bc9fc8cdf7af",
-      "taskName": "[P13] Implement pantry item substitution graph using nutrition+price similarity",
-      "to": "todo",
-      "detail": "Added task from intelligent-iteration"
-    },
-    {
-      "at": "2026-02-27T04:58:37.224Z",
-      "type": "task_moved",
-      "taskId": "349b6310-8764-4009-8c27-f3a2f444294f",
-      "taskName": "[P12] Add dynamic leftover shelf-life confidence scoring with user correction loop",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed directly in main agent (cron); evidence artifacts/p12-leftover-shelf-life-confidence-scoring-evidence.md"
-    },
-    {
-      "at": "2026-02-27T04:58:08.623Z",
-      "type": "task_reassigned",
-      "taskId": "349b6310-8764-4009-8c27-f3a2f444294f",
-      "taskName": "[P12] Add dynamic leftover shelf-life confidence scoring with user correction loop",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; continued directly in main agent (cron)"
-    },
-    {
-      "at": "2026-02-27T04:51:20Z",
-      "type": "task_moved",
-      "taskId": "b0b6ac72-a451-4730-9524-8eaa3e34f3ed",
-      "taskName": "[P12] Design proactive weekend prep plan generator from expiry risk + household schedule",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p12-weekend-prep-generator; evidence artifacts/p12-weekend-prep-plan-generator-evidence.md"
-    },
-    {
-      "at": "2026-02-27T04:50:30Z",
-      "type": "task_moved",
-      "taskId": "673264fc-b7f0-4bf9-8392-2a6b3e3dfbaf",
-      "taskName": "[P12] Implement grocery price-volatility watchlist with swap recommendations",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p12-price-volatility-watchlist; evidence artifacts/p12-grocery-price-volatility-watchlist-evidence.md"
-    },
-    {
-      "at": "2026-02-27T04:47:00Z",
-      "type": "task_moved",
-      "taskId": "673264fc-b7f0-4bf9-8392-2a6b3e3dfbaf",
-      "taskName": "[P12] Implement grocery price-volatility watchlist with swap recommendations",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-27T04:47:00Z",
-      "type": "task_moved",
-      "taskId": "b0b6ac72-a451-4730-9524-8eaa3e34f3ed",
-      "taskName": "[P12] Design proactive weekend prep plan generator from expiry risk + household schedule",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-27T04:43:07Z",
-      "type": "task_moved",
-      "taskId": "349b6310-8764-4009-8c27-f3a2f444294f",
-      "taskName": "[P12] Add dynamic leftover shelf-life confidence scoring with user correction loop",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Started directly in main agent (cron)"
-    },
-    {
-      "at": "2026-02-27T04:43:07Z",
-      "type": "task_added",
-      "taskId": "673264fc-b7f0-4bf9-8392-2a6b3e3dfbaf",
-      "taskName": "[P12] Implement grocery price-volatility watchlist with swap recommendations",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-27T04:43:07Z",
-      "type": "task_added",
-      "taskId": "b0b6ac72-a451-4730-9524-8eaa3e34f3ed",
-      "taskName": "[P12] Design proactive weekend prep plan generator from expiry risk + household schedule",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-27T04:43:07Z",
-      "type": "task_added",
-      "taskId": "349b6310-8764-4009-8c27-f3a2f444294f",
-      "taskName": "[P12] Add dynamic leftover shelf-life confidence scoring with user correction loop",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-27T04:38:19Z",
-      "type": "task_moved",
-      "taskId": "abaf7e9d-1ee1-429c-8fa9-b4587dd4a227",
-      "taskName": "[P11] Implement personalized leftover transformation suggestions by cuisine + time budget",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed directly in main agent (cron); evidence at artifacts/p11-personalized-leftover-transformations-evidence.md"
-    },
-    {
-      "at": "2026-02-27T04:36:05.395Z",
-      "type": "task_moved",
-      "taskId": "13370894-6b88-4718-876e-9668746c1a7f",
-      "taskName": "[P11] Add pantry depletion anomaly alerts (unexpected usage spikes with explainers)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-27T04:35:31.121Z",
-      "type": "task_moved",
-      "taskId": "4c44ac00-c2ae-4752-b1a3-573e92c351b2",
-      "taskName": "[P11] Design family challenge loops with weekly cooperative anti-waste goals",
-      "from": "inProgress",
-      "to": "done",
-      "detail": ""
-    },
-    {
-      "at": "2026-02-28T03:54:59Z",
-      "type": "task_moved",
-      "taskId": "df8ffcd0-dbad-4d1e-a6a9-0ad1bbd7525e",
-      "taskName": "[Rework QA] [P3] Implement pet animation state controller",
-      "from": "todo",
-      "to": "done",
-      "detail": "Rework QA closure with GitHub evidence + screenshot links added."
-    },
-    {
-      "at": "2026-02-28T04:00:36Z",
-      "type": "task_moved",
-      "taskId": "8e29e46f-4c4d-4c2b-8314-66213fe23a62",
-      "taskName": "[Rework QA] [P4] Implement expiry reminders and urgency tiers",
-      "from": "todo",
-      "to": "done",
-      "detail": "Rework QA closure: expiry reminders urgency tiers retested (7/7), and kanban description updated with GitHub evidence + screenshot links."
     }
   ]
 }
