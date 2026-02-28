@@ -45,62 +45,12 @@
     ],
     "todo": [
       {
-        "id": "239f82df-0c60-420e-832f-cfc00ada7326",
-        "name": "[Rework QA] [P4] Build challenge/quest system (use expiring foods this week)",
-        "description": "Rework QA PASS. Evidence: artifacts/rework-qa-p4-challenge-quest-system-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.346Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "1cec7707-6648-4c2a-bfc6-62b0835c3010",
-        "name": "[Rework QA] [P4] Add streak engine (healthy pantry days / waste reduction)",
-        "description": "Rework QA PASS: streak engine validated for healthy pantry and waste-reduction streak semantics (threshold boundaries, UTC as-of normalization, owner/day dedupe, current+longest continuity). Evidence: artifacts/rework-qa-p4-streak-engine-evidence.md",
-        "priority": "medium",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.344Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "108f18b4-c421-434b-8a9a-4bac1f20c14d",
-        "name": "[Rework QA] [P6] Build smart shopping list generator from low-stock + expiry risk",
-        "description": "Rework QA PASS: smart shopping list generator validated for low-stock + expiry-risk prioritization, urgency-tier output, and noisy unnamed-item suppression. Evidence: artifacts/rework-qa-p6-smart-shopping-list-generator-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.341Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
         "id": "53f3e69f-4452-403b-960c-10a8d9a6bc7c",
         "name": "[Rework QA] [P5] QA plan + test matrix (unit/widget/integration)",
         "description": "Rework QA update complete: QA strategy + unit/widget/integration test matrix reworked and verified. Added/updated matrix coverage mapping and CI gate policy (PR vs release), added golden test tags for quarantine workflow, refreshed brittle widget expectations, and ran `flutter test --exclude-tags=golden` to validate broad suite status. Remaining failures isolated to presentation/golden drift and documented. Evidence: artifacts/rework-qa-p5-qa-plan-test-matrix-evidence.md",
         "priority": "medium",
         "status": "toDo",
         "createdAt": "2026-02-26T22:39:17.352Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "d3812c11-07ae-4154-9261-0b177e4c4dcb",
-        "name": "[Rework QA] [P6] Add household profiles + shared pantry collaboration permissions",
-        "description": "Rework QA PASS: household profiles + shared pantry collaboration permissions verified with household-membership scoped access checks, regression coverage, and docs refresh. Evidence: artifacts/rework-qa-p6-household-collab-permissions-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.338Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "706c918c-50e0-459f-ad91-2f6a5258f894",
-        "name": "[Rework QA] [Ops] Verify Claude delegate workflow end-to-end",
-        "description": "Rework QA PASS: verified done-state consistency + evidence link integrity for Claude delegate workflow. Evidence: artifacts/rework-qa-ops-claude-delegate-e2e-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.337Z",
         "completedAt": null,
         "source": "delight-rework-sweep"
       },
@@ -1635,6 +1585,28 @@
     ],
     "done": [
       {
+        "id": "108f18b4-c421-434b-8a9a-4bac1f20c14d",
+        "name": "[Rework QA] [P6] Build smart shopping list generator from low-stock + expiry risk",
+        "description": "Rework QA closure: validated smart shopping list generator behavior and attached GitHub evidence links. Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/smart_shopping_list_generator.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/smart_shopping_list_generator_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/smart_shopping_list_generator_test.dart (8/8 passing on 2026-02-28).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.341Z",
+        "completedAt": "2026-02-28T14:01:26Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T14:01:26Z"
+      },
+      {
+        "id": "1cec7707-6648-4c2a-bfc6-62b0835c3010",
+        "name": "[Rework QA] [P4] Add streak engine (healthy pantry days / waste reduction)",
+        "description": "Rework QA PASS: streak engine validated for healthy pantry and waste-reduction streak semantics (threshold boundaries, UTC as-of normalization, owner/day dedupe, current+longest continuity). Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/rework-qa-p4-streak-engine-evidence.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.344Z",
+        "completedAt": "2026-02-28T13:52:46.704Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T13:52:46.704Z"
+      },
+      {
         "id": "4d423e6c-b6f1-456f-8729-71c61a4a07d5",
         "name": "[Rework QA] [P5] Launch checklist + app store assets + rollout plan",
         "description": "Rework QA PASS: verified launch checklist, app store asset matrix, and phased rollout plan with focused structural/cross-link validation. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p5-launch-assets-rollout-evidence.md | Checklist: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/launch_readiness_checklist.md | Asset matrix: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/app_store_asset_matrix.md | Rollout plan: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/phased_rollout_plan.md | Validation log: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p5-launch-assets-rollout-validation.txt | Commit: https://github.com/larryclaw/pantrypal/commit/b23a02a",
@@ -3014,10 +2986,78 @@
         "source": "delight-rework-sweep",
         "startedAt": "2026-02-28T13:24:44.000Z",
         "updatedAt": "2026-02-28T13:37:10Z"
+      },
+      {
+        "id": "239f82df-0c60-420e-832f-cfc00ada7326",
+        "name": "[Rework QA] [P4] Build challenge/quest system (use expiring foods this week)",
+        "description": "Rework QA PASS: challenge/quest system verified. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p4-challenge-quest-system-evidence.md | Commit: https://github.com/larryclaw/pantrypal/commit/b09dfa8 | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/weekly_expiring_food_quest_builder.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/application/use_cases/sync_weekly_expiring_food_quest_use_case.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/weekly_expiring_food_quest_builder_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/application/use_cases/sync_weekly_expiring_food_quest_use_case_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/data/repositories/in_memory_quest_repository_test.dart | Verification: flutter test targeted quest suite (8/8 pass) and flutter analyze targeted files (clean) on 2026-02-28.",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.346Z",
+        "completedAt": "2026-02-28T13:51:00Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T13:51:00Z"
+      },
+      {
+        "id": "d3812c11-07ae-4154-9261-0b177e4c4dcb",
+        "name": "[Rework QA] [P6] Add household profiles + shared pantry collaboration permissions",
+        "description": "Rework QA PASS: household profiles + shared pantry collaboration permissions verified with household-membership scoped access checks, regression coverage, and docs refresh. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/household_collaboration_permissions.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/models/household_profile.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/models/household_member.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/shared_pantry_permission_service.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/firebase/firestore.rules | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/shared_pantry_permission_service_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/models/household_profile_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/models/user_profile_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/models/pantry_item_test.dart | Verification: flutter test test/domain/services/shared_pantry_permission_service_test.dart test/domain/models/household_profile_test.dart test/domain/models/user_profile_test.dart test/domain/models/pantry_item_test.dart (16/16 passing on 2026-02-28).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.338Z",
+        "completedAt": "2026-02-28T14:04:00.000Z",
+        "source": "delight-rework-sweep"
+      },
+      {
+        "id": "706c918c-50e0-459f-ad91-2f6a5258f894",
+        "name": "[Rework QA] [Ops] Verify Claude delegate workflow end-to-end",
+        "description": "Rework QA PASS: validated Claude delegate workflow e2e with targeted checks and GitHub-backed evidence. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/rework-qa-ops-claude-delegate-e2e-evidence.md",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.337Z",
+        "completedAt": "2026-02-28T14:02:22Z",
+        "source": "delight-rework-sweep"
       }
     ]
   },
   "activityLog": [
+    {
+      "id": "activity-d3812c11-07ae-4154-9261-0b177e4c4dcb-done-2026-02-28T14:02:20.650506Z",
+      "taskId": "d3812c11-07ae-4154-9261-0b177e4c4dcb",
+      "type": "task_moved",
+      "from": "todo",
+      "to": "done",
+      "summary": "Closed Rework QA P6 household collaboration permissions task with GitHub evidence links.",
+      "timestamp": "2026-02-28T14:02:20.650506Z"
+    },
+    {
+      "at": "2026-02-28T14:01:26Z",
+      "type": "task_moved",
+      "taskId": "108f18b4-c421-434b-8a9a-4bac1f20c14d",
+      "taskName": "[Rework QA] [P6] Build smart shopping list generator from low-stock + expiry risk",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA closure: validated smart shopping list generator behavior and attached GitHub evidence links."
+    },
+    {
+      "at": "2026-02-28T13:51:00Z",
+      "type": "task_moved",
+      "taskId": "239f82df-0c60-420e-832f-cfc00ada7326",
+      "taskName": "[Rework QA] [P4] Build challenge/quest system (use expiring foods this week)",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA PASS: verified weekly expiring-food challenge/quest flow with focused tests/analyze and GitHub evidence links."
+    },
+    {
+      "id": "log-1772286766706",
+      "type": "task.moved",
+      "taskId": "1cec7707-6648-4c2a-bfc6-62b0835c3010",
+      "taskName": "[Rework QA] [P4] Add streak engine (healthy pantry days / waste reduction)",
+      "from": "todo",
+      "to": "done",
+      "timestamp": "2026-02-28T13:52:46.704Z",
+      "note": "Subagent QA validation complete. Evidence linked."
+    },
     {
       "id": "rework-qa-p5-launch-assets-rollout-2026-02-28T13:52:30Z",
       "type": "task_completed",
@@ -7427,6 +7467,15 @@
       "from": "todo",
       "to": "done",
       "detail": "Rework QA closure: verified nutrition delta mapper implementation/tests and attached GitHub evidence links."
+    },
+    {
+      "at": "2026-02-28T14:02:22Z",
+      "type": "task_moved",
+      "taskId": "706c918c-50e0-459f-ad91-2f6a5258f894",
+      "taskName": "[Rework QA] [Ops] Verify Claude delegate workflow end-to-end",
+      "from": "todo",
+      "to": "done",
+      "detail": "Rework QA PASS: verified delegate skill contract, Claude CLI availability, prior delegate commit evidence, and published GitHub-backed artifact."
     }
   ]
 }
