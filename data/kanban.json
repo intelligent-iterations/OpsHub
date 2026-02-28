@@ -45,72 +45,28 @@
     ],
     "todo": [
       {
-        "id": "335459e5-6eac-4394-9f4c-07f0d8064f82",
-        "name": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
-        "description": "Rework QA PASS: polished pantry summary dashboard with segmented healthy/unhealthy/neutral visualization, balance score coaching copy, and widget coverage. Evidence: artifacts/rework-qa-p2-pantry-summary-dashboard-evidence.md. Verification: flutter test test/widget_test.dart test/presentation/widgets/pantry_summary_dashboard_test.dart; flutter analyze.",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.366Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "dbc0400d-b5b1-4bd5-b66f-45aed9430b60",
-        "name": "[Rework QA] [P2] Add confidence scoring + fallback for unknown items",
-        "description": "Rework QA PASS: strengthened confidence scoring with source-aware heuristics and added fallback labeling for unknown items (with explicit review reasons). Verified via targeted tests + flutter analyze. Evidence: artifacts/dbc0400d-confidence-fallback-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.364Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep",
-        "startedAt": "2026-02-27T00:07:58.182Z",
-        "updatedAt": "2026-02-27T00:07:58.182Z"
-      },
-      {
         "id": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
         "name": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
-        "description": "Rework QA PASS: implemented nutrition delta \u2192 pet stat mapping service with deterministic deadband/spike/cap logic and added focused coverage (10/10 passing). Evidence: artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md",
+        "description": "Rework QA PASS: verified nutrition delta \u2192 pet stat mapping with deterministic deadband/spike/cap logic and targeted test coverage. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-nutrition-delta-mapping-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/nutrition_delta_mapper.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/nutrition_delta_mapper_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/nutrition_delta_mapper_test.dart (10/10 passing on 2026-02-28).",
         "priority": "high",
-        "status": "toDo",
+        "status": "done",
         "createdAt": "2026-02-26T22:39:17.359Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "4bdf2baa-ada3-4e3d-9da9-cc6bc9949233",
-        "name": "[Rework QA] [P2] Normalize food names and units (dedupe + parsing)",
-        "description": "Rework QA PASS: normalized food-name/unit parsing hardened (x-notation, trailing qty+unit, unit alias canonicalization) and dedupe behavior verified with targeted tests. Evidence: artifacts/rework-qa-p2-normalize-food-units-evidence.md; verification: flutter test test/capture_food_item_from_photo_use_case_test.dart (10/10).",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.361Z",
-        "completedAt": null,
+        "completedAt": "2026-02-28T13:24:44.000Z",
         "source": "delight-rework-sweep",
-        "startedAt": "2026-02-27T00:07:58.182Z",
-        "updatedAt": "2026-02-27T00:07:58.182Z"
-      },
-      {
-        "id": "d4efe638-9179-40ed-a793-fce15a82921f",
-        "name": "[Rework QA] [P2] Build food classification engine (category + nutrition quality score)",
-        "description": "Rework QA PASS: food classification engine validated (category + nutrition quality score) with passing tests. Evidence: artifacts/rework-qa-p2-food-classification-engine-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.363Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep",
-        "startedAt": "2026-02-27T00:07:58.182Z",
-        "updatedAt": "2026-02-27T00:07:58.182Z",
-        "details": "Implemented + verified food classification engine (category mapping, nutrition score, quality band, confidence/review flags) and validated via targeted Flutter tests covering classification, receipt scan pipeline, and photo capture fallback paths."
+        "startedAt": "2026-02-28T13:24:44.000Z",
+        "updatedAt": "2026-02-28T13:24:44.000Z"
       },
       {
         "id": "b72cbfdc-b0d2-4141-b1d7-49824939a9c4",
         "name": "[Rework QA] [P7] Implement household activity feed with undo for pantry actions",
-        "description": "Rework QA PASS: household pantry activity feed undo flow revalidated with expanded edge-case regression coverage (notFound + alreadyUndone in addition to apply/conflict). Evidence: artifacts/rework-qa-p7-household-activity-feed-undo-evidence.md. Verification: flutter test test/log_pantry_activity_with_undo_use_case_test.dart (5/5 passing).",
+        "description": "Rework QA PASS: implemented and revalidated household pantry activity feed undo lifecycle (requested/applied/conflict) plus undo edge cases (notFound + alreadyUndone). Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p7-household-activity-feed-undo-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/application/use_cases/log_pantry_activity_with_undo_use_case.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/presentation/widgets/pet_timeline_history_view.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/log_pantry_activity_with_undo_use_case_test.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/presentation/widgets/pet_timeline_history_view_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/cc837b40244826fdbea5e06658385b328fd4804d | Verification: flutter test test/log_pantry_activity_with_undo_use_case_test.dart test/presentation/widgets/pet_timeline_history_view_test.dart (11/11 passing on 2026-02-28).",
         "priority": "high",
-        "status": "toDo",
+        "status": "done",
         "createdAt": "2026-02-26T22:39:17.333Z",
-        "completedAt": null,
+        "completedAt": "2026-02-28T13:28:30.000Z",
         "source": "delight-rework-sweep",
-        "updatedAt": "2026-02-27T00:44:15Z"
+        "startedAt": "2026-02-28T13:28:30.000Z",
+        "updatedAt": "2026-02-28T13:28:30.000Z"
       },
       {
         "id": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
@@ -123,26 +79,6 @@
         "source": "delight-rework-sweep",
         "startedAt": "2026-02-27T00:44:56Z",
         "updatedAt": "2026-02-27T00:44:56Z"
-      },
-      {
-        "id": "b126e511-fe6c-4e27-ab78-c0e50f901522",
-        "name": "[Rework QA] [P3] Define evolution/degradation thresholds and cadence",
-        "description": "Delight rework QA complete. Evidence: artifacts/rework-qa-p3-evolution-degradation-thresholds-cadence-evidence.md (threshold constants aligned + boundary tests passing).",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.355Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
-      },
-      {
-        "id": "ff1b7a09-df85-4e33-a6c6-cbc549a191d4",
-        "name": "[Rework QA] [P3] Implement hunger/sad behavior for expiring pantry items",
-        "description": "Rework QA PASS: hunger/sad behavior for expiring pantry items validated and hardened. pet_state_machine expiry-risk thresholds/constants clarified with boundary coverage and vitals-priority mood override test. Verification: flutter test test/domain/services/pet_state_machine_test.dart (17/17 passing); flutter analyze (no new errors; 3 pre-existing info-level lints in log_pantry_activity_with_undo_use_case.dart). Evidence: artifacts/rework-qa-p3-hunger-sad-expiry-evidence.md",
-        "priority": "high",
-        "status": "toDo",
-        "createdAt": "2026-02-26T22:39:17.357Z",
-        "completedAt": null,
-        "source": "delight-rework-sweep"
       },
       {
         "id": "48c98705-ed2a-4a15-b4c0-669286fec15e",
@@ -1765,6 +1701,28 @@
     ],
     "done": [
       {
+        "id": "335459e5-6eac-4394-9f4c-07f0d8064f82",
+        "name": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+        "description": "Rework QA PASS: pantry summary dashboard (healthy/unhealthy balance) validated with targeted widget+domain coverage and static analysis. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p2-pantry-summary-dashboard-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/presentation/widgets/pantry_summary_dashboard.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/pantry_health_balance_calculator.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/presentation/widgets/pantry_summary_dashboard_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/pantry_health_balance_calculator_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/0c06dc2",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.366Z",
+        "completedAt": "2026-02-28T13:25:00.702Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T13:25:00.702Z"
+      },
+      {
+        "id": "b126e511-fe6c-4e27-ab78-c0e50f901522",
+        "name": "[Rework QA] [P3] Define evolution/degradation thresholds and cadence",
+        "description": "Rework QA PASS: defined and verified evolution/degradation thresholds + cadence in pet state machine with boundary-safe tests. Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-evolution-degradation-thresholds-cadence-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/pet_state_machine.dart | Rules: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/docs/pet_state_machine_rules.md | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/pet_state_machine_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/1da95bf | Verification: flutter test test/domain/services/pet_state_machine_test.dart (17/17 passing).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.355Z",
+        "completedAt": "2026-02-28T13:16:09Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T13:16:09Z"
+      },
+      {
         "id": "c4acfa26-1eb4-4589-a45a-2b985441a8f6",
         "name": "[Rework QA] [P2] Implement photo-to-food item capture flow",
         "description": "Rework QA PASS: verified photo-to-food item capture flow (permission education gate for camera/gallery, capture persistence to pantry + timeline, and use-case fallback mapping for unknown/barcode-missing flows). Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p2-photo-to-food-capture-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/application/use_cases/capture_food_item_from_photo_use_case.dart and https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/presentation/pages/photo_capture_page.dart | Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/capture_food_item_from_photo_use_case_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/presentation/state/photo_capture_controller_test.dart , https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/widget_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/1da95bf",
@@ -3003,6 +2961,54 @@
         "completedAt": "2026-02-28T13:12:47Z",
         "source": "delight-rework-sweep",
         "updatedAt": "2026-02-28T13:12:47Z"
+      },
+      {
+        "id": "ff1b7a09-df85-4e33-a6c6-cbc549a191d4",
+        "name": "[Rework QA] [P3] Implement hunger/sad behavior for expiring pantry items",
+        "description": "Rework QA PASS: hunger/sad behavior for expiring pantry items verified with boundary + mood-priority coverage. Verification: `flutter test test/domain/services/pet_state_machine_test.dart` (17/17 passing); `flutter analyze lib/domain/services/pet_state_machine.dart test/domain/services/pet_state_machine_test.dart` (no issues). Evidence: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/rework-qa-p3-hunger-sad-expiry-evidence.md ; Implementation: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/lib/domain/services/pet_state_machine.dart ; Tests: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/test/domain/services/pet_state_machine_test.dart",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.357Z",
+        "completedAt": "2026-02-28T13:18:00Z",
+        "source": "delight-rework-sweep",
+        "updatedAt": "2026-02-28T13:18:00Z"
+      },
+      {
+        "id": "dbc0400d-b5b1-4bd5-b66f-45aed9430b60",
+        "name": "[Rework QA] [P2] Add confidence scoring + fallback for unknown items",
+        "description": "Rework QA PASS: strengthened confidence scoring with source-aware heuristics and added fallback labeling for unknown items (with explicit review reasons). Verified via targeted tests + focused static analysis. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/dbc0400d-confidence-fallback-evidence.md | Screenshot: https://github.com/larryclaw/pantrypal/blob/p36-github-remote-publish-path/artifacts/ui-integration-screenshots/25-e2e-item-added.png",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.364Z",
+        "completedAt": "2026-02-28T13:25:03.381Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-27T00:07:58.182Z",
+        "updatedAt": "2026-02-28T13:25:40.023Z"
+      },
+      {
+        "id": "4bdf2baa-ada3-4e3d-9da9-cc6bc9949233",
+        "name": "[Rework QA] [P2] Normalize food names and units (dedupe + parsing)",
+        "description": "Rework QA PASS: normalized food-name/unit parsing hardened and dedupe behavior re-verified with focused tests (x-notation, trailing qty+unit, and item-unit alias canonicalization). Evidence: https://github.com/larryclaw/pantrypal/blob/main/artifacts/rework-qa-p2-normalize-food-units-evidence.md | Implementation: https://github.com/larryclaw/pantrypal/blob/b70ede19fa32e44f24573e6b26c9df4efceb09e8/lib/application/use_cases/capture_food_item_from_photo_use_case.dart | Tests: https://github.com/larryclaw/pantrypal/blob/b70ede19fa32e44f24573e6b26c9df4efceb09e8/test/capture_food_item_from_photo_use_case_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/b70ede19fa32e44f24573e6b26c9df4efceb09e8 | Verification: flutter test test/capture_food_item_from_photo_use_case_test.dart (11/11 passing on 2026-02-28).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.361Z",
+        "completedAt": "2026-02-28T13:26:00.000Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-27T00:07:58.182Z",
+        "updatedAt": "2026-02-28T13:26:00.000Z"
+      },
+      {
+        "id": "d4efe638-9179-40ed-a793-fce15a82921f",
+        "name": "[Rework QA] [P2] Build food classification engine (category + nutrition quality score)",
+        "description": "Rework QA PASS: food classification engine validated (category + nutrition quality score) with targeted passing tests. Evidence: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/lib/domain/services/food_classification_engine.dart | Tests: https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/domain/services/food_classification_engine_test.dart , https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/capture_food_item_from_photo_use_case_test.dart , https://github.com/larryclaw/pantrypal/blob/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0/test/mock_receipt_scan_pipeline_integration_test.dart | Commit: https://github.com/larryclaw/pantrypal/commit/56882d8f36b73e9fae32d6b1ac7b3b5c1f64acf0 | Verification: flutter test test/domain/services/food_classification_engine_test.dart test/capture_food_item_from_photo_use_case_test.dart test/mock_receipt_scan_pipeline_integration_test.dart (18/18 passing on 2026-02-28).",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-26T22:39:17.363Z",
+        "completedAt": "2026-02-28T13:26:00.000Z",
+        "source": "delight-rework-sweep",
+        "startedAt": "2026-02-27T00:07:58.182Z",
+        "updatedAt": "2026-02-28T13:26:00.000Z",
+        "details": "Implemented + verified food classification engine (category mapping, nutrition score, quality band, confidence/review flags) and validated via targeted Flutter tests covering classification, receipt scan pipeline, and photo capture fallback paths."
       }
     ]
   },
@@ -7354,6 +7360,24 @@
       "from": "todo",
       "to": "done",
       "detail": "Rework QA PASS with GitHub-linked evidence; targeted receipt pipeline tests passing and analyzer warnings documented."
+    },
+    {
+      "type": "task_moved",
+      "taskId": "335459e5-6eac-4394-9f4c-07f0d8064f82",
+      "taskName": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
+      "from": "todo",
+      "to": "done",
+      "timestamp": "2026-02-28T13:25:00.702Z",
+      "detail": "Rework QA closure: pantry summary dashboard validated; evidence and commit links added."
+    },
+    {
+      "type": "task_moved",
+      "taskId": "d4efe638-9179-40ed-a793-fce15a82921f",
+      "taskName": "[Rework QA] [P2] Build food classification engine (category + nutrition quality score)",
+      "from": "todo",
+      "to": "done",
+      "timestamp": "2026-02-28T13:26:00.000Z",
+      "detail": "Rework QA closure: food classification engine verified with targeted Flutter tests and GitHub evidence links added."
     }
   ]
 }
