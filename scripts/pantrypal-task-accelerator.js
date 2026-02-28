@@ -205,6 +205,16 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null) {
   ].join('\n');
 }
 
+function formatTaskJson(taskQueue, executionPlan, validationResult = null, metadata = {}) {
+  return JSON.stringify({
+    generatedAt: metadata.generatedAt ?? new Date().toISOString(),
+    seeded: Boolean(metadata.seeded),
+    queue: taskQueue,
+    immediateExecution: executionPlan,
+    validation: validationResult
+  }, null, 2);
+}
+
 if (require.main === module) {
   let experiments = [
     {
@@ -236,7 +246,9 @@ if (require.main === module) {
     }
   ];
 
-  const { queue } = buildQueueWithAutoSeed(experiments, {
+  const outputFormat = process.argv.includes('--json') ? 'json' : 'markdown';
+
+  const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
     defaultOwner: 'growth-oncall',
     limit: 3,
     minimumScore: 75,
@@ -245,7 +257,12 @@ if (require.main === module) {
 
   const executionPlan = pickImmediateExecution(queue);
   const validationResult = runValidationCommand(executionPlan?.validationCommand);
-  process.stdout.write(formatTaskMarkdown(queue, executionPlan, validationResult));
+
+  const output = outputFormat === 'json'
+    ? formatTaskJson(queue, executionPlan, validationResult, { seeded })
+    : formatTaskMarkdown(queue, executionPlan, validationResult);
+
+  process.stdout.write(output);
 }
 
 module.exports = {
@@ -257,5 +274,6 @@ module.exports = {
   buildQueueWithAutoSeed,
   pickImmediateExecution,
   runValidationCommand,
-  formatTaskMarkdown
+  formatTaskMarkdown,
+  formatTaskJson
 };

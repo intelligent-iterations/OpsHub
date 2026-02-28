@@ -10,7 +10,8 @@ const {
   buildQueueWithAutoSeed,
   pickImmediateExecution,
   runValidationCommand,
-  formatTaskMarkdown
+  formatTaskMarkdown,
+  formatTaskJson
 } = require('../scripts/pantrypal-task-accelerator');
 
 test('toSlug normalizes experiment names', () => {
@@ -137,4 +138,20 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Validation Result/);
   assert.match(markdown, /Status: PASS/);
+});
+
+test('formatTaskJson emits seeded metadata and validation payload', () => {
+  const json = formatTaskJson(
+    [{ id: 'PP-GROWTH-001-foo', title: 'Foo', score: 91.23, owner: 'growth', acceptanceCriteria: [] }],
+    { taskId: 'PP-GROWTH-001-foo', title: 'Foo', executionNow: ['step1'] },
+    { status: 'PASS', command: 'npm test', exitCode: 0, durationMs: 20, outputSnippet: 'ok' },
+    { seeded: true, generatedAt: '2026-02-28T01:56:00.000Z' }
+  );
+
+  const parsed = JSON.parse(json);
+  assert.equal(parsed.seeded, true);
+  assert.equal(parsed.generatedAt, '2026-02-28T01:56:00.000Z');
+  assert.equal(parsed.queue.length, 1);
+  assert.equal(parsed.immediateExecution.taskId, 'PP-GROWTH-001-foo');
+  assert.equal(parsed.validation.status, 'PASS');
 });
