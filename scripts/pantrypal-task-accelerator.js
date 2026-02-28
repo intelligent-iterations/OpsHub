@@ -427,6 +427,7 @@ function parseCliOptions(argv = []) {
     limit: 3,
     minimumScore: 75,
     lightThreshold: 2,
+    minimumCriteria: 6,
     validate: !argv.includes('--no-validate'),
     experimentsFile: null,
     defaultOwner: 'growth-oncall',
@@ -446,7 +447,8 @@ function parseCliOptions(argv = []) {
     const numericFlagMap = {
       '--limit': 'limit',
       '--minimum-score': 'minimumScore',
-      '--light-threshold': 'lightThreshold'
+      '--light-threshold': 'lightThreshold',
+      '--minimum-criteria': 'minimumCriteria'
     };
 
     if (rawFlag in numericFlagMap) {
@@ -653,7 +655,8 @@ if (require.main === module) {
     };
   const health = createQueueHealthSnapshot(experiments, queue, {
     minimumScore: cliOptions.minimumScore,
-    lightThreshold: cliOptions.lightThreshold
+    lightThreshold: cliOptions.lightThreshold,
+    minimumCriteria: cliOptions.minimumCriteria
   });
 
   const syncResult = cliOptions.syncKanban

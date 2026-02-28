@@ -192,6 +192,25 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.match(health.nextAction, /Resolve blockers or auto-seed fresh PantryPal experiments/);
 });
 
+test('createQueueHealthSnapshot applies custom minimumCriteria thresholds', () => {
+  const experiments = [
+    { name: 'Strong', impact: 0.9, confidence: 0.8, ease: 0.8, pantryPalFit: 0.9 }
+  ];
+  const queue = [{
+    id: 'PP-GROWTH-001-strong',
+    title: 'Strong',
+    score: 90,
+    acceptanceCriteria: ['a', 'b', 'c', 'd', 'e'],
+    blockedReasons: [],
+    isReady: true
+  }];
+
+  const health = createQueueHealthSnapshot(experiments, queue, { minimumCriteria: 6 });
+
+  assert.equal(health.minimumCriteria, 6);
+  assert.deepEqual(health.tasksBelowCriteriaThreshold, ['PP-GROWTH-001-strong']);
+});
+
 test('pickImmediateExecution chooses top queue item and includes acceptance checklist gating + validation step', () => {
   const plan = pickImmediateExecution([{
     id: 'PP-GROWTH-001-foo',
@@ -353,12 +372,19 @@ test('formatTaskJson emits seeded metadata and validation payload', () => {
 });
 
 test('parseCliOptions supports explicit thresholds and json mode', () => {
-  const options = parseCliOptions(['--json', '--limit', '5', '--minimum-score=82', '--light-threshold', '4']);
+  const options = parseCliOptions([
+    '--json',
+    '--limit', '5',
+    '--minimum-score=82',
+    '--light-threshold', '4',
+    '--minimum-criteria', '7'
+  ]);
 
   assert.equal(options.outputFormat, 'json');
   assert.equal(options.limit, 5);
   assert.equal(options.minimumScore, 82);
   assert.equal(options.lightThreshold, 4);
+  assert.equal(options.minimumCriteria, 7);
   assert.equal(options.validate, true);
 });
 
@@ -368,6 +394,7 @@ test('parseCliOptions preserves defaults for invalid numeric values and disables
   assert.equal(options.limit, 3);
   assert.equal(options.minimumScore, 75);
   assert.equal(options.lightThreshold, 2);
+  assert.equal(options.minimumCriteria, 6);
   assert.equal(options.validate, false);
 });
 test('parseCliOptions accepts experiment file, owner, and validation command overrides', () => {
