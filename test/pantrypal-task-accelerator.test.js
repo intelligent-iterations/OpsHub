@@ -10,6 +10,8 @@ const {
   deriveBlockedReasons,
   buildTaskQueue,
   isQueueLight,
+  countReadyTasks,
+  isExecutionCapacityLight,
   createLightQueueSeedTasks,
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
@@ -85,6 +87,18 @@ test('isQueueLight applies default threshold', () => {
   assert.equal(isQueueLight([{ id: 'one' }, { id: 'two' }, { id: 'three' }]), false);
 });
 
+test('countReadyTasks and isExecutionCapacityLight track launchable capacity', () => {
+  const queue = [
+    { id: 'one', isReady: true },
+    { id: 'two', isReady: false },
+    { id: 'three' }
+  ];
+
+  assert.equal(countReadyTasks(queue), 2);
+  assert.equal(isExecutionCapacityLight(queue, 2), true);
+  assert.equal(isExecutionCapacityLight(queue, 1), false);
+});
+
 
 test('createLightQueueSeedTasks returns pantrypal-ready tasks with acceptance inputs', () => {
   const seeds = createLightQueueSeedTasks({ validationCommand: 'npm test -- pantrypal' });
@@ -158,6 +172,24 @@ test('buildQueueWithAutoSeed respects seedMaxTasks cap when queue is light', () 
   assert.equal(queue.length, 2);
 });
 
+test('buildQueueWithAutoSeed seeds when queue has no ready tasks even if size is not light', () => {
+  const experiments = [
+    { name: 'Blocked alpha', impact: 0.9, confidence: 0.8, ease: 0.7, pantryPalFit: 0.9, externalDependency: 'legal' },
+    { name: 'Blocked beta', impact: 0.88, confidence: 0.77, ease: 0.72, pantryPalFit: 0.91, externalDependency: 'infra' },
+    { name: 'Blocked gamma', impact: 0.86, confidence: 0.76, ease: 0.7, pantryPalFit: 0.89, externalDependency: 'policy' }
+  ];
+
+  const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
+    minimumScore: 70,
+    limit: 5,
+    lightThreshold: 2,
+    readyLightThreshold: 0
+  });
+
+  assert.equal(seeded, true);
+  assert.ok(queue.some((task) => task.isReady === true));
+});
+
 
 test('summarizeBlockedReasons returns frequency-ranked blocker reasons', () => {
   const blockers = summarizeBlockedReasons([
@@ -202,7 +234,9 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.topBlockedReasons.length, 1);
   assert.match(health.topBlockedReasons[0].reason, /legal sign-off/);
   assert.equal(health.isLight, true);
+  assert.equal(health.isReadyCapacityLight, true);
   assert.equal(health.threshold, 2);
+  assert.equal(health.readyLightThreshold, 1);
   assert.equal(health.minimumScore, 60);
   assert.equal(health.averageCriteriaCount, 6);
   assert.equal(health.minimumCriteria, 6);
@@ -395,6 +429,7 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
     '--limit', '5',
     '--minimum-score=82',
     '--light-threshold', '4',
+    '--ready-light-threshold', '2',
     '--minimum-criteria', '7',
     '--seed-max-tasks', '2'
   ]);
@@ -403,6 +438,7 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
   assert.equal(options.limit, 5);
   assert.equal(options.minimumScore, 82);
   assert.equal(options.lightThreshold, 4);
+  assert.equal(options.readyLightThreshold, 2);
   assert.equal(options.minimumCriteria, 7);
   assert.equal(options.seedMaxTasks, 2);
   assert.equal(options.validate, true);
@@ -420,6 +456,7 @@ test('parseCliOptions preserves defaults for invalid numeric values and disables
   assert.equal(options.limit, 3);
   assert.equal(options.minimumScore, 75);
   assert.equal(options.lightThreshold, 2);
+  assert.equal(options.readyLightThreshold, 1);
   assert.equal(options.minimumCriteria, 6);
   assert.equal(options.validate, false);
 });

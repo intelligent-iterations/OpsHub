@@ -75,6 +75,14 @@ function isQueueLight(taskQueue, threshold = 2) {
   return taskQueue.length <= threshold;
 }
 
+function countReadyTasks(taskQueue = []) {
+  return taskQueue.filter((task) => task && task.isReady !== false).length;
+}
+
+function isExecutionCapacityLight(taskQueue, threshold = 1) {
+  return countReadyTasks(taskQueue) <= threshold;
+}
+
 function createLightQueueSeedTasks(options = {}) {
   return [
     {
@@ -160,12 +168,18 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
   let seeded = false;
   let queue = buildTaskQueue(experiments, buildOptions);
 
-  if (isQueueLight(queue, options.lightThreshold)) {
+  const readyLightThreshold = options.readyLightThreshold ?? 1;
+  const queueIsLight = isQueueLight(queue, options.lightThreshold);
+  const readyCapacityIsLight = isExecutionCapacityLight(queue, readyLightThreshold);
+
+  if (queueIsLight || readyCapacityIsLight) {
     const desiredQueueSize = Math.max(options.limit ?? 3, (options.lightThreshold ?? 2) + 1);
     const missingCount = Math.max(0, desiredQueueSize - queue.length);
+    const readyTaskDeficit = Math.max(0, readyLightThreshold + 1 - countReadyTasks(queue));
+    const computedSeedTarget = Math.max(missingCount, readyTaskDeficit);
     const requestedSeedTasks = Number.isFinite(options.seedMaxTasks) && options.seedMaxTasks > 0
       ? Math.floor(options.seedMaxTasks)
-      : missingCount;
+      : computedSeedTarget;
     const seeds = createAdaptiveSeedTasks(experiments, {
       validationCommand: options.validationCommand,
       maxTasks: requestedSeedTasks
@@ -234,11 +248,12 @@ function createTaskAcceptanceAudit(taskQueue, minimumCriteria = 6) {
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
+  const readyLightThreshold = options.readyLightThreshold ?? 1;
   const ranked = rankExperiments(experiments);
   const aboveMinimum = typeof minimumScore === 'number'
     ? ranked.filter((experiment) => experiment.score >= minimumScore)
     : ranked;
-  const readyTasks = queue.filter((task) => task.isReady !== false).length;
+  const readyTasks = countReadyTasks(queue);
   const blockedTasks = Math.max(0, queue.length - readyTasks);
   const readinessPct = queue.length ? Math.round((readyTasks / queue.length) * 100) : 0;
   const topBlockedReasons = summarizeBlockedReasons(queue);
@@ -253,7 +268,9 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     readinessPct,
     topBlockedReasons,
     isLight: isQueueLight(queue, threshold),
+    isReadyCapacityLight: isExecutionCapacityLight(queue, readyLightThreshold),
     threshold,
+    readyLightThreshold,
     minimumScore: typeof minimumScore === 'number' ? minimumScore : null,
     averageCriteriaCount: acceptanceAudit.averageCriteriaCount,
     minimumCriteria: acceptanceAudit.minimumCriteria,
@@ -383,6 +400,7 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Readiness: ${health.readinessPct ?? 'n/a'}%`,
       `Top blockers: ${(health.topBlockedReasons || []).length ? health.topBlockedReasons.map((entry) => `${entry.reason} (${entry.count})`).join('; ') : 'none'}`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
+      `Ready capacity light: ${health.isReadyCapacityLight ? 'yes' : 'no'} (threshold: ${health.readyLightThreshold ?? 1})`,
       `Next action: ${health.nextAction ?? 'n/a'}`
     ].join('\n')
     : 'Queue health unavailable';
@@ -488,6 +506,7 @@ function parseCliOptions(argv = []) {
     limit: 3,
     minimumScore: 75,
     lightThreshold: 2,
+    readyLightThreshold: 1,
     minimumCriteria: 6,
     validate: !argv.includes('--no-validate'),
     experimentsFile: null,
@@ -510,6 +529,7 @@ function parseCliOptions(argv = []) {
     const integerFlagMap = {
       '--limit': 'limit',
       '--light-threshold': 'lightThreshold',
+      '--ready-light-threshold': 'readyLightThreshold',
       '--minimum-criteria': 'minimumCriteria',
       '--seed-max-tasks': 'seedMaxTasks'
     };
@@ -713,6 +733,7 @@ if (require.main === module) {
     limit: cliOptions.limit,
     minimumScore: cliOptions.minimumScore,
     lightThreshold: cliOptions.lightThreshold,
+    readyLightThreshold: cliOptions.readyLightThreshold,
     validationCommand: cliOptions.validationCommand,
     seedMaxTasks: cliOptions.seedMaxTasks
   });
@@ -730,6 +751,7 @@ if (require.main === module) {
   const health = createQueueHealthSnapshot(experiments, queue, {
     minimumScore: cliOptions.minimumScore,
     lightThreshold: cliOptions.lightThreshold,
+    readyLightThreshold: cliOptions.readyLightThreshold,
     minimumCriteria: cliOptions.minimumCriteria
   });
 
@@ -758,6 +780,8 @@ module.exports = {
   deriveBlockedReasons,
   buildTaskQueue,
   isQueueLight,
+  countReadyTasks,
+  isExecutionCapacityLight,
   createLightQueueSeedTasks,
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
