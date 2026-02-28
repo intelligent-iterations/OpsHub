@@ -16,19 +16,23 @@ test('toSlug normalizes experiment names', () => {
   assert.equal(toSlug('Expiry-risk push digest!'), 'expiry-risk-push-digest');
 });
 
-test('createAcceptanceCriteria includes metric, target lift, and validation command', () => {
+test('createAcceptanceCriteria includes metric, target lift, sample gate, and validation command', () => {
   const criteria = createAcceptanceCriteria({
     primaryMetric: 'activation rate',
     targetLiftPct: 10,
+    minimumSampleSize: 2000,
+    experimentWindowDays: 21,
     guardrail: 'crash-free sessions remain >=99.5%',
     validationCommand: 'npm test -- growth'
   });
 
-  assert.equal(criteria.length, 5);
+  assert.equal(criteria.length, 6);
   assert.match(criteria[0], /activation rate/);
   assert.match(criteria[1], /10%/);
-  assert.match(criteria[2], /99.5%/);
-  assert.match(criteria[3], /npm test -- growth/);
+  assert.match(criteria[2], /2000 qualified households/);
+  assert.match(criteria[2], /21 days/);
+  assert.match(criteria[3], /99.5%/);
+  assert.match(criteria[4], /npm test -- growth/);
 });
 
 test('buildTaskQueue ranks experiments and emits stable ids', () => {
@@ -52,6 +56,8 @@ test('createLightQueueSeedTasks returns pantrypal-ready tasks with acceptance in
   const seeds = createLightQueueSeedTasks({ validationCommand: 'npm test -- pantrypal' });
   assert.equal(seeds.length, 2);
   assert.match(seeds[0].name, /lapsed households/i);
+  assert.equal(seeds[0].minimumSampleSize, 1600);
+  assert.equal(seeds[0].experimentWindowDays, 14);
   assert.equal(seeds[0].validationCommand, 'npm test -- pantrypal');
 });
 

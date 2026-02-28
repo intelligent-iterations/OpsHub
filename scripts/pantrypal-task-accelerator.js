@@ -14,12 +14,15 @@ function toSlug(name) {
 function createAcceptanceCriteria(experiment) {
   const metric = experiment.primaryMetric ?? '7-day activation rate';
   const targetLift = experiment.targetLiftPct ?? 8;
+  const minimumSampleSize = experiment.minimumSampleSize ?? 1200;
+  const experimentWindowDays = experiment.experimentWindowDays ?? 14;
   const guardrail = experiment.guardrail ?? 'unsubscribe rate does not increase by >1%';
   const validationCommand = experiment.validationCommand ?? 'npm test';
 
   return [
     `Experiment spec includes hypothesis, segment, channel, and success metric (${metric}).`,
     `A/B test is configured with event instrumentation and minimum detectable lift target of ${targetLift}% .`,
+    `Sample-size gate is defined: at least ${minimumSampleSize} qualified households over ${experimentWindowDays} days.`,
     `Guardrail is monitored and passes: ${guardrail}.`,
     `Validation completed with command: ${validationCommand}.`,
     'Decision log is updated with launch date, owner, and rollback trigger.'
@@ -54,6 +57,8 @@ function createLightQueueSeedTasks(options = {}) {
       pantryPalFit: 0.96,
       primaryMetric: 'week-2 rescue completion rate',
       targetLiftPct: 10,
+      minimumSampleSize: 1600,
+      experimentWindowDays: 14,
       guardrail: 'notification opt-out rate stays below 1.5%',
       validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-growth-experiment-prioritizer.test.js'
     },
@@ -65,6 +70,8 @@ function createLightQueueSeedTasks(options = {}) {
       pantryPalFit: 0.92,
       primaryMetric: 'same-day rescue completion rate',
       targetLiftPct: 7,
+      minimumSampleSize: 1400,
+      experimentWindowDays: 10,
       guardrail: 'push dismiss rate does not increase by >2%',
       validationCommand: options.validationCommand ?? 'npm test -- test/pantrypal-task-accelerator.test.js'
     }
