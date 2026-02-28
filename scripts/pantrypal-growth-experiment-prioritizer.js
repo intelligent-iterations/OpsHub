@@ -57,6 +57,12 @@ function rankExperiments(experiments) {
         return b.score - a.score;
       }
 
+      const aFit = clamp(a.pantryPalFit ?? 1);
+      const bFit = clamp(b.pantryPalFit ?? 1);
+      if (aFit !== bFit) {
+        return bFit - aFit;
+      }
+
       return String(a.name ?? '').localeCompare(String(b.name ?? ''), undefined, { sensitivity: 'base' });
     });
 }

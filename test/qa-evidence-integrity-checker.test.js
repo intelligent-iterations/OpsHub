@@ -43,6 +43,8 @@ test('parseArgs reads new threshold and top-failures flags', () => {
   assert.equal(args.maxErrors, 2);
   assert.equal(args.maxWarnings, 3);
   assert.equal(args.topFailures, 1);
+  assert.equal(args.requireGithubLinksOnly, true);
+  assert.equal(args.requireCorrectionLog, true);
 });
 
 test('parseArgs rejects negative threshold values', () => {
@@ -50,6 +52,18 @@ test('parseArgs rejects negative threshold values', () => {
     () => checker.parseArgs(['node', checkerPath, '--max-errors', '-1']),
     /non-negative integer/
   );
+});
+
+test('parseArgs can disable github-only and correction-log checks', () => {
+  const args = checker.parseArgs([
+    'node',
+    checkerPath,
+    '--allow-non-github-links',
+    '--no-correction-log-required'
+  ]);
+
+  assert.equal(args.requireGithubLinksOnly, false);
+  assert.equal(args.requireCorrectionLog, false);
 });
 
 test('exits non-zero when error threshold is exceeded', () => {
@@ -91,6 +105,24 @@ test('exits non-zero when warning threshold is exceeded', () => {
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
+});
+
+test('checkTask enforces github-only evidence refs and correction log compliance by default', () => {
+  const result = checker.checkTask({
+    id: 'task-3',
+    name: 'Local path evidence task',
+    status: 'done',
+    description: 'Evidence: artifacts/local-proof.md\nScreenshot: artifacts/proof.png'
+  }, {
+    kanbanDir: '/tmp',
+    artifactsDir: '/tmp/artifacts',
+    requireGithubLinksOnly: true,
+    requireCorrectionLog: true
+  });
+
+  const codes = result.issues.map((issue) => issue.code);
+  assert.ok(codes.includes('NON_GITHUB_EVIDENCE_REFERENCE'));
+  assert.ok(codes.includes('MISSING_CORRECTION_LOG'));
 });
 
 test('toMarkdown includes top remediation summary and applies slicing', () => {

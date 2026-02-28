@@ -78,6 +78,36 @@ test('rankExperiments prioritizes ready experiments before unready', () => {
   assert.equal(ranked[1].name, 'High but unready');
 });
 
+test('rankExperiments prioritizes higher PantryPal fit when readiness and score tie', () => {
+  const ranked = rankExperiments([
+    {
+      name: 'Lower fit',
+      impact: 0.8,
+      confidence: 0.8,
+      ease: 0.8,
+      pantryPalFit: 0.6,
+      readinessWeight: 0.8,
+      hypothesis: 'h1',
+      primaryMetric: 'm1',
+      acceptanceCriteria: ['c1', 'c2']
+    },
+    {
+      name: 'Higher fit',
+      impact: 0.8,
+      confidence: 0.8,
+      ease: 0.8,
+      pantryPalFit: 0.95,
+      readinessWeight: 0.8,
+      hypothesis: 'h2',
+      primaryMetric: 'm2',
+      acceptanceCriteria: ['c1', 'c2']
+    }
+  ]);
+
+  assert.equal(ranked[0].name, 'Higher fit');
+  assert.equal(ranked[1].name, 'Lower fit');
+});
+
 test('rankExperiments falls back to experiment name for deterministic ordering when scores tie', () => {
   const ranked = rankExperiments([
     {

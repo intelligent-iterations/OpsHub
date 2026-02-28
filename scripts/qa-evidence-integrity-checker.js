@@ -21,7 +21,9 @@ function parseArgs(argv) {
     failOnIssues: false,
     maxErrors: Number.POSITIVE_INFINITY,
     maxWarnings: Number.POSITIVE_INFINITY,
-    topFailures: 0
+    topFailures: 0,
+    requireGithubLinksOnly: true,
+    requireCorrectionLog: true
   };
 
   for (let i = 2; i < argv.length; i += 1) {
@@ -34,6 +36,8 @@ function parseArgs(argv) {
     else if (token === '--max-errors') args.maxErrors = parseNonNegativeInteger(argv[++i], '--max-errors');
     else if (token === '--max-warnings') args.maxWarnings = parseNonNegativeInteger(argv[++i], '--max-warnings');
     else if (token === '--top-failures') args.topFailures = parseNonNegativeInteger(argv[++i], '--top-failures');
+    else if (token === '--allow-non-github-links') args.requireGithubLinksOnly = false;
+    else if (token === '--no-correction-log-required') args.requireCorrectionLog = false;
     else if (token === '--help' || token === '-h') {
       printHelp();
       process.exit(0);
@@ -46,7 +50,7 @@ function parseArgs(argv) {
 }
 
 function printHelp() {
-  console.log(`qa-evidence-integrity-checker\n\nUsage:\n  node scripts/qa-evidence-integrity-checker.js [options]\n\nOptions:\n  --kanban <path>         Path to kanban.json (default: OpsHub/data/kanban.json)\n  --artifacts-dir <path>  Artifacts directory root (default: ../artifacts)\n  --json-out <path>       Write JSON report to file\n  --md-out <path>         Write markdown report to file\n  --fail-on-issues        Exit with code 1 if any task fails checks\n  --max-errors <n>        Exit with code 1 if total errors exceed n\n  --max-warnings <n>      Exit with code 1 if total warnings exceed n\n  --top-failures <n>      Include top n failing tasks in remediation summary\n  -h, --help              Show help`);
+  console.log(`qa-evidence-integrity-checker\n\nUsage:\n  node scripts/qa-evidence-integrity-checker.js [options]\n\nOptions:\n  --kanban <path>         Path to kanban.json (default: OpsHub/data/kanban.json)\n  --artifacts-dir <path>  Artifacts directory root (default: ../artifacts)\n  --json-out <path>       Write JSON report to file\n  --md-out <path>         Write markdown report to file\n  --fail-on-issues        Exit with code 1 if any task fails checks\n  --max-errors <n>        Exit with code 1 if total errors exceed n\n  --max-warnings <n>      Exit with code 1 if total warnings exceed n\n  --top-failures <n>      Include top n failing tasks in remediation summary\n  --allow-non-github-links  Disable GitHub-links-only evidence enforcement\n  --no-correction-log-required Disable correction-log evidence requirement\n  -h, --help              Show help`);
 }
 
 function safeReadJson(filePath) {
@@ -115,6 +119,15 @@ function existsAny(paths) {
   return paths.some((p) => fs.existsSync(p));
 }
 
+function isGitHubUrl(ref) {
+  return /^https:\/\/(?:www\.)?github\.com\//i.test(String(ref || '').trim());
+}
+
+function hasCorrectionLog(text) {
+  if (!text) return false;
+  return /(correction\s*log|correction\s*:\s*|fix\s*log|remediation\s*log)/i.test(String(text));
+}
+
 function checkTask(task, context) {
   const description = String(task.description || '');
   const evidenceRefs = extractEvidenceLinks(description);
@@ -140,6 +153,27 @@ function checkTask(task, context) {
       code: 'MISSING_SCREENSHOT_REFERENCE',
       message: 'Done task does not reference screenshot artifact (.png/.jpg/etc).',
       remediation: 'Attach and reference at least one screenshot artifact path under artifacts/.'
+    });
+  }
+
+  if (context.requireGithubLinksOnly) {
+    const nonGithubRefs = evidenceRefs.filter((ref) => !isGitHubUrl(ref));
+    if (nonGithubRefs.length > 0) {
+      issues.push({
+        severity: 'error',
+        code: 'NON_GITHUB_EVIDENCE_REFERENCE',
+        message: `Evidence refs must be GitHub URLs only: ${nonGithubRefs.join(', ')}`,
+        remediation: 'Replace local file paths/raw artifact refs with canonical GitHub blob/commit/PR URLs.'
+      });
+    }
+  }
+
+  if (context.requireCorrectionLog && !hasCorrectionLog(description)) {
+    issues.push({
+      severity: 'warn',
+      code: 'MISSING_CORRECTION_LOG',
+      message: 'Done task does not include correction/remediation log language in description.',
+      remediation: 'Add a Correction log section summarizing what was fixed and verification outcome.'
     });
   }
 
@@ -262,7 +296,9 @@ function main() {
 
   const context = {
     kanbanDir: path.dirname(args.kanban),
-    artifactsDir: args.artifactsDir
+    artifactsDir: args.artifactsDir,
+    requireGithubLinksOnly: args.requireGithubLinksOnly,
+    requireCorrectionLog: args.requireCorrectionLog
   };
 
   const results = doneTasks.map((task) => checkTask(task, context));
@@ -310,6 +346,8 @@ function main() {
 module.exports = {
   parseArgs,
   extractEvidenceLinks,
+  isGitHubUrl,
+  hasCorrectionLog,
   checkTask,
   summarize,
   toMarkdown,
