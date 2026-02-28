@@ -1,0 +1,157 @@
+{
+  "generatedAt": "2026-02-28T00:46:56.967Z",
+  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+  "applyMode": false,
+  "syntheticCandidates": [
+    {
+      "taskId": "d21285c7-25c0-4f02-b9df-7c911bc69625",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:16:21.649Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "2f04d5e2-608d-400a-aff3-d7a93b005a8f",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:26:03.832Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "6570c950-29fb-4d84-834d-2ac67cd23a6d",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:26:14.715Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "144d061b-ead1-4ece-aab9-8fa62707658b",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:27:18.651Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "ce9b64fa-6cac-4311-bb22-8b141fe75128",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:30:46.542Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "d16297fd-426f-4f41-b818-aaabe8ad6e83",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:30:52.461Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "70dacfbc-b606-403c-a1ee-075a836f3849",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:04:40.505Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "0f346228-ab38-4076-835a-aba0411b0d43",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:08:07.098Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "ee3e2bc7-39ba-4f77-a620-2edd38154546",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-27T23:56:19.371Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "f8005135-e64b-4478-a08a-de2d5d3fca0b",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:13:11.374Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "5b453af5-1cc5-4507-bc76-28ac94311724",
+      "taskName": "Integration dashboard task",
+      "column": "todo",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:14:41.306Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "592fc46c-f0ae-4d97-9f3d-224f0cdb00b1",
+      "taskName": "Integration dashboard task",
+      "column": "inProgress",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:44:10.290Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "d12dc166-910d-4287-9335-07fe1860c0e5",
+      "taskName": "Integration dashboard task",
+      "column": "inProgress",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:42:11.855Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "b1f42664-77f7-4309-81f3-7c111bf3afd4",
+      "taskName": "Integration dashboard task",
+      "column": "inProgress",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:41:59.962Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "1addb332-5fae-49ee-b7bc-635ba14b117e",
+      "taskName": "Integration dashboard task",
+      "column": "inProgress",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:40:45.164Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "deeb4f62-e529-4d59-bf53-99ca69bb48c4",
+      "taskName": "Integration dashboard task",
+      "column": "inProgress",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:38:16.295Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "40db1e3c-f1d6-4c82-966d-f293fd4fb247",
+      "taskName": "Integration dashboard task",
+      "column": "inProgress",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:37:05.041Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    },
+    {
+      "taskId": "435d594b-11ed-42ec-a230-3067bf2f996c",
+      "taskName": "Integration dashboard task",
+      "column": "inProgress",
+      "source": "manual",
+      "createdAt": "2026-02-28T00:36:51.111Z",
+      "reason": "matches synthetic Integration dashboard task fingerprint"
+    }
+  ],
+  "movedTaskIds": [],
+  "summary": {
+    "syntheticCandidates": 18,
+    "quarantinedCount": 0,
+    "rollupId": null
+  }
+}
