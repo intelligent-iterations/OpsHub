@@ -19,6 +19,7 @@ const {
   summarizeQueueScores,
   summarizeValidationCoverage,
   summarizeOwnerLoad,
+  classifyLaunchRisk,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
@@ -329,6 +330,13 @@ test('summarizeOwnerLoad reports per-owner ready/blocked totals and average scor
   ]);
 });
 
+
+test('classifyLaunchRisk grades high/medium/low launch posture from readiness and validation coverage', () => {
+  assert.equal(classifyLaunchRisk({ readyTasks: 0, blockedTasks: 2, readinessPct: 0, executableValidationPct: 100 }), 'high');
+  assert.equal(classifyLaunchRisk({ readyTasks: 2, blockedTasks: 3, readinessPct: 65, executableValidationPct: 90 }), 'medium');
+  assert.equal(classifyLaunchRisk({ readyTasks: 4, blockedTasks: 1, readinessPct: 80, executableValidationPct: 100 }), 'low');
+});
+
 test('createTaskAcceptanceAudit reports average criteria coverage and below-threshold tasks', () => {
   const audit = createTaskAcceptanceAudit([
     { id: 'PP-GROWTH-001', acceptanceCriteria: ['a', 'b', 'c', 'd', 'e', 'f'] },
@@ -388,6 +396,8 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.ownerLoad.length, 1);
   assert.equal(health.ownerLoad[0].owner, 'growth-oncall');
   assert.equal(health.ownerLoad[0].blocked, 1);
+  assert.equal(health.readyToBlockedRatio, 0);
+  assert.equal(health.launchRisk, 'high');
   assert.match(health.nextAction, /Resolve blockers or auto-seed fresh PantryPal experiments/);
 });
 
@@ -571,6 +581,8 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
       validationCoveragePct: 100,
       executableValidationPct: 100,
       ownerLoad: [{ owner: 'growth', total: 1, ready: 1, blocked: 0, avgScore: 91.23 }],
+      readyToBlockedRatio: Number.POSITIVE_INFINITY,
+      launchRisk: 'low',
       nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
     }
   );
@@ -590,6 +602,8 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Validation coverage: 1\/1 tasks \(100%\)/);
   assert.match(markdown, /Executable validation commands: 1\/1 tasks \(100%\)/);
   assert.match(markdown, /Owner load: growth total 1 \(ready 1, blocked 0, avg 91.23\)/);
+  assert.match(markdown, /Ready\/blocked ratio: inf/);
+  assert.match(markdown, /Launch risk: low/);
   assert.match(markdown, /Next action: Execute top ready PantryPal experiment now/);
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Critical Acceptance Checklist/);

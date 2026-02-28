@@ -402,6 +402,18 @@ function summarizeOwnerLoad(taskQueue = []) {
     .sort((a, b) => b.total - a.total || b.ready - a.ready || b.avgScore - a.avgScore || a.owner.localeCompare(b.owner));
 }
 
+function classifyLaunchRisk({ readyTasks = 0, blockedTasks = 0, readinessPct = 0, executableValidationPct = 0 } = {}) {
+  if (readyTasks <= 0 || readinessPct < 40 || executableValidationPct < 50) {
+    return 'high';
+  }
+
+  if (blockedTasks > readyTasks || readinessPct < 70 || executableValidationPct < 80) {
+    return 'medium';
+  }
+
+  return 'low';
+}
+
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
@@ -423,6 +435,15 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const scoreSummary = summarizeQueueScores(queue);
   const validationCoverage = summarizeValidationCoverage(queue);
   const ownerLoad = summarizeOwnerLoad(queue);
+  const readyToBlockedRatio = blockedTasks > 0
+    ? Number((readyTasks / blockedTasks).toFixed(2))
+    : (readyTasks > 0 ? Number.POSITIVE_INFINITY : 0);
+  const launchRisk = classifyLaunchRisk({
+    readyTasks,
+    blockedTasks,
+    readinessPct,
+    executableValidationPct: validationCoverage.executableValidationPct
+  });
 
   return {
     incomingExperiments: experiments.length,
@@ -454,6 +475,8 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     validationCoveragePct: validationCoverage.validationCoveragePct,
     executableValidationPct: validationCoverage.executableValidationPct,
     ownerLoad,
+    readyToBlockedRatio,
+    launchRisk,
     nextAction: blockedTasks > 0 && readyTasks === 0
       ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
       : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
@@ -598,6 +621,8 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Validation coverage: ${health.tasksWithValidation ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks (${health.validationCoveragePct ?? 'n/a'}%)`,
       `Executable validation commands: ${health.executableValidations ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks (${health.executableValidationPct ?? 'n/a'}%)`,
       `Owner load: ${(health.ownerLoad || []).length ? health.ownerLoad.map((entry) => `${entry.owner} total ${entry.total} (ready ${entry.ready}, blocked ${entry.blocked}, avg ${entry.avgScore})`).join('; ') : 'none'}`,
+      `Ready/blocked ratio: ${health.readyToBlockedRatio === Number.POSITIVE_INFINITY ? 'inf' : (health.readyToBlockedRatio ?? 'n/a')}`,
+      `Launch risk: ${health.launchRisk ?? 'n/a'}`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
       `Ready capacity light: ${health.isReadyCapacityLight ? 'yes' : 'no'} (threshold: ${health.readyLightThreshold ?? 1})`,
       `Next action: ${health.nextAction ?? 'n/a'}`
@@ -690,6 +715,8 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Validation coverage: ${health?.tasksWithValidation ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks (${health?.validationCoveragePct ?? 'n/a'}%)`);
   lines.push(`Executable validation commands: ${health?.executableValidations ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks (${health?.executableValidationPct ?? 'n/a'}%)`);
   lines.push(`Owner load: ${(health?.ownerLoad || []).length ? health.ownerLoad.map((entry) => `${entry.owner} total ${entry.total} (ready ${entry.ready}, blocked ${entry.blocked}, avg ${entry.avgScore})`).join('; ') : 'none'}`);
+  lines.push(`Ready/blocked ratio: ${health?.readyToBlockedRatio === Number.POSITIVE_INFINITY ? 'inf' : (health?.readyToBlockedRatio ?? 'n/a')}`);
+  lines.push(`Launch risk: ${health?.launchRisk ?? 'n/a'}`);
   lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
 
   lines.push('', '## Validation result');
@@ -1034,6 +1061,7 @@ module.exports = {
   summarizeQueueScores,
   summarizeValidationCoverage,
   summarizeOwnerLoad,
+  classifyLaunchRisk,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
