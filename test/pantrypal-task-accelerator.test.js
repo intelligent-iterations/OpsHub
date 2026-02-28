@@ -141,6 +141,23 @@ test('buildQueueWithAutoSeed backfills to meet requested limit when queue is lig
   assert.ok(queue.every((task) => task.owner === 'growth-oncall'));
 });
 
+test('buildQueueWithAutoSeed respects seedMaxTasks cap when queue is light', () => {
+  const experiments = [
+    { name: 'Strong baseline', impact: 0.88, confidence: 0.82, ease: 0.8, pantryPalFit: 0.94 }
+  ];
+
+  const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
+    minimumScore: 70,
+    limit: 5,
+    lightThreshold: 2,
+    seedMaxTasks: 1,
+    defaultOwner: 'growth-oncall'
+  });
+
+  assert.equal(seeded, true);
+  assert.equal(queue.length, 2);
+});
+
 
 test('summarizeBlockedReasons returns frequency-ranked blocker reasons', () => {
   const blockers = summarizeBlockedReasons([
@@ -378,7 +395,8 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
     '--limit', '5',
     '--minimum-score=82',
     '--light-threshold', '4',
-    '--minimum-criteria', '7'
+    '--minimum-criteria', '7',
+    '--seed-max-tasks', '2'
   ]);
 
   assert.equal(options.outputFormat, 'json');
@@ -386,6 +404,7 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
   assert.equal(options.minimumScore, 82);
   assert.equal(options.lightThreshold, 4);
   assert.equal(options.minimumCriteria, 7);
+  assert.equal(options.seedMaxTasks, 2);
   assert.equal(options.validate, true);
 });
 

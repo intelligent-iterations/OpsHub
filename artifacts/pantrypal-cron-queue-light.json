@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-02-28T03:39:59.126Z",
+  "seeded": true,
+  "sync": {
+    "synced": false,
+    "inserted": 0,
+    "reason": "Sync disabled."
+  },
+  "health": {
+    "incomingExperiments": 1,
+    "eligibleExperiments": 1,
+    "queueSize": 2,
+    "readyTasks": 2,
+    "blockedTasks": 0,
+    "readinessPct": 100,
+    "topBlockedReasons": [],
+    "isLight": true,
+    "threshold": 2,
+    "minimumScore": 75,
+    "averageCriteriaCount": 6,
+    "minimumCriteria": 6,
+    "tasksBelowCriteriaThreshold": [],
+    "nextAction": "Execute top ready PantryPal experiment now and monitor first-hour guardrail."
+  },
+  "queue": [
+    {
+      "id": "PP-GROWTH-001-pantry-rescue-nudge-after-idle-weekend",
+      "title": "Pantry rescue nudge after idle weekend",
+      "score": 80.5,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+      "acceptanceCriteria": [
+        "Experiment spec includes hypothesis, segment, channel, and success metric (72h rescue plan creation rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 8%.",
+        "Sample-size gate is defined: at least 1100 qualified households over 10 days.",
+        "Guardrail is monitored and passes: notification mute rate stays below 1.7%.",
+        "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
+        "Decision log is updated with launch date, owner, and rollback trigger."
+      ],
+      "blockedReasons": [],
+      "isReady": true
+    },
+    {
+      "id": "PP-GROWTH-002-rescue-streak-comeback-experiment-for-lapsed-households",
+      "title": "Rescue streak comeback experiment for lapsed households",
+      "score": 79.75,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
+      "acceptanceCriteria": [
+        "Experiment spec includes hypothesis, segment, channel, and success metric (week-2 rescue completion rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 10%.",
+        "Sample-size gate is defined: at least 1600 qualified households over 14 days.",
+        "Guardrail is monitored and passes: notification opt-out rate stays below 1.5%.",
+        "Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.",
+        "Decision log is updated with launch date, owner, and rollback trigger."
+      ],
+      "blockedReasons": [],
+      "isReady": true
+    }
+  ],
+  "immediateExecution": {
+    "taskId": "PP-GROWTH-001-pantry-rescue-nudge-after-idle-weekend",
+    "title": "Pantry rescue nudge after idle weekend",
+    "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+    "acceptanceChecklist": [
+      "Experiment spec includes hypothesis, segment, channel, and success metric (72h rescue plan creation rate).",
+      "A/B test is configured with event instrumentation and minimum detectable lift target of 8%.",
+      "Sample-size gate is defined: at least 1100 qualified households over 10 days."
+    ],
+    "executionNow": [
+      "Draft experiment brief in tracker with owner + rollout window.",
+      "Prepare treatment/control variants and QA events in staging.",
+      "Gate launch against acceptance checklist (3 critical checks).",
+      "Run validation: npm test -- test/pantrypal-task-accelerator.test.js.",
+      "Launch to 10% holdout split and monitor first-hour guardrail."
+    ]
+  },
+  "validation": {
+    "status": "PASS",
+    "command": "npm test -- test/pantrypal-task-accelerator.test.js",
+    "exitCode": 0,
+    "durationMs": 191,
+    "outputSnippet": "# tests 35\n# suites 0\n# pass 35\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 63.033875"
+  }
+}

@@ -25,6 +25,7 @@ node scripts/pantrypal-task-accelerator.js --json
 - `--limit <n>` cap queue size (default: `3`)
 - `--minimum-score <n>` filter by score before ranking (default: `75`)
 - `--light-threshold <n>` queue-light threshold for auto-seeding (default: `2`)
+- `--seed-max-tasks <n>` cap how many auto-seeded experiments can be injected during a light-queue cycle (default: computed gap-to-target)
 - `--experiments-file <path>` load experiment candidates from JSON array
 - `--default-owner <owner>` owner attached to generated queue cards
 - `--validation-command <cmd>` override validation command applied to seeded tasks

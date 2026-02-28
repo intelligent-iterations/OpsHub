@@ -163,9 +163,12 @@ function buildQueueWithAutoSeed(experiments, options = {}) {
   if (isQueueLight(queue, options.lightThreshold)) {
     const desiredQueueSize = Math.max(options.limit ?? 3, (options.lightThreshold ?? 2) + 1);
     const missingCount = Math.max(0, desiredQueueSize - queue.length);
+    const requestedSeedTasks = Number.isFinite(options.seedMaxTasks) && options.seedMaxTasks > 0
+      ? Math.floor(options.seedMaxTasks)
+      : missingCount;
     const seeds = createAdaptiveSeedTasks(experiments, {
       validationCommand: options.validationCommand,
-      maxTasks: missingCount
+      maxTasks: requestedSeedTasks
     });
 
     if (seeds.length) {
@@ -493,7 +496,8 @@ function parseCliOptions(argv = []) {
     executionBriefOut: null,
     syncKanban: false,
     kanbanFile: null,
-    readyOnlySync: false
+    readyOnlySync: false,
+    seedMaxTasks: null
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -506,7 +510,8 @@ function parseCliOptions(argv = []) {
     const integerFlagMap = {
       '--limit': 'limit',
       '--light-threshold': 'lightThreshold',
-      '--minimum-criteria': 'minimumCriteria'
+      '--minimum-criteria': 'minimumCriteria',
+      '--seed-max-tasks': 'seedMaxTasks'
     };
 
     if (rawFlag in integerFlagMap) {
@@ -708,7 +713,8 @@ if (require.main === module) {
     limit: cliOptions.limit,
     minimumScore: cliOptions.minimumScore,
     lightThreshold: cliOptions.lightThreshold,
-    validationCommand: cliOptions.validationCommand
+    validationCommand: cliOptions.validationCommand,
+    seedMaxTasks: cliOptions.seedMaxTasks
   });
 
   const executionPlan = pickImmediateExecution(queue);

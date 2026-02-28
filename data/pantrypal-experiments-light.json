@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Pantry rescue nudge after idle weekend",
+    "impact": 0.79,
+    "confidence": 0.72,
+    "ease": 0.78,
+    "pantryPalFit": 0.95,
+    "primaryMetric": "72h rescue plan creation rate",
+    "targetLiftPct": 8,
+    "minimumSampleSize": 1100,
+    "experimentWindowDays": 10,
+    "guardrail": "notification mute rate stays below 1.7%",
+    "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js"
+  }
+]
