@@ -1,6 +1,6 @@
 # PantryPal Task Queue (Auto-generated)
 
-- [ ] PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter — Friday night rescue reminder with 20-minute cook filter (score: 81.20, owner: growth-cron)
+- [ ] PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter — Friday night rescue reminder with 20-minute cook filter (score: 81.90, owner: growth-oncall)
   - Acceptance criteria:
     - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).
     - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 9%.
@@ -8,32 +8,40 @@
     - [ ] Guardrail is monitored and passes: notification opt-out rate stays below 1.6%.
     - [ ] Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.
     - [ ] Decision log is updated with launch date, owner, and rollback trigger.
-- [ ] PP-GROWTH-002-rescue-streak-comeback-experiment-for-lapsed-households — Rescue streak comeback experiment for lapsed households (score: 78.95, owner: growth-cron)
+- [ ] PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households — Post-checkout pantry scan nudge for first-week households (score: 81.45, owner: growth-oncall)
   - Acceptance criteria:
-    - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (week-2 rescue completion rate).
-    - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 10%.
-    - [ ] Sample-size gate is defined: at least 1600 qualified households over 14 days.
-    - [ ] Guardrail is monitored and passes: notification opt-out rate stays below 1.5%.
-    - [ ] Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.
+    - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (week-1 pantry scan completion rate).
+    - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 8%.
+    - [ ] Sample-size gate is defined: at least 1700 qualified households over 14 days.
+    - [ ] Guardrail is monitored and passes: session abandonment does not increase by >1.2%.
+    - [ ] Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.
     - [ ] Decision log is updated with launch date, owner, and rollback trigger.
-- [ ] PP-GROWTH-003-smart-defrost-reminder-timing-tuned-by-prep-time-tier — Smart defrost reminder timing tuned by prep-time tier (score: 76.45, owner: growth-cron)
+- [ ] PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill — Sunday prep planner with expiring-ingredient auto-fill (score: 80.85, owner: growth-oncall)
   - Acceptance criteria:
-    - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).
-    - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 7%.
-    - [ ] Sample-size gate is defined: at least 1400 qualified households over 10 days.
-    - [ ] Guardrail is monitored and passes: push dismiss rate does not increase by >2%.
+    - [ ] Experiment spec includes hypothesis, segment, channel, and success metric (weekly rescue plan creation rate).
+    - [ ] A/B test is configured with event instrumentation and minimum detectable lift target of 11%.
+    - [ ] Sample-size gate is defined: at least 1800 qualified households over 14 days.
+    - [ ] Guardrail is monitored and passes: recipe dismiss rate stays below 18%.
     - [ ] Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.
     - [ ] Decision log is updated with launch date, owner, and rollback trigger.
 
 ## Queue Health
-Incoming experiments: 1
-Eligible experiments (minimum score): 1
+Incoming experiments: 3
+Eligible experiments (minimum score): 3
 Queue size: 3
 Ready tasks: 3
 Blocked tasks: 0
 Readiness: 100%
 Top blockers: none
+Score summary: avg 81.4, median 81.45, min 80.85, max 81.9
+Score by readiness: ready avg 81.4, blocked avg 0
+Acceptance criteria coverage: 3/3 tasks meet minimum 6 checks
+Average criteria per task: 6
+Tasks below criteria threshold: 0
+Validation coverage: 3/3 tasks (100%)
+Executable validation commands: 3/3 tasks (100%)
 Queue light: no (threshold: 2)
+Ready capacity light: no (threshold: 1)
 Next action: Execute top ready PantryPal experiment now and monitor first-hour guardrail.
 
 ## Execute Immediately
@@ -54,15 +62,15 @@ Top task: PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter 
 Status: PASS
 Command: npm test -- test/pantrypal-task-accelerator.test.js
 Exit code: 0
-Duration: 187ms
+Duration: 189ms
 Recent output:
 ```
-# tests 24
+# tests 39
 # suites 0
-# pass 24
+# pass 39
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 58.779792
+# duration_ms 65.980292
 ```

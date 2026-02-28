@@ -1,25 +1,46 @@
 {
-  "generatedAt": "2026-02-28T02:44:19.297Z",
-  "seeded": true,
+  "generatedAt": "2026-02-28T04:08:18.457Z",
+  "seeded": false,
+  "sync": {
+    "synced": false,
+    "inserted": 0,
+    "reason": "Sync disabled."
+  },
   "health": {
-    "incomingExperiments": 1,
-    "eligibleExperiments": 1,
+    "incomingExperiments": 3,
+    "eligibleExperiments": 3,
     "queueSize": 3,
     "readyTasks": 3,
     "blockedTasks": 0,
     "readinessPct": 100,
     "topBlockedReasons": [],
+    "scoreAverage": 81.4,
+    "scoreMedian": 81.45,
+    "scoreMin": 80.85,
+    "scoreMax": 81.9,
+    "scoreReadyAverage": 81.4,
+    "scoreBlockedAverage": 0,
     "isLight": false,
+    "isReadyCapacityLight": false,
     "threshold": 2,
+    "readyLightThreshold": 1,
     "minimumScore": 75,
+    "averageCriteriaCount": 6,
+    "minimumCriteria": 6,
+    "tasksMeetingMinimum": 3,
+    "tasksBelowCriteriaThreshold": [],
+    "tasksWithValidation": 3,
+    "executableValidations": 3,
+    "validationCoveragePct": 100,
+    "executableValidationPct": 100,
     "nextAction": "Execute top ready PantryPal experiment now and monitor first-hour guardrail."
   },
   "queue": [
     {
       "id": "PP-GROWTH-001-friday-night-rescue-reminder-with-20-minute-cook-filter",
       "title": "Friday night rescue reminder with 20-minute cook filter",
-      "score": 81.2,
-      "owner": "growth-cron",
+      "score": 81.9,
+      "owner": "growth-oncall",
       "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
       "acceptanceCriteria": [
         "Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).",
@@ -33,33 +54,33 @@
       "isReady": true
     },
     {
-      "id": "PP-GROWTH-002-rescue-streak-comeback-experiment-for-lapsed-households",
-      "title": "Rescue streak comeback experiment for lapsed households",
-      "score": 78.95,
-      "owner": "growth-cron",
-      "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
+      "id": "PP-GROWTH-002-post-checkout-pantry-scan-nudge-for-first-week-households",
+      "title": "Post-checkout pantry scan nudge for first-week households",
+      "score": 81.45,
+      "owner": "growth-oncall",
+      "validationCommand": "npm test -- test/pantrypal-growth-experiment-prioritizer.test.js",
       "acceptanceCriteria": [
-        "Experiment spec includes hypothesis, segment, channel, and success metric (week-2 rescue completion rate).",
-        "A/B test is configured with event instrumentation and minimum detectable lift target of 10%.",
-        "Sample-size gate is defined: at least 1600 qualified households over 14 days.",
-        "Guardrail is monitored and passes: notification opt-out rate stays below 1.5%.",
-        "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
+        "Experiment spec includes hypothesis, segment, channel, and success metric (week-1 pantry scan completion rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 8%.",
+        "Sample-size gate is defined: at least 1700 qualified households over 14 days.",
+        "Guardrail is monitored and passes: session abandonment does not increase by >1.2%.",
+        "Validation completed with command: npm test -- test/pantrypal-growth-experiment-prioritizer.test.js.",
         "Decision log is updated with launch date, owner, and rollback trigger."
       ],
       "blockedReasons": [],
       "isReady": true
     },
     {
-      "id": "PP-GROWTH-003-smart-defrost-reminder-timing-tuned-by-prep-time-tier",
-      "title": "Smart defrost reminder timing tuned by prep-time tier",
-      "score": 76.45,
-      "owner": "growth-cron",
+      "id": "PP-GROWTH-003-sunday-prep-planner-with-expiring-ingredient-auto-fill",
+      "title": "Sunday prep planner with expiring-ingredient auto-fill",
+      "score": 80.85,
+      "owner": "growth-oncall",
       "validationCommand": "npm test -- test/pantrypal-task-accelerator.test.js",
       "acceptanceCriteria": [
-        "Experiment spec includes hypothesis, segment, channel, and success metric (same-day rescue completion rate).",
-        "A/B test is configured with event instrumentation and minimum detectable lift target of 7%.",
-        "Sample-size gate is defined: at least 1400 qualified households over 10 days.",
-        "Guardrail is monitored and passes: push dismiss rate does not increase by >2%.",
+        "Experiment spec includes hypothesis, segment, channel, and success metric (weekly rescue plan creation rate).",
+        "A/B test is configured with event instrumentation and minimum detectable lift target of 11%.",
+        "Sample-size gate is defined: at least 1800 qualified households over 14 days.",
+        "Guardrail is monitored and passes: recipe dismiss rate stays below 18%.",
         "Validation completed with command: npm test -- test/pantrypal-task-accelerator.test.js.",
         "Decision log is updated with launch date, owner, and rollback trigger."
       ],
@@ -88,7 +109,7 @@
     "status": "PASS",
     "command": "npm test -- test/pantrypal-task-accelerator.test.js",
     "exitCode": 0,
-    "durationMs": 184,
-    "outputSnippet": "# tests 24\n# suites 0\n# pass 24\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 59.168542"
+    "durationMs": 193,
+    "outputSnippet": "# tests 39\n# suites 0\n# pass 39\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 66.17625"
   }
 }

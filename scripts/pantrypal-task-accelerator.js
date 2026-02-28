@@ -290,6 +290,26 @@ function summarizeQueueScores(taskQueue = []) {
   };
 }
 
+function summarizeValidationCoverage(taskQueue = []) {
+  const tasksWithValidation = taskQueue.filter((task) => typeof task?.validationCommand === 'string' && task.validationCommand.trim().length > 0);
+  const executableValidations = tasksWithValidation.filter((task) => /test\/(pantrypal|.*pantrypal)/.test(task.validationCommand));
+
+  const queueSize = taskQueue.length;
+  const validationCoveragePct = queueSize
+    ? Math.round((tasksWithValidation.length / queueSize) * 100)
+    : 0;
+  const executableValidationPct = queueSize
+    ? Math.round((executableValidations.length / queueSize) * 100)
+    : 0;
+
+  return {
+    tasksWithValidation: tasksWithValidation.length,
+    executableValidations: executableValidations.length,
+    validationCoveragePct,
+    executableValidationPct
+  };
+}
+
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
@@ -304,6 +324,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const topBlockedReasons = summarizeBlockedReasons(queue);
   const acceptanceAudit = createTaskAcceptanceAudit(queue, options.minimumCriteria);
   const scoreSummary = summarizeQueueScores(queue);
+  const validationCoverage = summarizeValidationCoverage(queue);
 
   return {
     incomingExperiments: experiments.length,
@@ -328,6 +349,10 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     minimumCriteria: acceptanceAudit.minimumCriteria,
     tasksMeetingMinimum: acceptanceAudit.tasksMeetingMinimum,
     tasksBelowCriteriaThreshold: acceptanceAudit.tasksBelowMinimum,
+    tasksWithValidation: validationCoverage.tasksWithValidation,
+    executableValidations: validationCoverage.executableValidations,
+    validationCoveragePct: validationCoverage.validationCoveragePct,
+    executableValidationPct: validationCoverage.executableValidationPct,
     nextAction: blockedTasks > 0 && readyTasks === 0
       ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
       : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
@@ -457,6 +482,8 @@ function formatTaskMarkdown(taskQueue, executionPlan, validationResult = null, h
       `Acceptance criteria coverage: ${health.tasksMeetingMinimum ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks meet minimum ${health.minimumCriteria ?? 'n/a'} checks`,
       `Average criteria per task: ${health.averageCriteriaCount ?? 'n/a'}`,
       `Tasks below criteria threshold: ${(health.tasksBelowCriteriaThreshold || []).length}`,
+      `Validation coverage: ${health.tasksWithValidation ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks (${health.validationCoveragePct ?? 'n/a'}%)`,
+      `Executable validation commands: ${health.executableValidations ?? 'n/a'}/${health.queueSize ?? 'n/a'} tasks (${health.executableValidationPct ?? 'n/a'}%)`,
       `Queue light: ${health.isLight ? 'yes' : 'no'} (threshold: ${health.threshold})`,
       `Ready capacity light: ${health.isReadyCapacityLight ? 'yes' : 'no'} (threshold: ${health.readyLightThreshold ?? 1})`,
       `Next action: ${health.nextAction ?? 'n/a'}`
@@ -546,6 +573,8 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Acceptance criteria coverage: ${health?.tasksMeetingMinimum ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks meet minimum ${health?.minimumCriteria ?? 'n/a'} checks`);
   lines.push(`Average criteria per task: ${health?.averageCriteriaCount ?? 'n/a'}`);
   lines.push(`Tasks below criteria threshold: ${(health?.tasksBelowCriteriaThreshold || []).length}`);
+  lines.push(`Validation coverage: ${health?.tasksWithValidation ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks (${health?.validationCoveragePct ?? 'n/a'}%)`);
+  lines.push(`Executable validation commands: ${health?.executableValidations ?? 'n/a'}/${health?.queueSize ?? 'n/a'} tasks (${health?.executableValidationPct ?? 'n/a'}%)`);
   lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
 
   lines.push('', '## Validation result');
@@ -851,6 +880,7 @@ module.exports = {
   buildQueueWithAutoSeed,
   summarizeBlockedReasons,
   summarizeQueueScores,
+  summarizeValidationCoverage,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,

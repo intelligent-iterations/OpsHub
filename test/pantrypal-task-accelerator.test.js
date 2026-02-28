@@ -17,6 +17,7 @@ const {
   buildQueueWithAutoSeed,
   summarizeBlockedReasons,
   summarizeQueueScores,
+  summarizeValidationCoverage,
   createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
@@ -222,6 +223,20 @@ test('summarizeQueueScores reports central tendency and readiness split', () => 
   assert.equal(summary.blockedAverage, 70);
 });
 
+test('summarizeValidationCoverage reports command coverage and executable ratio', () => {
+  const summary = summarizeValidationCoverage([
+    { id: 'PP-1', validationCommand: 'npm test -- test/pantrypal-task-accelerator.test.js' },
+    { id: 'PP-2', validationCommand: 'npm run lint' },
+    { id: 'PP-3', validationCommand: '' },
+    { id: 'PP-4' }
+  ]);
+
+  assert.equal(summary.tasksWithValidation, 2);
+  assert.equal(summary.executableValidations, 1);
+  assert.equal(summary.validationCoveragePct, 50);
+  assert.equal(summary.executableValidationPct, 25);
+});
+
 test('createTaskAcceptanceAudit reports average criteria coverage and below-threshold tasks', () => {
   const audit = createTaskAcceptanceAudit([
     { id: 'PP-GROWTH-001', acceptanceCriteria: ['a', 'b', 'c', 'd', 'e', 'f'] },
@@ -236,7 +251,15 @@ test('createTaskAcceptanceAudit reports average criteria coverage and below-thre
 
 test('createQueueHealthSnapshot reports light queue, readiness, and minimum score eligibility', () => {
   const experiments = [
-    { name: 'Strong', impact: 0.9, confidence: 0.8, ease: 0.8, pantryPalFit: 0.9, externalDependency: 'legal sign-off' },
+    {
+      name: 'Strong',
+      impact: 0.9,
+      confidence: 0.8,
+      ease: 0.8,
+      pantryPalFit: 0.9,
+      externalDependency: 'legal sign-off',
+      validationCommand: 'npm test -- test/pantrypal-task-accelerator.test.js'
+    },
     { name: 'Weak', impact: 0.5, confidence: 0.5, ease: 0.5, pantryPalFit: 0.5 }
   ];
   const queue = buildTaskQueue(experiments, { minimumScore: 60, limit: 3 });
@@ -264,6 +287,10 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.averageCriteriaCount, 6);
   assert.equal(health.minimumCriteria, 6);
   assert.deepEqual(health.tasksBelowCriteriaThreshold, []);
+  assert.equal(health.tasksWithValidation, 1);
+  assert.equal(health.executableValidations, 1);
+  assert.equal(health.validationCoveragePct, 100);
+  assert.equal(health.executableValidationPct, 100);
   assert.match(health.nextAction, /Resolve blockers or auto-seed fresh PantryPal experiments/);
 });
 
@@ -405,6 +432,10 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
       tasksMeetingMinimum: 1,
       averageCriteriaCount: 6.5,
       tasksBelowCriteriaThreshold: [],
+      tasksWithValidation: 1,
+      executableValidations: 1,
+      validationCoveragePct: 100,
+      executableValidationPct: 100,
       nextAction: 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
     }
   );
@@ -421,6 +452,8 @@ test('formatTaskMarkdown renders queue execution and validation section', () => 
   assert.match(markdown, /Acceptance criteria coverage: 1\/1 tasks meet minimum 6 checks/);
   assert.match(markdown, /Average criteria per task: 6.5/);
   assert.match(markdown, /Tasks below criteria threshold: 0/);
+  assert.match(markdown, /Validation coverage: 1\/1 tasks \(100%\)/);
+  assert.match(markdown, /Executable validation commands: 1\/1 tasks \(100%\)/);
   assert.match(markdown, /Next action: Execute top ready PantryPal experiment now/);
   assert.match(markdown, /Execute Immediately/);
   assert.match(markdown, /Critical Acceptance Checklist/);
