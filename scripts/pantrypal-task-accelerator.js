@@ -202,6 +202,32 @@ function summarizeBlockedReasons(taskQueue, limit = 3) {
     .map(([reason, count]) => ({ reason, count }));
 }
 
+
+function createTaskAcceptanceAudit(taskQueue, minimumCriteria = 6) {
+  const normalizedMinimum = Number.isFinite(minimumCriteria) && minimumCriteria > 0
+    ? Math.floor(minimumCriteria)
+    : 6;
+
+  const taskAudits = taskQueue.map((task) => {
+    const criteriaCount = Array.isArray(task.acceptanceCriteria) ? task.acceptanceCriteria.length : 0;
+    return {
+      taskId: task.id,
+      criteriaCount,
+      meetsMinimum: criteriaCount >= normalizedMinimum
+    };
+  });
+
+  const tasksBelowMinimum = taskAudits.filter((task) => !task.meetsMinimum).map((task) => task.taskId);
+  const totalCriteria = taskAudits.reduce((sum, task) => sum + task.criteriaCount, 0);
+
+  return {
+    minimumCriteria: normalizedMinimum,
+    averageCriteriaCount: taskAudits.length ? Number((totalCriteria / taskAudits.length).toFixed(2)) : 0,
+    tasksBelowMinimum,
+    tasksMeetingMinimum: taskAudits.length - tasksBelowMinimum.length
+  };
+}
+
 function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const minimumScore = options.minimumScore;
   const threshold = options.lightThreshold ?? 2;
@@ -213,6 +239,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
   const blockedTasks = Math.max(0, queue.length - readyTasks);
   const readinessPct = queue.length ? Math.round((readyTasks / queue.length) * 100) : 0;
   const topBlockedReasons = summarizeBlockedReasons(queue);
+  const acceptanceAudit = createTaskAcceptanceAudit(queue, options.minimumCriteria);
 
   return {
     incomingExperiments: experiments.length,
@@ -225,6 +252,9 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
     isLight: isQueueLight(queue, threshold),
     threshold,
     minimumScore: typeof minimumScore === 'number' ? minimumScore : null,
+    averageCriteriaCount: acceptanceAudit.averageCriteriaCount,
+    minimumCriteria: acceptanceAudit.minimumCriteria,
+    tasksBelowCriteriaThreshold: acceptanceAudit.tasksBelowMinimum,
     nextAction: blockedTasks > 0 && readyTasks === 0
       ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
       : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
@@ -528,6 +558,7 @@ module.exports = {
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
   summarizeBlockedReasons,
+  createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
   runValidationCommand,

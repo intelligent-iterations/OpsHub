@@ -14,6 +14,7 @@ const {
   createAdaptiveSeedTasks,
   buildQueueWithAutoSeed,
   summarizeBlockedReasons,
+  createTaskAcceptanceAudit,
   createQueueHealthSnapshot,
   pickImmediateExecution,
   runValidationCommand,
@@ -151,6 +152,19 @@ test('summarizeBlockedReasons returns frequency-ranked blocker reasons', () => {
   ]);
 });
 
+
+test('createTaskAcceptanceAudit reports average criteria coverage and below-threshold tasks', () => {
+  const audit = createTaskAcceptanceAudit([
+    { id: 'PP-GROWTH-001', acceptanceCriteria: ['a', 'b', 'c', 'd', 'e', 'f'] },
+    { id: 'PP-GROWTH-002', acceptanceCriteria: ['a', 'b', 'c'] }
+  ], 5);
+
+  assert.equal(audit.minimumCriteria, 5);
+  assert.equal(audit.averageCriteriaCount, 4.5);
+  assert.deepEqual(audit.tasksBelowMinimum, ['PP-GROWTH-002']);
+  assert.equal(audit.tasksMeetingMinimum, 1);
+});
+
 test('createQueueHealthSnapshot reports light queue, readiness, and minimum score eligibility', () => {
   const experiments = [
     { name: 'Strong', impact: 0.9, confidence: 0.8, ease: 0.8, pantryPalFit: 0.9, externalDependency: 'legal sign-off' },
@@ -170,6 +184,9 @@ test('createQueueHealthSnapshot reports light queue, readiness, and minimum scor
   assert.equal(health.isLight, true);
   assert.equal(health.threshold, 2);
   assert.equal(health.minimumScore, 60);
+  assert.equal(health.averageCriteriaCount, 6);
+  assert.equal(health.minimumCriteria, 6);
+  assert.deepEqual(health.tasksBelowCriteriaThreshold, []);
   assert.match(health.nextAction, /Resolve blockers or auto-seed fresh PantryPal experiments/);
 });
 
