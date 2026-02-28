@@ -910,6 +910,29 @@ test('upsertQueueIntoKanban avoids duplicate task ids already in todo', () => {
   assert.equal(kanban.columns.todo.length, 1);
 });
 
+test('upsertQueueIntoKanban avoids duplicate task titles already in todo even with punctuation differences', () => {
+  const seedKanban = {
+    columns: {
+      todo: [{ id: 'PP-GROWTH-100-existing', name: '[PantryPal] Fast rescue trial' }]
+    },
+    activityLog: []
+  };
+
+  const queue = [{
+    id: 'PP-GROWTH-101-new-id',
+    title: 'Fast rescue trial!!!',
+    score: 89,
+    owner: 'growth-oncall',
+    validationCommand: 'npm test -- growth',
+    acceptanceCriteria: ['c1'],
+    blockedReasons: []
+  }];
+
+  const { inserted, kanban } = upsertQueueIntoKanban(queue, seedKanban);
+  assert.equal(inserted, 0);
+  assert.equal(kanban.columns.todo.length, 1);
+});
+
 test('syncQueueToKanban writes inserted queue tasks to provided file path', () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-kanban-'));
   const kanbanFile = path.join(tempDir, 'kanban.json');

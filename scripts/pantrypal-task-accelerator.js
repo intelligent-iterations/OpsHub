@@ -907,6 +907,15 @@ function loadExperimentsFromFile(filePath) {
   return parsed;
 }
 
+function canonicalizePantryPalTaskName(value) {
+  return String(value ?? '')
+    .replace(/^\s*\[pantrypal\]\s*/i, '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 function upsertQueueIntoKanban(taskQueue, kanban, options = {}) {
   const normalized = kanban && typeof kanban === 'object' ? { ...kanban } : {};
   const columns = normalized.columns && typeof normalized.columns === 'object' ? normalized.columns : {};
@@ -916,10 +925,16 @@ function upsertQueueIntoKanban(taskQueue, kanban, options = {}) {
   const now = options.now ?? new Date().toISOString();
 
   const existingTaskIds = new Set(todo.map((task) => task && task.id).filter(Boolean));
+  const existingTaskNames = new Set(
+    todo
+      .map((task) => canonicalizePantryPalTaskName(task?.name))
+      .filter(Boolean)
+  );
   let inserted = 0;
 
   for (const queueTask of taskQueue) {
-    if (!queueTask || !queueTask.id || existingTaskIds.has(queueTask.id)) continue;
+    const normalizedQueueTitle = canonicalizePantryPalTaskName(queueTask?.title);
+    if (!queueTask || !queueTask.id || existingTaskIds.has(queueTask.id) || (normalizedQueueTitle && existingTaskNames.has(normalizedQueueTitle))) continue;
     const descriptionLines = [
       `Score: ${Number(queueTask.score).toFixed(2)}`,
       `Owner: ${queueTask.owner}`,
@@ -950,6 +965,7 @@ function upsertQueueIntoKanban(taskQueue, kanban, options = {}) {
       }
     });
     existingTaskIds.add(queueTask.id);
+    if (normalizedQueueTitle) existingTaskNames.add(normalizedQueueTitle);
     inserted += 1;
 
     activityLog.unshift({
