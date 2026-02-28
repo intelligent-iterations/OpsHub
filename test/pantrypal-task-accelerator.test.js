@@ -389,6 +389,12 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
   assert.equal(options.validate, true);
 });
 
+test('parseCliOptions accepts decimal minimum-score values', () => {
+  const options = parseCliOptions(['--minimum-score', '82.5']);
+
+  assert.equal(options.minimumScore, 82.5);
+});
+
 test('parseCliOptions preserves defaults for invalid numeric values and disables validation', () => {
   const options = parseCliOptions(['--limit', '0', '--minimum-score', 'abc', '--no-validate']);
 

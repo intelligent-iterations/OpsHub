@@ -503,17 +503,25 @@ function parseCliOptions(argv = []) {
     const [rawFlag, rawValue] = token.split('=');
     const value = rawValue ?? argv[index + 1];
 
-    const numericFlagMap = {
+    const integerFlagMap = {
       '--limit': 'limit',
-      '--minimum-score': 'minimumScore',
       '--light-threshold': 'lightThreshold',
       '--minimum-criteria': 'minimumCriteria'
     };
 
-    if (rawFlag in numericFlagMap) {
+    if (rawFlag in integerFlagMap) {
       const parsedValue = Number.parseInt(value, 10);
       if (Number.isFinite(parsedValue) && parsedValue > 0) {
-        options[numericFlagMap[rawFlag]] = parsedValue;
+        options[integerFlagMap[rawFlag]] = parsedValue;
+        if (rawValue === undefined) index += 1;
+      }
+      continue;
+    }
+
+    if (rawFlag === '--minimum-score') {
+      const parsedValue = Number.parseFloat(value);
+      if (Number.isFinite(parsedValue) && parsedValue > 0) {
+        options.minimumScore = parsedValue;
         if (rawValue === undefined) index += 1;
       }
       continue;
