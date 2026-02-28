@@ -90,9 +90,9 @@ function collectTaskMatchKeys(task) {
 
   const fromText = [];
   const text = `${task.name || ''}\n${task.description || ''}`;
-  const labelMatches = text.match(/(?:label|subagent)\s*[:=]\s*([\w:-]{4,})/gi) || [];
+  const labelMatches = [...text.matchAll(/(?:label|subagent)\s*[:=]\s*([\w:-]{4,})/gi)];
   const sessionMatches = text.match(/agent:[\w:-]+/gi) || [];
-  fromText.push(...labelMatches.map((m) => m.split(/[:=]/).pop()));
+  fromText.push(...labelMatches.map((m) => m[1]));
   fromText.push(...sessionMatches);
 
   return uniq([...direct, ...fromText].map(normalizeKey));

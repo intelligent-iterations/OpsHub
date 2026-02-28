@@ -61,6 +61,29 @@ test('detectStaleInProgressTasks does not mark stale when active session matches
   assert.equal(result[0].matchedSessionKeys.length, 1);
 });
 
+test('detectStaleInProgressTasks extracts full session key from label text without truncation', () => {
+  const nowMs = Date.parse('2026-02-28T01:00:00.000Z');
+  const board = makeBoard([
+    {
+      id: 't2b',
+      name: 'Task linked by description label',
+      description: 'owner label: agent:vibe-coder:subagent:123',
+      source: 'manual',
+      createdAt: '2026-02-28T00:00:00.000Z'
+    }
+  ]);
+
+  const result = cleanup.detectStaleInProgressTasks(board, {
+    nowMs,
+    staleMinutes: 20,
+    activeSessions: [{ key: 'agent:vibe-coder:subagent:123' }]
+  });
+
+  assert.equal(result.length, 1);
+  assert.equal(result[0].stale, false);
+  assert.equal(result[0].matchedSessionKeys.includes('agent:vibe-coder:subagent:123'), true);
+});
+
 test('applyRemediation moves stale tasks to todo and writes activity log', () => {
   const board = makeBoard([
     {
