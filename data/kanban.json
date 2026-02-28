@@ -1,68 +1,549 @@
 {
   "columns": {
-    "backlog": [],
-    "todo": [],
+    "backlog": [
+      {
+        "id": "quarantine-synthetic-integration-dashboard-task-rollup",
+        "name": "[Quarantine] Synthetic \"Integration dashboard task\" cards",
+        "description": "Auto-generated quarantine rollup.\nCaptured synthetic cards: 20.\nColumns: backlog=0, todo=11, inProgress=9.\nTask IDs: d21285c7-25c0-4f02-b9df-7c911bc69625, 2f04d5e2-608d-400a-aff3-d7a93b005a8f, 6570c950-29fb-4d84-834d-2ac67cd23a6d, 144d061b-ead1-4ece-aab9-8fa62707658b, ce9b64fa-6cac-4311-bb22-8b141fe75128, d16297fd-426f-4f41-b818-aaabe8ad6e83, 70dacfbc-b606-403c-a1ee-075a836f3849, 0f346228-ab38-4076-835a-aba0411b0d43, ee3e2bc7-39ba-4f77-a620-2edd38154546, f8005135-e64b-4478-a08a-de2d5d3fca0b, 5b453af5-1cc5-4507-bc76-28ac94311724, bebc76e0-4576-479b-908c-fa1ed0d465fb, d88a5e03-862f-4188-b7d2-5c5ba7456cf6, 592fc46c-f0ae-4d97-9f3d-224f0cdb00b1, d12dc166-910d-4287-9335-07fe1860c0e5, b1f42664-77f7-4309-81f3-7c111bf3afd4, 1addb332-5fae-49ee-b7bc-635ba14b117e, deeb4f62-e529-4d59-bf53-99ca69bb48c4, 40db1e3c-f1d6-4c82-966d-f293fd4fb247, 435d594b-11ed-42ec-a230-3067bf2f996c",
+        "priority": "low",
+        "status": "backlog",
+        "source": "kanban-quarantine-synthetic",
+        "createdAt": "2026-02-28T00:49:53.448Z",
+        "updatedAt": "2026-02-28T00:49:53.448Z",
+        "completedAt": null,
+        "metadata": {
+          "quarantineType": "synthetic-integration-dashboard-task",
+          "quarantinedCount": 20,
+          "quarantinedTaskIds": [
+            "d21285c7-25c0-4f02-b9df-7c911bc69625",
+            "2f04d5e2-608d-400a-aff3-d7a93b005a8f",
+            "6570c950-29fb-4d84-834d-2ac67cd23a6d",
+            "144d061b-ead1-4ece-aab9-8fa62707658b",
+            "ce9b64fa-6cac-4311-bb22-8b141fe75128",
+            "d16297fd-426f-4f41-b818-aaabe8ad6e83",
+            "70dacfbc-b606-403c-a1ee-075a836f3849",
+            "0f346228-ab38-4076-835a-aba0411b0d43",
+            "ee3e2bc7-39ba-4f77-a620-2edd38154546",
+            "f8005135-e64b-4478-a08a-de2d5d3fca0b",
+            "5b453af5-1cc5-4507-bc76-28ac94311724",
+            "bebc76e0-4576-479b-908c-fa1ed0d465fb",
+            "d88a5e03-862f-4188-b7d2-5c5ba7456cf6",
+            "592fc46c-f0ae-4d97-9f3d-224f0cdb00b1",
+            "d12dc166-910d-4287-9335-07fe1860c0e5",
+            "b1f42664-77f7-4309-81f3-7c111bf3afd4",
+            "1addb332-5fae-49ee-b7bc-635ba14b117e",
+            "deeb4f62-e529-4d59-bf53-99ca69bb48c4",
+            "40db1e3c-f1d6-4c82-966d-f293fd4fb247",
+            "435d594b-11ed-42ec-a230-3067bf2f996c"
+          ],
+          "columns": {
+            "todo": 11,
+            "inProgress": 9
+          }
+        }
+      }
+    ],
+    "todo": [
+      {
+        "id": "p36-pantrypal-github-remote-publish-path",
+        "name": "[P36][PantryPal] Configure GitHub remote + publish path for deliverable evidence",
+        "description": "Owner: claw\\nAcceptance Criteria:\\n1) Configure PantryPal git remote to canonical GitHub repo.\\n2) Validate push/auth path with a dry-run-safe check and document required credentials.\\n3) Ensure next PantryPal delivery can emit full https://github.com/... commit/file/PR links.\\n4) Add verification steps and fallback escalation notes.",
+        "priority": "high",
+        "status": "todo",
+        "source": "slack-social-mention",
+        "createdAt": "2026-02-28T03:25:37.270Z",
+        "updatedAt": "2026-02-28T03:25:37.271Z",
+        "completedAt": null,
+        "startedAt": null
+      },
+      {
+        "id": "c24d8d6f-1a0f-4f1f-8c73-3f2c8bb6e2af",
+        "name": "[P31][Growth] Build dormant-user segment builder + holdout calculator for win-back experiments",
+        "description": "Acceptance Criteria:\n1) Add scripts/p31-winback-segmentation.js that outputs deterministic weekly target cohorts (7-14d, 15-30d, 31-60d dormant).\n2) Add artifacts/p31-winback-segments-sample.{json,md} with counts and holdout split rationale.\n3) Include holdout size calculator and minimum detectable lift table for activation + D7 retention.\n4) Add tests and keep npm test passing.",
+        "priority": "high",
+        "status": "todo",
+        "source": "cron-workaholic-loop",
+        "createdAt": "2026-02-28T00:59:15.346Z",
+        "updatedAt": "2026-02-28T00:59:15.346Z",
+        "completedAt": null
+      },
+      {
+        "id": "p35-pantrypal-next-feature-slice",
+        "name": "[P35][PantryPal] Execute next PantryPal feature slice after boilerplate cleanup",
+        "description": "Owner: claw\nAcceptance Criteria:\n1) Implement one high-impact PantryPal feature increment tied to rescue adoption.\n2) Add/adjust tests and docs for the feature contract.\n3) Run full flutter test and confirm green suite.\n4) Commit and report GitHub commit/PR URLs with test evidence.",
+        "priority": "high",
+        "status": "todo",
+        "source": "slack-social-mention",
+        "createdAt": "2026-02-28T02:49:33.428Z",
+        "updatedAt": "2026-02-28T02:49:33.428Z",
+        "completedAt": null,
+        "startedAt": null
+      }
+    ],
     "inProgress": [
       {
-        "id": "d21285c7-25c0-4f02-b9df-7c911bc69625",
+        "id": "758bf942-2ae8-49ad-8a90-dc5adf55d70b",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
         "status": "inProgress",
-        "createdAt": "2026-02-28T00:16:21.649Z",
+        "createdAt": "2026-02-28T01:45:36.570Z",
         "completedAt": null,
         "source": "manual"
       },
       {
-        "id": "5b453af5-1cc5-4507-bc76-28ac94311724",
+        "id": "1c8892b3-edb9-4a91-82c0-72d69caf3d22",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
         "status": "inProgress",
-        "createdAt": "2026-02-28T00:14:41.306Z",
+        "createdAt": "2026-02-28T01:36:39.846Z",
         "completedAt": null,
         "source": "manual"
       },
       {
-        "id": "f8005135-e64b-4478-a08a-de2d5d3fca0b",
+        "id": "37f17071-18df-4056-ab95-4cf53c6d54d7",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
         "status": "inProgress",
-        "createdAt": "2026-02-28T00:13:11.374Z",
+        "createdAt": "2026-02-28T01:35:35.686Z",
         "completedAt": null,
         "source": "manual"
       },
       {
-        "id": "ee3e2bc7-39ba-4f77-a620-2edd38154546",
+        "id": "51b565cc-5ad3-42ea-9648-0f90a81b4430",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
         "status": "inProgress",
-        "createdAt": "2026-02-27T23:56:19.371Z",
-        "completedAt": null,
-        "source": "manual",
-        "updatedAt": "2026-02-28T00:11:37.213Z",
-        "startedAt": "2026-02-28T00:11:37.213Z"
-      },
-      {
-        "id": "0f346228-ab38-4076-835a-aba0411b0d43",
-        "name": "Integration dashboard task",
-        "description": "should appear in subagents.inProgressTasks",
-        "priority": "medium",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T00:08:07.098Z",
+        "createdAt": "2026-02-28T01:35:30.311Z",
         "completedAt": null,
         "source": "manual"
       },
       {
-        "id": "70dacfbc-b606-403c-a1ee-075a836f3849",
+        "id": "4f931118-0bc4-45ab-b03d-d6d3fb548b57",
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
         "status": "inProgress",
-        "createdAt": "2026-02-28T00:04:40.505Z",
+        "createdAt": "2026-02-28T01:31:48.004Z",
         "completedAt": null,
+        "source": "manual"
+      },
+      {
+        "id": "3d4dfd81-1722-400e-8943-f7cc65afef1e",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T00:59:21.073Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
+        "id": "e638d87b-3666-41f4-9173-9f6d478289dd",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T00:54:55.343Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
+        "id": "527de277-4e06-4698-8aa5-772789d9e40e",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T00:53:16.805Z",
+        "completedAt": null,
+        "source": "manual"
+      },
+      {
+        "id": "df4c65e6-7430-4677-9802-52067421cc49",
+        "name": "[P30][OpsHub] Ingest live social Slack mentions into OpsHub task queue",
+        "description": "Owner: claw\nAcceptance Criteria:\n1) Pull recent social-channel messages/mentions from live provider (not sample file).\n2) Convert actionable messages into OpsHub task payloads (title, owner, acceptance criteria, priority) with dedupe by message id.\n3) Persist diagnostics for fetch count, actionable count, and feed errors with fallback behavior.\n4) Add tests + docs updates and keep npm test green.",
+        "priority": "high",
+        "status": "inProgress",
+        "source": "slack-social-mention",
+        "createdAt": "2026-02-28T00:52:41.277Z",
+        "updatedAt": "2026-02-28T00:52:41.277Z",
+        "completedAt": null,
+        "startedAt": "2026-02-28T00:52:41.277Z"
+      },
+      {
+        "id": "23ccbe7a-9db1-42dc-82bf-9772b167adec",
+        "name": "Integration dashboard task",
+        "description": "should appear in subagents.inProgressTasks",
+        "priority": "medium",
+        "status": "inProgress",
+        "createdAt": "2026-02-28T00:50:43.856Z",
+        "completedAt": null,
+        "source": "manual"
+      }
+    ],
+    "done": [
+      {
+        "id": "p34-pantrypal-boilerplate-refactor",
+        "name": "[P34][PantryPal] Refactor Flutter boilerplate seams for faster feature delivery",
+        "description": "Owner: claw\nAcceptance Criteria:\n1) Reduce duplicate widget/test setup helpers used across PantryPal feature modules.\n2) Keep behavior unchanged with targeted test coverage updates.\n3) Run full flutter test and capture pass evidence.\n4) Commit with clear diff summary and GitHub URL evidence.",
+        "priority": "high",
+        "status": "done",
+        "source": "slack-social-mention",
+        "createdAt": "2026-02-28T02:49:33.428Z",
+        "updatedAt": "2026-02-28T02:57:40.441Z",
+        "completedAt": "2026-02-28T02:57:40.441Z",
+        "startedAt": "2026-02-28T02:49:42.110Z"
+      },
+      {
+        "id": "p33-pantrypal-integration-health-triage",
+        "name": "p33-pantrypal-integration-health-triage",
+        "description": "",
+        "priority": "high",
+        "source": "social-progress-cron",
+        "status": "done",
+        "updatedAt": "2026-02-28T02:26:02.337Z",
+        "completedAt": "2026-02-28T02:26:02.337Z"
+      },
+      {
+        "id": "p32-pantrypal-widget-contract-golden-health",
+        "name": "p32-pantrypal-widget-contract-golden-health",
+        "description": "",
+        "priority": "high",
+        "source": "social-progress-cron",
+        "status": "done",
+        "updatedAt": "2026-02-28T02:26:02.337Z",
+        "completedAt": "2026-02-28T02:26:02.337Z"
+      },
+      {
+        "id": "bfaf83f2-e345-4474-a1a0-cfdc10ed2247",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T01:45:36.550Z",
+        "completedAt": "2026-02-28T01:45:36.563Z",
+        "source": "manual"
+      },
+      {
+        "id": "b5552133-7bff-4be3-9569-acbb7e4139d3",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T01:45:36.531Z",
+        "completedAt": "2026-02-28T01:45:36.541Z",
+        "source": "manual"
+      },
+      {
+        "id": "fec643a3-dba4-49f7-b591-62e8c86261f2",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T01:36:39.827Z",
+        "completedAt": "2026-02-28T01:36:39.839Z",
+        "source": "manual"
+      },
+      {
+        "id": "33187cc1-1145-4fb1-b306-c48fb02f30b5",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T01:36:39.809Z",
+        "completedAt": "2026-02-28T01:36:39.817Z",
+        "source": "manual"
+      },
+      {
+        "id": "a92d91f4-a91c-4dbd-b215-79491ed521a0",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T01:35:35.668Z",
+        "completedAt": "2026-02-28T01:35:35.680Z",
+        "source": "manual"
+      },
+      {
+        "id": "879cf3ae-b0d5-4292-b22b-6819bd86ffc0",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T01:35:35.648Z",
+        "completedAt": "2026-02-28T01:35:35.657Z",
+        "source": "manual"
+      },
+      {
+        "id": "00e56fe5-9be2-4b64-ada7-7c54b46ee509",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T01:35:30.294Z",
+        "completedAt": "2026-02-28T01:35:30.305Z",
+        "source": "manual"
+      },
+      {
+        "id": "7282740c-e3d2-4ab4-960c-3c0df9e9b368",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T01:35:30.277Z",
+        "completedAt": "2026-02-28T01:35:30.285Z",
+        "source": "manual"
+      },
+      {
+        "id": "1a05b403-f83b-4732-82d4-0fa8d561c96e",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T01:31:47.988Z",
+        "completedAt": "2026-02-28T01:31:47.998Z",
+        "source": "manual"
+      },
+      {
+        "id": "15c0d4d2-a24e-4743-b392-c30309add552",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T01:31:47.974Z",
+        "completedAt": "2026-02-28T01:31:47.981Z",
+        "source": "manual"
+      },
+      {
+        "id": "4f4c9fa4-cc8b-402f-bf19-8a166e8adeb4",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:59:21.054Z",
+        "completedAt": "2026-02-28T00:59:21.067Z",
+        "source": "manual"
+      },
+      {
+        "id": "137aa1cf-889a-46ed-a232-e9ee493dad9a",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:59:21.035Z",
+        "completedAt": "2026-02-28T00:59:21.045Z",
+        "source": "manual"
+      },
+      {
+        "id": "96371c55-05a6-43c9-b4e5-8e410644fc5e",
+        "name": "[P29][Growth] Add weekly win-back push notification A/B experiment brief",
+        "description": "Acceptance criteria:\n1) Produce artifact: artifacts/p29-winback-experiment-brief.md with 3 testable hypotheses.\n2) Include success metrics (activation lift, 7-day retention, CTR) and guardrails.\n3) Add implementation checklist for tracking + rollout + stop conditions.",
+        "priority": "high",
+        "status": "done",
+        "source": "auto-seed-queue-task",
+        "createdAt": "2026-02-28T00:50:41.122Z",
+        "updatedAt": "2026-02-28T00:59:15.346Z",
+        "completedAt": "2026-02-28T00:59:15.346Z",
+        "startedAt": "2026-02-28T00:52:41.277Z",
+        "completionDetails": "Completed in-cycle: artifacts/p29-winback-experiment-brief.md with 3 hypotheses, metrics/guardrails, rollout + stop checklist, and event schema."
+      },
+      {
+        "id": "09368e4a-c861-4ef0-be62-8d3e16f4b7bf",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:54:55.323Z",
+        "completedAt": "2026-02-28T00:54:55.336Z",
+        "source": "manual"
+      },
+      {
+        "id": "33be643c-9cf8-4691-9a22-0b597f8e5e07",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:54:55.303Z",
+        "completedAt": "2026-02-28T00:54:55.312Z",
+        "source": "manual"
+      },
+      {
+        "id": "93df4dae-ddd5-4ddb-b2b2-74bc6fbb02cf",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:53:16.785Z",
+        "completedAt": "2026-02-28T00:53:16.799Z",
+        "source": "manual"
+      },
+      {
+        "id": "58c52e29-9439-460f-b4b2-4352f989677b",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:53:16.767Z",
+        "completedAt": "2026-02-28T00:53:16.775Z",
+        "source": "manual"
+      },
+      {
+        "id": "fd081555-b21c-4557-8edf-33c63bd19f2e",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:50:43.838Z",
+        "completedAt": "2026-02-28T00:50:43.851Z",
+        "source": "manual"
+      },
+      {
+        "id": "b154f736-e32f-41dd-9c2b-1df949d7aa2f",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:50:43.819Z",
+        "completedAt": "2026-02-28T00:50:43.829Z",
+        "source": "manual"
+      },
+      {
+        "id": "deda0b7b-2440-435c-8164-faecbbcb5e7d",
+        "name": "[P29][OpsHub] Build Slack social mention ingestion bridge for social-progress cron",
+        "description": "Owner: claw (Ops automation)\\nAcceptance Criteria: (1) add script/module that reads recent Slack messages+mentions for social channel into structured JSON queue, (2) map each actionable message into task payload template {title, owner, acceptance criteria, priority}, (3) add fallback behavior + diagnostics when Slack feed unavailable, (4) tests/docs updated and passing.\\nPriority rationale: unlocks automated Slack->OpsHub task conversion currently blocked.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:45:31.596Z",
+        "completedAt": "2026-02-28T00:49:23.839Z",
+        "source": "cron-social-progress",
+        "startedAt": "2026-02-28T00:45:31.641Z",
+        "updatedAt": "2026-02-28T00:49:23.839Z"
+      },
+      {
+        "id": "1ffe8c91-b93d-477f-8630-cbd9cb074729",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:48:34.462Z",
+        "completedAt": "2026-02-28T00:48:34.474Z",
+        "source": "manual"
+      },
+      {
+        "id": "871e603d-6642-4377-9628-b2c91753e05e",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:48:34.441Z",
+        "completedAt": "2026-02-28T00:48:34.451Z",
+        "source": "manual"
+      },
+      {
+        "id": "fc9177c7-4ed5-462e-a156-1594ae0b4c45",
+        "name": "[P28][OpsHub] Auto-quarantine synthetic \"Integration dashboard task\" spam cards",
+        "description": "Build guardrail that detects repetitive synthetic/manual test cards (e.g., repeated \"Integration dashboard task\") and auto-routes them into backlog quarantine with a single rollup card. Acceptance: (1) scripts/kanban-quarantine-synthetic.js with --apply + --report modes, (2) docs/kanban-quarantine-synthetic.md policy + rollback, (3) artifacts/p28-kanban-quarantine-sample.{json,md}, (4) npm test passes with at least one new test file for detector behavior.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:43:57.060Z",
+        "completedAt": "2026-02-28T00:48:03.357Z",
+        "source": "cron-workaholic-loop",
+        "startedAt": "2026-02-28T00:45:31.640Z",
+        "updatedAt": "2026-02-28T00:48:03.357Z"
+      },
+      {
+        "id": "4b3dfee9-faae-4513-a14b-8d031e71f312",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:47:01.940Z",
+        "completedAt": "2026-02-28T00:47:01.953Z",
+        "source": "manual"
+      },
+      {
+        "id": "d349be01-1e8d-465a-ae3f-becfe2f83c05",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:47:01.922Z",
+        "completedAt": "2026-02-28T00:47:01.930Z",
+        "source": "manual"
+      },
+      {
+        "id": "3f22e272-b9e8-4eed-8555-de350783d042",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:44:10.271Z",
+        "completedAt": "2026-02-28T00:44:10.284Z",
+        "source": "manual"
+      },
+      {
+        "id": "11d56fdb-a8c2-42ee-b2f1-19302e164a6e",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:44:10.252Z",
+        "completedAt": "2026-02-28T00:44:10.261Z",
+        "source": "manual"
+      },
+      {
+        "id": "c1a2db89-6b29-4b9f-bd2f-4ea6882f5e4b",
+        "name": "[P27][OpsHub] Add paywall sequential-testing safety checker to prevent peeking bias",
+        "description": "Implement a sequential-testing safety checker that annotates whether weekly paywall reads are safe-to-ship based on minimum runtime, sample size progression, and effect stability windows. Acceptance: (1) docs/paywall-sequential-testing-safety.md defines policy + examples, (2) scripts/paywall-sequential-check.js outputs PASS/WARN/FAIL JSON for experiment snapshots, (3) artifacts/paywall-sequential-check-sample.json generated, (4) test/paywall-sequential-check.test.js added and npm test passes.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:38:33.346Z",
+        "completedAt": "2026-02-28T00:42:36.750Z",
+        "source": "cron-workaholic-loop",
+        "updatedAt": "2026-02-28T00:42:36.750Z",
+        "startedAt": "2026-02-28T00:39:52.076Z"
+      },
+      {
+        "id": "672565ef-0a4c-4cee-b222-2efc7fcfea24",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:42:11.835Z",
+        "completedAt": "2026-02-28T00:42:11.848Z",
+        "source": "manual"
+      },
+      {
+        "id": "2c5da22d-d8a2-4743-bac5-88e5b58329a5",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:42:11.818Z",
+        "completedAt": "2026-02-28T00:42:11.826Z",
+        "source": "manual"
+      },
+      {
+        "id": "298ba5a8-771d-4b12-8db7-395fec6f5bd9",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:41:59.943Z",
+        "completedAt": "2026-02-28T00:41:59.955Z",
+        "source": "manual"
+      },
+      {
+        "id": "dc28731a-d552-4795-b50d-8c0ae81ef901",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:41:59.924Z",
+        "completedAt": "2026-02-28T00:41:59.934Z",
         "source": "manual"
       },
       {
@@ -70,9 +551,142 @@
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
-        "status": "inProgress",
+        "status": "done",
         "createdAt": "2026-02-28T00:04:35.579Z",
-        "completedAt": null,
+        "completedAt": "2026-02-28T00:41:07.747Z",
+        "source": "manual",
+        "updatedAt": "2026-02-28T00:41:07.747Z",
+        "startedAt": "2026-02-28T00:40:07.075Z"
+      },
+      {
+        "id": "577a79ed-9251-4920-8fb7-f785d2fa6406",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:40:45.148Z",
+        "completedAt": "2026-02-28T00:40:45.158Z",
+        "source": "manual"
+      },
+      {
+        "id": "d656458e-4064-439c-84b5-7b2b05a25935",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:40:45.132Z",
+        "completedAt": "2026-02-28T00:40:45.139Z",
+        "source": "manual"
+      },
+      {
+        "id": "642c0d19-dfc8-4b01-94dd-51328fa4240f",
+        "name": "Build paywall experiment tracker + weekly winner auto-pick",
+        "description": "Implement experiment registry for paywall variants (#1-#5 from p26 memo), event schema bindings, and weekly script that recommends winner by conversion + churn guardrails. Acceptance: (1) tracker spec in docs/paywall-experiment-tracker.md, (2) runnable script scripts/paywall-experiment-score.js outputs ranked variants JSON, (3) sample artifact artifacts/paywall-experiment-score-sample.json, (4) npm test passes.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:28:00.734Z",
+        "completedAt": "2026-02-28T00:39:52.076Z",
+        "source": "cron-workaholic-loop",
+        "updatedAt": "2026-02-28T00:39:52.076Z"
+      },
+      {
+        "id": "359d34a7-2024-41fe-a6aa-3be7cb73949d",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:38:16.279Z",
+        "completedAt": "2026-02-28T00:38:16.289Z",
+        "source": "manual"
+      },
+      {
+        "id": "493f7449-ef0c-409c-bbe0-4a585df52587",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:38:16.266Z",
+        "completedAt": "2026-02-28T00:38:16.272Z",
+        "source": "manual"
+      },
+      {
+        "id": "2722f7c2-8464-4681-9711-1c568b1396a3",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:37:05.024Z",
+        "completedAt": "2026-02-28T00:37:05.035Z",
+        "source": "manual"
+      },
+      {
+        "id": "81686976-b7bf-44c3-96d9-d6396852baa8",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:37:05.011Z",
+        "completedAt": "2026-02-28T00:37:05.017Z",
+        "source": "manual"
+      },
+      {
+        "id": "5d8c80e8-c526-47e7-b187-f618725a6d98",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:36:51.096Z",
+        "completedAt": "2026-02-28T00:36:51.105Z",
+        "source": "manual"
+      },
+      {
+        "id": "7f937f03-2429-4e95-9a11-2e860031e981",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:36:51.082Z",
+        "completedAt": "2026-02-28T00:36:51.088Z",
+        "source": "manual"
+      },
+      {
+        "id": "cb70b99b-0eac-4cea-9c4e-f02eaaf5591c",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:30:52.445Z",
+        "completedAt": "2026-02-28T00:30:52.455Z",
+        "source": "manual"
+      },
+      {
+        "id": "32b222b2-4565-4d9f-8211-b152c5015568",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:30:52.433Z",
+        "completedAt": "2026-02-28T00:30:52.439Z",
+        "source": "manual"
+      },
+      {
+        "id": "a83b04e2-20bd-4502-8abc-f549cc4d7845",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:30:46.527Z",
+        "completedAt": "2026-02-28T00:30:46.536Z",
+        "source": "manual"
+      },
+      {
+        "id": "08be7d6e-0fe5-4bd6-8da4-07c8f9e4ae53",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:30:46.514Z",
+        "completedAt": "2026-02-28T00:30:46.520Z",
         "source": "manual"
       },
       {
@@ -80,9 +694,70 @@
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
-        "status": "inProgress",
+        "status": "done",
         "createdAt": "2026-02-28T00:03:44.516Z",
-        "completedAt": null,
+        "completedAt": "2026-02-28T00:29:35.999Z",
+        "source": "manual",
+        "updatedAt": "2026-02-28T00:25:11.501Z"
+      },
+      {
+        "id": "9d673621-ace3-49f3-ac84-a466f7d84981",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:27:18.633Z",
+        "completedAt": "2026-02-28T00:27:18.645Z",
+        "source": "manual"
+      },
+      {
+        "id": "93cb3a74-7837-4821-8ac3-63dfc1b2993b",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:27:18.614Z",
+        "completedAt": "2026-02-28T00:27:18.622Z",
+        "source": "manual"
+      },
+      {
+        "id": "7d2d0634-96c9-4776-8fdd-a9099221433d",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:26:14.700Z",
+        "completedAt": "2026-02-28T00:26:14.709Z",
+        "source": "manual"
+      },
+      {
+        "id": "e0a6b9b4-6cbe-46e0-8933-d9d1ed955fda",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:26:14.687Z",
+        "completedAt": "2026-02-28T00:26:14.693Z",
+        "source": "manual"
+      },
+      {
+        "id": "1278fd02-d095-4b43-9b07-dc6854a665fe",
+        "name": "Lifecycle task",
+        "description": "",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T00:26:03.817Z",
+        "completedAt": "2026-02-28T00:26:03.826Z",
+        "source": "manual"
+      },
+      {
+        "id": "e10dffa6-af0f-48ff-b65e-4c0af2e2c278",
+        "name": "Smoke task",
+        "description": "verify kanban",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T00:26:03.804Z",
+        "completedAt": "2026-02-28T00:26:03.810Z",
         "source": "manual"
       },
       {
@@ -90,9 +765,9 @@
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
-        "status": "inProgress",
+        "status": "done",
         "createdAt": "2026-02-28T00:00:39.999Z",
-        "completedAt": null,
+        "completedAt": "2026-02-28T00:24:21.296Z",
         "source": "manual"
       },
       {
@@ -100,13 +775,11 @@
         "name": "Integration dashboard task",
         "description": "should appear in subagents.inProgressTasks",
         "priority": "medium",
-        "status": "inProgress",
+        "status": "done",
         "createdAt": "2026-02-28T00:00:28.112Z",
-        "completedAt": null,
+        "completedAt": "2026-02-28T00:24:21.279Z",
         "source": "manual"
-      }
-    ],
-    "done": [
+      },
       {
         "id": "b1ae8f8e-c954-452a-8051-ac632bac58c1",
         "name": "Lifecycle task",
@@ -2105,6 +2778,1702 @@
     ]
   },
   "activityLog": [
+    {
+      "id": "evt-1772245562339",
+      "type": "task_completed",
+      "taskId": "p32-pantrypal-widget-contract-golden-health",
+      "timestamp": "2026-02-28T02:26:02.337Z",
+      "meta": {
+        "summary": "Widget contract + golden baselines updated and validated."
+      }
+    },
+    {
+      "id": "evt-1772245562338",
+      "type": "task_completed",
+      "taskId": "p33-pantrypal-integration-health-triage",
+      "timestamp": "2026-02-28T02:26:02.337Z",
+      "meta": {
+        "summary": "PantryPal integration/widget health suite restored to green (flutter test pass)."
+      }
+    },
+    {
+      "at": "2026-02-28T02:20:43.162Z",
+      "type": "task_created",
+      "taskId": "p33-pantrypal-integration-health-triage",
+      "taskName": "[P33][PantryPal] Triage and fix failing integration/widget health tests from latest sweep",
+      "detail": "Created from social-progress cron after PantryPal integration health check run."
+    },
+    {
+      "at": "2026-02-28T01:45:36.570Z",
+      "type": "task_added",
+      "taskId": "758bf942-2ae8-49ad-8a90-dc5adf55d70b",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:45:36.563Z",
+      "type": "task_moved",
+      "taskId": "bfaf83f2-e345-4474-a1a0-cfdc10ed2247",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T01:45:36.556Z",
+      "type": "task_moved",
+      "taskId": "bfaf83f2-e345-4474-a1a0-cfdc10ed2247",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T01:45:36.550Z",
+      "type": "task_added",
+      "taskId": "bfaf83f2-e345-4474-a1a0-cfdc10ed2247",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:45:36.541Z",
+      "type": "task_moved",
+      "taskId": "b5552133-7bff-4be3-9569-acbb7e4139d3",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T01:45:36.531Z",
+      "type": "task_added",
+      "taskId": "b5552133-7bff-4be3-9569-acbb7e4139d3",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:36:39.846Z",
+      "type": "task_added",
+      "taskId": "1c8892b3-edb9-4a91-82c0-72d69caf3d22",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:36:39.839Z",
+      "type": "task_moved",
+      "taskId": "fec643a3-dba4-49f7-b591-62e8c86261f2",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T01:36:39.833Z",
+      "type": "task_moved",
+      "taskId": "fec643a3-dba4-49f7-b591-62e8c86261f2",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T01:36:39.827Z",
+      "type": "task_added",
+      "taskId": "fec643a3-dba4-49f7-b591-62e8c86261f2",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:36:39.817Z",
+      "type": "task_moved",
+      "taskId": "33187cc1-1145-4fb1-b306-c48fb02f30b5",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T01:36:39.809Z",
+      "type": "task_added",
+      "taskId": "33187cc1-1145-4fb1-b306-c48fb02f30b5",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:35:35.686Z",
+      "type": "task_added",
+      "taskId": "37f17071-18df-4056-ab95-4cf53c6d54d7",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:35:35.680Z",
+      "type": "task_moved",
+      "taskId": "a92d91f4-a91c-4dbd-b215-79491ed521a0",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T01:35:35.674Z",
+      "type": "task_moved",
+      "taskId": "a92d91f4-a91c-4dbd-b215-79491ed521a0",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T01:35:35.668Z",
+      "type": "task_added",
+      "taskId": "a92d91f4-a91c-4dbd-b215-79491ed521a0",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:35:35.657Z",
+      "type": "task_moved",
+      "taskId": "879cf3ae-b0d5-4292-b22b-6819bd86ffc0",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T01:35:35.648Z",
+      "type": "task_added",
+      "taskId": "879cf3ae-b0d5-4292-b22b-6819bd86ffc0",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:35:30.311Z",
+      "type": "task_added",
+      "taskId": "51b565cc-5ad3-42ea-9648-0f90a81b4430",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:35:30.305Z",
+      "type": "task_moved",
+      "taskId": "00e56fe5-9be2-4b64-ada7-7c54b46ee509",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T01:35:30.300Z",
+      "type": "task_moved",
+      "taskId": "00e56fe5-9be2-4b64-ada7-7c54b46ee509",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T01:35:30.294Z",
+      "type": "task_added",
+      "taskId": "00e56fe5-9be2-4b64-ada7-7c54b46ee509",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:35:30.285Z",
+      "type": "task_moved",
+      "taskId": "7282740c-e3d2-4ab4-960c-3c0df9e9b368",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T01:35:30.277Z",
+      "type": "task_added",
+      "taskId": "7282740c-e3d2-4ab4-960c-3c0df9e9b368",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:31:48.004Z",
+      "type": "task_added",
+      "taskId": "4f931118-0bc4-45ab-b03d-d6d3fb548b57",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:31:47.998Z",
+      "type": "task_moved",
+      "taskId": "1a05b403-f83b-4732-82d4-0fa8d561c96e",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T01:31:47.993Z",
+      "type": "task_moved",
+      "taskId": "1a05b403-f83b-4732-82d4-0fa8d561c96e",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T01:31:47.988Z",
+      "type": "task_added",
+      "taskId": "1a05b403-f83b-4732-82d4-0fa8d561c96e",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T01:31:47.981Z",
+      "type": "task_moved",
+      "taskId": "15c0d4d2-a24e-4743-b392-c30309add552",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T01:31:47.974Z",
+      "type": "task_added",
+      "taskId": "15c0d4d2-a24e-4743-b392-c30309add552",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:59:21.073Z",
+      "type": "task_added",
+      "taskId": "3d4dfd81-1722-400e-8943-f7cc65afef1e",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:59:21.067Z",
+      "type": "task_moved",
+      "taskId": "4f4c9fa4-cc8b-402f-bf19-8a166e8adeb4",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:59:21.061Z",
+      "type": "task_moved",
+      "taskId": "4f4c9fa4-cc8b-402f-bf19-8a166e8adeb4",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:59:21.054Z",
+      "type": "task_added",
+      "taskId": "4f4c9fa4-cc8b-402f-bf19-8a166e8adeb4",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:59:21.045Z",
+      "type": "task_moved",
+      "taskId": "137aa1cf-889a-46ed-a232-e9ee493dad9a",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:59:21.035Z",
+      "type": "task_added",
+      "taskId": "137aa1cf-889a-46ed-a232-e9ee493dad9a",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "type": "task_created",
+      "taskId": "c24d8d6f-1a0f-4f1f-8c73-3f2c8bb6e2af",
+      "taskName": "[P31][Growth] Build dormant-user segment builder + holdout calculator for win-back experiments",
+      "to": "todo",
+      "timestamp": "2026-02-28T00:59:15.346Z",
+      "meta": {
+        "source": "cron-workaholic-loop",
+        "acceptanceCriteria": true
+      }
+    },
+    {
+      "at": "2026-02-28T00:59:15.346Z",
+      "type": "task_moved",
+      "taskId": "96371c55-05a6-43c9-b4e5-8e410644fc5e",
+      "taskName": "[P29][Growth] Add weekly win-back push notification A/B experiment brief",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed win-back push A/B brief artifact for P29."
+    },
+    {
+      "at": "2026-02-28T00:54:55.343Z",
+      "type": "task_added",
+      "taskId": "e638d87b-3666-41f4-9173-9f6d478289dd",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:54:55.336Z",
+      "type": "task_moved",
+      "taskId": "09368e4a-c861-4ef0-be62-8d3e16f4b7bf",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:54:55.330Z",
+      "type": "task_moved",
+      "taskId": "09368e4a-c861-4ef0-be62-8d3e16f4b7bf",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:54:55.323Z",
+      "type": "task_added",
+      "taskId": "09368e4a-c861-4ef0-be62-8d3e16f4b7bf",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:54:55.312Z",
+      "type": "task_moved",
+      "taskId": "33be643c-9cf8-4691-9a22-0b597f8e5e07",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:54:55.303Z",
+      "type": "task_added",
+      "taskId": "33be643c-9cf8-4691-9a22-0b597f8e5e07",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:53:16.805Z",
+      "type": "task_added",
+      "taskId": "527de277-4e06-4698-8aa5-772789d9e40e",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:53:16.799Z",
+      "type": "task_moved",
+      "taskId": "93df4dae-ddd5-4ddb-b2b2-74bc6fbb02cf",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:53:16.792Z",
+      "type": "task_moved",
+      "taskId": "93df4dae-ddd5-4ddb-b2b2-74bc6fbb02cf",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:53:16.785Z",
+      "type": "task_added",
+      "taskId": "93df4dae-ddd5-4ddb-b2b2-74bc6fbb02cf",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:53:16.775Z",
+      "type": "task_moved",
+      "taskId": "58c52e29-9439-460f-b4b2-4352f989677b",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:53:16.767Z",
+      "type": "task_added",
+      "taskId": "58c52e29-9439-460f-b4b2-4352f989677b",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:52:41.277Z",
+      "type": "task_moved",
+      "taskId": "96371c55-05a6-43c9-b4e5-8e410644fc5e",
+      "taskName": "[P29][Growth] Add weekly win-back push notification A/B experiment brief",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Dispatched for sub-agent execution (social-progress cron)."
+    },
+    {
+      "at": "2026-02-28T00:52:41.277Z",
+      "type": "task_moved",
+      "taskId": "df4c65e6-7430-4677-9802-52067421cc49",
+      "taskName": "[P30][OpsHub] Ingest live social Slack mentions into OpsHub task queue",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Dispatched for sub-agent execution (social-progress cron)."
+    },
+    {
+      "at": "2026-02-28T00:52:41.277Z",
+      "type": "task_created",
+      "taskId": "df4c65e6-7430-4677-9802-52067421cc49",
+      "taskName": "[P30][OpsHub] Ingest live social Slack mentions into OpsHub task queue",
+      "detail": "Created from actionable Slack social mention sm-1001."
+    },
+    {
+      "at": "2026-02-28T00:50:43.856Z",
+      "type": "task_added",
+      "taskId": "23ccbe7a-9db1-42dc-82bf-9772b167adec",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:50:43.851Z",
+      "type": "task_moved",
+      "taskId": "fd081555-b21c-4557-8edf-33c63bd19f2e",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:50:43.844Z",
+      "type": "task_moved",
+      "taskId": "fd081555-b21c-4557-8edf-33c63bd19f2e",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:50:43.838Z",
+      "type": "task_added",
+      "taskId": "fd081555-b21c-4557-8edf-33c63bd19f2e",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:50:43.829Z",
+      "type": "task_moved",
+      "taskId": "b154f736-e32f-41dd-9c2b-1df949d7aa2f",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:50:43.819Z",
+      "type": "task_added",
+      "taskId": "b154f736-e32f-41dd-9c2b-1df949d7aa2f",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:50:41.122Z",
+      "type": "task_created",
+      "taskId": "96371c55-05a6-43c9-b4e5-8e410644fc5e",
+      "taskName": "[P29][Growth] Add weekly win-back push notification A/B experiment brief",
+      "detail": "Auto-seeded because queue was empty."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "quarantine_rollup_updated",
+      "taskId": "quarantine-synthetic-integration-dashboard-task-rollup",
+      "taskName": "[Quarantine] Synthetic \"Integration dashboard task\" cards",
+      "detail": "Quarantined 20 synthetic cards."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "435d594b-11ed-42ec-a230-3067bf2f996c",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "40db1e3c-f1d6-4c82-966d-f293fd4fb247",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "deeb4f62-e529-4d59-bf53-99ca69bb48c4",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "1addb332-5fae-49ee-b7bc-635ba14b117e",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "b1f42664-77f7-4309-81f3-7c111bf3afd4",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "d12dc166-910d-4287-9335-07fe1860c0e5",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "592fc46c-f0ae-4d97-9f3d-224f0cdb00b1",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "d88a5e03-862f-4188-b7d2-5c5ba7456cf6",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "bebc76e0-4576-479b-908c-fa1ed0d465fb",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "5b453af5-1cc5-4507-bc76-28ac94311724",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "f8005135-e64b-4478-a08a-de2d5d3fca0b",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "ee3e2bc7-39ba-4f77-a620-2edd38154546",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "0f346228-ab38-4076-835a-aba0411b0d43",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "70dacfbc-b606-403c-a1ee-075a836f3849",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "d16297fd-426f-4f41-b818-aaabe8ad6e83",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "ce9b64fa-6cac-4311-bb22-8b141fe75128",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "144d061b-ead1-4ece-aab9-8fa62707658b",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "6570c950-29fb-4d84-834d-2ac67cd23a6d",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "2f04d5e2-608d-400a-aff3-d7a93b005a8f",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:53.448Z",
+      "type": "task_quarantined",
+      "taskId": "d21285c7-25c0-4f02-b9df-7c911bc69625",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "backlog",
+      "detail": "Auto-quarantined by kanban-quarantine-synthetic script."
+    },
+    {
+      "at": "2026-02-28T00:49:23.839Z",
+      "type": "task_moved",
+      "taskId": "deda0b7b-2440-435c-8164-faecbbcb5e7d",
+      "taskName": "[P29][OpsHub] Build Slack social mention ingestion bridge for social-progress cron",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed via subagent sp15-p29-slack-ingest-bridge commit 7a2e666"
+    },
+    {
+      "at": "2026-02-28T00:48:34.480Z",
+      "type": "task_added",
+      "taskId": "bebc76e0-4576-479b-908c-fa1ed0d465fb",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:48:34.474Z",
+      "type": "task_moved",
+      "taskId": "1ffe8c91-b93d-477f-8630-cbd9cb074729",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:48:34.468Z",
+      "type": "task_moved",
+      "taskId": "1ffe8c91-b93d-477f-8630-cbd9cb074729",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:48:34.462Z",
+      "type": "task_added",
+      "taskId": "1ffe8c91-b93d-477f-8630-cbd9cb074729",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:48:34.451Z",
+      "type": "task_moved",
+      "taskId": "871e603d-6642-4377-9628-b2c91753e05e",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:48:34.441Z",
+      "type": "task_added",
+      "taskId": "871e603d-6642-4377-9628-b2c91753e05e",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:48:03.357Z",
+      "type": "task_moved",
+      "taskId": "fc9177c7-4ed5-462e-a156-1594ae0b4c45",
+      "taskName": "[P28][OpsHub] Auto-quarantine synthetic \"Integration dashboard task\" spam cards",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed via subagent sp15-p28-quarantine-synthetic commit 4c8c94a"
+    },
+    {
+      "at": "2026-02-28T00:47:01.959Z",
+      "type": "task_added",
+      "taskId": "d88a5e03-862f-4188-b7d2-5c5ba7456cf6",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:47:01.953Z",
+      "type": "task_moved",
+      "taskId": "4b3dfee9-faae-4513-a14b-8d031e71f312",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:47:01.946Z",
+      "type": "task_moved",
+      "taskId": "4b3dfee9-faae-4513-a14b-8d031e71f312",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:47:01.940Z",
+      "type": "task_added",
+      "taskId": "4b3dfee9-faae-4513-a14b-8d031e71f312",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:47:01.930Z",
+      "type": "task_moved",
+      "taskId": "d349be01-1e8d-465a-ae3f-becfe2f83c05",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:47:01.922Z",
+      "type": "task_added",
+      "taskId": "d349be01-1e8d-465a-ae3f-becfe2f83c05",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:45:31.641Z",
+      "type": "task_moved",
+      "taskId": "deda0b7b-2440-435c-8164-faecbbcb5e7d",
+      "taskName": "[P29][OpsHub] Build Slack social mention ingestion bridge for social-progress cron",
+      "from": "todo",
+      "to": "inProgress"
+    },
+    {
+      "at": "2026-02-28T00:45:31.641Z",
+      "type": "task_moved",
+      "taskId": "fc9177c7-4ed5-462e-a156-1594ae0b4c45",
+      "taskName": "[P28][OpsHub] Auto-quarantine synthetic \"Integration dashboard task\" spam cards",
+      "from": "todo",
+      "to": "inProgress"
+    },
+    {
+      "at": "2026-02-28T00:45:31.597Z",
+      "type": "task_created",
+      "taskId": "deda0b7b-2440-435c-8164-faecbbcb5e7d",
+      "taskName": "[P29][OpsHub] Build Slack social mention ingestion bridge for social-progress cron",
+      "detail": "Seeded by cron cycle due to recurring Slack feed blocker."
+    },
+    {
+      "at": "2026-02-28T00:44:10.290Z",
+      "type": "task_added",
+      "taskId": "592fc46c-f0ae-4d97-9f3d-224f0cdb00b1",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:44:10.284Z",
+      "type": "task_moved",
+      "taskId": "3f22e272-b9e8-4eed-8555-de350783d042",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:44:10.277Z",
+      "type": "task_moved",
+      "taskId": "3f22e272-b9e8-4eed-8555-de350783d042",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:44:10.271Z",
+      "type": "task_added",
+      "taskId": "3f22e272-b9e8-4eed-8555-de350783d042",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:44:10.261Z",
+      "type": "task_moved",
+      "taskId": "11d56fdb-a8c2-42ee-b2f1-19302e164a6e",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:44:10.252Z",
+      "type": "task_added",
+      "taskId": "11d56fdb-a8c2-42ee-b2f1-19302e164a6e",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "type": "task_created",
+      "taskId": "fc9177c7-4ed5-462e-a156-1594ae0b4c45",
+      "taskName": "[P28][OpsHub] Auto-quarantine synthetic \"Integration dashboard task\" spam cards",
+      "to": "todo",
+      "timestamp": "2026-02-28T00:43:57.060Z",
+      "meta": {
+        "source": "cron-workaholic-loop",
+        "acceptanceCriteria": true
+      }
+    },
+    {
+      "at": "2026-02-28T00:43:16.263Z",
+      "type": "task_reassigned",
+      "taskId": "d21285c7-25c0-4f02-b9df-7c911bc69625",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:43:16.263Z",
+      "type": "task_reassigned",
+      "taskId": "2f04d5e2-608d-400a-aff3-d7a93b005a8f",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:43:16.263Z",
+      "type": "task_reassigned",
+      "taskId": "6570c950-29fb-4d84-834d-2ac67cd23a6d",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:43:16.263Z",
+      "type": "task_reassigned",
+      "taskId": "144d061b-ead1-4ece-aab9-8fa62707658b",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:43:16.263Z",
+      "type": "task_reassigned",
+      "taskId": "ce9b64fa-6cac-4311-bb22-8b141fe75128",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:43:16.263Z",
+      "type": "task_reassigned",
+      "taskId": "d16297fd-426f-4f41-b818-aaabe8ad6e83",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:42:36.750Z",
+      "type": "task_moved",
+      "taskId": "c1a2db89-6b29-4b9f-bd2f-4ea6882f5e4b",
+      "taskName": "[P27][OpsHub] Add paywall sequential-testing safety checker to prevent peeking bias",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed by sub-agent sp15-paywall-sequential-safety; commit d501ed2; npm test 52/52 pass; sequential safety checker docs/script/tests/artifact delivered."
+    },
+    {
+      "at": "2026-02-28T00:42:11.855Z",
+      "type": "task_added",
+      "taskId": "d12dc166-910d-4287-9335-07fe1860c0e5",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:42:11.848Z",
+      "type": "task_moved",
+      "taskId": "672565ef-0a4c-4cee-b222-2efc7fcfea24",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:42:11.842Z",
+      "type": "task_moved",
+      "taskId": "672565ef-0a4c-4cee-b222-2efc7fcfea24",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:42:11.835Z",
+      "type": "task_added",
+      "taskId": "672565ef-0a4c-4cee-b222-2efc7fcfea24",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:42:11.826Z",
+      "type": "task_moved",
+      "taskId": "2c5da22d-d8a2-4743-bac5-88e5b58329a5",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:42:11.818Z",
+      "type": "task_added",
+      "taskId": "2c5da22d-d8a2-4743-bac5-88e5b58329a5",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:41:59.962Z",
+      "type": "task_added",
+      "taskId": "b1f42664-77f7-4309-81f3-7c111bf3afd4",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:41:59.955Z",
+      "type": "task_moved",
+      "taskId": "298ba5a8-771d-4b12-8db7-395fec6f5bd9",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:41:59.949Z",
+      "type": "task_moved",
+      "taskId": "298ba5a8-771d-4b12-8db7-395fec6f5bd9",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:41:59.943Z",
+      "type": "task_added",
+      "taskId": "298ba5a8-771d-4b12-8db7-395fec6f5bd9",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:41:59.934Z",
+      "type": "task_moved",
+      "taskId": "dc28731a-d552-4795-b50d-8c0ae81ef901",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:41:59.924Z",
+      "type": "task_added",
+      "taskId": "dc28731a-d552-4795-b50d-8c0ae81ef901",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:41:07.747Z",
+      "type": "task_moved",
+      "taskId": "6188e748-8531-4924-83f3-f5753814a6dd",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed by sub-agent sp15-intdash-6188; commit 45e9a53; npm test 45/45 pass; fixed session label key parsing in stale cleanup."
+    },
+    {
+      "at": "2026-02-28T00:40:45.164Z",
+      "type": "task_added",
+      "taskId": "1addb332-5fae-49ee-b7bc-635ba14b117e",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:40:45.158Z",
+      "type": "task_moved",
+      "taskId": "577a79ed-9251-4920-8fb7-f785d2fa6406",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:40:45.153Z",
+      "type": "task_moved",
+      "taskId": "577a79ed-9251-4920-8fb7-f785d2fa6406",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:40:45.148Z",
+      "type": "task_added",
+      "taskId": "577a79ed-9251-4920-8fb7-f785d2fa6406",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:40:45.139Z",
+      "type": "task_moved",
+      "taskId": "d656458e-4064-439c-84b5-7b2b05a25935",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:40:45.132Z",
+      "type": "task_added",
+      "taskId": "d656458e-4064-439c-84b5-7b2b05a25935",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:40:07.075Z",
+      "type": "task_moved",
+      "taskId": "6188e748-8531-4924-83f3-f5753814a6dd",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for sub-agent execution (social-progress-15min cron)."
+    },
+    {
+      "at": "2026-02-28T00:39:52.076Z",
+      "type": "task_moved",
+      "taskId": "c1a2db89-6b29-4b9f-bd2f-4ea6882f5e4b",
+      "taskName": "[P27][OpsHub] Add paywall sequential-testing safety checker to prevent peeking bias",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned for sub-agent execution (social-progress-15min cron)."
+    },
+    {
+      "at": "2026-02-28T00:39:52.076Z",
+      "type": "task_moved",
+      "taskId": "642c0d19-dfc8-4b01-94dd-51328fa4240f",
+      "taskName": "Build paywall experiment tracker + weekly winner auto-pick",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Completed by sub-agent sp15-paywall-experiment-tracker; commit 499c87d; npm test 23/23 pass; artifacts generated."
+    },
+    {
+      "type": "task_created",
+      "taskId": "c1a2db89-6b29-4b9f-bd2f-4ea6882f5e4b",
+      "taskName": "[P27][OpsHub] Add paywall sequential-testing safety checker to prevent peeking bias",
+      "to": "todo",
+      "timestamp": "2026-02-28T00:38:33.347Z",
+      "meta": {
+        "source": "cron-workaholic-loop",
+        "acceptanceCriteria": true
+      }
+    },
+    {
+      "at": "2026-02-28T00:38:16.295Z",
+      "type": "task_added",
+      "taskId": "deeb4f62-e529-4d59-bf53-99ca69bb48c4",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:38:16.289Z",
+      "type": "task_moved",
+      "taskId": "359d34a7-2024-41fe-a6aa-3be7cb73949d",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:38:16.284Z",
+      "type": "task_moved",
+      "taskId": "359d34a7-2024-41fe-a6aa-3be7cb73949d",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:38:16.279Z",
+      "type": "task_added",
+      "taskId": "359d34a7-2024-41fe-a6aa-3be7cb73949d",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:38:16.272Z",
+      "type": "task_moved",
+      "taskId": "493f7449-ef0c-409c-bbe0-4a585df52587",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:38:16.266Z",
+      "type": "task_added",
+      "taskId": "493f7449-ef0c-409c-bbe0-4a585df52587",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:37:05.041Z",
+      "type": "task_added",
+      "taskId": "40db1e3c-f1d6-4c82-966d-f293fd4fb247",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:37:05.035Z",
+      "type": "task_moved",
+      "taskId": "2722f7c2-8464-4681-9711-1c568b1396a3",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:37:05.029Z",
+      "type": "task_moved",
+      "taskId": "2722f7c2-8464-4681-9711-1c568b1396a3",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:37:05.024Z",
+      "type": "task_added",
+      "taskId": "2722f7c2-8464-4681-9711-1c568b1396a3",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:37:05.017Z",
+      "type": "task_moved",
+      "taskId": "81686976-b7bf-44c3-96d9-d6396852baa8",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:37:05.011Z",
+      "type": "task_added",
+      "taskId": "81686976-b7bf-44c3-96d9-d6396852baa8",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:36:51.111Z",
+      "type": "task_added",
+      "taskId": "435d594b-11ed-42ec-a230-3067bf2f996c",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:36:51.105Z",
+      "type": "task_moved",
+      "taskId": "5d8c80e8-c526-47e7-b187-f618725a6d98",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:36:51.100Z",
+      "type": "task_moved",
+      "taskId": "5d8c80e8-c526-47e7-b187-f618725a6d98",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:36:51.096Z",
+      "type": "task_added",
+      "taskId": "5d8c80e8-c526-47e7-b187-f618725a6d98",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:36:51.088Z",
+      "type": "task_moved",
+      "taskId": "7f937f03-2429-4e95-9a11-2e860031e981",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:36:51.082Z",
+      "type": "task_added",
+      "taskId": "7f937f03-2429-4e95-9a11-2e860031e981",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:30:52.461Z",
+      "type": "task_added",
+      "taskId": "d16297fd-426f-4f41-b818-aaabe8ad6e83",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:30:52.455Z",
+      "type": "task_moved",
+      "taskId": "cb70b99b-0eac-4cea-9c4e-f02eaaf5591c",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:30:52.450Z",
+      "type": "task_moved",
+      "taskId": "cb70b99b-0eac-4cea-9c4e-f02eaaf5591c",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:30:52.445Z",
+      "type": "task_added",
+      "taskId": "cb70b99b-0eac-4cea-9c4e-f02eaaf5591c",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:30:52.439Z",
+      "type": "task_moved",
+      "taskId": "32b222b2-4565-4d9f-8211-b152c5015568",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:30:52.433Z",
+      "type": "task_added",
+      "taskId": "32b222b2-4565-4d9f-8211-b152c5015568",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:30:46.542Z",
+      "type": "task_added",
+      "taskId": "ce9b64fa-6cac-4311-bb22-8b141fe75128",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:30:46.536Z",
+      "type": "task_moved",
+      "taskId": "a83b04e2-20bd-4502-8abc-f549cc4d7845",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:30:46.531Z",
+      "type": "task_moved",
+      "taskId": "a83b04e2-20bd-4502-8abc-f549cc4d7845",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:30:46.527Z",
+      "type": "task_added",
+      "taskId": "a83b04e2-20bd-4502-8abc-f549cc4d7845",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:30:46.520Z",
+      "type": "task_moved",
+      "taskId": "08be7d6e-0fe5-4bd6-8da4-07c8f9e4ae53",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:30:46.514Z",
+      "type": "task_added",
+      "taskId": "08be7d6e-0fe5-4bd6-8da4-07c8f9e4ae53",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:29:36.048Z",
+      "type": "task_moved",
+      "taskId": "642c0d19-dfc8-4b01-94dd-51328fa4240f",
+      "taskName": "Build paywall experiment tracker + weekly winner auto-pick",
+      "from": "todo",
+      "to": "inProgress",
+      "detail": "Assigned to execution stream: paywall experiment tracker + weekly auto-pick implementation."
+    },
+    {
+      "at": "2026-02-28T00:29:35.999Z",
+      "type": "task_moved",
+      "taskId": "4e31ac20-b856-450f-8f07-77bd82356a7f",
+      "taskName": "Integration dashboard task",
+      "from": "todo",
+      "to": "done",
+      "detail": "Completed diagnostics + guardrails for dashboard in-progress sync drift detection (commit 81ea97f, npm test 20/20 pass)."
+    },
+    {
+      "type": "task_created",
+      "taskId": "642c0d19-dfc8-4b01-94dd-51328fa4240f",
+      "taskName": "Build paywall experiment tracker + weekly winner auto-pick",
+      "to": "todo",
+      "timestamp": "2026-02-28T00:28:00.735Z",
+      "meta": {
+        "source": "cron-workaholic-loop",
+        "acceptanceCriteria": true
+      }
+    },
+    {
+      "at": "2026-02-28T00:27:18.651Z",
+      "type": "task_added",
+      "taskId": "144d061b-ead1-4ece-aab9-8fa62707658b",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:27:18.645Z",
+      "type": "task_moved",
+      "taskId": "9d673621-ace3-49f3-ac84-a466f7d84981",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:27:18.639Z",
+      "type": "task_moved",
+      "taskId": "9d673621-ace3-49f3-ac84-a466f7d84981",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:27:18.633Z",
+      "type": "task_added",
+      "taskId": "9d673621-ace3-49f3-ac84-a466f7d84981",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:27:18.622Z",
+      "type": "task_moved",
+      "taskId": "93cb3a74-7837-4821-8ac3-63dfc1b2993b",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:27:18.614Z",
+      "type": "task_added",
+      "taskId": "93cb3a74-7837-4821-8ac3-63dfc1b2993b",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:26:14.715Z",
+      "type": "task_added",
+      "taskId": "6570c950-29fb-4d84-834d-2ac67cd23a6d",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:26:14.709Z",
+      "type": "task_moved",
+      "taskId": "7d2d0634-96c9-4776-8fdd-a9099221433d",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:26:14.704Z",
+      "type": "task_moved",
+      "taskId": "7d2d0634-96c9-4776-8fdd-a9099221433d",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:26:14.700Z",
+      "type": "task_added",
+      "taskId": "7d2d0634-96c9-4776-8fdd-a9099221433d",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:26:14.693Z",
+      "type": "task_moved",
+      "taskId": "e0a6b9b4-6cbe-46e0-8933-d9d1ed955fda",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:26:14.687Z",
+      "type": "task_added",
+      "taskId": "e0a6b9b4-6cbe-46e0-8933-d9d1ed955fda",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:26:03.832Z",
+      "type": "task_added",
+      "taskId": "2f04d5e2-608d-400a-aff3-d7a93b005a8f",
+      "taskName": "Integration dashboard task",
+      "to": "inProgress",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:26:03.826Z",
+      "type": "task_moved",
+      "taskId": "1278fd02-d095-4b43-9b07-dc6854a665fe",
+      "taskName": "Lifecycle task",
+      "from": "todo",
+      "to": "done",
+      "detail": "finally done"
+    },
+    {
+      "at": "2026-02-28T00:26:03.821Z",
+      "type": "task_moved",
+      "taskId": "1278fd02-d095-4b43-9b07-dc6854a665fe",
+      "taskName": "Lifecycle task",
+      "from": "done",
+      "to": "todo",
+      "detail": "needs follow-up"
+    },
+    {
+      "at": "2026-02-28T00:26:03.817Z",
+      "type": "task_added",
+      "taskId": "1278fd02-d095-4b43-9b07-dc6854a665fe",
+      "taskName": "Lifecycle task",
+      "to": "done",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:26:03.810Z",
+      "type": "task_moved",
+      "taskId": "e10dffa6-af0f-48ff-b65e-4c0af2e2c278",
+      "taskName": "Smoke task",
+      "from": "backlog",
+      "to": "done",
+      "detail": "finished"
+    },
+    {
+      "at": "2026-02-28T00:26:03.804Z",
+      "type": "task_added",
+      "taskId": "e10dffa6-af0f-48ff-b65e-4c0af2e2c278",
+      "taskName": "Smoke task",
+      "to": "backlog",
+      "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-02-28T00:25:11.501Z",
+      "type": "task_reassigned",
+      "taskId": "4e31ac20-b856-450f-8f07-77bd82356a7f",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:25:11.501Z",
+      "type": "task_reassigned",
+      "taskId": "6188e748-8531-4924-83f3-f5753814a6dd",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:25:11.501Z",
+      "type": "task_reassigned",
+      "taskId": "70dacfbc-b606-403c-a1ee-075a836f3849",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:25:11.501Z",
+      "type": "task_reassigned",
+      "taskId": "0f346228-ab38-4076-835a-aba0411b0d43",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:25:11.501Z",
+      "type": "task_reassigned",
+      "taskId": "ee3e2bc7-39ba-4f77-a620-2edd38154546",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:25:11.501Z",
+      "type": "task_reassigned",
+      "taskId": "f8005135-e64b-4478-a08a-de2d5d3fca0b",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:25:11.501Z",
+      "type": "task_reassigned",
+      "taskId": "5b453af5-1cc5-4507-bc76-28ac94311724",
+      "taskName": "Integration dashboard task",
+      "to": "todo",
+      "detail": "Auto-remediated by inprogress-stale-cleanup (--stale-minutes=10): no active sub-agent match + stale age threshold exceeded."
+    },
+    {
+      "at": "2026-02-28T00:24:21.296Z",
+      "type": "task_moved",
+      "taskId": "1677c75c-fdb4-4c75-b6c0-df9a52a122ce",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Fixed integration dashboard inProgressTasks payload + scoped stale cleanup; tests passing"
+    },
+    {
+      "at": "2026-02-28T00:24:21.279Z",
+      "type": "task_moved",
+      "taskId": "a4341689-9898-4d0e-81f9-23307929c7d3",
+      "taskName": "Integration dashboard task",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "Fixed integration dashboard inProgressTasks payload + scoped stale cleanup; tests passing"
+    },
     {
       "at": "2026-02-28T00:16:21.649Z",
       "type": "task_added",
@@ -4739,1676 +7108,43 @@
       "detail": "Added task from delight-rework-sweep"
     },
     {
-      "at": "2026-02-26T22:39:17.392Z",
-      "type": "task_added",
-      "taskId": "77a0607b-381f-446d-a2ab-6a1117eb7615",
-      "taskName": "[Rework QA] [P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.391Z",
-      "type": "task_added",
-      "taskId": "580c094b-22bc-4c8e-8e39-10e5f75bba54",
-      "taskName": "[Rework QA] [P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.390Z",
-      "type": "task_added",
-      "taskId": "c1c2fe48-7d82-4dd4-b21b-62dae6f6fcbd",
-      "taskName": "[Rework QA] [P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.389Z",
-      "type": "task_added",
-      "taskId": "caeeccb1-0f86-4ff9-a4f2-4b4da8102191",
-      "taskName": "[Rework QA] OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.388Z",
-      "type": "task_added",
-      "taskId": "84998ff0-62ff-4355-afa6-f92472c6888a",
-      "taskName": "[Rework QA] [P1] Create environment/config strategy (dev/staging/prod)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.386Z",
-      "type": "task_added",
-      "taskId": "e17eca61-de4e-40bd-bd47-f24874636d50",
-      "taskName": "[Rework QA] [P1] Scaffold Flutter app modules and folder conventions",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.385Z",
-      "type": "task_added",
-      "taskId": "f9ac62f3-cc9e-4824-ac59-00d0ce494d38",
-      "taskName": "[Rework QA] [P1] Define API/contracts for scanning + classification services",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.384Z",
-      "type": "task_added",
-      "taskId": "862370c2-46ca-44ed-8c91-5c90026210b5",
-      "taskName": "[Rework QA] [P1] Write security rules baseline for Firestore/Storage",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.383Z",
-      "type": "task_added",
-      "taskId": "f092ac2e-e01c-4614-82df-0e1c5f1f0b9e",
-      "taskName": "[Rework QA] [P1] Define Firestore collections and indexing plan",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.382Z",
-      "type": "task_added",
-      "taskId": "714ea6b8-49e6-4221-b9e1-f8334383f1a1",
-      "taskName": "[Rework QA] [P1] Design event model for pet reactions and pantry changes",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.380Z",
-      "type": "task_added",
-      "taskId": "28c984be-6d48-47f9-92fd-1ed9bf8de66e",
-      "taskName": "[Rework QA] [P1] Create PantryPal project brief and success metrics (MVP + north-star)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.379Z",
-      "type": "task_added",
-      "taskId": "269f9749-ff5b-4ff9-9f9c-946e9e51523e",
-      "taskName": "[Rework QA] [P1] Select state management approach (Riverpod/Bloc decision doc)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.378Z",
-      "type": "task_added",
-      "taskId": "083c57dc-eda2-4cb6-ad03-1329ac90d964",
-      "taskName": "[Rework QA] [P1] Define app architecture (presentation/state/domain/data layers)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.377Z",
-      "type": "task_added",
-      "taskId": "2979a92c-f358-46fa-b6cb-440da1b11d00",
-      "taskName": "[Rework QA] Smoke task",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.376Z",
-      "type": "task_added",
-      "taskId": "f2fe68dd-8cc8-45ff-879b-dac859cb5713",
-      "taskName": "[Rework QA] [P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.374Z",
-      "type": "task_added",
-      "taskId": "11ca03b3-2810-4a78-b317-8b1771c23477",
-      "taskName": "[Rework QA] [P2] Build pantry CRUD UI (add/edit/remove/consume)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.373Z",
-      "type": "task_added",
-      "taskId": "9cbbd55a-7754-4d54-82b5-a9c83cb7c2bc",
-      "taskName": "[Rework QA] [P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
-      "to": "todo",
-      "detail": "Delight rework pass: visual polish, interaction quality, emotional UX, and screenshot-based QA before re-closing."
-    },
-    {
-      "at": "2026-02-26T22:39:17.372Z",
-      "type": "task_added",
-      "taskId": "5a8ebea6-b01b-4abb-94fa-25269a51933b",
-      "taskName": "[Rework QA] [P1] Wire Firebase config bootstrap + emulator/dev toggles",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.371Z",
-      "type": "task_added",
-      "taskId": "5518e591-5362-411e-b5f0-5f8ed0d097ca",
-      "taskName": "[Rework QA] [P2] Add expiry-date tracking and freshness status logic",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.370Z",
-      "type": "task_added",
-      "taskId": "4fb291a2-d96b-4cad-a7cd-3b9a2a989011",
-      "taskName": "[Rework QA] [P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.369Z",
-      "type": "task_added",
-      "taskId": "c4acfa26-1eb4-4589-a45a-2b985441a8f6",
-      "taskName": "[Rework QA] [P2] Implement photo-to-food item capture flow",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.367Z",
-      "type": "task_added",
-      "taskId": "9b6a1867-3e6d-43b6-aada-bc08737c04a1",
-      "taskName": "[Rework QA] [P3] Define pet attributes (mood/energy/health/hunger/evolution)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.366Z",
-      "type": "task_added",
-      "taskId": "335459e5-6eac-4394-9f4c-07f0d8064f82",
-      "taskName": "[Rework QA] [P2] Build pantry summary dashboard (healthy/unhealthy balance)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.365Z",
-      "type": "task_added",
-      "taskId": "662e5878-f53d-4ac1-ae6a-10ee8c348cae",
-      "taskName": "[Rework QA] [P3] Design pet state machine and trigger rules",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.364Z",
-      "type": "task_added",
-      "taskId": "dbc0400d-b5b1-4bd5-b66f-45aed9430b60",
-      "taskName": "[Rework QA] [P2] Add confidence scoring + fallback for unknown items",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.363Z",
-      "type": "task_added",
-      "taskId": "d4efe638-9179-40ed-a793-fce15a82921f",
-      "taskName": "[Rework QA] [P2] Build food classification engine (category + nutrition quality score)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.361Z",
-      "type": "task_added",
-      "taskId": "4bdf2baa-ada3-4e3d-9da9-cc6bc9949233",
-      "taskName": "[Rework QA] [P2] Normalize food names and units (dedupe + parsing)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.360Z",
-      "type": "task_added",
-      "taskId": "df8ffcd0-dbad-4d1e-a6a9-0ad1bbd7525e",
-      "taskName": "[Rework QA] [P3] Implement pet animation state controller",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.359Z",
-      "type": "task_added",
-      "taskId": "38b3245d-10c5-4e3c-8fd5-1cbd1d34676f",
-      "taskName": "[Rework QA] [P3] Map nutrition score deltas to pet stat updates",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.358Z",
-      "type": "task_added",
-      "taskId": "48c98705-ed2a-4a15-b4c0-669286fec15e",
-      "taskName": "[Rework QA] [P3] Build pet timeline/history view for user feedback loop",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.357Z",
-      "type": "task_added",
-      "taskId": "ff1b7a09-df85-4e33-a6c6-cbc549a191d4",
-      "taskName": "[Rework QA] [P3] Implement hunger/sad behavior for expiring pantry items",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.355Z",
-      "type": "task_added",
-      "taskId": "b126e511-fe6c-4e27-ab78-c0e50f901522",
-      "taskName": "[Rework QA] [P3] Define evolution/degradation thresholds and cadence",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.354Z",
-      "type": "task_added",
-      "taskId": "a0c3ac65-2bfa-45e0-9dd0-42eb16385efd",
-      "taskName": "[Rework QA] [P5] Accessibility + localization readiness",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.353Z",
-      "type": "task_added",
-      "taskId": "4d423e6c-b6f1-456f-8729-71c61a4a07d5",
-      "taskName": "[Rework QA] [P5] Launch checklist + app store assets + rollout plan",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.352Z",
-      "type": "task_added",
-      "taskId": "53f3e69f-4452-403b-960c-10a8d9a6bc7c",
-      "taskName": "[Rework QA] [P5] QA plan + test matrix (unit/widget/integration)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.350Z",
-      "type": "task_added",
-      "taskId": "a065b412-6975-4b99-a2e9-18ef2a27dc71",
-      "taskName": "[Rework QA] [P5] Performance pass (startup, list rendering, sync)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.349Z",
-      "type": "task_added",
-      "taskId": "a791fed4-2779-4198-8cc5-24b938c0f077",
-      "taskName": "[Rework QA] [P5] Add onboarding flow + permission education",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.348Z",
-      "type": "task_added",
-      "taskId": "72fd9ddb-6503-44ed-932c-534f69a3ca12",
-      "taskName": "[Rework QA] [P5] Add analytics instrumentation (funnel + retention events)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.347Z",
-      "type": "task_added",
-      "taskId": "d433a717-dae7-44ba-b4eb-1a6b29362716",
-      "taskName": "[Rework QA] [P4] Add re-engagement messaging strategy (push + in-app)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.346Z",
-      "type": "task_added",
-      "taskId": "239f82df-0c60-420e-832f-cfc00ada7326",
-      "taskName": "[Rework QA] [P4] Build challenge/quest system (use expiring foods this week)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.344Z",
-      "type": "task_added",
-      "taskId": "1cec7707-6648-4c2a-bfc6-62b0835c3010",
-      "taskName": "[Rework QA] [P4] Add streak engine (healthy pantry days / waste reduction)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.343Z",
-      "type": "task_added",
-      "taskId": "2677a413-9820-4ff1-9d8f-0532e91f6235",
-      "taskName": "[Rework QA] [P4] Implement pet hunger notifications tied to pantry risk",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.342Z",
-      "type": "task_added",
-      "taskId": "8e29e46f-4c4d-4c2b-8314-66213fe23a62",
-      "taskName": "[Rework QA] [P4] Implement expiry reminders and urgency tiers",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.341Z",
-      "type": "task_added",
-      "taskId": "108f18b4-c421-434b-8a9a-4bac1f20c14d",
-      "taskName": "[Rework QA] [P6] Build smart shopping list generator from low-stock + expiry risk",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.339Z",
-      "type": "task_added",
-      "taskId": "a83f576b-a5b5-4eba-8610-0192fdc606ba",
-      "taskName": "[Rework QA] [P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.338Z",
-      "type": "task_added",
-      "taskId": "d3812c11-07ae-4154-9261-0b177e4c4dcb",
-      "taskName": "[Rework QA] [P6] Add household profiles + shared pantry collaboration permissions",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.337Z",
-      "type": "task_added",
-      "taskId": "706c918c-50e0-459f-ad91-2f6a5258f894",
-      "taskName": "[Rework QA] [Ops] Verify Claude delegate workflow end-to-end",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.336Z",
-      "type": "task_added",
-      "taskId": "679ae12e-5a55-4d05-92ef-4be0970cee6e",
-      "taskName": "[Rework QA] [P7] Build meal planner suggestions from expiring pantry items",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.334Z",
-      "type": "task_added",
-      "taskId": "064f20cc-6634-4dc6-9529-f35dec6118cf",
-      "taskName": "[Rework QA] [P7] Add adaptive notification quiet-hours + urgency escalation",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.333Z",
-      "type": "task_added",
-      "taskId": "b72cbfdc-b0d2-4141-b1d7-49824939a9c4",
-      "taskName": "[Rework QA] [P7] Implement household activity feed with undo for pantry actions",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.332Z",
-      "type": "task_added",
-      "taskId": "95880994-b1f1-4093-a708-b8c97485fff7",
-      "taskName": "[Rework QA] [P8] Build personalized pantry health scorecard with weekly trend explanations",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.330Z",
-      "type": "task_added",
-      "taskId": "96b68b0b-7650-441f-a271-ea7b9b714edc",
-      "taskName": "[Rework QA] [P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:39:17.329Z",
-      "type": "task_added",
-      "taskId": "376fe6d7-1792-4eec-8018-9cbe619da89e",
-      "taskName": "[Rework QA] [P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
-      "to": "todo",
-      "detail": "Added task from delight-rework-sweep"
-    },
-    {
-      "at": "2026-02-26T22:38:13.567Z",
-      "type": "task_moved",
-      "taskId": "519058ce-e72a-4936-8d65-e94c45116b61",
-      "taskName": "[P9] Add cost-aware substitution suggestions when ingredients are missing",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T22:38:13.567Z",
-      "type": "task_moved",
-      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
-      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T22:38:13.567Z",
-      "type": "task_moved",
-      "taskId": "b86c1e59-5027-46c4-9871-3d38f615c478",
-      "taskName": "[Rework][UI] Redesign Tamagotchi wellness companion with custom art, animation, and personality",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T22:38:01.983Z",
-      "type": "task_moved",
-      "taskId": "3dfeeb20-a5d6-41b2-ae3f-3cbf6738dc22",
-      "taskName": "[P9] Design PantryPal weekly meal-prep optimizer using pantry inventory + calendar constraints",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Started directly in main agent (cron)"
-    },
-    {
-      "at": "2026-02-26T22:38:01.983Z",
-      "type": "task_added",
-      "taskId": "6b6701af-0f27-4bf0-8159-3c62a8609032",
-      "taskName": "[P9] Create household accountability dashboard for waste reduction goals",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:38:01.983Z",
-      "type": "task_added",
-      "taskId": "519058ce-e72a-4936-8d65-e94c45116b61",
-      "taskName": "[P9] Add cost-aware substitution suggestions when ingredients are missing",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:38:01.983Z",
-      "type": "task_added",
-      "taskId": "3dfeeb20-a5d6-41b2-ae3f-3cbf6738dc22",
-      "taskName": "[P9] Design PantryPal weekly meal-prep optimizer using pantry inventory + calendar constraints",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:37:54.431Z",
-      "type": "task_added",
-      "taskId": "b86c1e59-5027-46c4-9871-3d38f615c478",
-      "taskName": "[Rework][UI] Redesign Tamagotchi wellness companion with custom art, animation, and personality",
-      "to": "todo",
-      "detail": "Added task from luciana-directive"
-    },
-    {
-      "at": "2026-02-26T22:37:48.814Z",
-      "type": "task_moved",
-      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
-      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
-      "from": "done",
-      "to": "todo",
-      "detail": "Needs rework: current pet visual implementation is placeholder quality; requires custom illustrated states + animation polish."
-    },
-    {
-      "at": "2026-02-26T22:24:32.382Z",
-      "type": "task_moved",
-      "taskId": "ab7df9f4-5da7-4fce-b890-73193eec72c6",
-      "taskName": "[P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p8-household-task-assignment; artifact pantrypal/docs/p8_household_pantry_task_assignment.md"
-    },
-    {
-      "at": "2026-02-26T22:24:32.382Z",
-      "type": "task_moved",
-      "taskId": "29015876-9333-4ce2-bdc8-503f902b559c",
-      "taskName": "[P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p8-cook-tonight-recs; artifact pantrypal/docs/p8_cook_tonight_recommendations.md"
-    },
-    {
-      "at": "2026-02-26T22:23:55.675Z",
-      "type": "task_moved",
-      "taskId": "ab7df9f4-5da7-4fce-b890-73193eec72c6",
-      "taskName": "[P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T22:23:55.675Z",
-      "type": "task_moved",
-      "taskId": "29015876-9333-4ce2-bdc8-503f902b559c",
-      "taskName": "[P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T22:23:42.581Z",
-      "type": "task_moved",
-      "taskId": "1bed2a9c-2fd7-44a2-ba99-1a45633b57fa",
-      "taskName": "[P8] Build personalized pantry health scorecard with weekly trend explanations",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed directly in main agent; artifact pantrypal/docs/p8_pantry_health_scorecard.md"
-    },
-    {
-      "at": "2026-02-26T22:23:18.552Z",
-      "type": "task_moved",
-      "taskId": "1bed2a9c-2fd7-44a2-ba99-1a45633b57fa",
-      "taskName": "[P8] Build personalized pantry health scorecard with weekly trend explanations",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Started directly in main agent (cron)"
-    },
-    {
-      "at": "2026-02-26T22:23:18.552Z",
-      "type": "task_added",
-      "taskId": "ab7df9f4-5da7-4fce-b890-73193eec72c6",
-      "taskName": "[P8] Add collaborative household task assignment for pantry actions (buy/use/freeze)",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:23:18.552Z",
-      "type": "task_added",
-      "taskId": "29015876-9333-4ce2-bdc8-503f902b559c",
-      "taskName": "[P8] Implement what-to-cook tonight recommendations using expiring inventory + prep time",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:23:18.552Z",
-      "type": "task_added",
-      "taskId": "1bed2a9c-2fd7-44a2-ba99-1a45633b57fa",
-      "taskName": "[P8] Build personalized pantry health scorecard with weekly trend explanations",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:16:37Z",
-      "type": "task_moved",
-      "taskId": "52845d1d-7a90-4c23-865d-b7daac20c53e",
-      "taskName": "[P7] Implement household activity feed with undo for pantry actions",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p7-activity-feed-undo"
-    },
-    {
-      "at": "2026-02-26T22:15:55Z",
-      "type": "task_moved",
-      "taskId": "fd440368-339f-4aec-a2a6-37222bf909d3",
-      "taskName": "[P7] Add adaptive notification quiet-hours + urgency escalation",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p7-quiet-hours-escalation"
-    },
-    {
-      "at": "2026-02-26T22:13:03Z",
-      "type": "task_moved",
-      "taskId": "52845d1d-7a90-4c23-865d-b7daac20c53e",
-      "taskName": "[P7] Implement household activity feed with undo for pantry actions",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T22:13:03Z",
-      "type": "task_moved",
-      "taskId": "fd440368-339f-4aec-a2a6-37222bf909d3",
-      "taskName": "[P7] Add adaptive notification quiet-hours + urgency escalation",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T22:08:26.526Z",
-      "type": "task_moved",
-      "taskId": "ec84a913-80e3-4bec-8451-f39115e52c8d",
-      "taskName": "[P7] Build meal planner suggestions from expiring pantry items",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed directly in main agent; artifact pantrypal/docs/p7-meal-planner-expiry.md"
-    },
-    {
-      "at": "2026-02-26T22:08:10.136Z",
-      "type": "task_moved",
-      "taskId": "ec84a913-80e3-4bec-8451-f39115e52c8d",
-      "taskName": "[P7] Build meal planner suggestions from expiring pantry items",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Started directly in main agent (cron)"
-    },
-    {
-      "at": "2026-02-26T22:08:10.136Z",
-      "type": "task_added",
-      "taskId": "52845d1d-7a90-4c23-865d-b7daac20c53e",
-      "taskName": "[P7] Implement household activity feed with undo for pantry actions",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:08:10.136Z",
-      "type": "task_added",
-      "taskId": "fd440368-339f-4aec-a2a6-37222bf909d3",
-      "taskName": "[P7] Add adaptive notification quiet-hours + urgency escalation",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:08:10.136Z",
-      "type": "task_added",
-      "taskId": "ec84a913-80e3-4bec-8451-f39115e52c8d",
-      "taskName": "[P7] Build meal planner suggestions from expiring pantry items",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T22:00:06.649Z",
-      "type": "task_moved",
-      "taskId": "62f7cbf3-3da1-4095-a321-72a475c686be",
-      "taskName": "[Ops] Verify Claude delegate workflow end-to-end",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "Completed via claude-code-delegate (commit 928ab58)"
-    },
-    {
-      "at": "2026-02-26T21:59:44.372Z",
-      "type": "task_moved",
-      "taskId": "62f7cbf3-3da1-4095-a321-72a475c686be",
-      "taskName": "[Ops] Verify Claude delegate workflow end-to-end",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "delegating to Claude Code via claude-code-delegate"
-    },
-    {
-      "at": "2026-02-26T21:59:38.701Z",
-      "type": "task_added",
-      "taskId": "62f7cbf3-3da1-4095-a321-72a475c686be",
-      "taskName": "[Ops] Verify Claude delegate workflow end-to-end",
-      "to": "todo",
-      "detail": "Added task from manual-checklist"
-    },
-    {
-      "at": "2026-02-26T21:53:08.356Z",
-      "type": "task_moved",
-      "taskId": "dc21fdc5-81a3-48c3-9362-0015eb34dee8",
-      "taskName": "[P6] Add household profiles + shared pantry collaboration permissions",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p6-household-collab (commit 77fbbc1)"
-    },
-    {
-      "at": "2026-02-26T21:46:07.979Z",
-      "type": "task_moved",
-      "taskId": "3115e6b8-5998-4767-9944-359ac669c740",
-      "taskName": "[P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p6-weekly-insights-digest (commit 37744ba)"
-    },
-    {
-      "at": "2026-02-26T21:45:55.888Z",
-      "type": "task_moved",
-      "taskId": "b26ebe2c-1e0a-4464-97d0-cccfb2e59341",
-      "taskName": "[P6] Build smart shopping list generator from low-stock + expiry risk",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p6-smart-shopping-list (commit 0d79f19)"
-    },
-    {
-      "at": "2026-02-26T21:43:10.553Z",
-      "type": "task_moved",
-      "taskId": "3115e6b8-5998-4767-9944-359ac669c740",
-      "taskName": "[P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:43:10.553Z",
-      "type": "task_moved",
-      "taskId": "b26ebe2c-1e0a-4464-97d0-cccfb2e59341",
-      "taskName": "[P6] Build smart shopping list generator from low-stock + expiry risk",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:43:10.553Z",
-      "type": "task_moved",
-      "taskId": "dc21fdc5-81a3-48c3-9362-0015eb34dee8",
-      "taskName": "[P6] Add household profiles + shared pantry collaboration permissions",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:43:10.553Z",
-      "type": "task_added",
-      "taskId": "3115e6b8-5998-4767-9944-359ac669c740",
-      "taskName": "[P6] Implement weekly insights digest (waste prevented, savings, pet health trend)",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T21:43:10.553Z",
-      "type": "task_added",
-      "taskId": "b26ebe2c-1e0a-4464-97d0-cccfb2e59341",
-      "taskName": "[P6] Build smart shopping list generator from low-stock + expiry risk",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T21:43:10.553Z",
-      "type": "task_added",
-      "taskId": "dc21fdc5-81a3-48c3-9362-0015eb34dee8",
-      "taskName": "[P6] Add household profiles + shared pantry collaboration permissions",
-      "to": "todo",
-      "detail": "Added intelligent iteration seed task (cron)"
-    },
-    {
-      "at": "2026-02-26T21:41:08.866Z",
-      "type": "task_moved",
-      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
-      "taskName": "[P4] Implement expiry reminders and urgency tiers",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p4-expiry-reminders (commit 5f7393f)"
-    },
-    {
-      "at": "2026-02-26T21:40:48.312Z",
-      "type": "task_moved",
-      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
-      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p4-hunger-notifications (commit 64a175c)"
-    },
-    {
-      "at": "2026-02-26T21:40:12.159Z",
-      "type": "task_moved",
-      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
-      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p4-streak-engine-unstick (commit 1637965)"
-    },
-    {
-      "at": "2026-02-26T21:38:13.649Z",
-      "type": "task_reassigned",
-      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
-      "taskName": "[P4] Implement expiry reminders and urgency tiers",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T21:38:13.649Z",
-      "type": "task_reassigned",
-      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
-      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T21:38:13.649Z",
-      "type": "task_reassigned",
-      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
-      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T21:38:13.649Z",
-      "type": "task_moved",
-      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
-      "taskName": "[P4] Implement expiry reminders and urgency tiers",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:38:13.649Z",
-      "type": "task_moved",
-      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
-      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:36:15.355Z",
-      "type": "task_moved",
-      "taskId": "5f65417e-c225-4069-a1c2-000638727a61",
-      "taskName": "[P4] Build challenge/quest system (use expiring foods this week)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p4-challenge-quest-system (commit 57736fa)"
-    },
-    {
-      "at": "2026-02-26T21:34:54.724Z",
-      "type": "task_moved",
-      "taskId": "5702ea57-c198-40d6-a165-7f1e274cf96b",
-      "taskName": "[P4] Add re-engagement messaging strategy (push + in-app)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p4-reengagement-messaging (commit 7bb1d40)"
-    },
-    {
-      "at": "2026-02-26T21:33:23.183Z",
-      "type": "task_moved",
-      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
-      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:33:23.183Z",
-      "type": "task_moved",
-      "taskId": "5f65417e-c225-4069-a1c2-000638727a61",
-      "taskName": "[P4] Build challenge/quest system (use expiring foods this week)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:33:23.183Z",
-      "type": "task_moved",
-      "taskId": "5702ea57-c198-40d6-a165-7f1e274cf96b",
-      "taskName": "[P4] Add re-engagement messaging strategy (push + in-app)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:28:44.022039Z",
-      "type": "task_moved",
-      "taskId": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
-      "taskName": "[P5] Add analytics instrumentation (funnel + retention events)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p5-analytics-instrumentation (commit 48a8d04)"
-    },
-    {
-      "at": "2026-02-26T21:28:31.642110Z",
-      "type": "task_moved",
-      "taskId": "20bb91f3-6263-4fca-9768-7f77ab351d41",
-      "taskName": "[P5] Add onboarding flow + permission education",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p5-onboarding-permissions (commit f5ea91e)"
-    },
-    {
-      "at": "2026-02-26T21:26:37.120245Z",
-      "type": "task_moved",
-      "taskId": "93d240f5-d619-4509-836f-497fb5b0c643",
-      "taskName": "[P5] Performance pass (startup, list rendering, sync)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p5-performance-pass (commit 08332d3)"
-    },
-    {
-      "at": "2026-02-26T21:23:24Z",
-      "type": "task_moved",
-      "taskId": "20bb91f3-6263-4fca-9768-7f77ab351d41",
-      "taskName": "[P5] Add onboarding flow + permission education",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:23:24Z",
-      "type": "task_moved",
-      "taskId": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
-      "taskName": "[P5] Add analytics instrumentation (funnel + retention events)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T21:23:24Z",
-      "type": "task_moved",
-      "taskId": "93d240f5-d619-4509-836f-497fb5b0c643",
-      "taskName": "[P5] Performance pass (startup, list rendering, sync)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:49:19Z",
-      "type": "task_moved",
-      "taskId": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
-      "taskName": "[P5] QA plan + test matrix (unit/widget/integration)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p5-qa-plan-test-matrix (commit 96cdd52)"
-    },
-    {
-      "at": "2026-02-26T20:49:19.363Z",
-      "type": "task_moved",
-      "taskId": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
-      "taskName": "[P5] Launch checklist + app store assets + rollout plan",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p5-launch-checklist-rollout (commit f742c65)"
-    },
-    {
-      "at": "2026-02-26T20:48:59Z",
-      "type": "task_moved",
-      "taskId": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
-      "taskName": "[P5] Accessibility + localization readiness",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p5-accessibility-localization-readiness (commit 8755bc6)"
-    },
-    {
-      "at": "2026-02-26T20:47:55.966Z",
-      "type": "task_moved",
-      "taskId": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
-      "taskName": "[P5] QA plan + test matrix (unit/widget/integration)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:47:55.966Z",
-      "type": "task_moved",
-      "taskId": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
-      "taskName": "[P5] Accessibility + localization readiness",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:47:55.966Z",
-      "type": "task_moved",
-      "taskId": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
-      "taskName": "[P5] Launch checklist + app store assets + rollout plan",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:42:25Z",
-      "type": "task_moved",
-      "taskId": "33ab6340-2712-4dd5-bd6f-a1c322227b8d",
-      "taskName": "[P3] Define evolution/degradation thresholds and cadence",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-evolution-thresholds-cadence (commit 0c037b7)"
-    },
-    {
-      "at": "2026-02-26T20:42:25Z",
-      "type": "task_moved",
-      "taskId": "956c668f-0d16-48b7-ac25-3e1830eb703d",
-      "taskName": "[P3] Implement hunger/sad behavior for expiring pantry items",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-hunger-sad-behavior (commit f1b4b22)"
-    },
-    {
-      "at": "2026-02-26T20:42:25Z",
-      "type": "task_moved",
-      "taskId": "9bbb6d66-4c96-4b9f-97da-656d2448fdce",
-      "taskName": "[P3] Build pet timeline/history view for user feedback loop",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-pet-timeline-history-view (commit 9f3bf4d)"
-    },
-    {
-      "at": "2026-02-26T20:37:59Z",
-      "type": "task_moved",
-      "taskId": "33ab6340-2712-4dd5-bd6f-a1c322227b8d",
-      "taskName": "[P3] Define evolution/degradation thresholds and cadence",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:37:59Z",
-      "type": "task_moved",
-      "taskId": "956c668f-0d16-48b7-ac25-3e1830eb703d",
-      "taskName": "[P3] Implement hunger/sad behavior for expiring pantry items",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:37:59Z",
-      "type": "task_moved",
-      "taskId": "9bbb6d66-4c96-4b9f-97da-656d2448fdce",
-      "taskName": "[P3] Build pet timeline/history view for user feedback loop",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:35:23.006Z",
-      "type": "task_moved",
-      "taskId": "26841502-9e0e-4034-9d5e-d7a812188223",
-      "taskName": "[P3] Map nutrition score deltas to pet stat updates",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-nutrition-deltas-to-pet-stats (commit 0a4cf62)"
-    },
-    {
-      "at": "2026-02-26T20:35:15.362Z",
-      "type": "task_moved",
-      "taskId": "71fb9a7f-4b33-4b0f-8442-4151ff6437c0",
-      "taskName": "[P3] Implement pet animation state controller",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-pet-animation-state-controller (commit d96834e)"
-    },
-    {
-      "at": "2026-02-26T20:35:00.479Z",
-      "type": "task_moved",
-      "taskId": "5c90333a-91fc-41fe-8b16-b9d1d9a15aa9",
-      "taskName": "[P2] Normalize food names and units (dedupe + parsing)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p2-normalize-food-names-units"
-    },
-    {
-      "at": "2026-02-26T20:34:51.011Z",
-      "type": "task_moved",
-      "taskId": "9ebcec19-b972-4fe3-ae6f-6b9067161131",
-      "taskName": "[P2] Build food classification engine (category + nutrition quality score)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p2-food-classification-engine"
-    },
-    {
-      "at": "2026-02-26T20:34:43.120Z",
-      "type": "task_moved",
-      "taskId": "26b38058-9cb8-4e12-8a72-adc0314f966a",
-      "taskName": "[P2] Add confidence scoring + fallback for unknown items",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p2-confidence-fallback"
-    },
-    {
-      "at": "2026-02-26T20:34:26.799Z",
-      "type": "task_moved",
-      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
-      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-pet-visual-base-states (commit b48edf2)"
-    },
-    {
-      "at": "2026-02-26T20:33:38.666Z",
-      "type": "task_moved",
-      "taskId": "8e731b0a-c103-4cf4-ad8d-efb422eb972f",
-      "taskName": "[P3] Build pet visuals for base states (happy/neutral/sluggish/sick)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:33:38.666Z",
-      "type": "task_moved",
-      "taskId": "71fb9a7f-4b33-4b0f-8442-4151ff6437c0",
-      "taskName": "[P3] Implement pet animation state controller",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:33:38.666Z",
-      "type": "task_moved",
-      "taskId": "26841502-9e0e-4034-9d5e-d7a812188223",
-      "taskName": "[P3] Map nutrition score deltas to pet stat updates",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:32:03.948Z",
-      "type": "task_moved",
-      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
-      "taskName": "[P3] Design pet state machine and trigger rules",
-      "from": "done",
-      "to": "done",
-      "detail": "completed by sub-agent p3-pet-state-machine-rules"
-    },
-    {
-      "at": "2026-02-26T20:29:15Z",
-      "type": "task_moved",
-      "taskId": "78ecd0ea-6c59-4342-8cd1-93f02c27ce49",
-      "taskName": "[P2] Build pantry summary dashboard (healthy/unhealthy balance)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p2-pantry-summary-dashboard"
-    },
-    {
-      "at": "2026-02-26T20:29:15Z",
-      "type": "task_moved",
-      "taskId": "44df43d6-ff02-464f-909e-a5cb68719a6a",
-      "taskName": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-pet-attributes-definition"
-    },
-    {
-      "at": "2026-02-26T20:29:15Z",
-      "type": "task_moved",
-      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
-      "taskName": "[P3] Design pet state machine and trigger rules",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p3-pet-state-machine-rules"
-    },
-    {
-      "at": "2026-02-26T20:28:41Z",
-      "type": "task_moved",
-      "taskId": "78ecd0ea-6c59-4342-8cd1-93f02c27ce49",
-      "taskName": "[P2] Build pantry summary dashboard (healthy/unhealthy balance)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:28:41Z",
-      "type": "task_moved",
-      "taskId": "44df43d6-ff02-464f-909e-a5cb68719a6a",
-      "taskName": "[P3] Define pet attributes (mood/energy/health/hunger/evolution)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:28:41Z",
-      "type": "task_moved",
-      "taskId": "16e03ff7-0d76-4b5a-9898-aefdf7f61871",
-      "taskName": "[P3] Design pet state machine and trigger rules",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:23:06Z",
-      "type": "task_moved",
-      "taskId": "26b38058-9cb8-4e12-8a72-adc0314f966a",
-      "taskName": "[P2] Add confidence scoring + fallback for unknown items",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:23:06Z",
-      "type": "task_moved",
-      "taskId": "9ebcec19-b972-4fe3-ae6f-6b9067161131",
-      "taskName": "[P2] Build food classification engine (category + nutrition quality score)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:23:06Z",
-      "type": "task_moved",
-      "taskId": "5c90333a-91fc-41fe-8b16-b9d1d9a15aa9",
-      "taskName": "[P2] Normalize food names and units (dedupe + parsing)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:23:06Z",
-      "type": "task_moved",
-      "taskId": "77b79633-56a9-48b2-8211-82239082dc53",
-      "taskName": "[P2] Implement photo-to-food item capture flow",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p2-photo-capture-flow"
-    },
-    {
-      "at": "2026-02-26T20:21:01Z",
-      "type": "task_moved",
-      "taskId": "86dc02f7-c52b-4e97-949c-fc075a40a288",
-      "taskName": "[P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p2-receipt-scan-ingestion"
-    },
-    {
-      "at": "2026-02-26T20:20:48Z",
-      "type": "task_moved",
-      "taskId": "9ae1cd93-21a5-434e-8d30-f54628822e02",
-      "taskName": "[P2] Add expiry-date tracking and freshness status logic",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p2-expiry-tracking-freshness"
-    },
-    {
-      "at": "2026-02-26T20:18:03Z",
-      "type": "task_moved",
-      "taskId": "77b79633-56a9-48b2-8211-82239082dc53",
-      "taskName": "[P2] Implement photo-to-food item capture flow",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:18:03Z",
-      "type": "task_moved",
-      "taskId": "86dc02f7-c52b-4e97-949c-fc075a40a288",
-      "taskName": "[P2] Implement receipt scan ingestion flow (OCR pipeline abstraction)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:18:03Z",
-      "type": "task_moved",
-      "taskId": "9ae1cd93-21a5-434e-8d30-f54628822e02",
-      "taskName": "[P2] Add expiry-date tracking and freshness status logic",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:15:43.528Z",
-      "type": "task_moved",
-      "taskId": "facc9d0c-9584-40af-8298-7a548e603843",
-      "taskName": "[P1] Wire Firebase config bootstrap + emulator/dev toggles",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:15:43.528Z",
-      "type": "task_moved",
-      "taskId": "646cfb37-bbf5-45dc-860a-e8ad9d6a4f5d",
-      "taskName": "[P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:15:43.528Z",
-      "type": "task_moved",
-      "taskId": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
-      "taskName": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:15:43.528Z",
-      "type": "task_moved",
-      "taskId": "59242717-db00-413f-a540-346bc0b9debb",
-      "taskName": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:15:43.528Z",
-      "type": "task_moved",
-      "taskId": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
-      "taskName": "Smoke task",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_reassigned",
-      "taskId": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
-      "taskName": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_reassigned",
-      "taskId": "59242717-db00-413f-a540-346bc0b9debb",
-      "taskName": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_reassigned",
-      "taskId": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
-      "taskName": "Smoke task",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_reassigned",
-      "taskId": "facc9d0c-9584-40af-8298-7a548e603843",
-      "taskName": "[P1] Wire Firebase config bootstrap + emulator/dev toggles",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_reassigned",
-      "taskId": "646cfb37-bbf5-45dc-860a-e8ad9d6a4f5d",
-      "taskName": "[P1] Validate Firestore rules/indexes against emulator and tighten server-managed field constraints",
-      "to": "inProgress",
-      "detail": "Unstuck after >15m stall; reassigned to fresh sub-agent (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_moved",
-      "taskId": "57a32021-68aa-47d5-aaeb-957ce5b3e621",
-      "taskName": "[P2] Build pantry CRUD UI (add/edit/remove/consume)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_moved",
-      "taskId": "59242717-db00-413f-a540-346bc0b9debb",
-      "taskName": "[P1] Design Firebase architecture (Auth, Firestore, Storage, Functions)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:13:15.342Z",
-      "type": "task_moved",
-      "taskId": "59e557b8-aa1e-4e60-b32f-cc9c0e32ec58",
-      "taskName": "Smoke task",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:09:36.547Z",
-      "type": "task_moved",
-      "taskId": "856b4509-4b98-4c81-b26f-e3f213a8eda1",
-      "taskName": "[P1] Define app architecture (presentation/state/domain/data layers)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p1-app-architecture-layers"
-    },
-    {
-      "at": "2026-02-26T20:09:15.134Z",
-      "type": "task_moved",
-      "taskId": "24f5de28-6e68-4c52-89de-7d263ba8a379",
-      "taskName": "[P1] Select state management approach (Riverpod/Bloc decision doc)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p1-state-mgmt-decision"
-    },
-    {
-      "at": "2026-02-26T20:09:04.479Z",
-      "type": "task_moved",
-      "taskId": "4840b3d9-557b-4693-a495-8b69ded1e114",
-      "taskName": "[P1] Create PantryPal project brief and success metrics (MVP + north-star)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p1-brief-success-metrics"
-    },
-    {
-      "at": "2026-02-26T20:08:04.991Z",
-      "type": "task_moved",
-      "taskId": "24f5de28-6e68-4c52-89de-7d263ba8a379",
-      "taskName": "[P1] Select state management approach (Riverpod/Bloc decision doc)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:08:04.991Z",
-      "type": "task_moved",
-      "taskId": "856b4509-4b98-4c81-b26f-e3f213a8eda1",
-      "taskName": "[P1] Define app architecture (presentation/state/domain/data layers)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:08:04.991Z",
-      "type": "task_moved",
-      "taskId": "4840b3d9-557b-4693-a495-8b69ded1e114",
-      "taskName": "[P1] Create PantryPal project brief and success metrics (MVP + north-star)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (cron)"
-    },
-    {
-      "at": "2026-02-26T20:05:47.351Z",
-      "type": "task_moved",
-      "taskId": "2218c972-0530-402c-a011-1d255942e293",
-      "taskName": "[P1] Design event model for pet reactions and pantry changes",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p1-event-model"
-    },
-    {
-      "at": "2026-02-26T20:05:03.094Z",
-      "type": "task_moved",
-      "taskId": "b0f90eca-f62e-4c17-83df-deb23899b7a4",
-      "taskName": "[P1] Define Firestore collections and indexing plan",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p1-firestore-collections-plan"
-    },
-    {
-      "at": "2026-02-26T20:04:50.976Z",
-      "type": "task_moved",
-      "taskId": "1f76e1d0-0314-417a-a88c-689df51989a5",
-      "taskName": "[P1] Write security rules baseline for Firestore/Storage",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent p1-security-rules-baseline"
-    },
-    {
-      "at": "2026-02-26T20:02:59.003Z",
-      "type": "task_moved",
-      "taskId": "b0f90eca-f62e-4c17-83df-deb23899b7a4",
-      "taskName": "[P1] Define Firestore collections and indexing plan",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (heartbeat)"
-    },
-    {
-      "at": "2026-02-26T20:02:59.003Z",
-      "type": "task_moved",
-      "taskId": "2218c972-0530-402c-a011-1d255942e293",
-      "taskName": "[P1] Design event model for pet reactions and pantry changes",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (heartbeat)"
-    },
-    {
-      "at": "2026-02-26T20:02:59.003Z",
-      "type": "task_moved",
-      "taskId": "1f76e1d0-0314-417a-a88c-689df51989a5",
-      "taskName": "[P1] Write security rules baseline for Firestore/Storage",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution (heartbeat)"
-    },
-    {
-      "at": "2026-02-26T19:58:43.151Z",
-      "type": "task_moved",
-      "taskId": "d5acb575-0834-4c96-af8b-3b57133c13c9",
-      "taskName": "[P1] Define API/contracts for scanning + classification services",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent"
-    },
-    {
-      "at": "2026-02-26T19:58:15.000003Z",
-      "type": "task_moved",
-      "taskId": "30011eb5-4854-46b4-907a-8fedd0f7e4f5",
-      "taskName": "[P1] Scaffold Flutter app modules and folder conventions",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent"
-    },
-    {
-      "at": "2026-02-26T19:57:59.776Z",
-      "type": "task_moved",
-      "taskId": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
-      "taskName": "[P1] Create environment/config strategy (dev/staging/prod)",
-      "from": "inProgress",
-      "to": "done",
-      "detail": "completed by sub-agent"
-    },
-    {
-      "at": "2026-02-26T19:56:36.414Z",
-      "type": "task_moved",
-      "taskId": "d5acb575-0834-4c96-af8b-3b57133c13c9",
-      "taskName": "[P1] Define API/contracts for scanning + classification services",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution"
-    },
-    {
-      "at": "2026-02-26T19:56:36.413Z",
-      "type": "task_moved",
-      "taskId": "22e8f7c5-1632-4169-b22a-36d4cddac6a4",
-      "taskName": "[P1] Create environment/config strategy (dev/staging/prod)",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution"
-    },
-    {
-      "at": "2026-02-26T19:56:36.412Z",
-      "type": "task_moved",
-      "taskId": "30011eb5-4854-46b4-907a-8fedd0f7e4f5",
-      "taskName": "[P1] Scaffold Flutter app modules and folder conventions",
-      "from": "todo",
-      "to": "inProgress",
-      "detail": "Assigned for parallel sub-agent execution"
-    },
-    {
-      "at": "2026-02-26T19:54:57.063Z",
-      "type": "task_added",
-      "taskId": "7424d962-fd80-4553-a84c-129b01e46c7d",
-      "taskName": "OpsHub local dashboard built and pushed: https://github.com/larryclaw/OpsHub",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.057Z",
-      "type": "task_added",
-      "taskId": "8bfc26f1-fa97-46cd-a7de-42d530e79f90",
-      "taskName": "[P1] Implement initial domain models in Flutter (`UserProfile`, `PantryItem`, `PetState`, `MetricsSnapshot`, `TimelineEvent`)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.052Z",
-      "type": "task_added",
-      "taskId": "1aa6af66-731e-4da7-8ae0-b3c3c938c876",
-      "taskName": "[P1] Write security rules baseline (`pantrypal/firebase/firestore.rules`, `pantrypal/firebase/storage.rules`)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.046Z",
-      "type": "task_added",
-      "taskId": "a2f7bc8d-6a52-48e2-8489-9535c57f5d59",
-      "taskName": "[P1] Define Firestore collections/indexing plan (`pantrypal/firebase/firestore.indexes.json`)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.041Z",
-      "type": "task_added",
-      "taskId": "09429660-b121-47d2-845f-bf3baa3be6d5",
-      "taskName": "[P1] Draft canonical data model (users, pantry items, nutrition profile, pet state, events)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.035Z",
-      "type": "task_added",
-      "taskId": "c39330d0-bc74-413f-956e-12adb8ebc865",
-      "taskName": "[P1] Define PantryPal system architecture (Flutter + Firebase modules, boundaries, data flow)",
-      "to": "done",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.030Z",
-      "type": "task_added",
-      "taskId": "50de5b88-8763-4561-9a54-0c7f2888b6a6",
-      "taskName": "[P5] Launch checklist + app store assets + rollout plan",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.024Z",
-      "type": "task_added",
-      "taskId": "9c59b2c8-3314-40dc-8cc2-1da919e64fe9",
-      "taskName": "[P5] Accessibility + localization readiness",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.019Z",
-      "type": "task_added",
-      "taskId": "695560f1-c1fc-4f2f-8478-dfb7244f0a55",
-      "taskName": "[P5] QA plan + test matrix (unit/widget/integration)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.013Z",
-      "type": "task_added",
-      "taskId": "93d240f5-d619-4509-836f-497fb5b0c643",
-      "taskName": "[P5] Performance pass (startup, list rendering, sync)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.007Z",
-      "type": "task_added",
-      "taskId": "b317de72-4a9f-4bf7-87f7-03b080fd3cb4",
-      "taskName": "[P5] Add analytics instrumentation (funnel + retention events)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:57.002Z",
-      "type": "task_added",
-      "taskId": "20bb91f3-6263-4fca-9768-7f77ab351d41",
-      "taskName": "[P5] Add onboarding flow + permission education",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.996Z",
-      "type": "task_added",
-      "taskId": "5702ea57-c198-40d6-a165-7f1e274cf96b",
-      "taskName": "[P4] Add re-engagement messaging strategy (push + in-app)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.990Z",
-      "type": "task_added",
-      "taskId": "5f65417e-c225-4069-a1c2-000638727a61",
-      "taskName": "[P4] Build challenge/quest system (use expiring foods this week)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.985Z",
-      "type": "task_added",
-      "taskId": "1ba53990-f0b1-472c-be7b-bf41d19ad9e4",
-      "taskName": "[P4] Add streak engine (healthy pantry days / waste reduction)",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.979Z",
-      "type": "task_added",
-      "taskId": "d28923a4-6957-4794-8a34-f3c5f513fce6",
-      "taskName": "[P4] Implement pet hunger notifications tied to pantry risk",
-      "to": "todo",
-      "detail": "Added task from migration"
-    },
-    {
-      "at": "2026-02-26T19:54:56.973Z",
-      "type": "task_added",
-      "taskId": "0e8ba01e-66d8-43ef-a780-c413a83fc41d",
-      "taskName": "[P4] Implement expiry reminders and urgency tiers",
-      "to": "todo",
-      "detail": "Added task from migration"
+      "id": "act-p34-pantrypal-boilerplate-refactor-1772246973429",
+      "type": "task_created",
+      "taskId": "p34-pantrypal-boilerplate-refactor",
+      "taskName": "[P34][PantryPal] Refactor Flutter boilerplate seams for faster feature delivery",
+      "timestamp": "2026-02-28T02:49:33.428Z",
+      "detail": "Created from social-progress cron instruction to prioritize PantryPal delivery."
+    },
+    {
+      "id": "act-p35-pantrypal-next-feature-slice-1772246973429",
+      "type": "task_created",
+      "taskId": "p35-pantrypal-next-feature-slice",
+      "taskName": "[P35][PantryPal] Execute next PantryPal feature slice after boilerplate cleanup",
+      "timestamp": "2026-02-28T02:49:33.428Z",
+      "detail": "Created from social-progress cron instruction to prioritize PantryPal delivery."
+    },
+    {
+      "id": "act-p34-start-1772246982111",
+      "type": "task_moved",
+      "taskId": "p34-pantrypal-boilerplate-refactor",
+      "taskName": "[P34][PantryPal] Refactor Flutter boilerplate seams for faster feature delivery",
+      "timestamp": "2026-02-28T02:49:42.110Z",
+      "detail": "Moved To Do -> In Progress (PantryPal priority directive)."
+    }
+  ],
+  "activity": [
+    {
+      "id": "act-p34-pantrypal-boilerplate-refactor-done-1772247460442",
+      "type": "moved",
+      "taskId": "p34-pantrypal-boilerplate-refactor",
+      "taskName": "[P34][PantryPal] Refactor Flutter boilerplate seams for faster feature delivery",
+      "fromColumn": "inProgress",
+      "toColumn": "done",
+      "timestamp": "2026-02-28T02:57:40.441Z",
+      "meta": {
+        "source": "social-progress-cron",
+        "note": "completed via sub-agent sp15-p34-boilerplate-refactor"
+      }
     }
   ]
 }
