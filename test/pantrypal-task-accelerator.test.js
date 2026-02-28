@@ -608,7 +608,8 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
     '--light-threshold', '4',
     '--ready-light-threshold', '2',
     '--minimum-criteria', '7',
-    '--seed-max-tasks', '2'
+    '--seed-max-tasks', '2',
+    '--validation-timeout-ms', '45000'
   ]);
 
   assert.equal(options.outputFormat, 'json');
@@ -618,6 +619,7 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
   assert.equal(options.readyLightThreshold, 2);
   assert.equal(options.minimumCriteria, 7);
   assert.equal(options.seedMaxTasks, 2);
+  assert.equal(options.validationTimeoutMs, 45000);
   assert.equal(options.validate, true);
 });
 
@@ -628,13 +630,14 @@ test('parseCliOptions accepts decimal minimum-score values', () => {
 });
 
 test('parseCliOptions preserves defaults for invalid numeric values and disables validation', () => {
-  const options = parseCliOptions(['--limit', '0', '--minimum-score', 'abc', '--no-validate']);
+  const options = parseCliOptions(['--limit', '0', '--minimum-score', 'abc', '--validation-timeout-ms', '-1', '--no-validate']);
 
   assert.equal(options.limit, 3);
   assert.equal(options.minimumScore, 75);
   assert.equal(options.lightThreshold, 2);
   assert.equal(options.readyLightThreshold, 1);
   assert.equal(options.minimumCriteria, 6);
+  assert.equal(options.validationTimeoutMs, null);
   assert.equal(options.validate, false);
   assert.equal(options.autoSeed, true);
 });

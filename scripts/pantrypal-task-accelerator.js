@@ -688,6 +688,7 @@ function parseCliOptions(argv = []) {
     readyLightThreshold: 1,
     minimumCriteria: 6,
     validate: !argv.includes('--no-validate'),
+    validationTimeoutMs: null,
     experimentsFile: null,
     defaultOwner: 'growth-oncall',
     validationCommand: null,
@@ -712,7 +713,8 @@ function parseCliOptions(argv = []) {
       '--light-threshold': 'lightThreshold',
       '--ready-light-threshold': 'readyLightThreshold',
       '--minimum-criteria': 'minimumCriteria',
-      '--seed-max-tasks': 'seedMaxTasks'
+      '--seed-max-tasks': 'seedMaxTasks',
+      '--validation-timeout-ms': 'validationTimeoutMs'
     };
 
     if (rawFlag in integerFlagMap) {
@@ -951,7 +953,9 @@ if (require.main === module) {
     minimumCriteria: cliOptions.minimumCriteria
   });
   const validationResult = cliOptions.validate
-    ? runValidationCommand(executionPlan?.validationCommand)
+    ? runValidationCommand(executionPlan?.validationCommand, {
+      timeoutMs: cliOptions.validationTimeoutMs ?? undefined
+    })
     : {
       status: 'NOT_RUN',
       command: executionPlan?.validationCommand ?? null,
