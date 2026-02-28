@@ -120,9 +120,9 @@ Error semantics:
 - `OPSHUB_DATA_DIR` (override kanban storage path; useful for tests)
 - `OPSHUB_BOARD_MODE` (`production` default, `diagnostic` to relax synthetic admission gate)
 - `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`)
-- `OPSHUB_INPROGRESS_WIP_LIMIT_HIGH` (default `3`)
-- `OPSHUB_INPROGRESS_WIP_LIMIT_MEDIUM` (default `3`)
-- `OPSHUB_INPROGRESS_WIP_LIMIT_LOW` (default `2`)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_HIGH` (default mirrors global limit)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_MEDIUM` (default mirrors global limit)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_LOW` (default mirrors global limit)
 - `OPSHUB_BOARD_MODE` (`production` default, `diagnostic` optional)
   - `production`: blocks synthetic/placeholder task admissions via API
   - `diagnostic`: allows synthetic patterns for controlled QA/experimentation

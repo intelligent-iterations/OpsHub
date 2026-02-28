@@ -7,46 +7,57 @@
 
 ## 1) Strict task-admission validator
 
-Applied in active columns (`backlog`, `todo`, `inProgress`).
+Applied when target column is active (`backlog`, `todo`, `inProgress`).
 
 ### Production-mode synthetic denylist
 
-`OPSHUB_BOARD_MODE=production` (default) denies known synthetic/placeholder patterns (for example: `smoke task`, `lifecycle task`, `integration dashboard task`, `closeout reminder`, `placeholder`).
+`OPSHUB_BOARD_MODE=production` (default) denies synthetic/placeholder patterns in task name/description.
 
 Error code: `TASK_ADMISSION_SYNTHETIC_DENIED` (422)
 
 ### Placeholder-description gate
 
-For `inProgress` admissions, placeholder/empty descriptions are denied except for approved sources:
+Rejects empty/placeholder descriptions unless:
 
-- allowed for `source=manual` or `source=ui`
-- allowed for `source=intelligent-iteration` only when acceptance criteria are present
+- `source === "intelligent-iteration"`
+- description includes acceptance criteria (explicit text or list bullets)
 
 Error code: `TASK_ADMISSION_PLACEHOLDER_DESCRIPTION` (422)
 
 ### Duplicate active-task guard
 
-Duplicate normalized `(name + description)` in active columns is rejected.
+Rejects duplicate normalized `(name + description)` if a matching task already exists in active columns.
 
 Error code: `TASK_ADMISSION_DUPLICATE_ACTIVE` (409)
 
 ## 2) Done-transition hard contract
 
-Done creation/moves require both:
+For done creation/moves, both are required:
 
-1. Completion text that passes the GitHub evidence gate (`https://github.com/...` required)
-2. Strict verification object:
+1. Human-facing completion text passes evidence gate with GitHub link (`https://github.com/...`)
+2. Verification object is complete:
    - `verification.command` (non-empty)
    - `verification.result === "pass"`
-   - `verification.verifiedAt` (valid timestamp)
+   - `verification.verifiedAt` (timestamp)
 
 Error code: `MISSING_REQUIRED_DONE_VERIFICATION` (422)
 
 ## 3) WIP cap enforcement (`inProgress`)
 
-A hard cap is enforced before admitting non-critical tasks to `inProgress`.
+Before admitting a task to `inProgress`:
 
-- Config: `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`)
-- `priority=critical` bypasses the cap
+- required fields: `claimedBy`, `startedAt`, `updatedAt`
+- global and per-priority caps must not be exceeded
+- `priority=critical` bypasses WIP cap
 
-Error code: `WIP_LIMIT_EXCEEDED` (422)
+Config:
+
+- `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_HIGH` (default mirrors global limit)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_MEDIUM` (default mirrors global limit)
+- `OPSHUB_INPROGRESS_WIP_LIMIT_LOW` (default mirrors global limit)
+
+Errors:
+
+- `INPROGRESS_REQUIRED_FIELDS_MISSING` (422)
+- `WIP_LIMIT_EXCEEDED` (422)
