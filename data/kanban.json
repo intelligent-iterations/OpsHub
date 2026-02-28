@@ -1104,18 +1104,6 @@
         "updatedAt": "2026-02-28T17:27:11.270Z"
       },
       {
-        "id": "d6210a93-b302-437b-98b6-f709aa3cb467",
-        "name": "[QDRIFT-04] Rebalance PantryPal prioritization guardrails",
-        "description": "Root cause: board intake favors synthetic/lifecycle cards over PantryPal strategic work under load.\n\nAcceptance criteria:\n- Introduce weighted priority rules keeping PantryPal strategic lanes above generic smoke/lifecycle churn.\n- Add anti-spam quarantine and cap for synthetic task families.\n- Add dashboard metric: PantryPal share of active WIP + drift alert threshold.\n- Run simulation on recent board history and publish before/after impact.\n- Provide commit-level evidence and updated prioritization policy doc.",
-        "priority": "critical",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T17:26:05.583Z",
-        "completedAt": null,
-        "source": "quality-diagnosis",
-        "updatedAt": "2026-02-28T17:27:11.270Z",
-        "startedAt": "2026-02-28T17:26:47.405Z"
-      },
-      {
         "id": "8a88952f-0074-4c1a-8b39-bd342312ecca",
         "name": "[QDRIFT-03] Restore correction logging coverage and QA gate enforcement",
         "description": "Root cause: correction loops run but misses are not consistently written to audit trail.\n\nAcceptance criteria:\n- Log every self-correction event with taskId, reason, and remediation action.\n- Fail QA gate when Done tasks lack correction/verification record where required.\n- Add daily integrity checker output artifact + summary stats.\n- Add tests for skipped logging and enforced rollback to In Progress.\n- Document operator playbook for correction triage.\n- Enforce correction-log-before-claim-done protocol: task cannot move to Done until correction log entry exists (when correction occurred).",
@@ -1579,6 +1567,20 @@
       }
     ],
     "done": [
+      {
+        "id": "d6210a93-b302-437b-98b6-f709aa3cb467",
+        "name": "[QDRIFT-04] Rebalance PantryPal prioritization guardrails",
+        "description": "Root cause: board intake favors synthetic/lifecycle cards over PantryPal strategic work under load.\n\nAcceptance criteria:\n- Introduce weighted priority rules keeping PantryPal strategic lanes above generic smoke/lifecycle churn.\n- Add anti-spam quarantine and cap for synthetic task families.\n- Add dashboard metric: PantryPal share of active WIP + drift alert threshold.\n- Run simulation on recent board history and publish before/after impact.\n- Provide commit-level evidence and updated prioritization policy doc.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T17:26:05.583Z",
+        "completedAt": "2026-02-28T17:33:18.386Z",
+        "source": "quality-diagnosis",
+        "updatedAt": "2026-02-28T17:33:18.386Z",
+        "startedAt": "2026-02-28T17:26:47.405Z",
+        "completionDetails": "QDRIFT-04 complete. PantryPal-first prioritization guardrails implemented with synthetic churn cap/quarantine and WIP drift alert metric.\n\nAcceptance criteria check:\n1) Weighted PantryPal-first priority rules in automation loops: COMPLETE\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/scripts/pantrypal-priority-guardrails.js\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/scripts/social-mention-ingest.js\n2) Anti-spam quarantine/cap for synthetic lifecycle/smoke churn: COMPLETE\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/scripts/pantrypal-priority-guardrails.js\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/test/social-mention-ingest.test.js\n3) Metric + threshold for PantryPal share of active WIP: COMPLETE\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/scripts/pantrypal-priority-guardrails.js\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/server.js\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/test/api.test.js\n4) Tests for prioritization + drift alert: COMPLETE\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/test/pantrypal-priority-guardrails.test.js\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/test/api.test.js\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/test/social-mention-ingest.test.js\n5) Docs updated: COMPLETE\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/docs/pantrypal-prioritization-guardrails.md\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/README.md\n6) Simulation before/after impact published: COMPLETE\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-04-prioritization-simulation.json\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-04-prioritization-simulation.md\n7) Verification tests evidence: COMPLETE\n   - https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-04-test-output.txt\n\nClaude Code usage evidence:\n- https://github.com/intelligent-iterations/OpsHub/blob/main/artifacts/qdrift-04-claude-code-usage.log\n\nResearcher confirmation:\n- Confirmed each acceptance criterion has corresponding code/test/doc artifact and GitHub URL evidence.\n- Confirmed full test suite passed (see qdrift-04-test-output artifact).\n- Confirmed no local-path evidence in completion details; GitHub links only.",
+        "verification": "npm test passed; commit https://github.com/intelligent-iterations/OpsHub/commit/3e44563d6f79e8d458a53f6c1714e9910d3079f1"
+      },
       {
         "id": "849aa7ad-2279-4697-920c-44e14f4a5516",
         "name": "[QDRIFT-02] Block local-path leakage in human-facing deliverables",
@@ -5115,6 +5117,15 @@
     ]
   },
   "activityLog": [
+    {
+      "at": "2026-02-28T17:33:18.386Z",
+      "type": "task_moved",
+      "taskId": "d6210a93-b302-437b-98b6-f709aa3cb467",
+      "taskName": "[QDRIFT-04] Rebalance PantryPal prioritization guardrails",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "QDRIFT-04 completed with acceptance criteria check + GitHub evidence links."
+    },
     {
       "at": "2026-02-28T17:33:03.346Z",
       "type": "task_moved",
