@@ -1,3 +1,6 @@
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
@@ -16,7 +19,8 @@ const {
   runValidationCommand,
   formatTaskMarkdown,
   formatTaskJson,
-  parseCliOptions
+  parseCliOptions,
+  loadExperimentsFromFile
 } = require('../scripts/pantrypal-task-accelerator');
 
 test('toSlug normalizes experiment names', () => {
@@ -344,4 +348,36 @@ test('parseCliOptions preserves defaults for invalid numeric values and disables
   assert.equal(options.minimumScore, 75);
   assert.equal(options.lightThreshold, 2);
   assert.equal(options.validate, false);
+});
+test('parseCliOptions accepts experiment file, owner, and validation command overrides', () => {
+  const options = parseCliOptions([
+    '--experiments-file', 'data/pantrypal-experiments.json',
+    '--default-owner=growth-night-shift',
+    '--validation-command', 'npm test -- test/pantrypal-task-accelerator.test.js'
+  ]);
+
+  assert.equal(options.experimentsFile, 'data/pantrypal-experiments.json');
+  assert.equal(options.defaultOwner, 'growth-night-shift');
+  assert.equal(options.validationCommand, 'npm test -- test/pantrypal-task-accelerator.test.js');
+});
+
+test('loadExperimentsFromFile loads a valid JSON experiment array', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-'));
+  const file = path.join(tempDir, 'experiments.json');
+  const payload = [{ name: 'Rescue boost', impact: 0.9, confidence: 0.8, ease: 0.7, pantryPalFit: 1 }];
+
+  fs.writeFileSync(file, JSON.stringify(payload), 'utf8');
+
+  const experiments = loadExperimentsFromFile(file);
+  assert.equal(experiments.length, 1);
+  assert.equal(experiments[0].name, 'Rescue boost');
+});
+
+test('loadExperimentsFromFile throws when payload is not an array', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pantrypal-'));
+  const file = path.join(tempDir, 'invalid.json');
+
+  fs.writeFileSync(file, JSON.stringify({ name: 'not-an-array' }), 'utf8');
+
+  assert.throws(() => loadExperimentsFromFile(file), /Expected an array of experiments/);
 });

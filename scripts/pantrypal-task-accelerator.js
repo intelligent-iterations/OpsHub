@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const fs = require('node:fs');
+const path = require('node:path');
 const { execSync } = require('node:child_process');
 const { rankExperiments } = require('./pantrypal-growth-experiment-prioritizer');
 
@@ -394,7 +396,10 @@ function parseCliOptions(argv = []) {
     limit: 3,
     minimumScore: 75,
     lightThreshold: 2,
-    validate: !argv.includes('--no-validate')
+    validate: !argv.includes('--no-validate'),
+    experimentsFile: null,
+    defaultOwner: 'growth-oncall',
+    validationCommand: null
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -410,16 +415,40 @@ function parseCliOptions(argv = []) {
       '--light-threshold': 'lightThreshold'
     };
 
-    if (!(rawFlag in numericFlagMap)) continue;
+    if (rawFlag in numericFlagMap) {
+      const parsedValue = Number.parseInt(value, 10);
+      if (Number.isFinite(parsedValue) && parsedValue > 0) {
+        options[numericFlagMap[rawFlag]] = parsedValue;
+        if (rawValue === undefined) index += 1;
+      }
+      continue;
+    }
 
-    const parsedValue = Number.parseInt(value, 10);
-    if (Number.isFinite(parsedValue) && parsedValue > 0) {
-      options[numericFlagMap[rawFlag]] = parsedValue;
+    const stringFlagMap = {
+      '--experiments-file': 'experimentsFile',
+      '--default-owner': 'defaultOwner',
+      '--validation-command': 'validationCommand'
+    };
+
+    if (rawFlag in stringFlagMap && typeof value === 'string' && value.trim()) {
+      options[stringFlagMap[rawFlag]] = value.trim();
       if (rawValue === undefined) index += 1;
     }
   }
 
   return options;
+}
+
+function loadExperimentsFromFile(filePath) {
+  const resolvedPath = path.resolve(process.cwd(), filePath);
+  const raw = fs.readFileSync(resolvedPath, 'utf8');
+  const parsed = JSON.parse(raw);
+
+  if (!Array.isArray(parsed)) {
+    throw new Error(`Expected an array of experiments in ${resolvedPath}`);
+  }
+
+  return parsed;
 }
 
 if (require.main === module) {
@@ -455,11 +484,16 @@ if (require.main === module) {
 
   const cliOptions = parseCliOptions(process.argv.slice(2));
 
+  if (cliOptions.experimentsFile) {
+    experiments = loadExperimentsFromFile(cliOptions.experimentsFile);
+  }
+
   const { queue, seeded } = buildQueueWithAutoSeed(experiments, {
-    defaultOwner: 'growth-oncall',
+    defaultOwner: cliOptions.defaultOwner,
     limit: cliOptions.limit,
     minimumScore: cliOptions.minimumScore,
-    lightThreshold: cliOptions.lightThreshold
+    lightThreshold: cliOptions.lightThreshold,
+    validationCommand: cliOptions.validationCommand
   });
 
   const executionPlan = pickImmediateExecution(queue);
@@ -499,5 +533,6 @@ module.exports = {
   runValidationCommand,
   formatTaskMarkdown,
   formatTaskJson,
-  parseCliOptions
+  parseCliOptions,
+  loadExperimentsFromFile
 };
