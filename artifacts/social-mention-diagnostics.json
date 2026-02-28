@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "channel": "social-progress",
+  "source": "file",
+  "fetchedCount": 2,
+  "actionableCount": 1,
+  "fallbackApplied": false,
+  "reason": "feed_available",
+  "generatedAt": "2026-02-28T00:48:38.667Z"
+}

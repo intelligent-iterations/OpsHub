@@ -1,0 +1,42 @@
+{
+  "queue": [
+    {
+      "id": "sm-1001",
+      "ts": "1772234100.100100",
+      "channel": "social-progress",
+      "user": "product-lead",
+      "threadTs": null,
+      "text": "@claw Task: Build social mention ingestion bridge for Slack\nOwner: @claw\nAcceptance Criteria:\n- fetch social channel mentions into queue\n- map actionable mentions into OpsHub payload\n- provide diagnostics fallback when feed unavailable\nPriority: high",
+      "mentions": [
+        "claw"
+      ],
+      "raw": {
+        "id": "sm-1001",
+        "ts": "1772234100.100100",
+        "channel": "social-progress",
+        "user": "product-lead",
+        "text": "@claw Task: Build social mention ingestion bridge for Slack\nOwner: @claw\nAcceptance Criteria:\n- fetch social channel mentions into queue\n- map actionable mentions into OpsHub payload\n- provide diagnostics fallback when feed unavailable\nPriority: high"
+      },
+      "actionable": true,
+      "ingestionReason": "actionable_signal_detected"
+    },
+    {
+      "id": "sm-1002",
+      "ts": "1772234160.200200",
+      "channel": "social-progress",
+      "user": "observer",
+      "threadTs": null,
+      "text": "FYI: social channel active today.",
+      "mentions": [],
+      "raw": {
+        "id": "sm-1002",
+        "ts": "1772234160.200200",
+        "channel": "social-progress",
+        "user": "observer",
+        "text": "FYI: social channel active today."
+      },
+      "actionable": false,
+      "ingestionReason": "no_action_signal"
+    }
+  ]
+}

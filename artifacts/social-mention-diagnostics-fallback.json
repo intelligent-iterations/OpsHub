@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "channel": "social-progress",
+  "source": "none",
+  "fetchedCount": 0,
+  "actionableCount": 0,
+  "fallbackApplied": true,
+  "reason": "no_feed_source_configured",
+  "generatedAt": "2026-02-28T00:48:43.214Z"
+}

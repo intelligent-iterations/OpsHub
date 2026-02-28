@@ -1,0 +1,21 @@
+{
+  "taskPayloads": [
+    {
+      "title": "Build social mention ingestion bridge for Slack",
+      "owner": "claw",
+      "acceptanceCriteria": [
+        "fetch social channel mentions into queue",
+        "map actionable mentions into OpsHub payload",
+        "provide diagnostics fallback when feed unavailable"
+      ],
+      "priority": "medium",
+      "source": {
+        "type": "slack-social-mention",
+        "messageId": "sm-1001",
+        "channel": "social-progress",
+        "ts": "1772234100.100100",
+        "mentionCount": 1
+      }
+    }
+  ]
+}
