@@ -1,0 +1,1245 @@
+{
+  "generatedAt": "2026-02-28T17:32:51.752Z",
+  "applyMode": false,
+  "autoRecover": true,
+  "fallbackCount": 2,
+  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/data/kanban.json",
+  "summary": {
+    "inProgressChecked": 89,
+    "staleCandidates": 43,
+    "stalledWorkers": 44,
+    "reassignedCount": 0,
+    "selfRecoveryAttempts": 0,
+    "fallbackTasksDispatched": 0
+  },
+  "rootCause": {
+    "staleCount": 43,
+    "waitingSignalCount": 1,
+    "likelyCause": "Workers appear stalled or detached from active sessions; autonomous recovery + fallback dispatch is recommended."
+  },
+  "staleCandidates": [
+    {
+      "taskId": "c738b269-4a15-480e-bbcc-373eab327181",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 24.56,
+      "ageAnchor": "2026-02-28T17:08:17.929Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "7a4b77e9-2873-4679-bd1f-3be70b336af5",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 25.22,
+      "ageAnchor": "2026-02-28T17:07:38.480Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0c4432aa-cbd5-422c-b419-212d4188715c",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 25.55,
+      "ageAnchor": "2026-02-28T17:07:18.643Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "e8a5142d-5960-42ca-a83e-f03b655140ff",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 30.07,
+      "ageAnchor": "2026-02-28T17:02:47.835Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "13378b91-67e1-4afd-bc49-11877a2fc1ee",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 31.48,
+      "ageAnchor": "2026-02-28T17:01:22.776Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "25fa2267-b977-410e-b401-c83ba6b96a81",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 31.98,
+      "ageAnchor": "2026-02-28T17:00:52.783Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "b44edf3e-5fd2-45bb-a2bb-715f989c50cc",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 36.98,
+      "ageAnchor": "2026-02-28T16:55:52.997Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "fe16419f-a1a4-479b-9c1b-d265fae5ae63",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 37.34,
+      "ageAnchor": "2026-02-28T16:55:31.529Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "1a0c191d-e8f0-47c0-90e0-c2ae8c300377",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 37.59,
+      "ageAnchor": "2026-02-28T16:55:16.172Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0801e326-c112-447d-828e-6aaade3b16ea",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 37.61,
+      "ageAnchor": "2026-02-28T16:55:15.396Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0cf5e178-6a3a-400a-9c85-e0f226bb6941",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 40.21,
+      "ageAnchor": "2026-02-28T16:52:39.421Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0d83b337-fab6-4367-ba8a-cdd6f06e2bab",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 40.67,
+      "ageAnchor": "2026-02-28T16:52:11.532Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "a46b702c-f8e1-4058-b777-69251a4b6ae0",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 46.38,
+      "ageAnchor": "2026-02-28T16:46:28.871Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9f34b780-9e96-487a-b937-b6478cdcdca3",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 46.46,
+      "ageAnchor": "2026-02-28T16:46:24.094Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "5e765b16-1d4d-498d-b6db-f614fb1ef390",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 46.88,
+      "ageAnchor": "2026-02-28T16:45:59.099Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "7e6e5351-807f-4f10-b3e8-1ce8a3770cdd",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 54.28,
+      "ageAnchor": "2026-02-28T16:38:34.976Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "8f7a1c0a-62a9-471e-891d-8ac499c00582",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 54.39,
+      "ageAnchor": "2026-02-28T16:38:28.087Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "c6744305-997f-4d00-81cd-a12f6a9d809c",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 55.94,
+      "ageAnchor": "2026-02-28T16:36:55.183Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "b3c72fbd-3ec5-4706-9ea7-e25e91b32b59",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 61.74,
+      "ageAnchor": "2026-02-28T16:31:07.566Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "8cd79ffb-edda-4015-b164-dbd40b9dea87",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 62.13,
+      "ageAnchor": "2026-02-28T16:30:43.949Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9f07b9bc-3419-495e-ad89-9c23d2d784a7",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 64.39,
+      "ageAnchor": "2026-02-28T16:28:28.355Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "cb04d4ba-d19f-42c8-b131-accf0e02d040",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 64.51,
+      "ageAnchor": "2026-02-28T16:28:21.419Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "e604d847-72c6-4df3-bf4a-399d5d7ba9ac",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 70.24,
+      "ageAnchor": "2026-02-28T16:22:37.508Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "ab4e8f44-2e49-4d05-8aee-8b5940ea2214",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 70.58,
+      "ageAnchor": "2026-02-28T16:22:16.760Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "6aeae742-d224-44c8-8baa-f0aead60e300",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 70.77,
+      "ageAnchor": "2026-02-28T16:22:05.812Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "ba7a46ed-60ea-4cc8-b40d-5799581de2f7",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 71.06,
+      "ageAnchor": "2026-02-28T16:21:48.063Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "998c9181-73e1-4dc3-a2e2-0e2329e3b194",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 79.41,
+      "ageAnchor": "2026-02-28T16:13:27.030Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "500dc389-13b5-4bf6-8d7e-806781bfc414",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 80.34,
+      "ageAnchor": "2026-02-28T16:12:31.194Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "1e04602b-e08a-4921-82ab-7259db8fbb85",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 82.35,
+      "ageAnchor": "2026-02-28T16:10:30.618Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "b3cfbf5e-42b4-48df-a5e5-1f9ddb5a2881",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 82.59,
+      "ageAnchor": "2026-02-28T16:10:16.155Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "448db643-c317-4bf8-848d-09140389cbcc",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 83.1,
+      "ageAnchor": "2026-02-28T16:09:45.703Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "e4b16d6b-979c-4b43-aa4e-73f6e6386f9a",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 85.19,
+      "ageAnchor": "2026-02-28T16:07:40.580Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "aa98788f-0db2-4457-a2a4-001d39528ea3",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 85.38,
+      "ageAnchor": "2026-02-28T16:07:29.118Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "fb19518b-c838-485e-85ba-40d7f405c220",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 92.04,
+      "ageAnchor": "2026-02-28T16:00:49.427Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "846f57f8-9e71-4c5d-a7b5-5836d9daea6a",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 105.16,
+      "ageAnchor": "2026-02-28T15:47:42.014Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9ef21063-c854-439b-97c9-b8583608d276",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 127,
+      "ageAnchor": "2026-02-28T15:25:51.544Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "d8eb7308-830f-4042-8846-c1439fd88176",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 178.65,
+      "ageAnchor": "2026-02-28T14:34:12.862Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9adadf33-1da8-4d37-ba32-7e2634f379d2",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 263.46,
+      "ageAnchor": "2026-02-28T13:09:24.019Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "2eb1b356-7504-47fe-a4f9-cde08999358e",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 838.38,
+      "ageAnchor": "2026-02-28T03:34:28.932Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "ddf5ed58-fd60-4e45-9256-5612dfc6a534",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 839.95,
+      "ageAnchor": "2026-02-28T03:32:54.685Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "06a45f28-cb19-4f19-86f2-ebe920c0bf87",
+      "taskName": "Smoke task",
+      "source": "manual",
+      "ageMinutes": 844.01,
+      "ageAnchor": "2026-02-28T03:28:50.939Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "5c7549c3-10f0-4e64-b23e-177bb26866fd",
+      "taskName": "Lifecycle task",
+      "source": "manual",
+      "ageMinutes": 844.01,
+      "ageAnchor": "2026-02-28T03:28:50.958Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "d6feef89-aca4-4e24-9794-6cf4036fbf8a",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 844.01,
+      "ageAnchor": "2026-02-28T03:28:50.976Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    }
+  ],
+  "stalledWorkers": [
+    {
+      "taskId": "0705908e-111e-49a0-8c04-bf735667a9a4",
+      "taskName": "[QDRIFT-01] Enforce execution start handshake to stop \"waiting for instruction\" stalls",
+      "source": "quality-diagnosis",
+      "ageMinutes": 5.67,
+      "ageAnchor": "2026-02-28T17:27:11.270Z",
+      "matchedSessionKeys": [],
+      "stale": false,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "waiting-or-stalled-signal"
+      ]
+    },
+    {
+      "taskId": "c738b269-4a15-480e-bbcc-373eab327181",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 24.56,
+      "ageAnchor": "2026-02-28T17:08:17.929Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "7a4b77e9-2873-4679-bd1f-3be70b336af5",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 25.22,
+      "ageAnchor": "2026-02-28T17:07:38.480Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0c4432aa-cbd5-422c-b419-212d4188715c",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 25.55,
+      "ageAnchor": "2026-02-28T17:07:18.643Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "e8a5142d-5960-42ca-a83e-f03b655140ff",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 30.07,
+      "ageAnchor": "2026-02-28T17:02:47.835Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "13378b91-67e1-4afd-bc49-11877a2fc1ee",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 31.48,
+      "ageAnchor": "2026-02-28T17:01:22.776Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "25fa2267-b977-410e-b401-c83ba6b96a81",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 31.98,
+      "ageAnchor": "2026-02-28T17:00:52.783Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "b44edf3e-5fd2-45bb-a2bb-715f989c50cc",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 36.98,
+      "ageAnchor": "2026-02-28T16:55:52.997Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "fe16419f-a1a4-479b-9c1b-d265fae5ae63",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 37.34,
+      "ageAnchor": "2026-02-28T16:55:31.529Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "1a0c191d-e8f0-47c0-90e0-c2ae8c300377",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 37.59,
+      "ageAnchor": "2026-02-28T16:55:16.172Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0801e326-c112-447d-828e-6aaade3b16ea",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 37.61,
+      "ageAnchor": "2026-02-28T16:55:15.396Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0cf5e178-6a3a-400a-9c85-e0f226bb6941",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 40.21,
+      "ageAnchor": "2026-02-28T16:52:39.421Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "0d83b337-fab6-4367-ba8a-cdd6f06e2bab",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 40.67,
+      "ageAnchor": "2026-02-28T16:52:11.532Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "a46b702c-f8e1-4058-b777-69251a4b6ae0",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 46.38,
+      "ageAnchor": "2026-02-28T16:46:28.871Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9f34b780-9e96-487a-b937-b6478cdcdca3",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 46.46,
+      "ageAnchor": "2026-02-28T16:46:24.094Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "5e765b16-1d4d-498d-b6db-f614fb1ef390",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 46.88,
+      "ageAnchor": "2026-02-28T16:45:59.099Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "7e6e5351-807f-4f10-b3e8-1ce8a3770cdd",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 54.28,
+      "ageAnchor": "2026-02-28T16:38:34.976Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "8f7a1c0a-62a9-471e-891d-8ac499c00582",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 54.39,
+      "ageAnchor": "2026-02-28T16:38:28.087Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "c6744305-997f-4d00-81cd-a12f6a9d809c",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 55.94,
+      "ageAnchor": "2026-02-28T16:36:55.183Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "b3c72fbd-3ec5-4706-9ea7-e25e91b32b59",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 61.74,
+      "ageAnchor": "2026-02-28T16:31:07.566Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "8cd79ffb-edda-4015-b164-dbd40b9dea87",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 62.13,
+      "ageAnchor": "2026-02-28T16:30:43.949Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9f07b9bc-3419-495e-ad89-9c23d2d784a7",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 64.39,
+      "ageAnchor": "2026-02-28T16:28:28.355Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "cb04d4ba-d19f-42c8-b131-accf0e02d040",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 64.51,
+      "ageAnchor": "2026-02-28T16:28:21.419Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "e604d847-72c6-4df3-bf4a-399d5d7ba9ac",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 70.24,
+      "ageAnchor": "2026-02-28T16:22:37.508Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "ab4e8f44-2e49-4d05-8aee-8b5940ea2214",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 70.58,
+      "ageAnchor": "2026-02-28T16:22:16.760Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "6aeae742-d224-44c8-8baa-f0aead60e300",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 70.77,
+      "ageAnchor": "2026-02-28T16:22:05.812Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "ba7a46ed-60ea-4cc8-b40d-5799581de2f7",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 71.06,
+      "ageAnchor": "2026-02-28T16:21:48.063Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "998c9181-73e1-4dc3-a2e2-0e2329e3b194",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 79.41,
+      "ageAnchor": "2026-02-28T16:13:27.030Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "500dc389-13b5-4bf6-8d7e-806781bfc414",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 80.34,
+      "ageAnchor": "2026-02-28T16:12:31.194Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "1e04602b-e08a-4921-82ab-7259db8fbb85",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 82.35,
+      "ageAnchor": "2026-02-28T16:10:30.618Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "b3cfbf5e-42b4-48df-a5e5-1f9ddb5a2881",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 82.59,
+      "ageAnchor": "2026-02-28T16:10:16.155Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "448db643-c317-4bf8-848d-09140389cbcc",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 83.1,
+      "ageAnchor": "2026-02-28T16:09:45.703Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "e4b16d6b-979c-4b43-aa4e-73f6e6386f9a",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 85.19,
+      "ageAnchor": "2026-02-28T16:07:40.580Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "aa98788f-0db2-4457-a2a4-001d39528ea3",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 85.38,
+      "ageAnchor": "2026-02-28T16:07:29.118Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "fb19518b-c838-485e-85ba-40d7f405c220",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 92.04,
+      "ageAnchor": "2026-02-28T16:00:49.427Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "846f57f8-9e71-4c5d-a7b5-5836d9daea6a",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 105.16,
+      "ageAnchor": "2026-02-28T15:47:42.014Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9ef21063-c854-439b-97c9-b8583608d276",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 127,
+      "ageAnchor": "2026-02-28T15:25:51.544Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "d8eb7308-830f-4042-8846-c1439fd88176",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 178.65,
+      "ageAnchor": "2026-02-28T14:34:12.862Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "9adadf33-1da8-4d37-ba32-7e2634f379d2",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 263.46,
+      "ageAnchor": "2026-02-28T13:09:24.019Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "2eb1b356-7504-47fe-a4f9-cde08999358e",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 838.38,
+      "ageAnchor": "2026-02-28T03:34:28.932Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "ddf5ed58-fd60-4e45-9256-5612dfc6a534",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 839.95,
+      "ageAnchor": "2026-02-28T03:32:54.685Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "06a45f28-cb19-4f19-86f2-ebe920c0bf87",
+      "taskName": "Smoke task",
+      "source": "manual",
+      "ageMinutes": 844.01,
+      "ageAnchor": "2026-02-28T03:28:50.939Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "5c7549c3-10f0-4e64-b23e-177bb26866fd",
+      "taskName": "Lifecycle task",
+      "source": "manual",
+      "ageMinutes": 844.01,
+      "ageAnchor": "2026-02-28T03:28:50.958Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    },
+    {
+      "taskId": "d6feef89-aca4-4e24-9794-6cf4036fbf8a",
+      "taskName": "Integration dashboard task",
+      "source": "manual",
+      "ageMinutes": 844.01,
+      "ageAnchor": "2026-02-28T03:28:50.976Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded"
+      ]
+    }
+  ],
+  "movedTaskIds": [],
+  "selfRecoveryAttempts": [],
+  "fallbackTaskIds": []
+}

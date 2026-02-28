@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-02-28T17:33:03.704Z",
+  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/qdrift-03-qa-fixture-kanban.json",
+  "artifactsDir": "/Users/claw/.openclaw/workspace/artifacts",
+  "thresholds": {
+    "maxErrors": 0,
+    "maxWarnings": null,
+    "failOnIssues": false
+  },
+  "summary": {
+    "doneTasksChecked": 1,
+    "passed": 0,
+    "failed": 1,
+    "errors": 2,
+    "warnings": 1
+  },
+  "results": [
+    {
+      "taskId": "qa-001",
+      "taskName": "Done without verification",
+      "status": "done",
+      "completedAt": null,
+      "evidenceRefs": [
+        "https://github.com/larryclaw/OpsHub/commit/abc123"
+      ],
+      "githubEvidenceUrls": [
+        "https://github.com/larryclaw/OpsHub/commit/abc123"
+      ],
+      "screenshotRefs": [],
+      "correctionOccurred": true,
+      "issues": [
+        {
+          "severity": "warn",
+          "code": "MISSING_SCREENSHOT_REFERENCE",
+          "message": "Done task does not reference screenshot artifact (.png/.jpg/etc).",
+          "remediation": "Attach and reference at least one screenshot artifact path under artifacts/."
+        },
+        {
+          "severity": "error",
+          "code": "MISSING_CORRECTION_LOG",
+          "message": "Task indicates a correction occurred but no correction log record exists.",
+          "remediation": "Add metadata.correctionLog with reason/remediation before Done."
+        },
+        {
+          "severity": "error",
+          "code": "MISSING_VERIFICATION_RECORD",
+          "message": "Done task has no verification record.",
+          "remediation": "Add metadata.verification (command, result, verifiedAt) before Done."
+        }
+      ],
+      "pass": false
+    }
+  ],
+  "rolledBackTaskIds": [
+    "qa-001"
+  ],
+  "applyRollback": true
+}

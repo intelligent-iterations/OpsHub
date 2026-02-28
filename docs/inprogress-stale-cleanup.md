@@ -24,6 +24,7 @@ Matching tries explicit task fields and text hints:
 
 - Default mode is **dry-run** (no mutation)
 - `--apply` performs remediation by moving stale tasks from `inProgress` to `todo`
+- Autonomous recovery (default) detects stalled/waiting workers, logs self-recovery attempts, and dispatches up to 2 fallback tasks in `todo`
 - Every moved task adds an `activityLog` entry with type `task_reassigned`
 
 ## Usage
@@ -47,8 +48,18 @@ node scripts/inprogress-stale-cleanup.js \
   --stale-minutes 20 \
   --active-window-minutes 3 \
   --apply \
+  --fallback-count 2 \
   --report-json-out artifacts/inprogress-stale-report.json \
   --report-md-out artifacts/inprogress-stale-report.md
+```
+
+Disable autonomous recovery (diagnostics-only reassignment behavior):
+
+```bash
+node scripts/inprogress-stale-cleanup.js \
+  --kanban data/kanban.json \
+  --apply \
+  --no-auto-recover
 ```
 
 Target a single stuck task id (repeat `--task-id` for multiple):

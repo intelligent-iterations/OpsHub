@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-02-28T17:32:58.844Z",
+  "applyMode": true,
+  "autoRecover": true,
+  "fallbackCount": 2,
+  "kanbanPath": "/Users/claw/.openclaw/workspace/OpsHub/artifacts/qdrift-01-recovery-fixture-kanban.json",
+  "summary": {
+    "inProgressChecked": 1,
+    "staleCandidates": 1,
+    "stalledWorkers": 1,
+    "reassignedCount": 1,
+    "selfRecoveryAttempts": 1,
+    "fallbackTasksDispatched": 2
+  },
+  "rootCause": {
+    "staleCount": 1,
+    "waitingSignalCount": 1,
+    "likelyCause": "Workers appear stalled or detached from active sessions; autonomous recovery + fallback dispatch is recommended."
+  },
+  "staleCandidates": [
+    {
+      "taskId": "stall-001",
+      "taskName": "Worker waiting",
+      "source": null,
+      "ageMinutes": 1052.98,
+      "ageAnchor": "2026-02-28T00:00:00.000Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded",
+        "waiting-or-stalled-signal"
+      ]
+    }
+  ],
+  "stalledWorkers": [
+    {
+      "taskId": "stall-001",
+      "taskName": "Worker waiting",
+      "source": null,
+      "ageMinutes": 1052.98,
+      "ageAnchor": "2026-02-28T00:00:00.000Z",
+      "matchedSessionKeys": [],
+      "stale": true,
+      "stalledWorker": true,
+      "reasons": [
+        "no-active-subagent-match",
+        "age-threshold-exceeded",
+        "waiting-or-stalled-signal"
+      ]
+    }
+  ],
+  "movedTaskIds": [
+    "stall-001"
+  ],
+  "selfRecoveryAttempts": [
+    "stall-001"
+  ],
+  "fallbackTaskIds": [
+    "stall-001-fallback-1",
+    "stall-001-fallback-2"
+  ]
+}
