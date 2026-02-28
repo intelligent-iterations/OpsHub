@@ -520,7 +520,7 @@ function createQueueHealthSnapshot(experiments, queue, options = {}) {
       ? 'Resolve blockers or auto-seed fresh PantryPal experiments before launch.'
       : executionPriority === 'seed-and-launch'
         ? 'Backfill queue depth while launching top ready PantryPal experiment this cycle.'
-        : 'Execute top ready PantryPal experiment now and monitor first-hour guardrail.'
+        : 'Execute top ready PantryPal experiment now without waiting for extra instruction when changes are clear and reversible; monitor first-hour guardrail.'
   };
 }
 
@@ -765,6 +765,12 @@ function writeExperimentSpec(filePath, executionPlan, metadata = {}) {
   };
 }
 
+function normalizeGithubLinks(links = []) {
+  return [...new Set((Array.isArray(links) ? links : [links])
+    .map((link) => String(link ?? '').trim())
+    .filter((link) => /^https:\/\/(?:www\.)?github\.com\//i.test(link)))];
+}
+
 function writeExecutionBrief(filePath, executionPlan, validationResult, health, metadata = {}) {
   if (!filePath) return null;
 
@@ -819,6 +825,14 @@ function writeExecutionBrief(filePath, executionPlan, validationResult, health, 
   lines.push(`Execution priority: ${health?.executionPriority ?? 'n/a'}`);
   lines.push(`Next action: ${health?.nextAction ?? 'n/a'}`);
 
+  const githubLinks = normalizeGithubLinks(metadata.githubLinks);
+  lines.push('', '## Reporting links (GitHub only)');
+  if (!githubLinks.length) {
+    lines.push('- NONE_PROVIDED (supply --github-link for commit/PR/artifact URLs)');
+  } else {
+    githubLinks.forEach((link) => lines.push(`- ${link}`));
+  }
+
   lines.push('', '## Validation result');
   lines.push(`Status: ${validationResult?.status ?? 'NOT_RUN'}`);
   lines.push(`Exit code: ${validationResult?.exitCode ?? 'n/a'}`);
@@ -842,6 +856,7 @@ function writeDecisionLog(filePath, executionPlan, validationResult, health, met
   const generatedAt = metadata.generatedAt ?? new Date().toISOString();
   const rollbackTrigger = metadata.rollbackTrigger
     ?? 'Rollback if first-hour guardrail breaches threshold or validation fails.';
+  const githubLinks = normalizeGithubLinks(metadata.githubLinks);
 
   const lines = [
     '# PantryPal Decision Log',
@@ -856,6 +871,8 @@ function writeDecisionLog(filePath, executionPlan, validationResult, health, met
     `- Validation status: ${validationResult?.status ?? 'NOT_RUN'}`,
     `- Readiness: ${health?.readinessPct ?? 'n/a'}%`,
     `- Rollback trigger: ${rollbackTrigger}`,
+    '- Correction log: Added automated remediation guardrails for PantryPal-first execution, GitHub-links-only reporting, and no-wait launch behavior when changes are clear/reversible.',
+    `- GitHub links: ${githubLinks.length ? githubLinks.join(', ') : 'NONE_PROVIDED'}`,
     ''
   ];
 
@@ -891,7 +908,8 @@ function parseCliOptions(argv = []) {
     readyOnlySync: false,
     bootstrapKanban: false,
     seedMaxTasks: null,
-    autoSeed: true
+    autoSeed: true,
+    githubLinks: []
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -941,6 +959,13 @@ function parseCliOptions(argv = []) {
     if (rawFlag in stringFlagMap && typeof value === 'string' && value.trim()) {
       options[stringFlagMap[rawFlag]] = value.trim();
       if (rawValue === undefined) index += 1;
+      continue;
+    }
+
+    if (rawFlag === '--github-link' && typeof value === 'string' && value.trim()) {
+      options.githubLinks.push(value.trim());
+      if (rawValue === undefined) index += 1;
+      continue;
     }
 
     if (rawFlag === '--sync-kanban') {
@@ -1198,7 +1223,10 @@ if (require.main === module) {
     : { synced: false, inserted: 0, reason: 'Sync disabled.' };
 
   const executionBrief = cliOptions.executionBriefOut
-    ? writeExecutionBrief(cliOptions.executionBriefOut, executionPlan, validationResult, health, { generatedAt })
+    ? writeExecutionBrief(cliOptions.executionBriefOut, executionPlan, validationResult, health, {
+      generatedAt,
+      githubLinks: cliOptions.githubLinks
+    })
     : null;
   const experimentSpec = cliOptions.experimentSpecOut
     ? writeExperimentSpec(cliOptions.experimentSpecOut, executionPlan, { generatedAt })
@@ -1206,7 +1234,8 @@ if (require.main === module) {
   const decisionLog = cliOptions.decisionLogOut
     ? writeDecisionLog(cliOptions.decisionLogOut, executionPlan, validationResult, health, {
       generatedAt,
-      owner: executionPlan?.experimentSpecTemplate?.owner ?? executionPlan?.owner ?? cliOptions.defaultOwner
+      owner: executionPlan?.experimentSpecTemplate?.owner ?? executionPlan?.owner ?? cliOptions.defaultOwner,
+      githubLinks: cliOptions.githubLinks
     })
     : null;
 
@@ -1242,6 +1271,7 @@ module.exports = {
   formatTaskMarkdown,
   formatTaskJson,
   writeExperimentSpec,
+  normalizeGithubLinks,
   writeExecutionBrief,
   writeDecisionLog,
   parseCliOptions,

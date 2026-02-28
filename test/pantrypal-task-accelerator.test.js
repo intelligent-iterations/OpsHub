@@ -29,6 +29,7 @@ const {
   formatTaskMarkdown,
   formatTaskJson,
   writeExperimentSpec,
+  normalizeGithubLinks,
   writeExecutionBrief,
   writeDecisionLog,
   parseCliOptions,
@@ -764,7 +765,9 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
     '--ready-light-threshold', '2',
     '--minimum-criteria', '7',
     '--seed-max-tasks', '2',
-    '--validation-timeout-ms', '45000'
+    '--validation-timeout-ms', '45000',
+    '--github-link', 'https://github.com/larryclaw/OpsHub/pull/42',
+    '--github-link=https://github.com/larryclaw/OpsHub/commit/abc123'
   ]);
 
   assert.equal(options.outputFormat, 'json');
@@ -775,6 +778,10 @@ test('parseCliOptions supports explicit thresholds and json mode', () => {
   assert.equal(options.minimumCriteria, 7);
   assert.equal(options.seedMaxTasks, 2);
   assert.equal(options.validationTimeoutMs, 45000);
+  assert.deepEqual(options.githubLinks, [
+    'https://github.com/larryclaw/OpsHub/pull/42',
+    'https://github.com/larryclaw/OpsHub/commit/abc123'
+  ]);
   assert.equal(options.validate, true);
 });
 
@@ -824,6 +831,17 @@ test('parseCliOptions accepts experiment file, owner, and validation command ove
   assert.equal(options.executionBriefOut, 'artifacts/pantrypal-execution-brief.md');
   assert.equal(options.experimentSpecOut, 'artifacts/pantrypal-experiment-spec.json');
   assert.equal(options.decisionLogOut, 'artifacts/pantrypal-decision-log.md');
+});
+
+test('normalizeGithubLinks keeps only canonical github.com URLs and de-duplicates entries', () => {
+  const links = normalizeGithubLinks([
+    'https://github.com/larryclaw/OpsHub/commit/abc123',
+    'https://github.com/larryclaw/OpsHub/commit/abc123',
+    'https://example.com/not-github',
+    'artifacts/local.md'
+  ]);
+
+  assert.deepEqual(links, ['https://github.com/larryclaw/OpsHub/commit/abc123']);
 });
 
 test('writeExperimentSpec persists immediate execution spec as JSON artifact', () => {
@@ -879,7 +897,8 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
     ownerLoad: [{ owner: 'growth-oncall', total: 3, ready: 3, blocked: 0, avgScore: 88.1 }],
     nextAction: 'Launch now.'
   }, {
-    generatedAt: '2026-02-28T03:30:00.000Z'
+    generatedAt: '2026-02-28T03:30:00.000Z',
+    githubLinks: ['https://github.com/larryclaw/OpsHub/commit/abc123']
   });
 
   const content = fs.readFileSync(briefPath, 'utf8');
@@ -895,6 +914,8 @@ test('writeExecutionBrief persists a markdown launch brief with checklist and va
   assert.match(content, /Average criteria per task: 6.67/);
   assert.match(content, /Tasks below criteria threshold: 0/);
   assert.match(content, /Owner load: growth-oncall total 3 \(ready 3, blocked 0, avg 88.1\)/);
+  assert.match(content, /Reporting links \(GitHub only\)/);
+  assert.match(content, /https:\/\/github.com\/larryclaw\/OpsHub\/commit\/abc123/);
   assert.match(content, /Status: PASS/);
   assert.match(content, /all good/);
 });
@@ -913,7 +934,8 @@ test('writeDecisionLog persists a launch decision artifact with rollback trigger
     readinessPct: 100
   }, {
     generatedAt: '2026-02-28T03:35:00.000Z',
-    owner: 'growth-night'
+    owner: 'growth-night',
+    githubLinks: ['https://github.com/larryclaw/OpsHub/pull/99']
   });
 
   const content = fs.readFileSync(logPath, 'utf8');
@@ -924,6 +946,8 @@ test('writeDecisionLog persists a launch decision artifact with rollback trigger
   assert.match(content, /Owner: growth-night/);
   assert.match(content, /Validation status: PASS/);
   assert.match(content, /Rollback trigger:/);
+  assert.match(content, /Correction log:/);
+  assert.match(content, /https:\/\/github.com\/larryclaw\/OpsHub\/pull\/99/);
 });
 
 test('loadExperimentsFromFile loads a valid JSON experiment array', () => {
