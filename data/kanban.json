@@ -1406,18 +1406,6 @@
         "ttlMinutes": 60
       },
       {
-        "id": "d87d0b76-d32f-4276-8dea-2c0469fc568b",
-        "name": "[MGAP-01] Enforce manager-mode proactive loop (claim→delegate→verify→close)",
-        "description": "Acceptance criteria:\n- Add manager-mode policy module enforcing immediate delegation trigger for actionable coding tasks.\n- Add anti-passivity watchdog: detect waiting/no-action states and auto-dispatch next action.\n- Add stale ownership sweeper that requeues unprogressed in-progress tasks with audit log.\n- Add KPI computation: passiveWaitRatio, delegationRate, evidenceCompletionRate.\n- Add tests covering delegation trigger, anti-passivity recovery, and stale-task remediation.\n- Task completionDetails must contain GitHub links only.",
-        "priority": "critical",
-        "status": "inProgress",
-        "createdAt": "2026-02-28T17:58:26.422Z",
-        "updatedAt": "2026-02-28T18:00:42.354Z",
-        "completedAt": null,
-        "source": "manager-gap-investigation",
-        "startedAt": "2026-02-28T18:00:42.354Z"
-      },
-      {
         "id": "691b1545-1c4b-41a7-9bb3-9cc195c1ec11",
         "name": "PantryPal rescue planner tune-up",
         "description": "",
@@ -2930,6 +2918,42 @@
     ],
     "done": [
       {
+        "id": "d2ad58ec-0a33-42e3-ad77-713ba5fbf67c",
+        "name": "[MGAP-03] Add measurable behavior-gap reduction report + dashboard checks",
+        "description": "Acceptance criteria:\n- Generate before/after metrics report from kanban + activity logs for manager-mode KPIs.\n- Add dashboard endpoint fields for proactive-loop and blocker-compliance metrics.\n- Define success thresholds: passiveWaitRatio <= 0.15, blockerProtocolCompliance >= 0.95.\n- Add regression test ensuring metrics emit and thresholds evaluate deterministically.\n- Publish verification artifact with npm test output and KPI values.\n- Task completionDetails must contain GitHub links only.",
+        "priority": "high",
+        "status": "done",
+        "createdAt": "2026-02-28T17:58:26.422Z",
+        "updatedAt": "2026-02-28T18:03:14.214Z",
+        "completedAt": "2026-02-28T18:03:14.214Z",
+        "source": "manager-gap-investigation",
+        "startedAt": "2026-02-28T18:00:42.354Z",
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T18:03:14.214Z"
+        },
+        "completionDetails": "https://github.com/intelligent-iterations/OpsHub/commit/6cc0a6ebf066f9f2bcbfdf9d2964dbeebaf7ec87"
+      },
+      {
+        "id": "d87d0b76-d32f-4276-8dea-2c0469fc568b",
+        "name": "[MGAP-01] Enforce manager-mode proactive loop (claim→delegate→verify→close)",
+        "description": "Acceptance criteria:\n- Add manager-mode policy module enforcing immediate delegation trigger for actionable coding tasks.\n- Add anti-passivity watchdog: detect waiting/no-action states and auto-dispatch next action.\n- Add stale ownership sweeper that requeues unprogressed in-progress tasks with audit log.\n- Add KPI computation: passiveWaitRatio, delegationRate, evidenceCompletionRate.\n- Add tests covering delegation trigger, anti-passivity recovery, and stale-task remediation.\n- Task completionDetails must contain GitHub links only.",
+        "priority": "critical",
+        "status": "done",
+        "createdAt": "2026-02-28T17:58:26.422Z",
+        "updatedAt": "2026-02-28T18:03:14.214Z",
+        "completedAt": "2026-02-28T18:03:14.214Z",
+        "source": "manager-gap-investigation",
+        "startedAt": "2026-02-28T18:00:42.354Z",
+        "completionDetails": "https://github.com/intelligent-iterations/OpsHub/commit/6cc0a6ebf066f9f2bcbfdf9d2964dbeebaf7ec87",
+        "verification": {
+          "command": "npm test",
+          "result": "pass",
+          "verifiedAt": "2026-02-28T18:03:14.214Z"
+        }
+      },
+      {
         "id": "fa5dfabe-2509-4da2-ab61-ab49cfbf5b09",
         "name": "[MGAP-02] Enforce blocker protocol compliance (auto blocker-handler + 2-attempt rule)",
         "description": "Acceptance criteria:\n- Implement blocker classifier + policy gate with allowed escalation categories only: permissions/sudo/auth/secrets/access.\n- Auto-spawn blocker-handler whenever blocker detected.\n- Enforce exactly 2 Claude Code repair attempts before escalation path is allowed.\n- Persist auditable proof artifacts for both attempts (inputs, outputs, outcomes, timestamps).\n- Reject/flag escalations lacking proof of both attempts.\n- Add tests for compliant and non-compliant blocker flows.\n- Task completionDetails must contain GitHub links only.",
@@ -2946,24 +2970,6 @@
           "commit": "https://github.com/intelligent-iterations/OpsHub/commit/2a9539558456a00bca3116a394ab7d822b505647"
         },
         "completionDetails": "https://github.com/intelligent-iterations/OpsHub/commit/2a9539558456a00bca3116a394ab7d822b505647\nhttps://github.com/intelligent-iterations/OpsHub/blob/2a9539558456a00bca3116a394ab7d822b505647/lib/blocker-protocol.js\nhttps://github.com/intelligent-iterations/OpsHub/blob/2a9539558456a00bca3116a394ab7d822b505647/server.js\nhttps://github.com/intelligent-iterations/OpsHub/blob/2a9539558456a00bca3116a394ab7d822b505647/test/api.test.js"
-      },
-      {
-        "id": "d2ad58ec-0a33-42e3-ad77-713ba5fbf67c",
-        "name": "[MGAP-03] Add measurable behavior-gap reduction report + dashboard checks",
-        "description": "Acceptance criteria:\n- Generate before/after metrics report from kanban + activity logs for manager-mode KPIs.\n- Add dashboard endpoint fields for proactive-loop and blocker-compliance metrics.\n- Define success thresholds: passiveWaitRatio <= 0.15, blockerProtocolCompliance >= 0.95.\n- Add regression test ensuring metrics emit and thresholds evaluate deterministically.\n- Publish verification artifact with npm test output and KPI values.\n- Task completionDetails must contain GitHub links only.",
-        "priority": "high",
-        "status": "done",
-        "createdAt": "2026-02-28T17:58:26.422Z",
-        "updatedAt": "2026-02-28T18:02:21.719Z",
-        "completedAt": "2026-02-28T18:02:21.719Z",
-        "source": "manager-gap-investigation",
-        "startedAt": "2026-02-28T18:00:42.354Z",
-        "verification": {
-          "command": "npm test",
-          "result": "pass",
-          "verifiedAt": "2026-02-28T18:02:21.719Z"
-        },
-        "completionDetails": "https://github.com/larryclaw/OpsHub/blob/main/server.js https://github.com/larryclaw/OpsHub/blob/main/test/api.test.js https://github.com/larryclaw/OpsHub/blob/main/test/manager-behavior-gap-metrics.test.js https://github.com/larryclaw/OpsHub/blob/main/scripts/manager-gap-kpi-report.js https://github.com/larryclaw/OpsHub/blob/main/artifacts/mgap-kpi-report.md https://github.com/larryclaw/OpsHub/blob/main/artifacts/mgap-kpi-report.json https://github.com/larryclaw/OpsHub/blob/main/artifacts/mgap-03-npm-test.txt"
       },
       {
         "id": "76a356e5-aef9-4d68-8b6a-6ebf34807243",
@@ -8064,6 +8070,24 @@
   },
   "activityLog": [
     {
+      "at": "2026-02-28T18:03:14.214Z",
+      "type": "task_moved",
+      "taskId": "d2ad58ec-0a33-42e3-ad77-713ba5fbf67c",
+      "taskName": "[MGAP-03] Add measurable behavior-gap reduction report + dashboard checks",
+      "from": "done",
+      "to": "done",
+      "detail": "https://github.com/intelligent-iterations/OpsHub/commit/6cc0a6ebf066f9f2bcbfdf9d2964dbeebaf7ec87"
+    },
+    {
+      "at": "2026-02-28T18:03:14.214Z",
+      "type": "task_moved",
+      "taskId": "d87d0b76-d32f-4276-8dea-2c0469fc568b",
+      "taskName": "[MGAP-01] Enforce manager-mode proactive loop (claim→delegate→verify→close)",
+      "from": "inProgress",
+      "to": "done",
+      "detail": "https://github.com/intelligent-iterations/OpsHub/commit/6cc0a6ebf066f9f2bcbfdf9d2964dbeebaf7ec87"
+    },
+    {
       "at": "2026-02-28T18:02:42.632Z",
       "type": "task_moved",
       "taskId": "fa5dfabe-2509-4da2-ab61-ab49cfbf5b09",
@@ -12245,31 +12269,6 @@
       "taskId": "6bf91516-01da-4ff4-8c20-2cafa04cfb2c",
       "taskName": "Lifecycle task",
       "to": "done",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T17:00:52.748Z",
-      "type": "task_moved",
-      "taskId": "61b29a41-846b-492b-b992-dfc28660f44e",
-      "taskName": "Smoke task",
-      "from": "backlog",
-      "to": "done",
-      "detail": "finished"
-    },
-    {
-      "at": "2026-02-28T17:00:52.738Z",
-      "type": "task_added",
-      "taskId": "61b29a41-846b-492b-b992-dfc28660f44e",
-      "taskName": "Smoke task",
-      "to": "backlog",
-      "detail": "Added task from manual"
-    },
-    {
-      "at": "2026-02-28T16:55:52.997Z",
-      "type": "task_added",
-      "taskId": "b44edf3e-5fd2-45bb-a2bb-715f989c50cc",
-      "taskName": "Integration dashboard task",
-      "to": "inProgress",
       "detail": "Added task from manual"
     }
   ]
