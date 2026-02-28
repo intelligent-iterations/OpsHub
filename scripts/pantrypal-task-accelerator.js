@@ -311,7 +311,13 @@ function summarizeQueueScores(taskQueue = []) {
 
 function summarizeValidationCoverage(taskQueue = []) {
   const tasksWithValidation = taskQueue.filter((task) => typeof task?.validationCommand === 'string' && task.validationCommand.trim().length > 0);
-  const executableValidations = tasksWithValidation.filter((task) => /test\/(pantrypal|.*pantrypal)/.test(task.validationCommand));
+  const executableValidations = tasksWithValidation.filter((task) => {
+    const command = task.validationCommand.trim().toLowerCase();
+    const invokesTestRunner = /\b(node\s+--test|npm\s+test|pnpm\s+test|yarn\s+test)\b/.test(command);
+    const targetsPantryPal = command.includes('pantrypal');
+
+    return invokesTestRunner && targetsPantryPal;
+  });
 
   const queueSize = taskQueue.length;
   const validationCoveragePct = queueSize

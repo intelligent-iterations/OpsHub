@@ -269,6 +269,20 @@ test('summarizeValidationCoverage reports command coverage and executable ratio'
   assert.equal(summary.executableValidationPct, 25);
 });
 
+test('summarizeValidationCoverage counts PantryPal tests without test/ path and ignores non-test commands', () => {
+  const summary = summarizeValidationCoverage([
+    { id: 'PP-1', validationCommand: 'npm test -- pantrypal-task-accelerator.test.js' },
+    { id: 'PP-2', validationCommand: 'NODE --TEST test/pantrypal-growth-experiment-prioritizer.test.js' },
+    { id: 'PP-3', validationCommand: 'npm run pantrypal:tasks' },
+    { id: 'PP-4', validationCommand: 'pnpm test -- test/not-related.test.js' }
+  ]);
+
+  assert.equal(summary.tasksWithValidation, 4);
+  assert.equal(summary.executableValidations, 2);
+  assert.equal(summary.validationCoveragePct, 100);
+  assert.equal(summary.executableValidationPct, 50);
+});
+
 test('createTaskAcceptanceAudit reports average criteria coverage and below-threshold tasks', () => {
   const audit = createTaskAcceptanceAudit([
     { id: 'PP-GROWTH-001', acceptanceCriteria: ['a', 'b', 'c', 'd', 'e', 'f'] },
