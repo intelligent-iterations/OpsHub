@@ -99,17 +99,32 @@ test('kanban create + move flow works and validates bad input', { concurrency: f
 
 test('task admission validator blocks synthetic placeholder titles in production mode', { concurrency: false }, async () => {
   const app = await makeServer();
+  const warnEvents = [];
+  const originalWarn = console.warn;
+  console.warn = (...args) => warnEvents.push(args[0]);
   try {
-    const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Integration dashboard task', description: 'real work item details', status: 'todo' })
-    });
+    const syntheticPayloads = [
+      { name: 'Integration dashboard task', description: 'real work item details' },
+      { name: 'Smoke task', description: 'manager-gap simulation placeholder card' },
+      { name: 'Lifecycle task', description: 'synthetic lifecycle replay' },
+      { name: 'Closeout reminder', description: 'manager-gap simulation follow-up' }
+    ];
 
-    assert.equal(create.status, 422);
-    const body = await create.json();
-    assert.equal(body.code, 'TASK_ADMISSION_SYNTHETIC_DENIED');
+    for (const payload of syntheticPayloads) {
+      const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, status: 'todo' })
+      });
+
+      assert.equal(create.status, 422, `expected synthetic denial for ${payload.name}`);
+      const body = await create.json();
+      assert.equal(body.code, 'TASK_ADMISSION_SYNTHETIC_DENIED');
+    }
+
+    assert.equal(warnEvents.some((event) => event?.event === 'synthetic_write_guard_blocked' && event?.path === '/api/kanban/task'), true);
   } finally {
+    console.warn = originalWarn;
     await app.close();
   }
 });

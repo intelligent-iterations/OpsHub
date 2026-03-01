@@ -195,7 +195,7 @@ test('resolveListMessagesProvider loads exported function from module path', asy
   }
 });
 
-test('enqueueTaskPayloadsToKanban adds todo cards and skips existing source message ids', async () => {
+test('enqueueTaskPayloadsToKanban adds todo cards, writes back guardrail priority, and skips existing source message ids', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-enqueue-'));
   const kanbanPath = join(dir, 'kanban.json');
   try {
@@ -232,16 +232,92 @@ test('enqueueTaskPayloadsToKanban adds todo cards and skips existing source mess
     const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
     assert.equal(board.columns.todo.length, 1);
     assert.equal(board.columns.todo[0].sourceMessageId, 'm-1');
+    assert.equal(board.columns.todo[0].priority, 'medium');
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
 });
 
-test('enqueueTaskPayloadsToKanban quarantines synthetic churn overflow beyond cap', async () => {
-  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-quarantine-'));
+test('enqueueTaskPayloadsToKanban blocks synthetic card writes in production mode and emits structured log', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-guard-prod-'));
+  const kanbanPath = join(dir, 'kanban.json');
+  const warns = [];
+  try {
+    await writeFile(kanbanPath, JSON.stringify({ columns: { backlog: [], todo: [], inProgress: [], done: [] }, activityLog: [] }, null, 2), 'utf8');
+
+    const result = enqueueTaskPayloadsToKanban({
+      kanbanPath,
+      mode: 'production',
+      taskPayloads: [{
+        title: 'Integration dashboard task',
+        owner: 'claw',
+        acceptanceCriteria: ['should be blocked in production'],
+        priority: 'high',
+        source: { messageId: 'prod-block-1' },
+      }],
+      logger: { info: () => {}, warn: (event) => warns.push(event) },
+    });
+
+    assert.equal(result.addedCount, 0);
+    assert.equal(result.blockedSyntheticCount, 1);
+    assert.equal(warns.some((event) => event?.event === 'synthetic_write_guard_blocked'), true);
+
+    const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
+    assert.equal(board.columns.todo.length, 0);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('enqueueTaskPayloadsToKanban allows synthetic diagnostics in diagnostic mode', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-guard-diag-'));
   const kanbanPath = join(dir, 'kanban.json');
   try {
     await writeFile(kanbanPath, JSON.stringify({ columns: { backlog: [], todo: [], inProgress: [], done: [] }, activityLog: [] }, null, 2), 'utf8');
+
+    const result = enqueueTaskPayloadsToKanban({
+      kanbanPath,
+      mode: 'diagnostic',
+      taskPayloads: [{
+        title: 'Integration dashboard task',
+        owner: 'claw',
+        acceptanceCriteria: ['allowed in diagnostic mode'],
+        priority: 'high',
+        source: { messageId: 'diag-allow-1' },
+      }],
+      logger: { info: () => {}, warn: () => {} },
+    });
+
+    assert.equal(result.mode, 'diagnostic');
+    assert.equal(result.addedCount, 1);
+    assert.equal(result.blockedSyntheticCount, 0);
+
+    const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
+    assert.equal(board.columns.todo.length, 1);
+    assert.equal(board.columns.todo[0].name, 'Integration dashboard task');
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('enqueueTaskPayloadsToKanban quarantines synthetic churn overflow and protects strategic reservation', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-quarantine-'));
+  const kanbanPath = join(dir, 'kanban.json');
+  try {
+    await writeFile(kanbanPath, JSON.stringify({
+      columns: {
+        backlog: [],
+        todo: [
+          { id: 't1', name: 'Generic todo 1', status: 'todo' },
+          { id: 't2', name: 'Generic todo 2', status: 'todo' }
+        ],
+        inProgress: [
+          { id: 'ip1', name: 'Generic in-progress 1', status: 'inProgress' }
+        ],
+        done: []
+      },
+      activityLog: []
+    }, null, 2), 'utf8');
 
     const result = enqueueTaskPayloadsToKanban({
       kanbanPath,
@@ -254,12 +330,59 @@ test('enqueueTaskPayloadsToKanban quarantines synthetic churn overflow beyond ca
       logger: { info: () => {} },
     });
 
-    assert.equal(result.addedCount, 3);
-    assert.equal(result.quarantinedCount, 1);
+    assert.equal(result.addedCount, 1);
+    assert.equal(result.quarantinedCount, 3);
 
     const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
     assert.equal(board.columns.todo.some((t) => String(t.name).includes('PantryPal rescue optimization')), true);
-    assert.equal(board.columns.backlog.some((t) => String(t.name).startsWith('[Quarantine]')), true);
+    assert.equal(board.columns.backlog.some((t) => String(t.description).includes('synthetic_non_strategic_share_exceeded')), true);
+    assert.equal(board.columns.todo.some((t) => String(t.name).includes('Smoke lifecycle run 3')), false);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('enqueueTaskPayloadsToKanban blocks known synthetic placeholder fingerprints in production mode', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-synth-block-'));
+  const kanbanPath = join(dir, 'kanban.json');
+  try {
+    await writeFile(kanbanPath, JSON.stringify({ columns: { backlog: [], todo: [], inProgress: [], done: [] }, activityLog: [] }, null, 2), 'utf8');
+
+    const result = enqueueTaskPayloadsToKanban({
+      kanbanPath,
+      mode: 'production',
+      taskPayloads: [{ title: 'Integration dashboard task', priority: 'high', source: { messageId: 'x-1' } }],
+      logger: { info: () => {}, warn: () => {} },
+    });
+
+    assert.equal(result.addedCount, 0);
+    assert.equal(result.blockedSyntheticCount, 1);
+
+    const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
+    assert.equal(board.columns.todo.length, 0);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('enqueueTaskPayloadsToKanban allows synthetic placeholder fingerprints in diagnostic mode', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-synth-allow-'));
+  const kanbanPath = join(dir, 'kanban.json');
+  try {
+    await writeFile(kanbanPath, JSON.stringify({ columns: { backlog: [], todo: [], inProgress: [], done: [] }, activityLog: [] }, null, 2), 'utf8');
+
+    const result = enqueueTaskPayloadsToKanban({
+      kanbanPath,
+      mode: 'diagnostic',
+      taskPayloads: [{ title: 'Integration dashboard task', priority: 'high', source: { messageId: 'x-2' } }],
+      logger: { info: () => {}, warn: () => {} },
+    });
+
+    assert.equal(result.addedCount, 1);
+    assert.equal(result.blockedSyntheticCount, 0);
+
+    const board = JSON.parse(await readFile(kanbanPath, 'utf8'));
+    assert.equal(board.columns.todo.length, 1);
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

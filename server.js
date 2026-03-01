@@ -14,6 +14,7 @@ const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 const { evaluateBlockerProtocol, captureBlockerProofArtifact } = require('./lib/blocker-protocol');
 const { buildLiveAgentActivity } = require('./lib/openclaw-live-activity');
 const { buildAgentActivitySummary, buildAgentTrace } = require('./lib/agent-activity-monitor');
+const { normalizeMode, evaluateSyntheticWriteGuard } = require('./lib/synthetic-write-guard');
 
 const execAsync = util.promisify(exec);
 const PORT = Number(process.env.PORT) || 4180;
@@ -33,7 +34,7 @@ const BLOCKER_PROOF_DIR = path.join(OPSHUB_DIR, 'artifacts', 'blocker-proofs');
 const VALID_COLUMNS = ['backlog', 'todo', 'inProgress', 'done'];
 const ACTIVE_COLUMNS = ['backlog', 'todo', 'inProgress'];
 const VALID_PRIORITIES = ['critical', 'high', 'medium', 'low'];
-const BOARD_MODE = String(process.env.OPSHUB_BOARD_MODE || 'production').toLowerCase() === 'diagnostic' ? 'diagnostic' : 'production';
+const BOARD_MODE = normalizeMode(process.env.OPSHUB_BOARD_MODE || 'production');
 const IN_PROGRESS_WIP_LIMIT = Number(process.env.OPSHUB_INPROGRESS_WIP_LIMIT || 5);
 const IN_PROGRESS_WIP_LIMIT_BY_PRIORITY = {
   high: Number(process.env.OPSHUB_INPROGRESS_WIP_LIMIT_HIGH || IN_PROGRESS_WIP_LIMIT),
@@ -88,12 +89,6 @@ function isPlaceholderDescription(description = '') {
   return /^(tbd|todo|placeholder|n\/?a|none|lorem ipsum|coming soon|test|temp|wip|pending)\.?$/.test(normalized);
 }
 
-function isDeniedSyntheticPattern(name = '', description = '') {
-  const loweredName = normalizeForDuplicate(name);
-  const loweredDesc = normalizeForDuplicate(description);
-  return /(smoke task|lifecycle task|integration dashboard task|closeout reminder|placeholder)/.test(`${loweredName} ${loweredDesc}`);
-}
-
 function hasAcceptanceCriteria(description = '') {
   const normalized = cleanText(description, 4000).toLowerCase();
   return /acceptance criteria|\n\s*[-*]\s+/.test(normalized);
@@ -113,15 +108,24 @@ function findDuplicateActiveTask(board, { name, description, excludingTaskId = n
   return null;
 }
 
-function validateTaskAdmission({ board, name, description, source, targetColumn = 'backlog', mode = BOARD_MODE, excludingTaskId = null }) {
+function validateTaskAdmission({ board, name, description, source, targetColumn = 'backlog', mode = BOARD_MODE, excludingTaskId = null, operation = 'api_task_admission', path = '/api/kanban/task' }) {
   const cleanedSource = cleanText(source, 100).toLowerCase();
 
-  if (mode === 'production' && isDeniedSyntheticPattern(name, description)) {
+  const syntheticGuard = evaluateSyntheticWriteGuard({
+    mode,
+    name,
+    description,
+    operation,
+    path,
+    source: cleanedSource,
+    logger: console
+  });
+  if (!syntheticGuard.ok) {
     return {
       ok: false,
-      status: 422,
-      error: 'task admission denied in production mode for synthetic/placeholder pattern',
-      code: 'TASK_ADMISSION_SYNTHETIC_DENIED'
+      status: syntheticGuard.status,
+      error: syntheticGuard.error,
+      code: syntheticGuard.code
     };
   }
 
@@ -840,7 +844,15 @@ function createApp() {
       const board = await loadKanban();
 
       if (ACTIVE_COLUMNS.includes(target)) {
-        const admission = validateTaskAdmission({ board, name: cleanedName, description: cleanedDescription, source, targetColumn: target });
+        const admission = validateTaskAdmission({
+          board,
+          name: cleanedName,
+          description: cleanedDescription,
+          source,
+          targetColumn: target,
+          operation: 'api_task_create',
+          path: '/api/kanban/task'
+        });
         if (!admission.ok) {
           return res.status(admission.status).json({ error: admission.error, code: admission.code, duplicateTaskId: admission.duplicateTaskId || null });
         }
@@ -989,7 +1001,9 @@ function createApp() {
           description: task.description,
           source: task.source,
           targetColumn: to,
-          excludingTaskId: task.id
+          excludingTaskId: task.id,
+          operation: 'api_task_move',
+          path: '/api/kanban/move'
         });
         if (!admission.ok) {
           board.columns[found.col].splice(found.idx, 0, task);

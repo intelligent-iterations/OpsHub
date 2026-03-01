@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const { prioritizeWithGuardrails } = require('./pantrypal-priority-guardrails');
+const { prioritizeWithGuardrails, mapScoreToPriority } = require('./pantrypal-priority-guardrails');
+const { normalizeMode, evaluateSyntheticWriteGuard } = require('../lib/synthetic-write-guard');
 
 function normalizeMentions(rawMentions, text) {
   const fromArray = Array.isArray(rawMentions) ? rawMentions : [];
@@ -270,7 +271,7 @@ function readKanbanBoard(kanbanPath) {
   };
 }
 
-function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = console }) {
+function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = console, mode = process.env.OPSHUB_BOARD_MODE }) {
   if (!kanbanPath) {
     return { attempted: false, addedCount: 0, skippedDuplicateCount: 0, addedTaskIds: [], reason: 'kanban_path_not_configured' };
   }
@@ -285,8 +286,10 @@ function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = consol
   }
 
   const now = new Date().toISOString();
+  const boardMode = normalizeMode(mode);
   const addedTaskIds = [];
   let skippedDuplicateCount = 0;
+  let blockedSyntheticCount = 0;
 
   const normalizedPayloadTasks = (taskPayloads || []).map((payload) => ({
     id: String(payload?.source?.messageId || payload?.title || `payload-${Date.now()}`),
@@ -297,7 +300,16 @@ function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = consol
     _payload: payload
   }));
 
-  const guardrailed = prioritizeWithGuardrails(normalizedPayloadTasks, { syntheticCap: 2 });
+  const existingActiveTasks = [
+    ...(Array.isArray(board?.columns?.todo) ? board.columns.todo : []),
+    ...(Array.isArray(board?.columns?.inProgress) ? board.columns.inProgress : [])
+  ];
+  const guardrailed = prioritizeWithGuardrails(normalizedPayloadTasks, {
+    syntheticCap: 2,
+    strategicReserveShare: 0.3,
+    nonStrategicCeiling: 0.7,
+    existingActiveTasks,
+  });
 
   for (const task of guardrailed.prioritized) {
     const payload = task._payload;
@@ -316,11 +328,27 @@ function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = consol
       ...(criteria.length ? criteria.map((line) => `- ${line}`) : ['- follow up in Slack thread']),
     ];
 
+    const writebackPriority = task?._guardrails?.priorityWriteback || mapScoreToPriority(task?._guardrails?.score || 0);
+    const syntheticGuard = evaluateSyntheticWriteGuard({
+      mode: boardMode,
+      name: payload?.title || 'Slack follow-up task',
+      description: descriptionLines.join('\n'),
+      operation: 'script_social_mention_enqueue',
+      path: 'scripts/social-mention-ingest.js#enqueueTaskPayloadsToKanban',
+      source: 'slack-social-mention',
+      taskId,
+      logger,
+    });
+    if (!syntheticGuard.ok) {
+      blockedSyntheticCount += 1;
+      continue;
+    }
+
     board.columns.todo.unshift({
       id: taskId,
       name: payload?.title || 'Slack follow-up task',
       description: descriptionLines.join('\n'),
-      priority: payload?.priority || 'medium',
+      priority: writebackPriority,
       status: 'todo',
       source: 'slack-social-mention',
       sourceMessageId: messageId || null,
@@ -349,10 +377,11 @@ function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = consol
     const payload = task._payload;
     const messageId = String(payload?.source?.messageId || '').trim() || null;
     const quarantineId = `quarantine-social-${messageId || Date.now().toString(36)}`;
+    const quarantineReason = task?._quarantineReason || 'synthetic_cap_exceeded';
     board.columns.backlog.unshift({
       id: quarantineId,
       name: `[Quarantine] ${payload?.title || 'Synthetic social task'}`,
-      description: 'Auto-quarantined by PantryPal priority guardrails due to synthetic churn cap.',
+      description: `Auto-quarantined by PantryPal priority guardrails (${quarantineReason}).`,
       priority: 'low',
       status: 'backlog',
       source: 'pantrypal-priority-guardrails',
@@ -366,12 +395,14 @@ function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = consol
   }
 
   fs.writeFileSync(kanbanPath, `${JSON.stringify(board, null, 2)}\n`);
-  logger.info?.(`[social-mention-ingest] enqueued ${addedTaskIds.length} task(s) to kanban; quarantined ${quarantinedTaskIds.length}`);
+  logger.info?.(`[social-mention-ingest] enqueued ${addedTaskIds.length} task(s) to kanban; quarantined ${quarantinedTaskIds.length}; blockedSynthetic ${blockedSyntheticCount}`);
 
   return {
     attempted: true,
+    mode: boardMode,
     addedCount: addedTaskIds.length,
     skippedDuplicateCount,
+    blockedSyntheticCount,
     addedTaskIds,
     quarantinedCount: quarantinedTaskIds.length,
     quarantinedTaskIds,
