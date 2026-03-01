@@ -1,26 +1,35 @@
 {
   "columns": {
     "backlog": [],
-    "todo": [
+    "todo": [],
+    "inProgress": [],
+    "done": [
       {
         "id": "3d772018-93f8-4638-b0e6-49002fee08de",
         "name": "Implement telemetry collector",
         "description": "Wire active sessions and runs into dashboard payload",
         "priority": "medium",
-        "status": "todo",
+        "status": "done",
         "createdAt": "2026-02-28T21:45:23.282Z",
-        "completedAt": null,
+        "completedAt": "2026-03-01T02:22:53.110Z",
         "source": "manual",
-        "ttlMinutes": null
+        "ttlMinutes": null,
+        "updatedAt": "2026-03-01T02:22:53.110Z",
+        "completionDetails": "https://github.com/intelligent-iterations/OpsHub/commit/6ec32e6\nhttps://github.com/intelligent-iterations/OpsHub/commit/a307099\nhttps://github.com/intelligent-iterations/OpsHub/blob/main/lib/openclaw-telemetry-collector.js\nhttps://github.com/intelligent-iterations/OpsHub/blob/main/test/openclaw-telemetry-collector.test.js\nhttps://github.com/intelligent-iterations/OpsHub/blob/main/docs/live-agent-activity.md",
+        "verification": {
+          "command": "npm test -- test/openclaw-telemetry-collector.test.js test/api.test.js",
+          "result": "pass",
+          "verifiedAt": "2026-03-01T02:22:53.110Z"
+        }
       },
       {
         "id": "b527f0e7-5675-4faa-af43-3f1a44f23f17",
         "name": "Unique delivery item",
         "description": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
         "priority": "medium",
-        "status": "todo",
+        "status": "done",
         "createdAt": "2026-02-28T21:45:23.259Z",
-        "completedAt": null,
+        "completedAt": "2026-03-01T01:18:42.919Z",
         "source": "manual",
         "ttlMinutes": null,
         "completionDetails": "Evidence: https://github.com/larryclaw/OpsHub/commit/abc123",
@@ -30,96 +39,20 @@
           "verifiedAt": "2026-02-28T21:45:23.253Z"
         },
         "correctionOccurred": false,
-        "correctionLog": null
+        "correctionLog": null,
+        "updatedAt": "2026-03-01T01:18:42.919Z"
       },
       {
         "id": "ab09256b-fe8f-4955-a14c-7e5b102ffc00",
         "name": "Unique delivery item",
         "description": "real scoped description",
         "priority": "medium",
-        "status": "todo",
+        "status": "done",
         "createdAt": "2026-02-28T21:45:23.242Z",
-        "completedAt": null,
+        "completedAt": "2026-03-01T01:18:19.003Z",
         "source": "manual",
         "ttlMinutes": null
       },
-      {
-        "id": "fdf4a9c7-991d-41cc-af97-9f4adfc82596",
-        "name": "Compliant escalation task",
-        "description": "",
-        "priority": "medium",
-        "status": "todo",
-        "createdAt": "2026-02-28T21:41:01.670Z",
-        "completedAt": null,
-        "source": "manual",
-        "ttlMinutes": null,
-        "blockerProtocol": {
-          "autoSpawned": true,
-          "autoSpawnedAt": "2026-02-28T21:41:01.673Z",
-          "assignedAgent": "blocker-handler",
-          "attempts": [
-            {
-              "agent": "claude code",
-              "input": "attempt fix #1",
-              "output": "still blocked",
-              "outcome": "failed",
-              "timestamp": "2026-02-28T21:41:01.672Z"
-            },
-            {
-              "agent": "claude code",
-              "input": "attempt fix #2",
-              "output": "still blocked",
-              "outcome": "failed",
-              "timestamp": "2026-02-28T21:41:01.672Z"
-            }
-          ],
-          "escalation": {
-            "requested": true,
-            "category": "permissions",
-            "reason": "permission denied on deployment key"
-          }
-        }
-      },
-      {
-        "id": "1a638230-5db3-4371-b8c3-ce2e11d6d6c1",
-        "name": "Compliant escalation task",
-        "description": "",
-        "priority": "medium",
-        "status": "todo",
-        "createdAt": "2026-02-28T21:40:46.340Z",
-        "completedAt": null,
-        "source": "manual",
-        "ttlMinutes": null,
-        "blockerProtocol": {
-          "autoSpawned": true,
-          "autoSpawnedAt": "2026-02-28T21:40:46.343Z",
-          "assignedAgent": "blocker-handler",
-          "attempts": [
-            {
-              "agent": "claude code",
-              "input": "attempt fix #1",
-              "output": "still blocked",
-              "outcome": "failed",
-              "timestamp": "2026-02-28T21:40:46.342Z"
-            },
-            {
-              "agent": "claude code",
-              "input": "attempt fix #2",
-              "output": "still blocked",
-              "outcome": "failed",
-              "timestamp": "2026-02-28T21:40:46.342Z"
-            }
-          ],
-          "escalation": {
-            "requested": true,
-            "category": "permissions",
-            "reason": "permission denied on deployment key"
-          }
-        }
-      }
-    ],
-    "inProgress": [],
-    "done": [
       {
         "id": "cc65790e-f8ce-4e34-ab23-b380ba55d861",
         "name": "[SYNTH-03] Add safeguards + CI regression checks for synthetic-card prevention",
@@ -2565,11 +2498,113 @@
         "updatedAt": "2026-02-28T16:31:46Z",
         "completedAt": "2026-02-28T16:31:46Z",
         "completionDetails": "Closed with PantryPal widget contract + golden baseline verification and GitHub-backed evidence. Evidence: https://github.com/larryclaw/pantrypal/commit/257df277234d0cda96b14df46eb0972ad0c702e9 ; https://github.com/larryclaw/pantrypal/blob/257df277234d0cda96b14df46eb0972ad0c702e9/test/presentation/widgets/pet_timeline_history_view_golden_test.dart ; https://github.com/larryclaw/pantrypal/commit/492f2f32b8a53d2d4a3c4904f8d244739d443072 ; https://github.com/larryclaw/pantrypal/blob/492f2f32b8a53d2d4a3c4904f8d244739d443072/test/goldens/pantry_crud_ui.png ; https://github.com/larryclaw/pantrypal/commit/77ded39328ef2761d59e7a95b2d6264c844273a2 ; https://github.com/larryclaw/pantrypal/blob/77ded39328ef2761d59e7a95b2d6264c844273a2/artifacts/integration-health-2026-02-27.txt"
+      },
+      {
+        "id": "fdf4a9c7-991d-41cc-af97-9f4adfc82596",
+        "name": "Compliant escalation task",
+        "description": "Compliant escalation scenario validated. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/fdf4a9c7-escalation-closure-evidence.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T21:41:01.670Z",
+        "completedAt": "2026-03-01T02:20:17Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T21:41:01.673Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T21:41:01.672Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T21:41:01.672Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        }
+      },
+      {
+        "id": "1a638230-5db3-4371-b8c3-ce2e11d6d6c1",
+        "name": "Compliant escalation task",
+        "description": "Compliant escalation scenario validated. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/1a638230-escalation-closure-evidence.md",
+        "priority": "medium",
+        "status": "done",
+        "createdAt": "2026-02-28T21:40:46.340Z",
+        "completedAt": "2026-03-01T02:21:06Z",
+        "source": "manual",
+        "ttlMinutes": null,
+        "blockerProtocol": {
+          "autoSpawned": true,
+          "autoSpawnedAt": "2026-02-28T21:40:46.343Z",
+          "assignedAgent": "blocker-handler",
+          "attempts": [
+            {
+              "agent": "claude code",
+              "input": "attempt fix #1",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T21:40:46.342Z"
+            },
+            {
+              "agent": "claude code",
+              "input": "attempt fix #2",
+              "output": "still blocked",
+              "outcome": "failed",
+              "timestamp": "2026-02-28T21:40:46.342Z"
+            }
+          ],
+          "escalation": {
+            "requested": true,
+            "category": "permissions",
+            "reason": "permission denied on deployment key"
+          }
+        }
       }
     ],
     "blocked": []
   },
   "activityLog": [
+    {
+      "at": "2026-03-01T02:21:06Z",
+      "type": "task_moved",
+      "taskId": "1a638230-5db3-4371-b8c3-ce2e11d6d6c1",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "done",
+      "detail": "Completed by blocker-handler with compliant escalation evidence + verification links."
+    },
+    {
+      "id": "activity-1772327922921",
+      "type": "move",
+      "taskId": "b527f0e7-5675-4faa-af43-3f1a44f23f17",
+      "taskName": "Unique delivery item",
+      "from": "todo",
+      "to": "done",
+      "timestamp": "2026-03-01T01:18:42.919Z",
+      "details": "Completed by subagent delivery handling"
+    },
+    {
+      "at": "2026-03-01T01:18:19.003Z",
+      "type": "task_moved",
+      "taskId": "ab09256b-fe8f-4955-a14c-7e5b102ffc00",
+      "taskName": "Unique delivery item",
+      "from": "todo",
+      "to": "done",
+      "detail": "Completed by subagent delivery: item handled."
+    },
     {
       "at": "2026-03-01T00:10:44.050Z",
       "type": "task_completed",
@@ -2967,6 +3002,26 @@
       "taskName": "Smoke task",
       "to": "backlog",
       "detail": "Added task from manual"
+    },
+    {
+      "at": "2026-03-01T02:20:17Z",
+      "type": "task_moved",
+      "taskId": "fdf4a9c7-991d-41cc-af97-9f4adfc82596",
+      "taskName": "Compliant escalation task",
+      "from": "todo",
+      "to": "done",
+      "detail": "Closed after verifying blocker escalation gate + regression coverage. Evidence: https://github.com/larryclaw/OpsHub/blob/main/artifacts/fdf4a9c7-escalation-closure-evidence.md"
+    }
+  ],
+  "activity": [
+    {
+      "at": "2026-03-01T02:22:53.110Z",
+      "type": "task_moved",
+      "taskId": "3d772018-93f8-4638-b0e6-49002fee08de",
+      "taskName": "Implement telemetry collector",
+      "from": "todo",
+      "to": "done",
+      "detail": "Closed as stale/pending: already implemented on main with telemetry collector + API integration evidence."
     }
   ]
 }
