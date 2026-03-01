@@ -14,6 +14,7 @@ const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 const { evaluateBlockerProtocol, captureBlockerProofArtifact } = require('./lib/blocker-protocol');
 const { buildLiveAgentActivity } = require('./lib/openclaw-live-activity');
 const { buildAgentActivitySummary, buildAgentTrace } = require('./lib/agent-activity-monitor');
+const { collectOpenClawTelemetry } = require('./lib/openclaw-telemetry-collector');
 const { normalizeMode, evaluateSyntheticWriteGuard, isDeniedSyntheticPattern } = require('./lib/synthetic-write-guard');
 
 const execAsync = util.promisify(exec);
@@ -352,77 +353,10 @@ async function safeExec(command, cwd = WORKSPACE) {
   }
 }
 
-function parseJsonArray(stdout, key) {
-  if (!stdout || !stdout.trim()) return [];
-  try {
-    const parsed = JSON.parse(stdout);
-    const entries = Array.isArray(parsed?.[key]) ? parsed[key] : [];
-    return entries;
-  } catch {
-    return [];
-  }
-}
-
-async function runFirstOk(commands = []) {
-  for (const command of commands) {
-    const result = await safeExec(command);
-    if (result.ok) return { ...result, command };
-  }
-  return { ok: false, stdout: '', stderr: 'No command succeeded', command: null };
-}
-
 async function getOpenClawTelemetry() {
-  const fixturePath = process.env.OPSHUB_TELEMETRY_FIXTURE;
-  if (fixturePath) {
-    try {
-      const fixtureRaw = await fs.readFile(path.resolve(fixturePath), 'utf8');
-      const fixture = JSON.parse(fixtureRaw);
-      return {
-        sessions: Array.isArray(fixture?.sessions) ? fixture.sessions : [],
-        runs: Array.isArray(fixture?.runs) ? fixture.runs : [],
-        diagnostics: {
-          sessionsSource: fixturePath,
-          runsSource: fixturePath,
-          sessionsCommandOk: true,
-          runsCommandOk: true,
-          fixture: true
-        }
-      };
-    } catch (err) {
-      return {
-        sessions: [],
-        runs: [],
-        diagnostics: {
-          sessionsSource: fixturePath,
-          runsSource: fixturePath,
-          sessionsCommandOk: false,
-          runsCommandOk: false,
-          fixture: true,
-          error: err.message
-        }
-      };
-    }
-  }
-
-  const sessionsResult = await runFirstOk([
-    '~/.openclaw/bin/openclaw sessions --active 30 --json',
-    'openclaw sessions --active 30 --json'
-  ]);
-  const runsResult = await runFirstOk([
-    '~/.openclaw/bin/openclaw runs --active --json',
-    'openclaw runs --active --json'
-  ]);
-
-  return {
-    sessions: parseJsonArray(sessionsResult.stdout, 'sessions'),
-    runs: parseJsonArray(runsResult.stdout, 'runs'),
-    diagnostics: {
-      sessionsSource: sessionsResult.command,
-      runsSource: runsResult.command,
-      sessionsCommandOk: Boolean(sessionsResult.ok),
-      runsCommandOk: Boolean(runsResult.ok)
-    }
-  };
+  return collectOpenClawTelemetry({
+    execute: (command) => safeExec(command)
+  });
 }
 
 function normalizeInProgressTask(task, index) {
