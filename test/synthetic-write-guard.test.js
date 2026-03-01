@@ -13,7 +13,13 @@ test('normalizeMode defaults to production and supports diagnostic', () => {
 test('isDeniedSyntheticPattern matches known synthetic placeholders', () => {
   assert.equal(isDeniedSyntheticPattern('Integration dashboard task', 'real details'), true);
   assert.equal(isDeniedSyntheticPattern('Smoke task', ''), true);
+  assert.equal(isDeniedSyntheticPattern('placeholder', 'real details'), true);
   assert.equal(isDeniedSyntheticPattern('Legit implementation task', 'Acceptance criteria:\n- real work'), false);
+});
+
+test('isDeniedSyntheticPattern avoids false positives for lifecycle/replay phrasing', () => {
+  assert.equal(isDeniedSyntheticPattern('Release lifecycle work', 'Evidence: https://github.com/larryclaw/OpsHub/commit/abc123'), false);
+  assert.equal(isDeniedSyntheticPattern('Lifecycle replay hardening', 'real details'), false);
 });
 
 test('evaluateSyntheticWriteGuard blocks in production and allows in diagnostic', () => {
