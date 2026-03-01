@@ -14,7 +14,7 @@ const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 const { evaluateBlockerProtocol, captureBlockerProofArtifact } = require('./lib/blocker-protocol');
 const { buildLiveAgentActivity } = require('./lib/openclaw-live-activity');
 const { buildAgentActivitySummary, buildAgentTrace } = require('./lib/agent-activity-monitor');
-const { normalizeMode, evaluateSyntheticWriteGuard } = require('./lib/synthetic-write-guard');
+const { normalizeMode, evaluateSyntheticWriteGuard, isDeniedSyntheticPattern } = require('./lib/synthetic-write-guard');
 
 const execAsync = util.promisify(exec);
 const PORT = Number(process.env.PORT) || 4180;
@@ -258,6 +258,43 @@ function normalizeBoard(parsed) {
     },
     activityLog: Array.isArray(parsed?.activityLog) ? parsed.activityLog : []
   };
+}
+
+function isSyntheticOrTestTask(task = {}) {
+  const name = cleanText(task?.name, 200);
+  const description = cleanText(task?.description, 2000);
+  const source = cleanText(task?.source, 120).toLowerCase();
+  if (isDeniedSyntheticPattern(name, description)) return true;
+  if (/\b(synthetic|diagnostic|test|auto-seed|simulation|fixture)\b/.test(source)) return true;
+  if (/^(?:test-|tmp-|diag-|synthetic-)/.test(cleanText(task?.id, 200).toLowerCase())) return true;
+  return false;
+}
+
+function cleanupSyntheticAndTestTasks(board) {
+  const next = normalizeBoard(board);
+  const removed = [];
+  for (const column of VALID_COLUMNS) {
+    const kept = [];
+    for (const task of next.columns[column]) {
+      if (isSyntheticOrTestTask(task)) {
+        removed.push({ id: task?.id || null, name: task?.name || '', column, source: task?.source || null });
+      } else {
+        kept.push(task);
+      }
+    }
+    next.columns[column] = kept;
+  }
+
+  if (removed.length > 0) {
+    pushActivity(next, {
+      type: 'cleanup_synthetic_test_tasks',
+      taskName: '[OpsHub cleanup] synthetic/test task purge',
+      to: 'backlog',
+      detail: `Removed ${removed.length} synthetic/test task(s) from production board via API cleanup.`
+    });
+  }
+
+  return { board: next, removed, removedCount: removed.length };
 }
 
 async function loadKanban() {
@@ -820,6 +857,16 @@ function createApp() {
   );
 
   app.post(
+    '/api/kanban/cleanup-synthetic',
+    asyncHandler(async (_req, res) => {
+      const board = await loadKanban();
+      const cleaned = cleanupSyntheticAndTestTasks(board);
+      if (cleaned.removedCount > 0) await saveKanban(cleaned.board);
+      res.json({ ok: true, removedCount: cleaned.removedCount, removed: cleaned.removed, board: cleaned.board });
+    })
+  );
+
+  app.post(
     '/api/kanban/task',
     asyncHandler(async (req, res) => {
       const {
@@ -1167,5 +1214,6 @@ module.exports = {
   getOpenClawTelemetry,
   getLiveAgentActivityData,
   getAgentActivitySummaryData,
-  getAgentTraceData
+  getAgentTraceData,
+  cleanupSyntheticAndTestTasks
 };

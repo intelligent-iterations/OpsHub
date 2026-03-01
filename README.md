@@ -91,6 +91,7 @@ OpsHub uses local artifacts and OpenClaw/runtime commands where available:
   - **Task admission validator** (production-mode synthetic denylist + placeholder description rejection + active duplicate guard)
   - **Done transition hard contract** (`completionDetails` GitHub evidence + strict verification object: `command`, `result=pass`, `verifiedAt`)
   - **WIP cap enforcement** for `inProgress` admissions/moves.
+- Production board writes are **API-only**: script/harness flows are blocked from mutating `data/kanban.json` (`PRODUCTION_BOARD_API_ONLY`).
 
 ## Kanban policy gates (Phase 1)
 
@@ -115,21 +116,22 @@ Error semantics:
 - `INPROGRESS_REQUIRED_FIELDS_MISSING` (422)
 - `WIP_LIMIT_EXCEEDED` (422)
 
+Synthetic-card regression runbook: `docs/synthetic-card-regression-repro.md`
+
+CI regression workflow: `.github/workflows/synthetic-card-regression.yml`
+
 ## Optional config
 
 - `PORT` (default `4180`)
 - `OPS_HUB_TOKEN_QUOTA` (default `1000000`)
-- `OPSHUB_DATA_DIR` (override kanban storage path; useful for tests)
-- `OPSHUB_BOARD_MODE` (`production` default, `diagnostic` to relax synthetic admission gate)
-- `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`)
+- `OPSHUB_DATA_DIR` (override kanban storage path; required for isolated tests)
+- `OPSHUB_BOARD_MODE` (`production` default, `diagnostic` optional for non-production fixtures only)
+  - `production`: blocks synthetic/placeholder task admissions via API
+  - `diagnostic`: only safe with isolated test kanban paths; cannot bypass API-only production board lock
+- `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`) hard cap for non-critical `inProgress` cards
 - `OPSHUB_INPROGRESS_WIP_LIMIT_HIGH` (default mirrors global limit)
 - `OPSHUB_INPROGRESS_WIP_LIMIT_MEDIUM` (default mirrors global limit)
 - `OPSHUB_INPROGRESS_WIP_LIMIT_LOW` (default mirrors global limit)
-- `OPSHUB_BOARD_MODE` (`production` default, `diagnostic` optional)
-  - `production`: blocks synthetic/placeholder task admissions via API
-  - `diagnostic`: allows synthetic patterns for controlled QA/experimentation
-- `OPSHUB_INPROGRESS_WIP_LIMIT` (default `5`)
-  - hard cap for non-critical `inProgress` cards
 
 ## PantryPal-first prioritization guardrails
 

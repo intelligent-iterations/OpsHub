@@ -12,12 +12,20 @@
 
 ### 2) Script path (Slack/social ingest direct board mutation)
 - **File/Function:** `scripts/social-mention-ingest.js` → `enqueueTaskPayloadsToKanban(...)`
-- **Guard path:** `lib/synthetic-write-guard.js` → `evaluateSyntheticWriteGuard(...)`
-- **Flow:** mention payload mapping → PantryPal prioritization/quarantine → synthetic write guard before `todo` insertion → kanban write.
+- **Guard paths:**
+  - `lib/kanban-write-safety.js` → `enforceApiOnlyProductionWrite(...)`
+  - `lib/synthetic-write-guard.js` → `evaluateSyntheticWriteGuard(...)`
+- **Flow:** mention payload mapping → API-only production write lock check → PantryPal prioritization/quarantine → synthetic write guard before `todo` insertion → kanban write (isolated test fixtures only).
 
 ## Why synthetic cards previously appeared
 
-The script path writes directly to `data/kanban.json` and does not go through API routes. Without a shared production write guard, synthetic placeholders could be inserted by script-driven ingestion even when API admission was stricter.
+Script paths wrote directly to `data/kanban.json` and bypassed API contracts. Without a production-path lock, synthetic placeholders could be inserted by script-driven ingestion even when API admission was stricter.
+
+## Current hardening state
+
+- Production board writes are API-only (`PRODUCTION_BOARD_API_ONLY` for script/harness write attempts).
+- Synthetic signatures are still denied by API admission guard in production mode.
+- Existing synthetic/test cards can be purged via `POST /api/kanban/cleanup-synthetic`.
 
 ## Deterministic reproduction
 
@@ -47,9 +55,9 @@ The script path writes directly to `data/kanban.json` and does not go through AP
 2. Expected: `addedCount=0`, `blockedSyntheticCount=1`.
 3. Verified by test: `test/social-mention-ingest.test.js`.
 
-### D) Script guard in diagnostic mode (allowed)
-1. Call `enqueueTaskPayloadsToKanban(...)` with `mode: 'diagnostic'` and same payload.
-2. Expected: `addedCount=1`, `blockedSyntheticCount=0`.
+### D) Script path targeting production board (blocked regardless mode)
+1. Call `enqueueTaskPayloadsToKanban(...)` with `kanbanPath=data/kanban.json` and `mode: 'diagnostic'`.
+2. Expected: `attempted=false`, `reason='PRODUCTION_BOARD_API_ONLY'`.
 3. Verified by test: `test/social-mention-ingest.test.js`.
 
 ## Regression guard artifacts (SYNTH-03)

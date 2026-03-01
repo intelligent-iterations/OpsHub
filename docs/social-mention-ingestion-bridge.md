@@ -12,7 +12,7 @@ This bridge enables `social-progress` cron loops to convert recent Slack social-
    - `acceptanceCriteria[]`
    - `priority`
 4. Dedupes actionable task payloads by source message id (`source.messageId`).
-5. Optionally enqueues deduped payloads directly into OpsHub kanban `todo` (`--enqueue-to-kanban`).
+5. Optionally enqueues deduped payloads directly into OpsHub kanban `todo` (`--enqueue-to-kanban`) for isolated/non-production kanban paths.
 6. Emits diagnostics + fallback metadata when provider/file fetch is unavailable.
 
 ## Script
@@ -47,6 +47,11 @@ node scripts/social-mention-ingest.js \
   --channel=social-progress \
   --feed-path=artifacts/social-mention-feed-sample.json
 ```
+
+## Production safety lock
+
+Direct script writes to the production board (`data/kanban.json`) are blocked with `PRODUCTION_BOARD_API_ONLY`.
+Use OpsHub API routes for production mutations; script enqueue is for isolated test/fixture boards.
 
 ## Diagnostics and fallback
 

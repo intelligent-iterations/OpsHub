@@ -22,7 +22,7 @@ Expected outcome:
 
 - Exit code `0`
 - `TASK_ADMISSION_SYNTHETIC_DENIED` assertions pass for all known signatures
-- Diagnostic mode assertion confirms controlled bypass for repro/debug paths
+- `PRODUCTION_BOARD_API_ONLY` assertions pass for script/harness write attempts targeting `data/kanban.json`
 
 ## 2) Manual API denial repro (production mode default)
 
@@ -46,7 +46,19 @@ Expected outcome:
 - JSON includes `"code":"TASK_ADMISSION_SYNTHETIC_DENIED"`
 - Server logs a structured warning event with `event: "synthetic_write_guard_blocked"`
 
-## 3) Full CI parity run
+## 3) Cleanup existing synthetic/test cards via API routine
+
+```bash
+curl -s -X POST http://127.0.0.1:4180/api/kanban/cleanup-synthetic
+```
+
+Expected outcome:
+
+- HTTP `200`
+- JSON includes `removedCount` and per-card removal metadata
+- Removed cards include synthetic signatures and test/diagnostic source entries
+
+## 4) Full CI parity run
 
 ```bash
 npm test
@@ -60,4 +72,5 @@ Expected outcome:
 ## Notes
 
 - Production mode is the default (`OPSHUB_BOARD_MODE=production`).
-- Diagnostic mode (`OPSHUB_BOARD_MODE=diagnostic`) is intentionally allowed for controlled simulation/reproduction workflows.
+- Production board mutations are API-only; script/harness direct writes to `data/kanban.json` are denied (`PRODUCTION_BOARD_API_ONLY`).
+- Diagnostic mode is allowed only for isolated non-production kanban fixtures (for tests/repro), not for production board bypass.

@@ -12,6 +12,7 @@ const {
   resolveListMessagesProvider,
   enqueueTaskPayloadsToKanban,
 } = require('../scripts/social-mention-ingest');
+const { DEFAULT_PRODUCTION_KANBAN_PATH } = require('../lib/kanban-write-safety');
 
 test('fetchSocialMessages returns fallback diagnostics when no source is configured', async () => {
   const result = await fetchSocialMessages({ channel: 'social-progress' });
@@ -269,7 +270,7 @@ test('enqueueTaskPayloadsToKanban blocks synthetic card writes in production mod
   }
 });
 
-test('enqueueTaskPayloadsToKanban allows synthetic diagnostics in diagnostic mode', async () => {
+test('enqueueTaskPayloadsToKanban allows synthetic diagnostics in diagnostic mode on isolated kanban', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'social-mention-kanban-guard-diag-'));
   const kanbanPath = join(dir, 'kanban.json');
   try {
@@ -298,6 +299,23 @@ test('enqueueTaskPayloadsToKanban allows synthetic diagnostics in diagnostic mod
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
+});
+
+test('enqueueTaskPayloadsToKanban cannot mutate production board path even in diagnostic mode', async () => {
+  const before = await readFile(DEFAULT_PRODUCTION_KANBAN_PATH, 'utf8');
+
+  const result = enqueueTaskPayloadsToKanban({
+    kanbanPath: DEFAULT_PRODUCTION_KANBAN_PATH,
+    mode: 'diagnostic',
+    taskPayloads: [{ title: 'Integration dashboard task', priority: 'high', source: { messageId: 'prod-board-locked-1' } }],
+    logger: { info: () => {}, warn: () => {} },
+  });
+
+  assert.equal(result.attempted, false);
+  assert.equal(result.reason, 'PRODUCTION_BOARD_API_ONLY');
+
+  const after = await readFile(DEFAULT_PRODUCTION_KANBAN_PATH, 'utf8');
+  assert.equal(after, before);
 });
 
 test('enqueueTaskPayloadsToKanban quarantines synthetic churn overflow and protects strategic reservation', async () => {

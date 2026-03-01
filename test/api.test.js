@@ -32,6 +32,8 @@ async function makeServer(options = {}) {
       await new Promise((resolve, reject) => server.close((err) => (err ? reject(err) : resolve())));
       await fs.rm(tempDir, { recursive: true, force: true });
       delete process.env.OPSHUB_TELEMETRY_FIXTURE;
+      delete process.env.OPSHUB_DATA_DIR;
+      delete process.env.OPSHUB_BOARD_MODE;
     }
   };
 }
@@ -125,6 +127,52 @@ test('task admission validator blocks synthetic placeholder titles in production
     assert.equal(warnEvents.some((event) => event?.event === 'synthetic_write_guard_blocked' && event?.path === '/api/kanban/task'), true);
   } finally {
     console.warn = originalWarn;
+    await app.close();
+  }
+});
+
+test('cleanup endpoint removes existing synthetic/test kanban tasks via API', { concurrency: false }, async () => {
+  const app = await makeServer();
+  try {
+    const seedPayloads = [
+      { name: 'Integration dashboard task', description: 'synthetic seed', source: 'manual' },
+      { name: 'Real product task', description: 'Acceptance criteria:\n- keep this card', source: 'manual' },
+      { name: 'Temporary QA fixture', description: 'investigation task', source: 'test-harness' }
+    ];
+
+    for (const payload of seedPayloads) {
+      const create = await fetch(`${app.baseUrl}/api/kanban/task`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, status: 'todo' })
+      });
+      if (payload.name === 'Integration dashboard task') {
+        assert.equal(create.status, 422);
+      } else {
+        assert.equal(create.status, 200);
+      }
+    }
+
+    const syntheticBypass = await fetch(`${app.baseUrl}/api/kanban/task`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Manual regression task',
+        description: 'real details',
+        source: 'synthetic-runner',
+        status: 'todo'
+      })
+    });
+    assert.equal(syntheticBypass.status, 200);
+
+    const cleanup = await fetch(`${app.baseUrl}/api/kanban/cleanup-synthetic`, { method: 'POST' });
+    assert.equal(cleanup.status, 200);
+    const body = await cleanup.json();
+    assert.equal(body.ok, true);
+    assert.equal(body.removedCount, 2);
+    assert.equal(body.board.columns.todo.some((task) => task.name === 'Manual regression task'), false);
+    assert.equal(body.board.columns.todo.some((task) => task.name === 'Real product task'), true);
+  } finally {
     await app.close();
   }
 });

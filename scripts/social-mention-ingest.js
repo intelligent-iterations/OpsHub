@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { prioritizeWithGuardrails, mapScoreToPriority } = require('./pantrypal-priority-guardrails');
 const { normalizeMode, evaluateSyntheticWriteGuard } = require('../lib/synthetic-write-guard');
+const { enforceApiOnlyProductionWrite } = require('../lib/kanban-write-safety');
 
 function normalizeMentions(rawMentions, text) {
   const fromArray = Array.isArray(rawMentions) ? rawMentions : [];
@@ -274,6 +275,25 @@ function readKanbanBoard(kanbanPath) {
 function enqueueTaskPayloadsToKanban({ taskPayloads, kanbanPath, logger = console, mode = process.env.OPSHUB_BOARD_MODE }) {
   if (!kanbanPath) {
     return { attempted: false, addedCount: 0, skippedDuplicateCount: 0, addedTaskIds: [], reason: 'kanban_path_not_configured' };
+  }
+
+  const productionWriteGuard = enforceApiOnlyProductionWrite({
+    kanbanPath,
+    actor: 'script_social_mention_enqueue',
+  });
+  if (!productionWriteGuard.ok) {
+    logger.warn?.({ event: 'production_board_write_blocked', ...productionWriteGuard.details });
+    return {
+      attempted: false,
+      addedCount: 0,
+      skippedDuplicateCount: 0,
+      blockedSyntheticCount: 0,
+      addedTaskIds: [],
+      quarantinedCount: 0,
+      quarantinedTaskIds: [],
+      reason: productionWriteGuard.code,
+      error: productionWriteGuard.error,
+    };
   }
 
   const board = readKanbanBoard(kanbanPath);
