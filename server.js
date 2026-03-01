@@ -13,6 +13,7 @@ const {
 const { validateHumanFacingUpdate } = require('./lib/human-deliverable-guard');
 const { evaluateBlockerProtocol, captureBlockerProofArtifact } = require('./lib/blocker-protocol');
 const { buildLiveAgentActivity } = require('./lib/openclaw-live-activity');
+const { buildAgentActivitySummary, buildAgentTrace } = require('./lib/agent-activity-monitor');
 
 const execAsync = util.promisify(exec);
 const PORT = Number(process.env.PORT) || 4180;
@@ -330,6 +331,38 @@ async function runFirstOk(commands = []) {
 }
 
 async function getOpenClawTelemetry() {
+  const fixturePath = process.env.OPSHUB_TELEMETRY_FIXTURE;
+  if (fixturePath) {
+    try {
+      const fixtureRaw = await fs.readFile(path.resolve(fixturePath), 'utf8');
+      const fixture = JSON.parse(fixtureRaw);
+      return {
+        sessions: Array.isArray(fixture?.sessions) ? fixture.sessions : [],
+        runs: Array.isArray(fixture?.runs) ? fixture.runs : [],
+        diagnostics: {
+          sessionsSource: fixturePath,
+          runsSource: fixturePath,
+          sessionsCommandOk: true,
+          runsCommandOk: true,
+          fixture: true
+        }
+      };
+    } catch (err) {
+      return {
+        sessions: [],
+        runs: [],
+        diagnostics: {
+          sessionsSource: fixturePath,
+          runsSource: fixturePath,
+          sessionsCommandOk: false,
+          runsCommandOk: false,
+          fixture: true,
+          error: err.message
+        }
+      };
+    }
+  }
+
   const sessionsResult = await runFirstOk([
     '~/.openclaw/bin/openclaw sessions --active 30 --json',
     'openclaw sessions --active 30 --json'
@@ -562,6 +595,22 @@ async function getLiveAgentActivityData() {
   };
 }
 
+async function getAgentActivitySummaryData() {
+  const telemetry = await getOpenClawTelemetry();
+  return {
+    ...buildAgentActivitySummary({ sessions: telemetry.sessions, runs: telemetry.runs, now: new Date() }),
+    telemetry: telemetry.diagnostics
+  };
+}
+
+async function getAgentTraceData(sessionKey) {
+  const telemetry = await getOpenClawTelemetry();
+  return {
+    ...buildAgentTrace({ sessionKey, sessions: telemetry.sessions, runs: telemetry.runs, now: new Date() }),
+    telemetry: telemetry.diagnostics
+  };
+}
+
 async function getSessionsData() {
   const entries = [];
 
@@ -708,9 +757,10 @@ function createApp() {
   app.get(
     '/api/dashboard',
     asyncHandler(async (_req, res) => {
-      const [subagents, liveAgentActivity, sessions, errors, tokenUsage, activity] = await Promise.all([
+      const [subagents, liveAgentActivity, agentActivitySummary, sessions, errors, tokenUsage, activity] = await Promise.all([
         getSubagentsData(),
         getLiveAgentActivityData(),
+        getAgentActivitySummaryData(),
         getSessionsData(),
         getErrorData(),
         getTokenUsageData(),
@@ -722,6 +772,7 @@ function createApp() {
         refreshSeconds: 60,
         subagents,
         liveAgentActivity,
+        agentActivitySummary,
         sessions,
         errors,
         tokenUsage,
@@ -735,6 +786,24 @@ function createApp() {
     asyncHandler(async (_req, res) => {
       const liveAgentActivity = await getLiveAgentActivityData();
       res.json({ generatedAt: nowIso(), refreshSeconds: 15, liveAgentActivity });
+    })
+  );
+
+  app.get(
+    '/api/agent-activity/summary',
+    asyncHandler(async (_req, res) => {
+      const summary = await getAgentActivitySummaryData();
+      res.json(summary);
+    })
+  );
+
+  app.get(
+    '/api/agent-activity/trace/:sessionKey',
+    asyncHandler(async (req, res) => {
+      const sessionKey = decodeURIComponent(req.params.sessionKey || '').trim();
+      if (!sessionKey) return res.status(400).json({ error: 'sessionKey is required' });
+      const trace = await getAgentTraceData(sessionKey);
+      res.json(trace);
     })
   );
 
@@ -1082,5 +1151,7 @@ module.exports = {
   buildInProgressSyncDiagnostics,
   computeBehaviorGapMetrics,
   getOpenClawTelemetry,
-  getLiveAgentActivityData
+  getLiveAgentActivityData,
+  getAgentActivitySummaryData,
+  getAgentTraceData
 };

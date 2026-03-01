@@ -11,9 +11,14 @@ function inProgressFields() {
   return { claimedBy: 'test-agent', startedAt: now, updatedAt: now };
 }
 
-async function makeServer() {
+async function makeServer(options = {}) {
   const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'opshub-test-'));
   process.env.OPSHUB_DATA_DIR = tempDir;
+  if (options.telemetryFixture) {
+    process.env.OPSHUB_TELEMETRY_FIXTURE = options.telemetryFixture;
+  } else {
+    delete process.env.OPSHUB_TELEMETRY_FIXTURE;
+  }
 
   const server = startServer(0);
   await new Promise((resolve) => server.once('listening', resolve));
@@ -26,6 +31,7 @@ async function makeServer() {
     close: async () => {
       await new Promise((resolve, reject) => server.close((err) => (err ? reject(err) : resolve())));
       await fs.rm(tempDir, { recursive: true, force: true });
+      delete process.env.OPSHUB_TELEMETRY_FIXTURE;
     }
   };
 }
@@ -729,6 +735,43 @@ test('failed done transition logs closeout contract reminder activity', { concur
       (entry) => entry.type === 'closeout_contract_reminder' && entry.taskId === created.task.id
     );
     assert.ok(reminder);
+  } finally {
+    await app.close();
+  }
+});
+
+test('agent activity summary endpoint returns all active sessions', { concurrency: false }, async () => {
+  const fixture = path.join(__dirname, 'fixtures', 'agent-telemetry.fixture.json');
+  const app = await makeServer({ telemetryFixture: fixture });
+  try {
+    const res = await fetch(`${app.baseUrl}/api/agent-activity/summary`);
+    assert.equal(res.status, 200);
+    const body = await res.json();
+
+    assert.equal(body.refreshSeconds, 5);
+    assert.equal(body.counts.activeSessions, 1);
+    assert.equal(body.counts.sessionsWithToolEvents, 1);
+    assert.equal(body.agents[0].sessionKey, 'agent:vibe-coder:subagent:abc');
+    assert.equal(body.agents[0].toolEventCount, 2);
+  } finally {
+    await app.close();
+  }
+});
+
+test('agent activity trace endpoint returns redacted timeline payload', { concurrency: false }, async () => {
+  const fixture = path.join(__dirname, 'fixtures', 'agent-telemetry.fixture.json');
+  const app = await makeServer({ telemetryFixture: fixture });
+  try {
+    const key = encodeURIComponent('agent:vibe-coder:subagent:abc');
+    const res = await fetch(`${app.baseUrl}/api/agent-activity/trace/${key}`);
+    assert.equal(res.status, 200);
+    const body = await res.json();
+
+    assert.equal(body.timeline.length, 2);
+    const serialized = JSON.stringify(body.timeline);
+    assert.doesNotMatch(serialized, /ghp_[A-Za-z0-9]+/);
+    assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._-]+/);
+    assert.match(serialized, /\[REDACTED/);
   } finally {
     await app.close();
   }

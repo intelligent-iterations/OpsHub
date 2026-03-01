@@ -1,0 +1,36 @@
+{
+  "sessions": [
+    {
+      "key": "agent:vibe-coder:subagent:abc",
+      "status": "active",
+      "updatedAt": "2026-02-28T23:30:00.000Z",
+      "lastUserMessage": "Investigate live tool timeline",
+      "events": [
+        {
+          "tool": "read",
+          "args": { "path": "README.md", "apiKey": "sk-abc1234567890xyz" },
+          "result": { "ok": true, "authorization": "Bearer very-secret-token" },
+          "status": "success",
+          "timestamp": "2026-02-28T23:29:00.000Z"
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "run-abc",
+      "sessionKey": "agent:vibe-coder:subagent:abc",
+      "state": "running",
+      "updatedAt": "2026-02-28T23:31:00.000Z",
+      "toolCalls": [
+        {
+          "tool": "exec",
+          "input": { "command": "echo hi", "token": "ghp_abcdefghijklmnopqrstuvwxyz123456" },
+          "output": { "stdout": "ok", "password": "supersecret" },
+          "status": "success",
+          "timestamp": "2026-02-28T23:30:30.000Z"
+        }
+      ]
+    }
+  ]
+}

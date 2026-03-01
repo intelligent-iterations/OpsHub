@@ -63,6 +63,8 @@ npm run lint:report-templates
 - `GET /api/health` → health check
 - `GET /api/dashboard` → JSON payload for all dashboard sections (`subagents.items` merged view + explicit `subagents.activeSubagents` and `subagents.inProgressTasks` arrays; each in-progress task includes `id`, `task`, `description`, and `priority`; `subagents.diagnostics` reports sync drift/missing IDs between kanban and payload; `subagents.behaviorGap` includes proactive-loop passive-wait and blocker-protocol compliance KPI thresholds). Includes `liveAgentActivity` panel payload.
 - `GET /api/live-activity` → live OpenClaw telemetry projection for the **Live Agent Activity** UI panel (`agent`, `currentTaskSession`, `state`, `lastUpdate`) with task-mapping metadata.
+- `GET /api/agent-activity/summary` → first-class Agent Activity summary (all active sessions + tool-event coverage + 5s refresh contract).
+- `GET /api/agent-activity/trace/:sessionKey` → per-agent timeline drilldown including tool name, redacted input/output, status, and timestamp.
 - `GET /api/kanban` → kanban board + activity log
 - `POST /api/kanban/task` → create task
 - `POST /api/kanban/move` → move task to another column
@@ -163,6 +165,10 @@ See `docs/inprogress-stale-cleanup.md` for details.
 ## Live Agent Activity telemetry
 
 See `docs/live-agent-activity.md` for architecture, endpoint contract, mapping logic, and data flow.
+
+## Agent Activity monitoring service
+
+See `docs/agent-activity-monitoring.md` for summary/trace API contracts, drilldown UX behavior, and redaction safety policy.
 
 ## Slack social mention ingestion bridge
 

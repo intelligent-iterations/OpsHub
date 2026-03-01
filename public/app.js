@@ -55,6 +55,8 @@ async function fetchJson(url, options) {
 }
 
 let isLoading = false;
+let activeTraceSessionKey = null;
+let agentTraceRefreshTimer = null;
 
 function setStatus(message, tone = 'muted') {
   const banner = el('statusBanner');
@@ -170,6 +172,72 @@ async function addTask() {
   }
 }
 
+function summarizeValue(value) {
+  if (value == null) return '-';
+  if (typeof value === 'string') return escapeHtml(value);
+  try {
+    return escapeHtml(JSON.stringify(value));
+  } catch {
+    return escapeHtml(String(value));
+  }
+}
+
+function closeAgentTraceDialog() {
+  activeTraceSessionKey = null;
+  if (agentTraceRefreshTimer) {
+    clearInterval(agentTraceRefreshTimer);
+    agentTraceRefreshTimer = null;
+  }
+  const dialog = el('agentTraceDialog');
+  if (dialog?.open) dialog.close();
+}
+
+async function loadAgentTrace(sessionKey) {
+  if (!sessionKey) return;
+  const encoded = encodeURIComponent(sessionKey);
+  const trace = await fetchJson(`/api/agent-activity/trace/${encoded}`);
+
+  el('agentTraceTitle').textContent = `Agent Trace: ${trace.agent}`;
+  el('agentTraceMeta').textContent = `Session: ${trace.sessionKey} • State: ${trace.state} • Refresh: ${trace.refreshSeconds}s`;
+
+  renderList('agentTraceTimeline', trace.timeline || [], (event) =>
+    `<strong>${escapeHtml(event.toolName)}</strong> <span class="muted">(${escapeHtml(event.status)})</span><br/>
+     <span class="muted">${ts(event.timestamp)} • ${escapeHtml(event.source)}</span><br/>
+     <span class="muted">Input:</span> ${summarizeValue(event.input)}<br/>
+     <span class="muted">Output:</span> ${summarizeValue(event.output)}`
+  );
+}
+
+async function openAgentTraceDialog(sessionKey) {
+  activeTraceSessionKey = sessionKey;
+  await loadAgentTrace(sessionKey);
+  const dialog = el('agentTraceDialog');
+  if (!dialog.open) dialog.showModal();
+
+  if (agentTraceRefreshTimer) clearInterval(agentTraceRefreshTimer);
+  agentTraceRefreshTimer = setInterval(async () => {
+    if (!activeTraceSessionKey) return;
+    try {
+      await loadAgentTrace(activeTraceSessionKey);
+    } catch (err) {
+      console.error('Failed to refresh agent trace', err);
+    }
+  }, 5000);
+}
+
+function wireAgentSummaryClicks() {
+  const buttons = document.querySelectorAll('[data-agent-session-key]');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try {
+        await openAgentTraceDialog(btn.dataset.agentSessionKey);
+      } catch (err) {
+        setStatus(`Failed to load agent trace: ${err.message}`, 'error');
+      }
+    });
+  });
+}
+
 async function loadDashboard() {
   const data = await fetchJson('/api/dashboard');
 
@@ -180,6 +248,15 @@ async function loadDashboard() {
      <strong>Current task/session:</strong> ${escapeHtml(x.currentTaskSession)}<br/>
      <span class="muted"><strong>State:</strong> ${escapeHtml(x.state)} • <strong>Last update:</strong> ${ts(x.lastUpdate)}</span>`
   );
+
+  renderList('agentActivitySummary', data.agentActivitySummary?.agents || [], (agent) =>
+    `<button class="agent-summary-btn" data-agent-session-key="${escapeHtml(agent.sessionKey)}">
+      <strong>${escapeHtml(agent.agent)}</strong> — ${escapeHtml(agent.state)}<br/>
+      <span class="muted">Session: ${escapeHtml(agent.sessionKey)} • Last update: ${ts(agent.lastUpdate)} • Tool events: ${escapeHtml(agent.toolEventCount)}</span><br/>
+      <span class="muted">Latest tool: ${escapeHtml(agent.latestTool || '-')} (${escapeHtml(agent.latestStatus || '-')})</span>
+    </button>`
+  );
+  wireAgentSummaryClicks();
 
   renderList('subagents', data.subagents.items, (x) =>
     `<strong>${escapeHtml(x.task)}</strong><br/><span class="muted">ID: ${escapeHtml(x.id)} • Status: ${escapeHtml(x.status)} • Source: ${escapeHtml(x.source)}</span>`
@@ -229,6 +306,8 @@ el('refreshBtn').addEventListener('click', load);
 el('taskName').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') addTask();
 });
+el('closeAgentTraceBtn').addEventListener('click', closeAgentTraceDialog);
+el('agentTraceDialog').addEventListener('close', closeAgentTraceDialog);
 
 load();
-setInterval(load, 60000);
+setInterval(load, 15000);
